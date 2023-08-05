@@ -1,3 +1,4 @@
+import creature.Cat;
 
 public class Main {
     public static void main (String[] args){
@@ -14,5 +15,8 @@ public class Main {
 
         String x = "Ciao";
         System.out.println(x + " Alessio");
+
+        Cat gatto = new Cat("nero");
+        System.out.println("Questo gatto ha " + gatto.numeroZampe +   " zampe ed è " + gatto.colore + " e dispone di "  + gatto.numeroVite + " vite");
     }
 }
