@@ -5,7 +5,7 @@ import com.testgioco.UI_elements.Window;
 
 public class Game {
     private Panel panel = new Panel();
-    private Window window = new Window();
+    private Window window = new Window(panel);
     public Game(){
     }
 }
