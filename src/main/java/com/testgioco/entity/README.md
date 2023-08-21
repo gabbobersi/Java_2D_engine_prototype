@@ -1,17 +1,19 @@
 #### Cosa implementare
-- Classe "Player"
+- Classe **Player**
   - Rappresenta il giocatore.
-  - Deve estendere la classe Entity.
-  - Dovrà avere un metodo che imposta i valori di default, non appena la classe viene istanziata (vedi classe di esempio "Gnomo").
-- Classe "Enemy"
-  - Rappresenta un nemico generico.
-  - Deve estendere la classe Entity.
-- Classe "Elf"
+  - Deve estendere: Entity
+  - Dovrà avere un metodo che imposta i valori di default (vedi classe "Gnomo").
+- Classe **Elf**
   - Rappresenta un elfo.
-  - Deve estendere la classe **Enemy**.
-  - Dovrà avere un metodo che imposta i valori di default, non appena la classe viene istanziata (vedi classe di esempio "Gnomo").
+  - Deve estendere: Entity
+  - Dovrà avere un metodo che imposta i valori di default (vedi classe "Gnomo").
+- Classe **Orc**
+  - Rappresenta un orco.
+  - Deve estendere: Entity
+  - Dovrà avere un metodo che imposta i valori di default (vedi classe "Gnomo").
  
 **Note**:
-- La classe "Enemy" sarà una classe base per le sottoclassi nemiche (es. Elf estende Enemy. Elf è la classe figlia di enemy).
-- Player eredita direttamente da Entity, come mai? Mi sono sbagliato. **Sarebbe meglio creare una classe Hero, estesa da Player.**
-
+- Ho creato (erroneamente in Italiano) la classe "Gnomo" che potete usare come esempio.
+- Ricordatevi che le classi da creare, estendendo Entity, hanno già delle caratteristiche ereditate da essa (quindi verificate cosa c'è già su Entity, e cosa dovete aggiungere).
+- Non vi aspettate che qualcosa appaia sullo schermo. Basta implementarle per ora.
+- In futuro, aggiungeremo una cartella (package) "base_classes" che conterrà, oltre a Entity, anche le classi tipo Archer, Warrior, Sourcerer, Witch, ... così potremo stabilire il tipo di classe dei nostri Elf, Orc, ... tramite l'ereditarietà (es. Elf estende Archer). 
