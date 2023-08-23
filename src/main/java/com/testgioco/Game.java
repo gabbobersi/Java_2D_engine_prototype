@@ -1,7 +1,7 @@
 package com.testgioco;
 
-import com.testgioco.UI_elements.Panel;
-import com.testgioco.UI_elements.Window;
+import com.testgioco.ui_elements.Panel;
+import com.testgioco.ui_elements.Window;
 
 public class Game {
     private Panel panel;

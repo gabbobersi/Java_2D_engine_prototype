@@ -1,4 +1,4 @@
-package com.testgioco.UI_elements;
+package com.testgioco.ui_elements;
 
 import javax.swing.*;
 

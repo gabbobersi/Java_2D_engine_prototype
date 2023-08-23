@@ -1,4 +1,4 @@
-package com.testgioco.entity;
+package com.testgioco.base_classes;
 
 public class Entity {
     public String name;     // Es. "Laradiel Umbria", "Alessio Trap", "Harry Potter".
