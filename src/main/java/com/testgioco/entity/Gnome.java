@@ -18,7 +18,7 @@ public class Gnome extends Entity {
 
     public void SetDefaultValues(){
         this.name = "Piccolo di Trivia";
-        this.type = "Gnomo";
+        this.type = "Gnome";
         this.life = 40;     // E' facile da uccidere. Fa danno in gruppo.
         this.speed = 10;
         this.x = 50;
