@@ -10,4 +10,10 @@ public class Game {
         this.panel = new Panel();
         this.window = new Window(this.panel);
     }
+
+    public void run(){
+        while (true) {
+            this.panel.run();
+        }
+    }
 }
