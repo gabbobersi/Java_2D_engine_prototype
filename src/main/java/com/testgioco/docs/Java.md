@@ -37,3 +37,7 @@ class Test(){
     private double k = 2;                      // Attr. di istanza
 }
 ```
+
+**NB:** se modifichi un attr. di classe, dall'istanza della classe padre (e quindi non dalla classe diretta), tale modifica viene applicata **solamente** all'istanza della classe padre, e non alle sue figlie!!!
+
+Se modifichi invece direttamente l'attr. della classe, utilizzando la classe stessa (e non l'istanza/oggetto) allora tale modifica viene riflessa anche sugli oggetti delle classi figlie.
