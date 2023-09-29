@@ -32,7 +32,6 @@ public class Panel extends JPanel implements Runnable {
     }
 
     public void update(){
-
     }
     @Override
     public void paintComponent(Graphics g) {
