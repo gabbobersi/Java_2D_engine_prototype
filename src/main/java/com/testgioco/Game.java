@@ -12,8 +12,6 @@ public class Game {
     }
 
     public void run(){
-        while (true) {
-            this.panel.run();
-        }
+        this.panel.run();
     }
 }

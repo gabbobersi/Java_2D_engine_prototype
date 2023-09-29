@@ -1,3 +1,31 @@
+### Classe
+E' un template. Descrive come creare oggetti concreti.
+
+Puoi vederla come il "blueprint" che gli architetti utilizzano per pianificare i futuri palazzi.
+
+```Java
+class Test(){
+    // Codice
+}
+```
+
+Ogni classe ha uno "stato" (dati interni) che condivide solo con le 
+sue istanze o con le proprie sottoclassi.
+
+### Istanza (o oggetto)
+E' l'oggetto concreto che deriva da una classe.
+
+Puoi vederlo come il palazzo costruito dal blueprint.
+
+```Java
+// Dichiaro una variabile chiamata "esperimento" di tipo "Test", e la inizializzo con una nuova istanza della classe Test.
+Test esperimento = new Test();
+```
+Ogni istanza ha il suo "stato" (dati interni) privato mentre condivide 
+tutto ciò che è della classe da cui deriva, con le altre istanza della medesima classe.
+
+_(es. se la classe mette a disposizione la variabile int x = 5, tutte le istanze della classe la conosceranno)_
+
 ### Istanziamento
 ```Java
 class Test(){

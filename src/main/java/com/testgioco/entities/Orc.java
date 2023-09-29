@@ -10,7 +10,7 @@ public class Orc extends Race {
     public void SetDefaultValues(){
         this.name = "Bolg";
         this.type = "Orc";
-        this.life = 50;     // .
+        this.life = 50;
         this.speed = 15;
         this.x = 50;
         this.y = 50;

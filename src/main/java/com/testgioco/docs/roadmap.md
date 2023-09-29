@@ -1,0 +1,17 @@
+_Roadmap from the top, to the bottom._
+- Core
+  - [x] Main class
+  - [x] Game class
+  - [x] JPanel class
+  - [x] JFrame class
+  - [x] FPS
+  - [x] Secondary thread (`Runnable` interface)
+  - [x] `paintComponent` method to draw something
+  - [ ] Input handler
+  - [ ] Sprites loading
+  - [ ] Animations system
+- Chill
+  - [ ] MVP game
+  - [x] Some entities to test
+  - [ ] Test FPS vs no FPS logic.
+  - [ ] Load images as sprite.

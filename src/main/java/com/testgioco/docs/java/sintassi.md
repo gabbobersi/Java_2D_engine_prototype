@@ -7,37 +7,3 @@ class Test(){
     public int d;       // PUBBLICO     Visibile a tutti.
 }
 ```
-
-### Istanziamento
-```Java
-class Test(){
-    /* Creo una variabile "griglia" di tipo Grid.
-     * Assegno alla variabile "griglia" una nuova istanza di Grid. */
-    Grid griglia = new Grid();
-}
-```
-
-### Attributi di classe e istanza
-**Attributo di classe:**
-- E' un attributo con davanti `static`.
-- Il suo valore è condiviso tra tutte le istanze della classe.
-
-**Attributo di istanza:**
-- E' un attributo qualsiasi (senza static).
-- Il suo valore non è condiviso tra le istanze. In altre parole, ogni istanza avrà il proprio valore.
-- **NB:** il costruttore non c'entra niente con gli attributi di istanza!!!!
-```Java
-class Test(){
-    static Grid griglia = new Grid();          // Attr. di classe
-    static int x;                              // Attr. di classe
-    int y;                                     // Attr. di istanza
-    
-    static private int z = 5;                  // Attr. di classe   
-    static public int j = 4;                   // Attr. di classe
-    private double k = 2;                      // Attr. di istanza
-}
-```
-
-**NB:** se modifichi un attr. di classe, dall'istanza della classe padre (e quindi non dalla classe diretta), tale modifica viene applicata **solamente** all'istanza della classe padre, e non alle sue figlie!!!
-
-Se modifichi invece direttamente l'attr. della classe, utilizzando la classe stessa (e non l'istanza/oggetto) allora tale modifica viene riflessa anche sugli oggetti delle classi figlie.

@@ -2,31 +2,32 @@ package com.testgioco;
 
 public class Fps {
     private final long MILLISECONDS = 1000000000;   // One second in milliseconds
+    double drawInterval;
     int fps = 1;
-    double drawInterval = (double) MILLISECONDS / (double) this.fps;
-    double deltaLastDraw = 0;
-    long timeFromLastDraw = System.nanoTime();
+    double delta = 0;
+    long lastTime = System.nanoTime();
     long currentTime = System.nanoTime();
     long timer = 0;
     int drawCount = 0;
 
     public Fps(int fps){
         this.fps = fps;
+        this.drawInterval = (double) MILLISECONDS / (double) this.fps;
     }
 
     public boolean canDraw(boolean debugMode){
         // Tells if external entity can draw.
         this.currentTime = System.nanoTime();
-        this.deltaLastDraw += (this.currentTime - this.timeFromLastDraw) / this.drawInterval;
-        this.timer += (this.currentTime - this.timeFromLastDraw);
-        this.timeFromLastDraw = this.currentTime;
+        this.delta += (this.currentTime - this.lastTime) / this.drawInterval;
+        this.timer += (this.currentTime - this.lastTime);
+        this.lastTime = this.currentTime;
 
         if (debugMode){
             this.debugFPS();
         }
 
-        if (this.deltaLastDraw >= 1) {
-            this.deltaLastDraw--;      // Reset delta to 0
+        if (this.delta >= 1) {
+            this.delta--;      // Reset delta to 0
             this.drawCount++;
             return true;
         }
