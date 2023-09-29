@@ -1,8 +1,10 @@
-Il mondo delle applicazioni desktop, così come le applicazioni web, utilizza gli eventi
-per interagire con l'esterno (es. l'utente preme "a").
+Le applicazioni desktop e web, utilizzano gli eventi
+per interagire con l'esterno dell'applicazione stessa (es. l'utente preme "a").
 
 Gli eventi vengono solitamente rappresetati da delle enumerazioni:
 ```Java
+// Immaginate che il framework che usiamo per prendere l'input dall'utente, abbia
+// definita la seguente enumerazione.
 enum Events {
     W(1), A(2), S(3), D(4), SPACE(5)
 }
@@ -16,7 +18,7 @@ class Game(){
         } else if (user_input == event.W){
             // Up
         }
-        .....
+        // ...altri controlli...
     }
 }
 ```

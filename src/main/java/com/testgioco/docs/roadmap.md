@@ -10,8 +10,31 @@ _Roadmap from the top, to the bottom._
   - [ ] Input handler
   - [ ] Sprites loading
   - [ ] Animations system
+  - [ ] Tile system (tilemap)
+  - [ ] Camera
+  - [ ] Collision detection
+  - [ ] Object placement
+  - [ ] Object interaction
+  - [ ] Sound
+  - [ ] State machine
+  - [ ] Scenes
+    - [ ] Main menu
+    - [ ] Option menu
+    - [ ] Quit game menu
 - Chill
-  - [ ] MVP game
+  - [ ] MVP game (Minimum Viable Product)
   - [x] Some entities to test
   - [ ] Test FPS vs no FPS logic.
   - [ ] Load images as sprite.
+  - [ ] Improving rendering
+  - [ ] Draw sprites (software Piskel)
+  - [ ] Game systems
+    - [ ] Inventory system
+    - [ ] Health, stamina, magick bars
+    - [ ] Skill tree
+    - [ ] XP points
+- Optional
+  - [ ] Game tools (of any kind, to help development)
+  - [ ] Automated test (Unit test)
+  - [ ] Splash screen
+  - [ ] Beautify UI (buttons, labels, ...)
