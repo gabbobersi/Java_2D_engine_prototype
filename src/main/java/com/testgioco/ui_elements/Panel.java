@@ -28,7 +28,8 @@ public class Panel extends JPanel implements Runnable {
 
     public void start(){
         gameThread = new Thread(this);
-        gameThread.start();     // It calls "run()" method.
+        // It calls "run()" method.
+        gameThread.start();
     }
 
     public void update(){
