@@ -24,7 +24,7 @@ _Roadmap from the top, to the bottom._
 - Chill
   - [ ] MVP game (Minimum Viable Product)
   - [x] Some entities to test
-  - [ ] Test FPS vs no FPS logic.
+  - [x] Test FPS vs no FPS logic.
   - [ ] Load images as sprite.
   - [ ] Improving rendering
   - [ ] Draw sprites (software Piskel)
