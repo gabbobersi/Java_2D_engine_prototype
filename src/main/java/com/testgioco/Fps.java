@@ -1,7 +1,11 @@
 package com.testgioco;
 
 public class Fps {
+<<<<<<< Updated upstream
     public static final long MILLISECONDS = 1000000000;   // One second in milliseconds
+=======
+    private final long MILLISECONDS = 1000000000;   // One second in milliseconds
+>>>>>>> Stashed changes
     double drawInterval;
     int fps = 1;
     double delta = 0;

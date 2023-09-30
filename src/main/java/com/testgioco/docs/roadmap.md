@@ -7,6 +7,7 @@ _Roadmap from the top, to the bottom._
   - [x] FPS
   - [x] Secondary thread (`Runnable` interface)
   - [x] `paintComponent` method to draw something
+<<<<<<< Updated upstream
   - [x] Input handler
   - [ ] Sprites loading
   - [ ] Animations system
@@ -38,3 +39,13 @@ _Roadmap from the top, to the bottom._
   - [ ] Automated test (Unit test)
   - [ ] Splash screen
   - [ ] Beautify UI (buttons, labels, ...)
+=======
+  - [ ] Input handler
+  - [ ] Sprites loading
+  - [ ] Animations system
+- Chill
+  - [ ] MVP game
+  - [x] Some entities to test
+  - [ ] Test FPS vs no FPS logic.
+  - [ ] Load images as sprite.
+>>>>>>> Stashed changes

@@ -42,19 +42,32 @@ public class Panel extends JPanel implements Runnable {
 
     public void start(){
         gameThread = new Thread(this);
+<<<<<<< Updated upstream
         // It calls "run()" method.
         gameThread.start();
     }
 
     public void update(){
         player.update();
+=======
+        gameThread.start();     // It calls "run()" method.
+    }
+
+    public void update(){
+
+>>>>>>> Stashed changes
     }
     @Override
     public void paintComponent(Graphics g) {
         // Questo metodo DISEGNA
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+<<<<<<< Updated upstream
         player.draw(g2);
+=======
+        g2.setColor(Color.BLACK);
+        g2.fillRect(100, 100, grid.cell.size, grid.cell.size);
+>>>>>>> Stashed changes
         g2.dispose();
     }
 }
