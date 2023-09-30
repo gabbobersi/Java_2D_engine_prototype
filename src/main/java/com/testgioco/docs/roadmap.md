@@ -7,7 +7,7 @@ _Roadmap from the top, to the bottom._
   - [x] FPS
   - [x] Secondary thread (`Runnable` interface)
   - [x] `paintComponent` method to draw something
-  - [ ] Input handler
+  - [x] Input handler
   - [ ] Sprites loading
   - [ ] Animations system
   - [ ] Tile system (tilemap)
