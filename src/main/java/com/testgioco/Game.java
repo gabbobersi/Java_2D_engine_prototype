@@ -6,7 +6,7 @@ import com.testgioco.ui_elements.Window;
 public class Game {
     private Panel panel;
     private Window window;
-    public Game(){
+    public Game() {
         this.panel = new Panel();
         this.window = new Window(this.panel);
     }

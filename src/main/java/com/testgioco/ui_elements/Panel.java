@@ -19,10 +19,10 @@ public class Panel extends JPanel implements Runnable {
     InputHandler keyH = new InputHandler();
     int x_quadratino = 100;
     int y_quadratino = 100;
-    Player player = new Player(this, keyH);
     Thread gameThread;
-    public Panel(){
-        this.setBackground(Color.WHITE);
+    Player player = new Player(keyH);
+    public Panel() {
+        this.setBackground(Color.BLACK);
 
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -42,13 +42,11 @@ public class Panel extends JPanel implements Runnable {
 
     public void start(){
         gameThread = new Thread(this);
-        // It calls "run()" method.
-        gameThread.start();
+        gameThread.start(); // Calls "run" method, in a new thread.
     }
 
     public void update(){
         player.update();
-        gameThread.start();     // It calls "run()" method.
     }
 
     @Override

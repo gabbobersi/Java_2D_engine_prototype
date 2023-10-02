@@ -3,17 +3,19 @@ package com.testgioco.entities;
 import com.testgioco.Cell;
 import com.testgioco.InputHandler;
 import com.testgioco.base_classes.Entity;
+import com.testgioco.exceptions.InvalidResourcesException;
 import com.testgioco.ui_elements.Panel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class Player extends Entity {
     InputHandler keyH;
+    int speed = 5;
     Cell cell;
-    public Player(Panel gp, InputHandler keyH){
+    public Player(InputHandler keyH){
         this.keyH = keyH;
         this.x = 100;
         this.y = 100;
@@ -25,18 +27,19 @@ public class Player extends Entity {
 
     public void getPlayerImage(){
         try {
-            System.out.println("Ciao");
-            String path = "/assets/player/pippo.png";
-            testImage = ImageIO.read(getClass().getResourceAsStream(path));
-            System.out.println("Ciao");
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            testImage = ImageIO.read(new File("assets/player/t2.png"));
+            if (testImage == null){
+                throw new InvalidResourcesException("Non sono riuscito a recuperare l'immagine del giocatore");
+            }
+        } catch (InvalidResourcesException e){
+            System.out.println("Sgamato");
+        } catch (IOException e){
+            System.out.println("Non sono riuscito a recuperare l'immagine del giocatore");
         }
+
     }
 
     public void update(){
-        int speed = 50;
         if (keyH.upPressed){
             this.y -= speed;
         }
