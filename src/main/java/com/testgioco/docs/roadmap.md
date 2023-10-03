@@ -7,9 +7,8 @@ _Roadmap from the top, to the bottom._
   - [x] FPS
   - [x] Secondary thread (`Runnable` interface)
   - [x] `paintComponent` method to draw something
-<<<<<<< Updated upstream
   - [x] Input handler
-  - [ ] Sprites loading
+  - [x] Sprites loading
   - [ ] Animations system
   - [ ] Tile system (tilemap)
   - [ ] Camera
@@ -26,9 +25,8 @@ _Roadmap from the top, to the bottom._
   - [ ] MVP game (Minimum Viable Product)
   - [x] Some entities to test
   - [x] Test FPS vs no FPS logic.
-  - [ ] Load images as sprite.
   - [ ] Improving rendering
-  - [ ] Draw sprites (software Piskel)
+  - [x] Draw sprites (software Piskel)
   - [ ] Game systems
     - [ ] Inventory system
     - [ ] Health, stamina, magick bars
@@ -39,13 +37,5 @@ _Roadmap from the top, to the bottom._
   - [ ] Automated test (Unit test)
   - [ ] Splash screen
   - [ ] Beautify UI (buttons, labels, ...)
-=======
-  - [ ] Input handler
   - [ ] Sprites loading
   - [ ] Animations system
-- Chill
-  - [ ] MVP game
-  - [x] Some entities to test
-  - [ ] Test FPS vs no FPS logic.
-  - [ ] Load images as sprite.
->>>>>>> Stashed changes
