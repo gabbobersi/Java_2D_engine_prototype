@@ -32,8 +32,10 @@ public class Player extends Entity {
                 throw new InvalidResourcesException("Non sono riuscito a recuperare l'immagine del giocatore");
             }
         } catch (InvalidResourcesException e){
+            e.printStackTrace();
             System.out.println("Sgamato");
         } catch (IOException e){
+            e.printStackTrace();
             System.out.println("Non sono riuscito a recuperare l'immagine del giocatore");
         }
 
