@@ -32,6 +32,7 @@ public class Player extends Entity {
                 throw new InvalidResourcesException("Non sono riuscito a recuperare l'immagine del giocatore");
             }
         } catch (InvalidResourcesException e){
+            // Queste due righe producono lo stesso output? Da verificare...
             e.printStackTrace();
             System.out.println("Sgamato");
         } catch (IOException e){

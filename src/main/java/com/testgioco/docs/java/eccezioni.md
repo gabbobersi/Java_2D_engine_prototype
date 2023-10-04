@@ -50,10 +50,13 @@ throw new ExceptionType("Questo è un messaggio di errore");
 ```Java
 try {
     // Codice che potrebbe fallire (es. divisione per zero, caricamento risorsa fallito, ecc...)
-} catch (ExceptionType1 e){
+} catch (ExceptionClass1 e){
     // Gestione errore di tipo 1.    
-} catch (ExceptionType2 e){
+} catch (ExceptionClass2 e){
     // Gestione errore di tipo 2.
+} catch (Exception e){
+    // Consigliato alla fine, di gestire un generico "Exception" in modo da
+    // gestire anche le eccezioni che non ho previsto sopra.
 }
 ...
 ```
