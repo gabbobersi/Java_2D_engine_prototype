@@ -1,9 +1,9 @@
 ## Interfacce Java
 Un'interfaccia in Java è un **contratto** che definisce un insieme di metodi che una classe deve implementare. 
 
-È simile ad una classe astratta, ma può contenere solo definizioni di metodi e costanti, senza implementazioni concrete. 
+È simile ad una [classe](classe_istanza.md) astratta, ma può contenere solo definizioni di metodi e costanti, senza implementazioni concrete. 
 
-Le classi che implementano un'interfaccia devono fornire l'implementazione concreta di tutti i metodi definiti dall'interfaccia.
+Le [classi](classe_istanza.md) che implementano un'interfaccia devono fornire l'implementazione concreta di tutti i metodi definiti dall'interfaccia.
 
 
 *NB:il termine "**contratto**" si riferisce ad un accordo o un insieme di regole che definiscono le condizioni che devono essere rispettate da chiunque utilizzi una determinata parte di codice, come una classe, un modulo o un'interfaccia.*
@@ -21,7 +21,7 @@ public interface Shape {
 
 Nel codice sopra, abbiamo definito un'interfaccia chiamata **Shape** che ha due metodi,**calculateArea**  e _**calculatePerimeter**_, senza fornire l'implementazione. 
 
-**Le classi che implementano l'interfaccia Shape devono fornire un'implementazione per questi metodi.**
+**Le [classi](classe_istanza.md) che implementano l'interfaccia Shape devono fornire un'implementazione per questi metodi.**
 ********************************
 Ecco un esempio di come una classe può implementare l'interfaccia Shape:
 
@@ -50,7 +50,7 @@ public class Circle implements Shape {
 
 ```
 
-Nel codice sopra, la classe **Circle** implementa l'interfaccia **Shape** e fornisce 
+Nel codice sopra, la [classe](classe_istanza.md) **Circle** implementa l'interfaccia **Shape** e fornisce 
 un'implementazione per i
 metodi _calculateArea e calculatePerimeter_ specifici per un cerchio.
 ********************************
