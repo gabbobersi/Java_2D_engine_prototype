@@ -7,7 +7,7 @@ La GoF è un gruppo di 4 programmatori.
 
 Tali pattern sono particolarmente utilizzati in linguaggi come Java e C#, e sono applicabili a qualunque linguaggio che implementa il paradigma di programmazione a oggetti.
 
-### Struttura di ogni pattern
+### Struttura di ogni design pattern
 - **nome:** identificativo che rappresenta il pattern stesso.
 - **problema:** situazione in cui applicare il pattern.
 - **soluzione:** descrizione degli elementi costitutivi del progetto, comprese le relazioni e le relative implicazioni, senza addentrarsi nella specifica implementazione.
