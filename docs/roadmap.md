@@ -14,7 +14,20 @@ _Roadmap from the top, to the bottom._
 - [x] Input handler
 - [x] Sprites loading
 - [ ] Animations system
-- [ ] Tile system (tilemap)
+- [ ] Tile system
+  - [ ] Tile class
+    - Features of a tile.
+  - [ ] TileManager class
+    - [ ] Constructor
+    - [ ] Array of all tile types.
+    - [ ] Method to draw all tiles
+    - [ ] Create the first tile map 16x12 (txt)
+    - [ ] Method to read the tile map
+    - [ ] Method to load the tile map 
+  - [ ] OPTIONALS
+    - [ ] Tile maps generator
+    - [ ] Change the array of tiles, in a HashMap (so you can refer to a tile by name).
+- [ ] World map
 - [ ] Camera
 - [ ] Collision detection
 - [ ] Object placement
