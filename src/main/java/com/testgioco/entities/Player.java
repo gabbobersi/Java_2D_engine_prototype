@@ -28,44 +28,90 @@ public class Player extends Entity {
 
     public void getPlayerImage(){
         try{
-            up1 = ImageIO.read(new File("assets/player/t2.png"));
-            down1 = ImageIO.read(new File("assets/player/t1.png"));
-            left1 = ImageIO.read(new File("assets/player/t2.png"));
-            right1 = ImageIO.read(new File("assets/player/t1.png"));
+            up1 = ImageIO.read(new File("assets/player/player_up_1.png"));
+            up2 = ImageIO.read(new File("assets/player/player_up_2.png"));
+
+            down1 = ImageIO.read(new File("assets/player/player_down_1.png"));
+            down2 = ImageIO.read(new File("assets/player/player_down_2.png"));
+
+            left1 = ImageIO.read(new File("assets/player/player_left_1.png"));
+            left2 = ImageIO.read(new File("assets/player/player_left_2.png"));
+
+            right1 = ImageIO.read(new File("assets/player/player_right_1.png"));
+            right2 = ImageIO.read(new File("assets/player/player_right_2.png"));
         } catch (IOException e){
             e.printStackTrace();
         }
     }
 
     public void update(){
-        direction = "down";         // Default direction
+        direction = "down";         // Default direction (even if no key is pressed)
 
-        if (keyH.upPressed){
-            direction = "up";
-            this.y -= speed;
-        }
-        if (keyH.downPressed){
-            direction = "down";
-            this.y += speed;
-        }
-        if (keyH.rightPressed){
-            direction = "right";
-            this.x += speed;
-        }
-        if (keyH.leftPressed){
-            direction = "left";
-            this.x -= speed;
+        // If any key is being pressed...
+        if (keyH.anyKeyPressed){
+            if (keyH.upPressed){
+                direction = "up";
+                this.y -= speed;
+            }
+            if (keyH.downPressed){
+                direction = "down";
+                this.y += speed;
+            }
+            if (keyH.rightPressed){
+                direction = "right";
+                this.x += speed;
+            }
+            if (keyH.leftPressed){
+                direction = "left";
+                this.x -= speed;
+            }
+
+            spriteCounter++;
+
+            // Every "x" draws, I change animation.
+            if (spriteCounter > 12) {
+                if (spriteNumber == 1){
+                    spriteNumber = 2;
+                } else {
+                    spriteNumber = 1;
+                }
+                spriteCounter = 0;
+            }
         }
     }
     public void draw(Graphics2D g2) {
-        BufferedImage image = switch (direction) {
-            case "up" -> up1;
-            case "down" -> down1;
-            case "left" -> left1;
-            case "right" -> right1;
-            default -> null;
+        BufferedImage image = null;
+
+        switch (direction) {
+            case "up":
+                if (spriteNumber == 1){
+                    image = up1;
+                } else if (spriteNumber == 2){
+                    image = up2;
+                }
+                break;
+            case "down":
+                if (spriteNumber == 1){
+                    image = down1;
+                } else if (spriteNumber == 2){
+                    image = down2;
+                }
+                break;
+            case "left":
+                if (spriteNumber == 1){
+                    image = left1;
+                } else if (spriteNumber == 2){
+                    image = left2;
+                }
+                break;
+            case "right":
+                if (spriteNumber == 1){
+                    image = right1;
+                } else if (spriteNumber == 2){
+                    image = right2;
+                }
+                break;
         };
-        System.out.println("La direzione è " + direction);
         g2.drawImage(image, x, y, this.cell.size, this.cell.size, null);
     }
 }
