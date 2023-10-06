@@ -8,6 +8,7 @@ import com.testgioco.ui_elements.Panel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -26,37 +27,45 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage(){
-        try {
-            testImage = ImageIO.read(new File("assets/player/t2.png"));
-            if (testImage == null){
-                throw new InvalidResourcesException("Non sono riuscito a recuperare l'immagine del giocatore");
-            }
-        } catch (InvalidResourcesException e){
-            // Queste due righe producono lo stesso output? Da verificare...
-            e.printStackTrace();
-            System.out.println("Sgamato");
+        try{
+            up1 = ImageIO.read(new File("assets/player/t2.png"));
+            down1 = ImageIO.read(new File("assets/player/t1.png"));
+            left1 = ImageIO.read(new File("assets/player/t2.png"));
+            right1 = ImageIO.read(new File("assets/player/t1.png"));
         } catch (IOException e){
             e.printStackTrace();
-            System.out.println("Non sono riuscito a recuperare l'immagine del giocatore");
         }
-
     }
 
     public void update(){
+        direction = "down";         // Default direction
+
         if (keyH.upPressed){
+            direction = "up";
             this.y -= speed;
         }
         if (keyH.downPressed){
+            direction = "down";
             this.y += speed;
         }
         if (keyH.rightPressed){
+            direction = "right";
             this.x += speed;
         }
         if (keyH.leftPressed){
+            direction = "left";
             this.x -= speed;
         }
     }
     public void draw(Graphics2D g2) {
-        g2.drawImage(testImage, x, y, this.cell.size, this.cell.size, null);
+        BufferedImage image = switch (direction) {
+            case "up" -> up1;
+            case "down" -> down1;
+            case "left" -> left1;
+            case "right" -> right1;
+            default -> null;
+        };
+        System.out.println("La direzione è " + direction);
+        g2.drawImage(image, x, y, this.cell.size, this.cell.size, null);
     }
 }
