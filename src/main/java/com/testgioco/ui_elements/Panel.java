@@ -1,9 +1,6 @@
 package com.testgioco.ui_elements;
 
-import com.testgioco.Fps;
-import com.testgioco.Grid;
-import com.testgioco.InputHandler;
-import com.testgioco.Vector2D;
+import com.testgioco.*;
 import com.testgioco.entities.Player;
 
 import javax.swing.*;
@@ -18,10 +15,9 @@ public class Panel extends JPanel implements Runnable {
     * (abbiamo creato una istanza - aka oggetto - della classe InputHandler. L'istanza è keyH.)
     * */
     InputHandler keyH = new InputHandler();
-    int x_quadratino = 100;
-    int y_quadratino = 100;
     Thread gameThread;
     Player player = new Player(keyH, 100, 100);
+    TileManager tileManager = new TileManager();
     public Panel() {
         this.setBackground(Color.BLACK);
 
@@ -55,6 +51,7 @@ public class Panel extends JPanel implements Runnable {
         // Questo metodo DISEGNA
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        tileManager.draw(g2);
         player.draw(g2);
         g2.dispose();
     }
