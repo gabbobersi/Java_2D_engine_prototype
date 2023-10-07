@@ -1,6 +1,4 @@
-package com.testgioco.base_classes;
-
-import com.testgioco.Vector2D;
+package com.testgioco.entities.base_classes;
 
 import java.awt.image.BufferedImage;
 

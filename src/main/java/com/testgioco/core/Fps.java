@@ -1,4 +1,4 @@
-package com.testgioco;
+package com.testgioco.core;
 
 public class Fps {
     public static final long MILLISECONDS = 1000000000;   // One second in milliseconds

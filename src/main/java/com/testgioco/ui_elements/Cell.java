@@ -1,4 +1,4 @@
-package com.testgioco;
+package com.testgioco.ui_elements;
 
 public class Cell {
     int baseSize = 10;

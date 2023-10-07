@@ -1,9 +1,9 @@
 package com.testgioco.entities;
 
-import com.testgioco.Cell;
-import com.testgioco.InputHandler;
-import com.testgioco.Vector2D;
-import com.testgioco.base_classes.Entity;
+import com.testgioco.ui_elements.Cell;
+import com.testgioco.core.InputHandler;
+import com.testgioco.core.Vector2D;
+import com.testgioco.entities.base_classes.Entity;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -66,7 +66,7 @@ public class Player extends Entity {
             spriteCounter++;
 
             // Every "x" draws, I change animation.
-            if (spriteCounter > 12) {
+            if (spriteCounter > 6) {
                 if (spriteNumber == 1){
                     spriteNumber = 2;
                 } else {
@@ -78,6 +78,7 @@ public class Player extends Entity {
 
         Vector2D vector = new Vector2D(deltaX, deltaY);
         vector.normalize();
+        // System.out.println(vector.getMagnitude());
         vector.multiply(speed);
         x += vector.getX();
         y += vector.getY();

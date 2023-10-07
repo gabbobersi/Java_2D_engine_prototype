@@ -2,19 +2,35 @@ package com.testgioco.ui_elements;
 
 import javax.swing.*;
 
-public class Window {
-    final JFrame window;
-    public Window(Panel gamePanel){
-        this.window = new JFrame();
-        this.window.add(gamePanel);
-        this.window.pack();
-        this.window.setSize(620, 480);
+public class Window extends JFrame {
+    private int width = 620;
+    private int height = 480;
+    public Window(){
+    }
 
-        this.window.setLocationRelativeTo(null);
-        this.window.setTitle("Gioco di esempio");
-        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.window.setVisible(true);
+    public Window(int width, int height, Panel gamePanel){
+        this.width = width;
+        this.height = height;
+
+        this.setTitle("Gioco di esempio");
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.add(gamePanel);
+        this.pack();
+
+        this.setSize(width, height);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
 
         gamePanel.start();
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
     }
 }

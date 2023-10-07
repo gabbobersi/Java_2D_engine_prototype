@@ -1,26 +1,20 @@
 package com.testgioco.ui_elements;
 
-import com.testgioco.*;
+import com.testgioco.core.Fps;
+import com.testgioco.core.InputHandler;
 import com.testgioco.entities.Player;
 
 import javax.swing.*;
 import java.awt.*;
-//berse sei un fregno
-public class Panel extends JPanel implements Runnable {
-    Grid grid = new Grid();
-    Fps fps = new Fps(60);
 
-    /* 1. Creiamo una variabile keyH, di tipo InputHandler (che è una classe)
-    *  2. Assegniamo alla variabile keyH, una istanza della classe InputHandler.
-    * (abbiamo creato una istanza - aka oggetto - della classe InputHandler. L'istanza è keyH.)
-    * */
-    InputHandler keyH = new InputHandler();
-    Thread gameThread;
-    Player player = new Player(keyH, 100, 100);
-    TileManager tileManager = new TileManager();
+public class Panel extends JPanel implements Runnable {
+    private Fps fps = new Fps(30);
+    private InputHandler keyH = new InputHandler();
+    private Thread gameThread;
+    private Player player = new Player(keyH, 100, 100);
+    private TileManager tileManager = new TileManager();
     public Panel() {
         this.setBackground(Color.BLACK);
-
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);

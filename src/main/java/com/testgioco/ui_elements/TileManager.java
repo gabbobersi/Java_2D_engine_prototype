@@ -1,8 +1,9 @@
-package com.testgioco;
+package com.testgioco.ui_elements;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class TileManager {
     Cell cella = new Cell();
@@ -12,6 +13,8 @@ public class TileManager {
     public TileManager() {
         tiles = new Tile[3];
         mapTileNum = new int[grid.rowNumber][grid.columnNumber];
+        System.out.println("Sto cercando di creare una matrice di: " + grid.rowNumber + " + " + grid.columnNumber);
+
         loadMap();
         getTileImage();
     }
@@ -34,11 +37,9 @@ public class TileManager {
     public void draw (Graphics g2) {
         int y = 0;
 
-
         for (int r = 0; r < grid.rowNumber; r++) {
             int x = 0;
-
-            for ( int c = 0; c < grid.columnNumber; c++) {
+            for (int c = 0; c < grid.columnNumber; c++) {
                 int tileIndex = mapTileNum[r][c];
                 g2.drawImage(tiles[tileIndex].image,x, y, cella.size, cella.size, null);
                 x += cella.size;
@@ -48,8 +49,9 @@ public class TileManager {
     }
     public void loadMap (){
         try{
-            InputStream is = getClass().getResourceAsStream("assets/maps/maps01.txt");
-            BufferedReader br = new BufferedReader( new InputStreamReader(is));
+            InputStream is = getClass().getResourceAsStream("/maps/maps01.txt");
+            InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
 
             for (int r = 0; r < grid.rowNumber; r++) {
                 String line = br.readLine();
