@@ -14,19 +14,10 @@ _Roadmap from the top, to the bottom._
 - [x] Input handler
 - [x] Sprites loading
 - [x] Animations system
-- [ ] Tile system
-  - [ ] Tile class
-    - Features of a tile.
-  - [ ] TileManager class
-    - [ ] Constructor
-    - [ ] Array of all tile types.
-    - [ ] Method to draw all tiles
-    - [ ] Create the first tile map 16x12 (txt)
-    - [ ] Method to read the tile map
-    - [ ] Method to load the tile map 
+- [x] Tile system
   - [ ] OPTIONALS
     - [ ] Tile maps generator
-    - [ ] Change the array of tiles, in a HashMap (so you can refer to a tile by name).
+    - [ ] Change the array of tiles, into an HashMap (so you can refer to a tile by name).
 - [ ] World map
 - [ ] Camera
 - [ ] Collision detection
@@ -59,5 +50,17 @@ _Roadmap from the top, to the bottom._
 - [ ] Automated test (Unit test)
 - [ ] Splash screen
 - [ ] Beautify UI (buttons, labels, ...)
-- [ ] Sprites loading
-- [ ] Animations system
+
+
+
+### Completed details
+- Tile System:
+  - [x] Tile class
+    - Features of a tile.
+  - [x] TileManager class
+    - [x] Constructor
+    - [x] Array of all tile types.
+    - [x] Method to draw all tiles
+    - [x] Create the first tile map
+    - [x] Method to read the tile map
+    - [x] Method to load the tile map 
