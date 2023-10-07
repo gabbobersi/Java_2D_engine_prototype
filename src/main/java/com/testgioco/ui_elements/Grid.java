@@ -7,9 +7,4 @@ public class Grid {
 
     public int columnNumber = window.getWidth() / cell.size;
     public int rowNumber = window.getHeight() / cell.size;;
-
-    public Grid(){
-        System.out.println("Numero colonne: " + columnNumber);
-        System.out.println("Numero righe: " + rowNumber);
-    }
 }

@@ -13,8 +13,6 @@ public class TileManager {
     public TileManager() {
         tiles = new Tile[3];
         mapTileNum = new int[grid.rowNumber][grid.columnNumber];
-        System.out.println("Sto cercando di creare una matrice di: " + grid.rowNumber + " + " + grid.columnNumber);
-
         loadMap();
         getTileImage();
     }

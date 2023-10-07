@@ -1,5 +1,6 @@
 package com.testgioco.ui_elements;
 
+import com.testgioco.Debug;
 import com.testgioco.core.Fps;
 import com.testgioco.core.InputHandler;
 import com.testgioco.entities.Player;
@@ -14,6 +15,8 @@ public class Panel extends JPanel implements Runnable {
     private Player player = new Player(keyH, 100, 100);
     private TileManager tileManager = new TileManager();
     public Panel() {
+        Debug debug = new Debug();
+        debug.debug();
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
