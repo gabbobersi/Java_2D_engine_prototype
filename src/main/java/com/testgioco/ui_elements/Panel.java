@@ -3,6 +3,7 @@ package com.testgioco.ui_elements;
 import com.testgioco.Fps;
 import com.testgioco.Grid;
 import com.testgioco.InputHandler;
+import com.testgioco.Vector2D;
 import com.testgioco.entities.Player;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ public class Panel extends JPanel implements Runnable {
     int x_quadratino = 100;
     int y_quadratino = 100;
     Thread gameThread;
-    Player player = new Player(keyH);
+    Player player = new Player(keyH, 100, 100);
     public Panel() {
         this.setBackground(Color.BLACK);
 

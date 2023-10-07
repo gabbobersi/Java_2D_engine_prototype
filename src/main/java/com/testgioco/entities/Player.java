@@ -2,10 +2,8 @@ package com.testgioco.entities;
 
 import com.testgioco.Cell;
 import com.testgioco.InputHandler;
+import com.testgioco.Vector2D;
 import com.testgioco.base_classes.Entity;
-import com.testgioco.exceptions.InvalidResourcesException;
-import com.testgioco.ui_elements.Panel;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,14 +13,11 @@ import java.io.IOException;
 public class Player extends Entity {
     InputHandler keyH;
     int speed = 5;
-    Cell cell;
-    public Player(InputHandler keyH){
+    Cell cell = new Cell();
+    public Player(InputHandler keyH, int x, int y){
         this.keyH = keyH;
-        this.x = 100;
-        this.y = 100;
-
-         cell = new Cell();
-
+        this.x = x;
+        this.y = y;
         getPlayerImage();
     }
 
@@ -46,24 +41,26 @@ public class Player extends Entity {
 
     public void update(){
         direction = "down";         // Default direction (even if no key is pressed)
+        int deltaX = 0;
+        int deltaY = 0;
 
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
                 direction = "up";
-                this.y -= speed;
+                deltaY--;
             }
             if (keyH.downPressed){
                 direction = "down";
-                this.y += speed;
+                deltaY++;
             }
             if (keyH.rightPressed){
                 direction = "right";
-                this.x += speed;
+                deltaX++;
             }
             if (keyH.leftPressed){
                 direction = "left";
-                this.x -= speed;
+                deltaX--;
             }
 
             spriteCounter++;
@@ -78,6 +75,12 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+
+        Vector2D vector = new Vector2D(deltaX, deltaY);
+        vector.normalize();
+        vector.multiply(speed);
+        x += vector.getX();
+        y += vector.getY();
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = null;

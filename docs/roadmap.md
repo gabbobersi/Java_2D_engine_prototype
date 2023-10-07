@@ -1,6 +1,6 @@
 _Roadmap from the top, to the bottom._
 ### Bug fix bounties
-- InputHandler (low urgency)
+- [X] InputHandler (low urgency)
   - issue: while pressing at the same time two keys, one the horiz. and one vert. axies, the player is much faster.
 
 ### Core
@@ -13,7 +13,7 @@ _Roadmap from the top, to the bottom._
 - [x] `paintComponent` method to draw something
 - [x] Input handler
 - [x] Sprites loading
-- [ ] Animations system
+- [x] Animations system
 - [ ] Tile system
   - [ ] Tile class
     - Features of a tile.
@@ -40,7 +40,7 @@ _Roadmap from the top, to the bottom._
   - [ ] Quit game menu
   - [ ] TEST
 ### Chill
-- [ ] Implement a 2D vector class.
+- [x] Implement a 2D vector class.
   - REF.: 
     - [GitHub](https://gist.github.com/gunvirranu/6816d65c0231981787ebefd3bdb61f98) 
     - [YouTube](https://www.youtube.com/watch?v=RrjRbTg6T2c&ab_channel=M3832)

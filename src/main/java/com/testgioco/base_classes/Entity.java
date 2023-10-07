@@ -1,5 +1,7 @@
 package com.testgioco.base_classes;
 
+import com.testgioco.Vector2D;
+
 import java.awt.image.BufferedImage;
 
 public class Entity {
