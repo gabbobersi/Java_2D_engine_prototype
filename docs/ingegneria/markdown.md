@@ -42,4 +42,13 @@ class Test(){
    1. Cane
    2. Ebreo
 
+[remote url](www.wikipedia.org)
 
+[local url](processi_thread.md)
+
+Qui voglio andare a capo \
+perché voglio tenere le \
+righe corte.
+
+****
+Quella sopra è una bella riga non trovate?

@@ -1,4 +1,9 @@
-## Riassunto rapido
+**Riassunto pratico:**\
+mi concentro sulla costruzione di fabbriche (factory) 
+specifiche, cioè che producono un solo prodotto ciascuna, 
+piuttosto che su ciò che voglio produrre. 
+
+## Procedura
 **Creo le fabbriche:**
 1. Creazione interfacce:
    1. Fabbrica generica.

@@ -4,7 +4,7 @@ E' un template. Descrive come creare oggetti concreti.
 Puoi vederla come il "blueprint" che gli architetti utilizzano per pianificare i futuri palazzi.
 
 ```Java
-class Test(){
+class Test{
     // Codice
 }
 ```
@@ -28,7 +28,7 @@ _(es. se la classe mette a disposizione la variabile int x = 5, tutte le istanze
 
 ### Istanziamento
 ```Java
-class Test(){
+class Test{
     /* Creo una variabile "griglia" di tipo Grid.
      * Assegno alla variabile "griglia" una nuova istanza di Grid. */
     Grid griglia = new Grid();
@@ -45,7 +45,7 @@ class Test(){
 - Il suo valore non è condiviso tra le istanze. In altre parole, ogni istanza avrà il proprio valore.
 - **NB:** il costruttore non c'entra niente con gli attributi di istanza!!!!
 ```Java
-class Test(){
+class Test{
     static Grid griglia = new Grid();          // Attr. di classe
     static int x;                              // Attr. di classe
     int y;                                     // Attr. di istanza
