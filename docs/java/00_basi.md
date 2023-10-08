@@ -1,10 +1,10 @@
 Il file sottostante è diviso in 4 parti:
-1. Modalità per aggiungere variabili/classi al codice.
-2. Struttura codice.
+1. Modalità per aggiungere variabili/classi al codice
+2. Struttura codice
 3. Naming convention
 4. Quiz
 ****
-Ci sono 3 tipi di modi per aggiungere una variabile a un programma:
+Ci sono 3 modalità per aggiungere una variabile a un programma:
 - Dichiarazione
 - Definizione
 - Inizializzazione
@@ -46,7 +46,7 @@ Build build;    // Build è il tipo (o classe), build è l'identificativo.
 
 ### Metodi
 In Java, i metodi si dichiarano in questo modo: \
-`[ TIPO RITORNATO]` `[ IDENTIFICATIVO ]` (`[PARAM1, PARAM2, ....]`) {`[CODICE]`} 
+`[ TIPO RITORNATO ]` `[ IDENTIFICATIVO ]` (`[PARAM1, PARAM2, ....]`) {`[CODICE]`} 
 
 Esempio:
 ```Java
@@ -62,7 +62,7 @@ String concatenaStringhe(String str1, String str2){
 ```
 
 Oltre al tipo, sia per le variabili che per i metodi, è possibile aggiungere un **modificatore di accesso**
-(ti rimando alla guida pre-fatta: [link](modificatori_di_accesso.md)).
+(ti rimando alla guida pre-fatta: [link](modificatori_di_accesso.md)) (i modificatori non verranno richiesti).
 
 ### Prototipo
 Il prototipo rappresenta una breve descrizione di una variabile, metodo (o funzione), classe. \
@@ -89,7 +89,7 @@ class Classe(){
 ```
 In altre parole, il prototipo corrisponde alla dichiarazione, tranne che per le 
 classi. \
-Nel caso delle classi, il prototipo corrisponde alla definzione.
+Nel caso delle classi, il prototipo corrisponde alla definizione.
 ****
 ## Naming convention
 Ogni linguaggio ha delle "naming convention". \
@@ -113,7 +113,7 @@ class SonoUnaClasse(){          // Lettera MAIUSCOLA iniziale, lettere maiuscole
 
 _La naming convention delle classi si applica anche a interfacce e classi astratte._
 
-Oltre al codice, le naming convention influenza anche la struttura di
+Oltre al codice, le naming convention influenzano anche la struttura di
 package (cartelle) e moduli (file):
 - sonoUnPackage
 - SonoUnModulo (notare che la sintassi è la stessa delle classi. Appunto perché le classi devono avere LO STESSO NOME del modulo in cui sono ospitate!)
@@ -127,6 +127,7 @@ E' sconsigliata la consultazione della soprastante guida durante lo svolgimento
 del quiz! \
 Se non sai qualcosa, semplicemente segnati la domanda. La verificherai al termine della prova, con la guida.
 
+### Cominciamo
 1. Spiega la struttura del codice sottostante:
 ```Java
 Aereo airLineF15 = new Aereo();
