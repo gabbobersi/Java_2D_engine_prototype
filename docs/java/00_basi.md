@@ -31,8 +31,8 @@ House house = new House();  // Inizializzo (o istanzio)
 ```
 ****
 ## Capiamo la struttura del codice
-In Java, le variabili di dichiarano in questo modo:
-
+### Variabili e classi
+In Java, le variabili si dichiarano in questo modo: \
 `[ TIPO ]` `[ IDENTIFICATIVO ]`
 
 Esempio:
@@ -43,6 +43,53 @@ Lo stesso vale per le classi:
 ```Java
 Build build;    // Build è il tipo (o classe), build è l'identificativo.
 ```
+
+### Metodi
+In Java, i metodi si dichiarano in questo modo: \
+`[ TIPO RITORNATO]` `[ IDENTIFICATIVO ]` (`[PARAM1, PARAM2, ....]`) {`[CODICE]`} 
+
+Esempio:
+```Java
+// Questo metodo non ritorna nulla, perciò il tipo di ritorno sarà void.
+void stampaMessaggio(String messaggio){
+    System.out.println(messaggio);
+}
+
+// Questo metodo ritorna una stringa, perciò il tipo di ritorno sarà String.
+String concatenaStringhe(String str1, String str2){
+    return str1 + str2;
+}
+```
+
+Oltre al tipo, sia per le variabili che per i metodi, è possibile aggiungere un **modificatore di accesso**
+(ti rimando alla guida pre-fatta: [link](modificatori_di_accesso.md)).
+
+### Prototipo
+Il prototipo rappresenta una breve descrizione di una variabile, metodo (o funzione), classe. \
+Ecco le tipologie:
+```Java
+// Prototipo di una variabile (è la dichiarazione)
+int x;
+
+// Prototipo di un metodo (è la dichiarazione)
+public int getAge(Person person);
+
+// Prototipo di una classe (è la definizione!)
+class Classe(){
+    int number = 0;
+    
+    public Classe() {
+        // Costruttore
+    }      
+    
+    public int getNumber(){
+        return number;
+    };
+}
+```
+In altre parole, il prototipo corrisponde alla dichiarazione, tranne che per le 
+classi. \
+Nel caso delle classi, il prototipo corrisponde alla definzione.
 ****
 ## Naming convention
 Ogni linguaggio ha delle "naming convention". \
@@ -78,7 +125,7 @@ Accertati di sapere tutto prima di provarlo!*
 
 E' sconsigliata la consultazione della soprastante guida durante lo svolgimento
 del quiz! \
-Se non sai qualcosa, semplicemente non segnarlo. Alla fine verifica le cose che non sai utilizzando la guida.
+Se non sai qualcosa, semplicemente segnati la domanda. La verificherai al termine della prova, con la guida.
 
 1. Spiega la struttura del codice sottostante:
 ```Java
@@ -100,4 +147,30 @@ String sonoUnaStringa = "Ciao mondo!";
 ```Java
 int stato;
 stato = 1;
+
+void StampaQualcosa(String qualcosa){
+    System.out.println(qualcosa);    
+}
+```
+7. Il codice sottostante è corretto?
+```Java
+String ritornaCarrello(String id_carrello){
+    return Integer.parseInt(id_carrello);    
+}
+```
+8. Spiega il concetto di prototipo di un metodo.
+9. Il codice sottostante è il prototipo di un metodo?
+```Java
+public void saveFile(String path, File file);
+```
+10. Il codice sottostante è il prototipo di una classe?
+```Java
+public class FileManager {
+    public File getFile(){
+        // Codice...
+    }
+    public void closeFile(File f){
+        // Codice...
+    }
+}
 ```
