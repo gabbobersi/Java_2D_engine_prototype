@@ -9,14 +9,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel extends JPanel implements Runnable {
-    private Fps fps = new Fps(30);
+    private Fps fps = new Fps(60);
     private InputHandler keyH = new InputHandler();
     private Thread gameThread;
     private Player player = new Player(keyH, 100, 100);
     private TileManager tileManager = new TileManager();
+
     public Panel() {
-        Debug debug = new Debug();
-        debug.debug();
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -50,6 +49,9 @@ public class Panel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D)g;
         tileManager.draw(g2);
         player.draw(g2);
+
+        Debug debug = new Debug(g2);
+        debug.draw();
         g2.dispose();
     }
 }

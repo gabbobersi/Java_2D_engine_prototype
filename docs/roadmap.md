@@ -32,9 +32,6 @@ _Roadmap from the top, to the bottom._
   - [ ] TEST
 ### Chill
 - [x] Implement a 2D vector class.
-  - REF.: 
-    - [GitHub](https://gist.github.com/gunvirranu/6816d65c0231981787ebefd3bdb61f98) 
-    - [YouTube](https://www.youtube.com/watch?v=RrjRbTg6T2c&ab_channel=M3832)
 - [ ] MVP game (Minimum Viable Product)
 - [x] Some entities to test
 - [x] Test FPS vs no FPS logic.
