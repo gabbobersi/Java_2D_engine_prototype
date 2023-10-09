@@ -18,6 +18,7 @@ Valutiamo a questo punto diversi design:
 Car car = new Car(id, null, model, color, null, null, weight, heigth);
 ```
 Il controllo dei parametri passati come `null` lo lasciamo al codice interno della classe.
+
 2. Creare un costruttore per ogni combinazione di argomenti necessari (ok ma poco flessibile) .
 ```Java
 new Car(id, brand, model);
