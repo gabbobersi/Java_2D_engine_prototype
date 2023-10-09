@@ -9,11 +9,11 @@ Immaginate di avere un oggetto, che richiede **molti parametri** in fase di iniz
 ```Java
 Car car = new Car(id, brand, model, color, numberOfDors, screenType, weight, heigth);
 ```
-A tutto ciò, aggiuntete che alcuni tra questi parametri non sono sempre 
+A tutto ciò, aggiungete che alcuni tra questi parametri non sono sempre 
 richiesti, ma sono **opzionali**. \
 Valutiamo a questo punto diversi design:
 
-1.  Passare gli argomenti che non mi servono, come null (orribile).
+1.  Passare gli argomenti che non mi servono, come `null` (orribile).
 ```Java
 Car car = new Car(id, null, model, color, null, null, weight, heigth);
 ```
@@ -29,7 +29,8 @@ new CAr(id, brand, model, color, numberOfDors);
 E' facile intuire che questa seconda soluzione può sfuggire di mano facilmente...
 
 3. Builder
-"Estraggo" i parametri dal costruttore della classe in questione, e li sposto in una classe a parte chiamata "QualcosaBuilder". \
+
+Nel pattern builder, "estraggo" i parametri dal costruttore della classe in questione, e li sposto in una classe a parte chiamata "QualcosaBuilder". \
 Creo poi un costruttore per ognuno di questi parametri.
 ```Java
 public class CarBuilder {
@@ -97,8 +98,9 @@ public class Test{
 ```
 Ok ora abbiamo un modo flessibile e conciso per creare differenti classi...\
 Aspetta un attimo però. \
-Dopo aver costruito 1000 macchine, mi sono reso conto che ci sono step che si ripetono
-in modo uguale:
+Dopo aver costruito 1000 macchine, mi sono reso conto che ci sono step di costruzione che si ripetono
+in modo uguale. \
+Tali step formano quindi delle **configurazioni** riutilizzabili:
 ```Java
 // esempio
 
