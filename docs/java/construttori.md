@@ -22,7 +22,7 @@ public class Vehicle {
 ```
 Il metodo **_Vehicle()_** è il costruttore della nostra classe,
 quindi ogni volta che **viene creato** un oggetto di quella classe,
-l'attributo colore verrà impostato su "Red".
+l'attributo color verrà impostato su "Red".
 ***
 Un costruttore può anche _**accettare parametri**_ per inizializzare gli attributi.
 
@@ -68,7 +68,7 @@ public class Vehicle {
 }
 ```
 La classe sopra **ha due costruttori**, uno senza alcun parametro
-che imposta l'attributo colore a un valore predefinito di "Red",
+che imposta l'attributo color a un valore predefinito di "Red",
 
 e un altro costruttore che accetta un parametro e lo assegna all'attributo.
 
