@@ -19,3 +19,10 @@ Sono:
 - Front Controller
 - Data Access Object
 - Data Transfer Object
+
+Da un post Linkedin ho visto questi (Gabri):
+- SOA
+- Monilithic
+- Microservices
+- CQRS
+- Serverless
