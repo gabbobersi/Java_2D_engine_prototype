@@ -14,10 +14,8 @@ public class Player extends Entity {
     InputHandler keyH;
     int speed = 5;
     Cell cell = new Cell();
-    public Player(InputHandler keyH, int x, int y){
+    public Player(InputHandler keyH){
         this.keyH = keyH;
-        this.x = x;
-        this.y = y;
         getPlayerImage();
     }
 

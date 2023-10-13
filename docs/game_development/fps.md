@@ -33,7 +33,7 @@ class Game(){
             Thread.sleep((long) remainingTime);
 
             // Dopo aver atteso il tempo necessario, riparto con i calcoli ma stavolta con un nuovo obiettivo davanti.
-            remainingTime += drawInterval;
+            nextDrawTime += drawInterval;
         } 
     }
 }

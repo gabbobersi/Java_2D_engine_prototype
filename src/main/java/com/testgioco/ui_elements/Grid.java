@@ -1,10 +1,11 @@
 package com.testgioco.ui_elements;
 
+import com.testgioco.utilities.GameSettings;
 
 public class Grid {
-    private Cell cell = new Cell();
-    private Window window = new Window();
+    private final Cell cell = new Cell();
+    private final GameSettings settings = new GameSettings();
 
-    public int columnNumber = window.getWidth() / cell.size;
-    public int rowNumber = window.getHeight() / cell.size;;
+    public int columnNumber = settings.screenWidth / cell.size;
+    public int rowNumber = settings.screenHeight / cell.size;
 }

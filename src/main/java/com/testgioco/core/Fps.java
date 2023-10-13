@@ -1,8 +1,13 @@
 package com.testgioco.core;
 
+import com.testgioco.utilities.Constants;
+import com.testgioco.utilities.GameSettings;
+
 public class Fps {
-    int fps = 1;
-    public static final long MILLISECONDS = 1000000000;   // One second in milliseconds
+    private final GameSettings settings = new GameSettings();
+    private final Constants constants = new Constants();
+
+    int fps = settings.fps;
     double drawInterval;
     double delta;
     long lastTime;
@@ -10,44 +15,79 @@ public class Fps {
     long timer;
     int drawCount;
 
-    public Fps(int fps){
-        this.fps = fps;
-        this.drawInterval = (double) MILLISECONDS / (double) this.fps;
-        this.delta = 0;
-        this.lastTime = System.nanoTime();
-        this.currentTime = System.nanoTime();
-        this.timer = 0;
-        this.drawCount = 0;
+    double nextDrawTime;
+
+    public Fps(){
+        resetValues();
     }
 
-    public boolean canDraw(boolean debugMode){
-        long inizio = System.nanoTime();
+    public Fps(int fps){
+        this.fps = fps;
+        resetValues();
+    }
 
-        // Tells if external entity can draw.
-        this.currentTime = System.nanoTime();
-        this.delta += (this.currentTime - this.lastTime) / this.drawInterval;
-        this.timer += (this.currentTime - this.lastTime);
-        this.lastTime = this.currentTime;
+    private void resetValues(){
+        drawInterval = (double) constants.ONE_SECOND_IN_MILLISECONDS / (double) fps;
+        delta = 0;
+        lastTime = System.nanoTime();
+        currentTime = System.nanoTime();
+        timer = 0;
+        drawCount = 0;
+        nextDrawTime = System.nanoTime() + drawInterval;
+    }
+
+    public boolean canDraw_accumulator(boolean debugMode){
+        // FPS System with accumulator
+        currentTime = System.nanoTime();
+        delta += (currentTime - lastTime) / drawInterval;
+        timer += (currentTime - lastTime);
+        lastTime = currentTime;
 
         if (debugMode){
-            this.debugFPS();
+            debugFPS();
         }
-
-        if (this.delta >= 1) {
-            this.delta--;      // Reset delta to 0
-            this.drawCount++;
+        if (delta >= 1) {
+            delta--;      // Reset delta to 0
+            drawCount++;
             return true;
         }
-        long fine = System.nanoTime() - inizio;
-
         return false;
     }
 
     private void debugFPS(){
-        if (this.timer >= MILLISECONDS) {
-            System.out.println("FPS: " + this.drawCount);
-            this.drawCount = 0;
-            this.timer = 0;
+        if (timer >= constants.ONE_SECOND_IN_MILLISECONDS) {
+            System.out.println("FPS: " + drawCount);
+            drawCount = 0;
+            timer = 0;
         }
+    }
+
+    public void canDraw_sleep(boolean debugMode){
+        try {
+            currentTime = System.nanoTime();
+
+            // Tempo rimanente fino a prossimo disegno.
+            double remainingTime = nextDrawTime - System.nanoTime();
+            // Converto i nanosecondi in millisecondi (accettati dal metodo sleep).
+            remainingTime = remainingTime / 1000000;
+
+            timer += (currentTime - lastTime);
+            lastTime = currentTime;
+
+            if (debugMode){
+                debugFPS();
+            }
+
+            if (remainingTime < 0){
+                remainingTime = 0;
+            }
+
+            // Fermo il thread per il tempo necessario.
+            Thread.sleep((long) remainingTime);
+            drawCount++;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        nextDrawTime += drawInterval;
     }
 }

@@ -9,7 +9,7 @@ public class TileManager {
     Cell cella = new Cell();
     Grid grid = new Grid();
     Tile[] tiles;
-    int mapTileNum[][];
+    int[][] mapTileNum;
     public TileManager() {
         tiles = new Tile[3];
         mapTileNum = new int[grid.rowNumber][grid.columnNumber];
