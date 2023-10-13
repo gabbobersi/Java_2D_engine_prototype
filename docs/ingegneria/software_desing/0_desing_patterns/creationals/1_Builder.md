@@ -42,24 +42,28 @@ public class CarBuilder {
     
     public CarBuilder id (int id){
         this.id = id;
+        return this;        // Ritorno l'oggetto
     }
 
     public CarBuilder brand (int brand){
         this.brand = brand;
+        return this;        // Ritorno l'oggetto
     }
     
     public CarBuilder model (int model){
         this.model = model;
+        return this;        // Ritorno l'oggetto
     }
     
     public CarBuilder color (int color){
         this.color = color;
+        return this;        // Ritorno l'oggetto
     }
 
     // ...
     
     public Car build(){
-        return new Car(id, brand, model, color);
+        return new Car(id, brand, model, color);        // Ritorno il prodotto finito.
     }
 }
 
