@@ -36,8 +36,6 @@ public class Panel extends JPanel implements Runnable {
 //                repaint();  // Calls "paintComponent" method.
 //            }
 //        }
-        double drawInterval = (double)constants.ONE_SECOND_IN_MILLISECONDS / settings.fps;
-        double nextDrawTime = System.nanoTime() + drawInterval;
         while(gameThread != null) {
             update();
             repaint();
