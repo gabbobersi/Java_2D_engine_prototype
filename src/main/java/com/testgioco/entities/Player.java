@@ -26,8 +26,8 @@ public class Player extends Entity {
 
     public void setDeafultValues(){
         vector = new Vector2D(0, 0);
-        this.x = 100;
-        this.y = 100;
+        this.x = 10;
+        this.y = 10;
         speed = 200;
     }
 
@@ -85,6 +85,7 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+        System.out.println(direction);
     }
 
     public void update(double deltaTime){
@@ -127,6 +128,7 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.drawImage(image, (int)x, (int)y, this.cell.width, this.cell.height, null);
+
+        g2.drawImage(image, (int) Math.round(x), (int) Math.round(y), this.cell.width, this.cell.height, null);
     }
 }
