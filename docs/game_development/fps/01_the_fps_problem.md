@@ -58,8 +58,9 @@ Esempio, se prima avevo speed = 5, con il dt dovrò aggiustarli in modo incremen
 
 ### Riassumento il calcolo del delta time
 ```Java
-double dt = System.nanotime() - previous_time;
-previous_time = System.nanotime();
+long previous_time = System.nanoTime();
+double dt = System.nanoTime() - previous_time;
+previous_time = System.nanoTime();
 ```
 
 Il valore della variabile `dt` andrà ora moltiplicato a tutti i movimenti, rotazioni, animazioni, all'interno del gioco.

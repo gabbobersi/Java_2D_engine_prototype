@@ -1,10 +1,9 @@
-package com.testgioco.ui_elements;
+package com.testgioco.core.ui_elements;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Random;
 
 public class TileManager {
     Cell cell = new Cell();

@@ -1,4 +1,4 @@
-package com.testgioco.ui_elements;
+package com.testgioco.core.ui_elements;
 
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.ScreenLogger;
@@ -13,6 +13,7 @@ import java.awt.*;
 public class Panel extends JPanel implements Runnable {
     private final GameSettings settings = new GameSettings();
     private final Constants constants = new Constants();
+
     private final Fps fps = new Fps();
     private final InputHandler keyH = new InputHandler();
     private Thread gameThread;
@@ -29,19 +30,19 @@ public class Panel extends JPanel implements Runnable {
     }
     @Override
     public void run() {
-        // Main game loop
-//        while (gameThread != null) {
-//            // Note: we only updates and draw when fps allow us.
-//            if (fps.canDraw_accumulator(true)){
-//                update();
-//                repaint();  // Calls "paintComponent" method.
-//            }
-//        }
-        while(gameThread != null) {
+        while (gameThread != null) {
+            // Note: we only updates and draw when fps allow us.
             update();
-            repaint();
-            fps.canDraw_sleep(true);
+            if (fps.canDrawAccumulator(true)){
+                repaint();  // Calls "paintComponent" method.
+            }
         }
+//
+//        while(gameThread != null) {
+//            update();
+//            repaint();
+//            fps.canDrawSleep(true);
+//        }
 
 
     }
@@ -52,7 +53,7 @@ public class Panel extends JPanel implements Runnable {
     }
 
     public void update(){
-        player.update();
+        player.update(fps.deltaTime);
     }
 
     @Override

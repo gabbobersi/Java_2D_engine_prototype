@@ -1,7 +1,7 @@
 package com.testgioco.utilities;
 
-import com.testgioco.ui_elements.Cell;
-import com.testgioco.ui_elements.Grid;
+import com.testgioco.core.ui_elements.Cell;
+import com.testgioco.core.ui_elements.Grid;
 
 import java.awt.*;
 

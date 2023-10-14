@@ -1,9 +1,10 @@
 package com.testgioco.entities;
 
-import com.testgioco.ui_elements.Cell;
+import com.testgioco.core.ui_elements.Cell;
 import com.testgioco.core.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,12 +12,23 @@ import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity {
-    InputHandler keyH;
-    int speed = 5;
-    Cell cell = new Cell();
+    private final InputHandler keyH;
+
+    private double speed;
+    private final Cell cell = new Cell();
+    private Vector2D vector;
+
     public Player(InputHandler keyH){
         this.keyH = keyH;
+        setDeafultValues();
         getPlayerImage();
+    }
+
+    public void setDeafultValues(){
+        vector = new Vector2D(0, 0);
+        this.x = 100;
+        this.y = 100;
+        speed = 200;
     }
 
     public void getPlayerImage(){
@@ -37,30 +49,30 @@ public class Player extends Entity {
         }
     }
 
-    public void update(){
+    public void keyHandler(){
         direction = "down";         // Default direction (even if no key is pressed)
-        int deltaX = 0;
-        int deltaY = 0;
+
+        vector.setX(0);
+        vector.setY(0);
 
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
                 direction = "up";
-                deltaY--;
+                vector.setY(-1);
             }
             if (keyH.downPressed){
                 direction = "down";
-                deltaY++;
-            }
-            if (keyH.rightPressed){
-                direction = "right";
-                deltaX++;
+                vector.setY(1);
             }
             if (keyH.leftPressed){
                 direction = "left";
-                deltaX--;
+                vector.setX(-1);
             }
-
+            if (keyH.rightPressed){
+                direction = "right";
+                vector.setX(1);
+            }
             spriteCounter++;
 
             // Every "x" draws, I change animation.
@@ -73,16 +85,17 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+    }
 
-        Vector2D vector = new Vector2D(deltaX, deltaY);
+    public void update(double deltaTime){
+        keyHandler();
         vector.normalize();
-        // System.out.println(vector.getMagnitude());
-        vector.multiply(speed);
+        vector.multiply(speed * deltaTime);
         x += vector.getX();
         y += vector.getY();
     }
     public void draw(Graphics2D g2) {
-        BufferedImage image = null;
+        BufferedImage image = up1;
 
         switch (direction) {
             case "up":
@@ -114,6 +127,6 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.drawImage(image, x, y, this.cell.width, this.cell.height, null);
+        g2.drawImage(image, (int)x, (int)y, this.cell.width, this.cell.height, null);
     }
 }

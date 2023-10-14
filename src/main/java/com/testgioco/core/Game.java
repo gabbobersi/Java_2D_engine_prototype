@@ -1,7 +1,7 @@
 package com.testgioco.core;
 
-import com.testgioco.ui_elements.Panel;
-import com.testgioco.ui_elements.Window;
+import com.testgioco.core.ui_elements.Panel;
+import com.testgioco.core.ui_elements.Window;
 import com.testgioco.utilities.GameSettings;
 
 public class Game {

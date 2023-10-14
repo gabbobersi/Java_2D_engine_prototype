@@ -7,13 +7,14 @@ public class Fps {
     private final GameSettings settings = new GameSettings();
     private final Constants constants = new Constants();
 
-    int fps = settings.fps;
-    double drawInterval;
-    double delta;
-    long lastTime;
-    long currentTime;
-    long timer;
-    int drawCount;
+    private int fps = settings.fps;
+    private double drawInterval;
+    private double delta;
+    public double deltaTime;
+    private long lastTime;
+    private long currentTime;
+    private long timer;
+    private int drawCount;
 
     double nextDrawTime;
 
@@ -27,8 +28,9 @@ public class Fps {
     }
 
     private void resetValues(){
-        drawInterval = (double) constants.ONE_SECOND_IN_MILLISECONDS / (double) fps;
+        drawInterval = (double) constants.ONE_SECOND_IN_NANOSECONDS / (double) fps;
         delta = 0;
+        deltaTime = 0;
         lastTime = System.nanoTime();
         currentTime = System.nanoTime();
         timer = 0;
@@ -36,18 +38,26 @@ public class Fps {
         nextDrawTime = System.nanoTime() + drawInterval;
     }
 
-    public boolean canDraw_accumulator(boolean debugMode){
+    public boolean canDrawAccumulator(boolean debugMode){
         // FPS System with accumulator
         currentTime = System.nanoTime();
-        delta += (currentTime - lastTime) / drawInterval;
+
+        if (currentTime > lastTime) {
+            deltaTime = (currentTime - lastTime) / 1e9;
+        } else {
+            deltaTime = 0; // Il tempo si è fermato o ha subito un'anomalia
+        }
+
+        delta +=  (currentTime - lastTime) / drawInterval;
         timer += (currentTime - lastTime);
         lastTime = currentTime;
 
         if (debugMode){
             debugFPS();
         }
+
         if (delta >= 1) {
-            delta--;      // Reset delta to 0
+            delta--;
             drawCount++;
             return true;
         }
@@ -55,14 +65,14 @@ public class Fps {
     }
 
     private void debugFPS(){
-        if (timer >= constants.ONE_SECOND_IN_MILLISECONDS) {
+        if (timer >= constants.ONE_SECOND_IN_NANOSECONDS) {
             System.out.println("FPS: " + drawCount);
             drawCount = 0;
             timer = 0;
         }
     }
 
-    public void canDraw_sleep(boolean debugMode){
+    public void canDrawSleep(boolean debugMode){
         try {
             currentTime = System.nanoTime();
 
