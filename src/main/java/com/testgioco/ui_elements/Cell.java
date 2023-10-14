@@ -1,7 +1,12 @@
 package com.testgioco.ui_elements;
 
+import com.testgioco.utilities.GameSettings;
+
 public class Cell {
-    int baseSize = 10;
-    int scale = 5;
-    public int size = baseSize * scale;        // Final cell dimension
+    private final Grid grid = new Grid();
+    private final GameSettings settings = new GameSettings();
+
+    public int height = settings.screenHeight / grid.rowNumber;
+    public int width = settings.screenWidth / grid.columnNumber;
+
 }

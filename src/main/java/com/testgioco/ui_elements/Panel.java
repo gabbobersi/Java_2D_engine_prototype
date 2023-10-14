@@ -13,12 +13,13 @@ import java.awt.*;
 public class Panel extends JPanel implements Runnable {
     private final GameSettings settings = new GameSettings();
     private final Constants constants = new Constants();
-
     private final Fps fps = new Fps();
     private final InputHandler keyH = new InputHandler();
     private Thread gameThread;
+
     private final Player player = new Player(keyH);
     private final TileManager tileManager = new TileManager();
+    private final Grid grid = new Grid();
 
     public Panel() {
         this.setBackground(Color.BLACK);
@@ -59,6 +60,7 @@ public class Panel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileManager.draw(g2);
+        grid.drawDebugGrid(g2);
         player.draw(g2);
 
         ScreenLogger debug = new ScreenLogger(g2);

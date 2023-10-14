@@ -114,6 +114,6 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.drawImage(image, x, y, this.cell.size, this.cell.size, null);
+        g2.drawImage(image, x, y, this.cell.width, this.cell.height, null);
     }
 }

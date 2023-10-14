@@ -8,7 +8,7 @@ public class Window extends JFrame {
     GameSettings settings = new GameSettings();
     public Window(Panel gamePanel){
         this.setTitle(settings.gameTitle);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.add(gamePanel);

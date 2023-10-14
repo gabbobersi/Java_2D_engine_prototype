@@ -4,14 +4,15 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class TileManager {
-    Cell cella = new Cell();
+    Cell cell = new Cell();
     Grid grid = new Grid();
     Tile[] tiles;
     int[][] mapTileNum;
     public TileManager() {
-        tiles = new Tile[3];
+        tiles = new Tile[10];
         mapTileNum = new int[grid.rowNumber][grid.columnNumber];
         loadMap();
         getTileImage();
@@ -27,6 +28,9 @@ public class TileManager {
             tiles[2] = new Tile();
             tiles[2].image = ImageIO.read(new File("assets/tiles/water_01.png"));
 
+            tiles[9] = new Tile();
+            tiles[9].image = ImageIO.read(new File("assets/tiles/not_loaded.png"));
+
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -39,23 +43,34 @@ public class TileManager {
             int x = 0;
             for (int c = 0; c < grid.columnNumber; c++) {
                 int tileIndex = mapTileNum[r][c];
-                g2.drawImage(tiles[tileIndex].image,x, y, cella.size, cella.size, null);
-                x += cella.size;
+                g2.drawImage(tiles[tileIndex].image,x, y, cell.width, cell.height, null);
+                x += cell.width;
             }
-            y += cella.size;
+            y += cell.height;
         }
     }
     public void loadMap (){
         try{
             InputStream is = getClass().getResourceAsStream("/maps/maps01.txt");
+            assert is != null;
             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
 
             for (int r = 0; r < grid.rowNumber; r++) {
                 String line = br.readLine();
+                String[] numbers = new String[grid.columnNumber];
+
+                // If the line has been correctly read, I just take those values.
+                // Else, I take a default tile
+                if (line != null) {
+                    numbers = line.split(" ");
+                } else {
+                    for (int i = 0; i < grid.columnNumber; i++){
+                        numbers[i] = "9";
+                    }
+                }
 
                 for ( int c = 0; c < grid.columnNumber; c++) {
-                    String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[c]);
                     mapTileNum[r][c] = num;
 

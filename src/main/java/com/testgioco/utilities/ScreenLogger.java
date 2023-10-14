@@ -20,7 +20,7 @@ public class ScreenLogger {
         g2.drawString("Risoluzione: " + settings.screenWidth + " x " + settings.screenHeight, 10, 20);
         g2.drawString("Numero colonne: " + grid.columnNumber, 10, 40);
         g2.drawString("Numero righe: " + grid.rowNumber, 10, 60);
-        g2.drawString("Dimensione cella: " + cell.size + " x " + cell.size, 10, 80);
+        g2.drawString("Dimensione cella: " + cell.width + " x " + cell.height, 10, 80);
     }
 
 }
