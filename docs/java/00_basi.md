@@ -155,8 +155,8 @@ void StampaQualcosa(String qualcosa){
 ```
 7. Il codice sottostante è corretto?
 ```Java
-String ritornaCarrello(String id_carrello){
-    return Integer.parseInt(id_carrello);    
+String ritornaCarrello(String idCarrello){
+    return Integer.parseInt(idCarrello);    
 }
 ```
 8. Spiega il concetto di prototipo di un metodo.
