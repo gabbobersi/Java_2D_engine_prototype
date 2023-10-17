@@ -28,7 +28,7 @@ Vedremo in seguito un esempio di algoritmo tradizionale di base e può essere ra
 ![img.png](img.png)
 
 ## Link utili
-Per saziare la vostra fame di conoscenza metterò a dispozione dei link utili che riguardano il game loop, da esempi pragmatici e video tutorial utili per il nostro progetto, essendo molto grande e complesso come argomento ho messo a disposizione questo materiale.
+Per saziare la vostra fame di conoscenza metterò a dispozione dei link utili che riguardano il game loop, da esempi pragmatici a video tutorial utili per il nostro progetto, essendo molto grande e complesso come argomento ho messo a disposizione questo materiale.
 
 Su questo [sito](https://java-design-patterns.com/patterns/game-loop/) troverete a vostra disposozione un'ottima documentazione su esempi pragmatici sul game loop e tutte le sue funzionalità.
 
