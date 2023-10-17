@@ -35,5 +35,10 @@ Su questo [sito](https://java-design-patterns.com/patterns/game-loop/) troverete
 Per non farci mancare niente cliccando su questo [video](https://youtu.be/fgxHNPb-7as?si=m8J17VwvtGQr7Y9-) vi reindirizzerà ad un canale Youtube molto interessante che tratta appunto lo sviluppo videogiochi, il video in questione parla del **Game Loop**.
 
 
+```Java
+TO BE CONTINUED
+```
+
+
 
 
