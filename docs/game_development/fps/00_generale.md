@@ -1,10 +1,15 @@
-## FPS
+## FPS in generale
 Rappresentano il numero di volte al secondo in cui disegnare sulla finestra.
-Es. fps = 30, significa che vuoi disegnare 30 frame al secondo.
+Es. fps = 30, significa che vuoi disegnare 30 frame ogni secondo.
+
+Il sistema degli FPS è strettamente relazionato al game loop design.\
+Se gli sviluppatori spendono il 90% del loro tempo sul 10% del codice, il sistema degli FPS rientra in quel 10%!
 
 #### METODO 1 - SLEEP
 Sfrutto la funzionalità del thread di essere fermato in qualsiasi momento, per 
-fermare l'esecuzione del game loop fino al prossimo disegno effettivo.
+fermare l'esecuzione del game loop (che è ospitato in un thread) fino al prossimo disegno effettivo.
+
+Questo sistema è considerato "basico" in quanto non tiene conto dei rallentamenti di fps più incisivi.
 ```Java
 class Game(){
     private boolean running = false;
@@ -38,6 +43,11 @@ class Game(){
     }
 }
 ```
+Avete notato il controllo se `remainingTime` è negativo?\
+Ciò è dovuto al fatto che se l'update e il repaint ci mettono più tempo rispetto al `nextDrawTime`, il `remainingTime`
+diventa **negativo**!
+
+
 #### METODO 2 - DELTA (o "accumulatore")
 Disegno/aggiorno solamente quando occorre farlo.
 ```Java
