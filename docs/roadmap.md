@@ -27,7 +27,6 @@ _Roadmap from the top, to the bottom._
 - [x] Tile system
   - [ ] OPTIONALS
     - [ ] Tile maps generator
-    - [ ] Change the array of tiles, into an HashMap (so you can refer to a tile by name).
 - [ ] World map
 - [ ] Camera
 - [ ] Collision detection
@@ -40,6 +39,53 @@ _Roadmap from the top, to the bottom._
   - [ ] Option menu
   - [ ] Quit game menu
   - [ ] TEST
+
+### Responsabilità
+- Bersi
+  - UI 
+    - Label (etichetta, cioè testo a video) 
+    - LayoutManager (disporre le robe UI a schermo)
+  - Audio
+  - Game design
+    - Interazione con gli oggetti
+    - Generazione personaggi causali
+  - Core
+- Giammarco
+  - UI / TileMap generator
+    - Box (cioè un quadrato con uno sfondo)
+    - Button (cioè un box, interagibile)
+  - Level design
+  - Game design
+    - Bar varie
+      - Health
+      - Stamina
+    - Dialoghi / Narrativa / Lore
+  - UI / TileMap generator
+    - Box (cioè un quadrato con uno sfondo)
+    - Button (cioè un box, interagibile)
+  - Level design
+  - Game design
+    - Inventario
+    - Dialoghi / Narrativa / Lore
+- Francesco
+  - Physics
+  - Audio
+  - Game design
+    - Obiettivi
+    - Regole gioco
+  - Core
+
+TileMap generator:
+- Quanti tile ho adesso nella cartella assets/tiles?
+  - Guarda il numero dei file.
+- Che etichetta do al tile?
+  - Prendi il nome
+- UI
+  - Bottoni
+  - Grid, in cui dove clicki genera un tile (es cambia da 0 a 3, se abbiamo 4 tile)
+
+
+
 ### Chill
 - [x] Implement a 2D vector class.
 - [ ] MVP game (Minimum Viable Product)
