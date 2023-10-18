@@ -1,4 +1,5 @@
-### Metodi Setter e Getter
+## Metodi Setter e Getter
+***
 Una singola _classe_ può avere _diversi_ **costruttori** con un numero _diverso_ di **parametri**.
 
 I getter e i setter in Java sono utilizzati per controllare l'accesso
