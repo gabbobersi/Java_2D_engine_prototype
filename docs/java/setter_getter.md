@@ -1,5 +1,6 @@
 ### Metodi Setter e Getter
 Una singola _classe_ può avere _diversi_ **costruttori** con un numero _diverso_ di **parametri**.
+
 I getter e i setter in Java sono utilizzati per controllare l'accesso
 e la modifica dei dati di una classe,
 garantendo incapsulamento e protezione dei dati.
@@ -12,6 +13,7 @@ permettono di impostarne o aggiornarne il valore.
 Questa convenzione, chiamata anche accessori e mutatori,
 aiuta a mantenere una buona pratica di denominazione dei metodi in Java.
 
+Esempio:
 ```Java
 public class Vehicle {
     private String color;
@@ -27,14 +29,24 @@ public class Vehicle {
     }
 }
 ```
-I metodo getter restituisce il valore di un attributo all'interno di una classe,
-permettendo di accedere a tale valore dall'esterno.
+Nel codice della classe "Vehicle", 
+l'incapsulamento degli attributi
+viene garantito attraverso l'utilizzo di metodi getter e setter. 
 
-D'altro canto, il metodo setter accetta un parametro
-e lo assegna all'attributo della classe, consentendo di modificarne il valore.
+L'attributo "color" è dichiarato come privato, limitando l'accesso diretto a esso. 
 
-Una volta definiti questi metodi, possono essere utilizzati
-nel programma principale (main) per ottenere o modificare i dati dell'oggetto.
+Il metodo getter `getColor()` consente di ottenere il valore di "color" in modo controllato,
+mentre il metodo setter `setColor(String c)` permette di impostarne il valore, 
+consentendo l'implementazione di logiche o controlli aggiuntivi. 
+
+Questo approccio controllato mantiene l'incapsulamento, garantendo che 
+l'accesso e la modifica dei dati avvengano in modo sicuro e controllato.
+
+***
+Una volta definiti questi metodi,
+possono essere utilizzati
+nel programma principale (main) 
+per ottenere o modificare i dati dell'oggetto.
 
 ``` Java
 public static void main(String[] args) {
