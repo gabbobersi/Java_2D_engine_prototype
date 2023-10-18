@@ -175,5 +175,9 @@ public class FileManager {
     }
 }
 ```
+11. L'identificativo sottostante rispecchia le naming convention per i moduli?
+sonounmodulo
+12. L'identificativo sottostante rispecchia le naming convention per i package?
+sonounpackage
 ### Risorse
 [NamingConvention](https://github.com/nbicocchi/java-core/blob/main/assets/books/Java-Coding-Standard.pdf)
