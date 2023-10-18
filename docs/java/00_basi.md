@@ -115,7 +115,7 @@ _La naming convention delle classi si applica anche a interfacce e classi astrat
 
 Oltre al codice, le naming convention influenzano anche la struttura di
 package (cartelle) e moduli (file):
-- sonoUnPackage
+- sonounpackage
 - SonoUnModulo (notare che la sintassi è la stessa delle classi. Appunto perché le classi devono avere LO STESSO NOME del modulo in cui sono ospitate!)
 ****
 
@@ -175,3 +175,5 @@ public class FileManager {
     }
 }
 ```
+### Risorse
+[NamingConvention](https://github.com/nbicocchi/java-core/blob/main/assets/books/Java-Coding-Standard.pdf)
