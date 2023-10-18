@@ -174,9 +174,9 @@ public class FileManager {
     }
 }
 ```
-11. L'identificativo sottostante rispecchia le naming convention per le classi?
+11. L'identificativo sottostante rispecchia le naming convention per le classi?\
 sonounaclasse
-12. L'identificativo sottostante rispecchia le naming convention per i package?
+12. L'identificativo sottostante rispecchia le naming convention per i package?\
 sonounpackage
 ### Risorse
 [NamingConvention](https://github.com/nbicocchi/java-core/blob/main/assets/books/Java-Coding-Standard.pdf)
