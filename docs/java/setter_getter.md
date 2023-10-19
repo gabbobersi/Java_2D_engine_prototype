@@ -1,109 +1,89 @@
-## Metodi Setter e Getter
+## _**Metodi Setter & Getter**_ 
 ***
-Una singola _classe_ può avere _diversi_ **costruttori** con un numero _diverso_ di **parametri**.
+#### Encapsulamento
+Si intende, che i dati "sensibili" siano nascosti agli utenti. Per raggiungere questo obiettivo, è necessario:
 
-I getter e i setter in Java sono utilizzati per controllare l'accesso
-e la modifica dei dati di una classe,
-garantendo incapsulamento e protezione dei dati.
+- Dichiarare le variabili/attributi di classe come privati.
+- Fornire **metodi pubblici di get e set** per accedere e aggiornare il valore di una variabile privata.
+***
+### Ora possiamo procedere per i metodi Setter e Getter
+Dunque le **_variabili private_** possono essere accessibili solo all'interno 
+della stessa classe (una classe esterna non ha accesso ad esse). \
+Tuttavia, è possibile accedervi fornendo metodi pubblici di get e set.
+Il metodo "get" restituisce il valore 
+della variabile, mentre il metodo "set" ne imposta il valore.
 
-I getter, definiti con il prefisso "get", consentono di ottenere
-il valore di una variabile di istanza, mentre i setter, con il prefisso "set",
-permettono di impostarne o aggiornarne il valore.
-
-
-Questa convenzione, chiamata anche accessori e mutatori,
-aiuta a mantenere una buona pratica di denominazione dei metodi in Java.
-
-Esempio:
-```Java
-public class Vehicle {
-    private String color;
-
+La sintassi per entrambi è che iniziano con "get" o "set", seguiti dal nome della variabile, con la prima lettera in maiuscolo.
+``` Java
+public class Person {
+private String name; // private = restricted access
     // Getter
-    public String getColor() {
-        return color;
+    public String getName() {
+        return name;
     }
 
     // Setter
-    public void setColor(String c) {
-        this.color = c;
+    public void setName(String newName) {
+    this.name = newName;
     }
 }
 ```
-Nel codice della classe "Vehicle", 
-l'incapsulamento degli attributi
-viene garantito attraverso l'utilizzo di metodi getter e setter. 
 
-L'attributo "color" è dichiarato come privato, limitando l'accesso diretto a esso. 
+Il metodo **_"get"_** restituisce il valore della variabile "name".
+\
+Il metodo **_"set"_** prende un parametro (newName) e lo assegna alla variabile "name". La parola chiave "this" viene utilizzata per fare riferimento all'oggetto corrente.
 
-Il metodo getter `getColor()` consente di ottenere il valore di "color" in modo controllato,
-mentre il metodo setter `setColor(String c)` permette di impostarne il valore, 
-consentendo l'implementazione di logiche o controlli aggiuntivi. 
 
-Questo approccio controllato mantiene l'incapsulamento, garantendo che 
-l'accesso e la modifica dei dati avvengano in modo sicuro e controllato.
-
+**NB**: \
+**Tuttavia, poiché la variabile "name" è dichiarata come privata, non possiamo accedervi dall'esterno di questa classe.**
 ***
-Una volta definiti questi metodi,
-possono essere utilizzati
-nel programma principale (main) 
-per ottenere o modificare i dati dell'oggetto.
-
+### Altro Esempio
 ``` Java
-public static void main(String[] args) {
-Vehicle v1 = new Vehicle();
-v1.setColor("Blue");
-System.out.println(v1.getColor());
+public class Main {
+    public static void main(String[] args) {
+        Person myObj = new Person();
+        myObj.name = "Francesco";  // error
+        System.out.println(myObj.name); // error
+    }
 }
+```
+Se la variabile fosse stata dichiarata come **pubblica**, ci aspetteremmo il seguente output:
 
-// l'output è "Blue"
+``` Output
+Francesco
 ```
 
-Dunque, i getter e setter offrono un controllo sui dati,
-incluso il potere di verificare e garantire la validità del valore
-inserito nel setter prima di assegnarlo come attributo.
+Invece, se fosse stata dichiarata come **privata**, avremmo un errore:
 
-Questa capacità di validare all'interno del setter assicura
-che il valore fornito rispetti determinate condizioni o regole
-specifiche prima di essere accettato e applicato come parte delle proprietà dell'oggetto.
+``` Code
+MyClass.java:4: error: name has private access in Person
+    myObj.name = "Francesco";
+         ^
+MyClass.java:5: error: name has private access in Person
+    System.out.println(myObj.name);
+                  ^
+2 errors 
+```
+Tuttavia, se usassimo getName() e setName() (metodi) per accedere ed aggiornare le variabili:
+``` Java
+public class Main {
+    public static void main(String[] args) {
+        Person myObj = new Person();
+        myObj.setName("Francesco"); // Set the value of the name variable to "Francesco"
+        System.out.println(myObj.getName());
+    }
+}
+
+// Outputs "Francesco"
+```
 ***
-### Per quale motivo dovrei usarli?
-I metodi getter e setter consentono di gestire come
-le variabili nel tuo codice vengono lette e modificate.
+### Concludiamo
+Perchè usare incapsulamento?
 
-Ad esempio, se prendiamo in considerazione un metodo setter,
-questo ti offre la possibilità di controllare e personalizzare
-la modalità con cui una variabile può essere aggiornata, applicando regole o
-logiche specifiche prima di accettare e impostare il nuovo valore per quella variabile.
-
-``` Java
-public void setNumber(int number) {
-if (number < 1 || number > 10) {
-throw new IllegalArgumentException();
-}
-this.number = num;
-}
-```
-
-Utilizzando il metodo `setNumber`, è garantito che il valore di `number`
-sia limitato tra 1 e 10, offrendo una gestione
-controllata e conveniente rispetto alla modifica diretta della variabile `number`.
-
-
-```Java
-obj.number = 13;
-```
-Fornendo solo il metodo `setNumber`,
-si garantisce il rispetto dei limiti desiderati per la variabile
-`number` (1-10), prevenendo modifiche indesiderate che potrebbero
-influenzare il comportamento del codice. Per accedere al valore di `number`,
-è necessario utilizzare il metodo getter,
-garantendo un accesso controllato e conforme alle restrizioni previste.
-
-D'altra parte, l'unico modo per leggere il valore di number è l'uso di un metodo getter:
-```Java
-public int getNumber() {
-return this.number;
-}
-```
+- Miglior controllo degli attributi e dei metodi della classe;
+- Gli attributi della classe possono essere resi solo in lettura (se si utilizza solo il metodo "get") o solo in scrittura (se si utilizza solo il metodo "set");
+  
+- Flessibilità: il programmatore può modificare una parte del codice senza influenzare altre parti;
+ 
+- Maggiore sicurezza dei dati.
 ***
