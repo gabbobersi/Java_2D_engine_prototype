@@ -1,6 +1,6 @@
 ## _**Metodi Setter & Getter**_ 
 ***
-#### Encapsulamento
+#### Incapsulamento
 Si intende, che i dati "sensibili" siano nascosti agli utenti. Per raggiungere questo obiettivo, è necessario:
 
 - Dichiarare le variabili/attributi di classe come privati.
