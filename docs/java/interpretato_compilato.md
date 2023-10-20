@@ -55,7 +55,6 @@ Questo accade perché il processo di traduzione del codice durante l'esecuzione 
 
 Svantaggi:
 - Più tempo necessario per completare la fase di compilazione prima di poter fare test
-Dipendenza dalla piattaforma del codice binario generato
 
 ### Vantaggi e svantaggi dei linguaggi interpretati:
 Vantaggi:
