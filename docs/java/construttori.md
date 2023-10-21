@@ -15,7 +15,7 @@ Un costruttore può essere utilizzato per fornire valori iniziali per gli attrib
 ``` Java
 public class Vehicle {
   private String color;
-  Vehicle() {
+  public Vehicle() {
      color = "Red";
   }
 }
@@ -29,7 +29,7 @@ Un costruttore può anche _**accettare parametri**_ per inizializzare gli attrib
 ```Java
 public class Vehicle {
     private String color;
-    Vehicle(String c) {
+    public Vehicle(String c) {
         color = c;
     }
 }
