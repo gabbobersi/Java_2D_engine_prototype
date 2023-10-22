@@ -1,4 +1,4 @@
-package com.testgioco.core.ui_elements;
+package com.testgioco.core;
 
 import com.testgioco.utilities.GameSettings;
 

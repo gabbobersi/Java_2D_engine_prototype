@@ -1,6 +1,6 @@
 package com.testgioco.entities;
 
-import com.testgioco.core.ui_elements.Cell;
+import com.testgioco.core.Cell;
 import com.testgioco.core.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
@@ -12,19 +12,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity {
-    private final InputHandler keyH;
+    public InputHandler keyH;
 
     private double speed;
     private final Cell cell = new Cell();
     private Vector2D vector;
 
-    public Player(InputHandler keyH){
-        this.keyH = keyH;
-        setDeafultValues();
+    public Player(){
+        setDefaultValues();
         getPlayerImage();
     }
 
-    public void setDeafultValues(){
+    public void setDefaultValues(){
         vector = new Vector2D(0, 0);
         this.x = 10;
         this.y = 10;
@@ -85,7 +84,6 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
-        System.out.println(direction);
     }
 
     public void update(double deltaTime){

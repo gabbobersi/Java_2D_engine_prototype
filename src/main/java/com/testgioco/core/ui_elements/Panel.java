@@ -1,71 +1,40 @@
 package com.testgioco.core.ui_elements;
 
-import com.testgioco.utilities.Constants;
+import com.testgioco.core.Grid;
 import com.testgioco.utilities.ScreenLogger;
-import com.testgioco.core.Fps;
-import com.testgioco.utilities.GameSettings;
 import com.testgioco.core.InputHandler;
 import com.testgioco.entities.Player;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Panel extends JPanel implements Runnable {
-    private final GameSettings settings = new GameSettings();
-    private final Constants constants = new Constants();
+public class Panel extends JPanel {
+    private InputHandler keyH;
 
-    private final Fps fps = new Fps();
-    private final InputHandler keyH = new InputHandler();
-    private Thread gameThread;
+    // Here put classes to draw
+    public final TileManager tileManager = new TileManager();
+    public final Grid grid = new Grid();
+    public final Player player = new Player();
+    public final ScreenLogger debug = new ScreenLogger();
 
-    private final Player player = new Player(keyH);
-    private final TileManager tileManager = new TileManager();
-    private final Grid grid = new Grid();
-
-    public Panel() {
-        this.setBackground(Color.BLACK);
+    public Panel(InputHandler keyH, Color backGround){
+        this.keyH = keyH;
+        this.player.keyH = keyH;
+        this.setBackground(backGround);
+        this.addKeyListener(this.keyH);
         this.setDoubleBuffered(true);
-        this.addKeyListener(keyH);
         this.setFocusable(true);
-    }
-    @Override
-    public void run() {
-        while (gameThread != null) {
-            // Note: we only updates and draw when fps allow us.
-            update();
-            if (fps.canDrawAccumulator(true)){
-                repaint();  // Calls "paintComponent" method.
-            }
-        }
-//
-//        while(gameThread != null) {
-//            update();
-//            repaint();
-//            fps.canDrawSleep(true);
-//        }
-
-
-    }
-
-    public void start(){
-        gameThread = new Thread(this);
-        gameThread.start(); // Calls "run" method, in a new thread.
-    }
-
-    public void update(){
-        player.update(fps.deltaTime);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        // Objects to draw, in order.
         tileManager.draw(g2);
         grid.drawDebugGrid(g2);
+        debug.draw(g2);
         player.draw(g2);
-
-        ScreenLogger debug = new ScreenLogger(g2);
-        debug.draw();
         g2.dispose();
     }
 }
