@@ -8,16 +8,12 @@ Compilatori e interpreti partono da un codice leggibile scritto da una persona e
 Immaginate di voler leggere un libro in una lingua straniera, ad esempio il russo (Сука блять), ma non conoscete questa lingua. Avete allora due modi per farlo:
 
 - **Versione Compilata**: Qualcuno ha già tradotto il libro dall'originale russo all'italiano. Ora puoi leggere il libro in italiano, che è una lingua che capisci. Questo è simile a un linguaggio compilato, dove il lavoro di traduzione viene fatto in anticipo e tu leggi semplicemente il risultato tradotto.
-
-
 - **Versione Interpretata**: Invece di avere una traduzione completa, hai un amico che conosce il russo e l'italiano. Quando leggi il libro, il tuo amico è accanto a te e ti aiuta a tradurre le frasi man mano che le leggi. In questo caso, la traduzione è interpretata in tempo reale mentre leggi il libro, e il tuo amico funge da interprete. Questo è simile a un linguaggio interpretato, dove il codice viene tradotto ed eseguito "al volo" mentre il programma è in esecuzione.
 
 Quindi:
 
-- La **compilazione** _traduce_ tutte le istruzioni di un programma in linguaggio macchina, creando un file eseguibile dal computer (.exe). La compilazione viene eseguita da un software compilatore.
-
-
-- **L'interpretazione** _traduce_ ed _esegue_ ogni singola istruzione del programma. Legge ed esegue il codice sorgente del programma senza creare un file oggetto eseguibile. E' più lenta rispetto alla compilazione.
+- La **compilazione** consiste nel tradurre il codice di un linguaggio A in codice di un linguaggio B. La compilazione viene eseguita da un software compilatore.
+- **L'interpretazione** consiste nell'eseguire, riga per riga, il codice B (precedentemente tradotto dal codice A, tramite un compilatore). E' più lenta rispetto alla compilazione.
 
 L'esecuzione di un programma compilato è **molto più veloce** rispetto a un programma interpretato.
 

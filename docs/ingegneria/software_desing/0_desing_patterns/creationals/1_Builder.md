@@ -23,7 +23,7 @@ Il controllo dei parametri passati come `null` lo lasciamo al codice interno del
 ```Java
 new Car(id, brand, model);
 new Car(id, screenType, weight, height);
-new CAr(id, brand, model, color, numberOfDors);
+new Car(id, brand, model, color, numberOfDors);
 // ... e così via ...
 ```
 E' facile intuire che questa seconda soluzione può sfuggire di mano facilmente...
