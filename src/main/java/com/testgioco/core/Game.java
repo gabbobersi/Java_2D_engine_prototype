@@ -12,7 +12,6 @@ public class Game implements Runnable {
     private final GameSettings settings = new GameSettings();
     private final Constants constants = new Constants();
 
-    private final Fps fps = new Fps();
     private final InputHandler keyH = new InputHandler();
     private Thread gameThread;
 
@@ -30,16 +29,30 @@ public class Game implements Runnable {
     }
     @Override
     public void run() {
-        while (gameThread != null) {
-            update();
-            if (fps.canDrawAccumulator(true)){
-                // Calls its "paintComponent" method
-                panel.repaint();
+        double previous = System.nanoTime();
+        double lag = 0.0;
+
+        while (gameThread != null){
+            double current = System.nanoTime();
+            double elapsed = current - previous;
+            previous = current;
+            lag += elapsed;
+
+            processInput();
+
+            while (lag >= constants.NS_PER_UPDATE){
+                updateGame();
+                lag -= constants.NS_PER_UPDATE;
             }
+            panel.repaint();
         }
     }
 
-    public void update(){
-        panel.player.update(fps.deltaTime);
+    private void processInput(){
+        panel.player.getInput();
+    }
+
+    private void updateGame(){
+        panel.player.update();
     }
 }

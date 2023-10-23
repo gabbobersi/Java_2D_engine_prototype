@@ -3,16 +3,15 @@ _Roadmap from the top, to the bottom._
 - [X] InputHandler (low urgency)
   - issue: while pressing at the same time two keys, one the horiz. and one vert. axies, the player is much faster.
   - solution: Vector2D
-- [ ] FPS:
+- [X] FPS:
   - Issues:
-    - [ ] Unstable FPS.
-      - [ ] Player moving faster and slower, since it is rendered with unstable FPS
-    - [ ] Player being rendered not fluid, in 30 FPS (it should be fluid, over 24 FPS!)
- - Possible fixes:
-   - [ ] Independent movement FPS.
-   - [ ] Fixed Update
-   - [ ] OpenGL access, so more customization, with LibGdx library (this will be the last possibile solution, since it will cause a massive refactoring)
-   - [ ] ......(don't know)
+    - [x] Unstable FPS.
+      - [x] Player moving faster and slower, since it is rendered with unstable FPS
+    - [x] Player being rendered not fluid, in 30 FPS (it should be fluid, over 24 FPS!)
+    - All fixed with refactoring. 
+- Possible fixes:
+  - [x] Independent movement FPS.
+  - [x] Fixed Update
 ### Core
 - [x] Main class
 - [x] Game class
@@ -60,6 +59,7 @@ _Roadmap from the top, to the bottom._
       - Health
       - Stamina
     - Dialoghi / Narrativa / Lore
+- Alessio
   - UI / TileMap generator
     - Box (cioè un quadrato con uno sfondo)
     - Button (cioè un box, interagibile)
