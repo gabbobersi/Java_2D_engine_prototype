@@ -3,17 +3,17 @@ Possono essere viste come una via di mezzo tra una classe e una interfaccia.
 **Caratteristiche:**
 - Come per le interfacce, le classi astratte **non possono essere istanziate**.
 - A differenza delle interfacce, possono avere attributi non statici, metodi non pubblici. 
-Parliamo quindi di una classe a tutti gli effetti, ma **non istanziabile**.
-- Possono implementare altre interfacce.
-- Possono ereditare solamente altri classi astratte!
+Parliamo quindi di una classe a tutti gli effetti, ma non istanziabile.
+- Possono implementare interfacce.
+- Possono ereditare solamente da un'altra classe astratta!
 
 #### Quando usarle
-Non sono istanziabili e sono utilizzabili solo come classi base.\
-Lo scopo principale delle classi astratte, è quello di controllare il comportamento delle classi base che le derivano.
+Tenendo presente che non sono istanziabili direttamente, lo scopo principale delle classi astratte, è quello\
+di controllare il comportamento delle classi figlie che le derivano.
 
 #### Metodi astratti
 Le classi astratte, possono implementare i normali metodi concreti, ma anche quelli astratti.\
-I metodi astratti sono gli stessi che implementi nelle interfacce.
+Ricordo che i metodi astratti sono gli stessi che implementi nelle interfacce.
 
 ```Java
 public abstract Shape {
@@ -81,10 +81,9 @@ public class Enemy extends GameEntity {
         System.out.println("Il nemico " + getName() + " sta eseguendo un'azione.");
     }
 }
-Ora puoi creare istanze di Player e Enemy e utilizzarle nel tuo gioco:
-
-java
-Copy code
+```
+Ora puoi creare istanze di Player e Enemy:
+```Java
 public class GameMain {
     public static void main(String[] args) {
         Player player = new Player("Eroe", 100);
