@@ -3,13 +3,15 @@ Possono essere viste come una via di mezzo tra una classe e una interfaccia.
 **Caratteristiche:**
 - Come per le interfacce, le classi astratte **non possono essere istanziate**.
 - A differenza delle interfacce, possono avere attributi non statici, metodi non pubblici. 
-Parliamo quindi di una classe a tutti gli effetti, ma non istanziabile.
 - Possono implementare interfacce.
 - Possono ereditare solamente da un'altra classe astratta!
 
-#### Quando usarle
+Parliamo quindi di una classe a tutti gli effetti, ma non istanziabile.
+
+#### Perché usarle
 Tenendo presente che non sono istanziabili direttamente, lo scopo principale delle classi astratte, è quello\
-di controllare il comportamento delle classi figlie che le derivano.
+di controllare il comportamento delle classi figlie che le derivano.\
+Ricordo inoltre che, così come le interfacce, anch'essere permettono di definire un contratto comune a più classi.
 
 #### Metodi astratti
 Le classi astratte, possono implementare i normali metodi concreti, ma anche quelli astratti.\
