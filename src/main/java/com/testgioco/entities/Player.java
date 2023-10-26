@@ -1,34 +1,37 @@
 package com.testgioco.entities;
 
-import com.testgioco.core.ui_elements.Cell;
+import com.testgioco.core.Cell;
 import com.testgioco.core.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.desktop.SystemSleepEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity {
-    private final InputHandler keyH;
+    public InputHandler keyH;
 
     private double speed;
+    private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
 
-    public Player(InputHandler keyH){
-        this.keyH = keyH;
-        setDeafultValues();
+    public Player(){
+        setDefaultValues();
         getPlayerImage();
     }
 
-    public void setDeafultValues(){
+    public void setDefaultValues(){
+        direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
-        this.x = 10;
-        this.y = 10;
-        speed = 200;
+        lastAnimationTime = System.nanoTime();
+        x = 10;
+        y = 10;
+        speed = 4;
     }
 
     public void getPlayerImage(){
@@ -49,9 +52,7 @@ public class Player extends Entity {
         }
     }
 
-    public void keyHandler(){
-        direction = "down";         // Default direction (even if no key is pressed)
-
+    public void getInput(){
         vector.setX(0);
         vector.setY(0);
 
@@ -73,25 +74,36 @@ public class Player extends Entity {
                 direction = "right";
                 vector.setX(1);
             }
-            spriteCounter++;
+            animate(direction);
+        } else {
+            direction = "down";     // Default direction, even if no key is pressed
+        }
+    }
 
-            // Every "x" draws, I change animation.
-            if (spriteCounter > 6) {
-                if (spriteNumber == 1){
+    private void animate(String newDirection){
+        if (!newDirection.equals(direction)) {
+            // Resetta l'animazione se la direzione è cambiata.
+            spriteNumber = 1;
+            direction = newDirection;
+        } else {
+            long currentTime = System.nanoTime();
+            long elapsedTime = currentTime - lastAnimationTime;
+            long animationInterval = 100_000_000;
+            if (elapsedTime >= animationInterval) {
+                // Cambia l'immagine dell'animazione.
+                if (spriteNumber == 1) {
                     spriteNumber = 2;
                 } else {
                     spriteNumber = 1;
                 }
-                spriteCounter = 0;
+                lastAnimationTime = currentTime;
             }
         }
-        System.out.println(direction);
     }
 
-    public void update(double deltaTime){
-        keyHandler();
+    public void update(){
         vector.normalize();
-        vector.multiply(speed * deltaTime);
+        vector.multiply(speed);
         x += vector.getX();
         y += vector.getY();
     }

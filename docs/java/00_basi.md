@@ -113,10 +113,9 @@ class SonoUnaClasse(){          // Lettera MAIUSCOLA iniziale, lettere maiuscole
 
 _La naming convention delle classi si applica anche a interfacce e classi astratte._
 
-Oltre al codice, le naming convention influenzano anche la struttura di
-package (cartelle) e moduli (file):
-- sonoUnPackage
-- SonoUnModulo (notare che la sintassi è la stessa delle classi. Appunto perché le classi devono avere LO STESSO NOME del modulo in cui sono ospitate!)
+Oltre al codice, le naming convention influenzano anche la struttura del progetto (cartelle e file):
+- sonounpackage (cartella)
+- SonoUnaClasse (file)
 ****
 
 ## Quiz
@@ -175,3 +174,9 @@ public class FileManager {
     }
 }
 ```
+11. L'identificativo sottostante rispecchia le naming convention per le classi?\
+sonounaclasse
+12. L'identificativo sottostante rispecchia le naming convention per i package?\
+sonounpackage
+### Risorse
+[NamingConvention](https://github.com/nbicocchi/java-core/blob/main/assets/books/Java-Coding-Standard.pdf)

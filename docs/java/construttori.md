@@ -15,7 +15,7 @@ Un costruttore può essere utilizzato per fornire valori iniziali per gli attrib
 ``` Java
 public class Vehicle {
   private String color;
-  Vehicle() {
+  public Vehicle() {
      color = "Red";
   }
 }
@@ -29,7 +29,7 @@ Un costruttore può anche _**accettare parametri**_ per inizializzare gli attrib
 ```Java
 public class Vehicle {
     private String color;
-    Vehicle(String c) {
+    public Vehicle(String c) {
         color = c;
     }
 }
@@ -44,33 +44,4 @@ public class MyClass {
     }
 }
 ```
-***
-
-
-Una singola _classe_ può avere _diversi_ **costruttori** con un numero _diverso_ di **parametri**.
-
-I metodi **_setter_** all'interno dei costruttori possono essere utilizzati per impostare i valori degli attributi.
-```Java
-public class Vehicle {
-  private String color;
-
-  Vehicle() {
-    this.setColor("Red");
-  }
-  Vehicle(String c) {
-    this.setColor(c);
-  }
-
-  // Setter
-  public void setColor(String c) {
-    this.color = c;
-  }
-}
-```
-La classe sopra **ha due costruttori**, uno senza alcun parametro
-che imposta l'attributo color a un valore predefinito di "Red",
-
-e un altro costruttore che accetta un parametro e lo assegna all'attributo.
-
-Ora possiamo utilizzare i costruttori per creare oggetti della nostra classe.
 ***

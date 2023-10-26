@@ -9,7 +9,7 @@ Se gli sviluppatori spendono il 90% del loro tempo sul 10% del codice, il sistem
 Sfrutto la funzionalità del thread di essere fermato in qualsiasi momento, per 
 fermare l'esecuzione del game loop (che è ospitato in un thread) fino al prossimo disegno effettivo.
 
-Questo sistema è considerato "basico" in quanto non tiene conto dei rallentamenti di fps più incisivi.
+Questo sistema è considerato "basico" in quanto non tiene conto dei rallentamenti di fps.
 ```Java
 class Game(){
     private boolean running = false;
@@ -44,9 +44,8 @@ class Game(){
 }
 ```
 Avete notato il controllo se `remainingTime` è negativo?\
-Ciò è dovuto al fatto che se l'update e il repaint ci mettono più tempo rispetto al `nextDrawTime`, il `remainingTime`
-diventa **negativo**!
-
+Ciò è dovuto al fatto che se l'update + repaint ci mettono più tempo rispetto al `nextDrawTime`, il `remainingTime`
+diventa **negativo** (infatti `remainingTime = nextDrawTime - System.nanoTime()`!)
 
 #### METODO 2 - DELTA (o "accumulatore")
 Disegno/aggiorno solamente quando occorre farlo.

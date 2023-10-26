@@ -39,3 +39,5 @@ Notare la catena:
 
 Per poter quindi sfruttare il method chaining, è necessario ritornare 
 l'oggetto stesso, fino al metodo finale (che ritornerà appunto il valore finito).
+
+**Nota**: l'ordine della catena non è importante, purché il ritorno del prodotto finale sia sempre in fondo.
