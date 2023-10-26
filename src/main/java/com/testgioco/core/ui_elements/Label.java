@@ -1,35 +1,46 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2D;
-import com.testgioco.core.interfaces.UiElement;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Label extends JLabel implements UiElement {
+/**
+ * This class allows to draw and update text on the screen.
+ * */
+public class Label extends JLabel {
     private Vector2D vector;
-    private String text;
 
     public enum Alignment {
         LEFT, CENTER, RIGHT
     }
 
-    // With coordinates
-    public Label(int x, int y, String text, Alignment alignment, Font font, Color FontColor, int fontSize){
+    /**
+     * Constructor with coordinates (x, y) for position.
+     * */
+    public Label(int x, int y, String text, Alignment alignment, Font font, Color fontColor){
         super(text);
-        this.text = text;
-        vector.setX(x);
-        vector.setY(y);
+        this.vector = new Vector2D(x, y);
+        setLocation(x, y);
         setAlignment(alignment);
+
+        modifyFont(font, fontColor);
+
+        updateVisuals();
     }
 
-    // With Vector
-    public Label(Vector2D vector, String text, Alignment alignment){
+    /**
+     * Constructor with vector for position.
+     * */
+    public Label(Vector2D vector, String text, Alignment alignment, Font font, Color fontColor){
         super(text);
-        this.text = text;
         this.vector = vector;
+        setLocation((int)vector.getX(), (int)vector.getY());
         setAlignment(alignment);
 
+        modifyFont(font, fontColor);
+
+        updateVisuals();
     }
 
     private void setAlignment(Alignment alignment){
@@ -38,16 +49,44 @@ public class Label extends JLabel implements UiElement {
             case CENTER -> setHorizontalAlignment(SwingConstants.CENTER);
             case RIGHT -> setHorizontalAlignment(SwingConstants.RIGHT);
             default ->
-                // Allineamento predefinito in caso di allineamento non valido
+                // Allineamento predefinito in caso di parametro non valido
                 setHorizontalAlignment(SwingConstants.LEFT);
         }
     }
 
-    @Override
-    public void Draw() {
+    private void modifyFont(Font font, Color color){
+        setFont(font);
+        setSize(font.getSize(), font.getSize());
+        setForeground(color);
     }
 
-    @Override
-    public void Update() {
+    public void updateText(String text) {
+        this.setText(text);
+        updateVisuals();
+    }
+
+    public void updateCoordinates(int x, int y) {
+        vector.setX(x);
+        vector.setY(y);
+        setLocation((int)vector.getX(), (int)vector.getY());
+        updateVisuals();
+    }
+
+    /**
+     * Allows to update font and size.
+     * */
+    public void updateFont(Font font){
+        setFont(font);
+        updateVisuals();
+    }
+
+    public void updateColor(Color color){
+        setForeground(color);
+        updateVisuals();
+    }
+
+    private void updateVisuals(){
+        revalidate();
+        repaint();
     }
 }

@@ -1,6 +1,8 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Grid;
+import com.testgioco.core.Vector2D;
+import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
 import com.testgioco.core.InputHandler;
 import com.testgioco.entities.Player;
@@ -10,6 +12,9 @@ import java.awt.*;
 
 public class Panel extends JPanel {
     private InputHandler keyH;
+    private final GameSettings settings = new GameSettings();
+    private Label label = new Label(new Vector2D(200, 200),"Test", Label.Alignment.CENTER, new Font("Comic Sans", 1, 30),
+            Color.WHITE);
 
     // Here put classes to draw
     public final TileManager tileManager = new TileManager();
@@ -19,11 +24,16 @@ public class Panel extends JPanel {
 
     public Panel(InputHandler keyH, Color backGround){
         this.keyH = keyH;
-        this.player.keyH = keyH;
-        this.setBackground(backGround);
-        this.addKeyListener(this.keyH);
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
+        player.keyH = keyH;
+        setBackground(backGround);
+        addKeyListener(this.keyH);
+        setDoubleBuffered(true);
+        setFocusable(true);
+        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+
+        label.setBounds(200, 200, label.getPreferredSize().width, label.getPreferredSize().height);
+        this.add(label);
+        label.setVisible(true);
     }
 
     @Override
@@ -31,10 +41,12 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         // Objects to draw, in order.
-        tileManager.draw(g2);
-        grid.drawDebugGrid(g2);
-        debug.draw(g2);
-        player.draw(g2);
+//        tileManager.draw(g2);
+//        grid.drawDebugGrid(g2);
+//        debug.draw(g2);
+//        player.draw(g2);
+        label.paint(g2);
+
         g2.dispose();
     }
 }
