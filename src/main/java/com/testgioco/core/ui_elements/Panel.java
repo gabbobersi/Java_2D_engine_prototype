@@ -16,14 +16,16 @@ public class Panel extends JPanel {
     public final Grid grid = new Grid();
     public final Player player = new Player();
     public final ScreenLogger debug = new ScreenLogger();
+    private final Box box = new Box();
 
     public Panel(InputHandler keyH, Color backGround){
         this.keyH = keyH;
         this.player.keyH = keyH;
-        this.setBackground(backGround);
+        this.setBackground(Color.white);
         this.addKeyListener(this.keyH);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        this.add(box);
     }
 
     @Override
@@ -31,10 +33,17 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         // Objects to draw, in order.
-        tileManager.draw(g2);
-        grid.drawDebugGrid(g2);
-        debug.draw(g2);
-        player.draw(g2);
+//        tileManager.draw(g2);
+//        grid.drawDebugGrid(g2);
+//        debug.draw(g2);
+//        player.draw(g2);
+        box.setX(200);
+        box.setY(100);
+        box.setWidth(200);
+        box.setHeight(100);
+        box.setThickness(5);
+        box.setBoxColor(Color.BLUE);
+        box.draw(g2);
         g2.dispose();
     }
 }

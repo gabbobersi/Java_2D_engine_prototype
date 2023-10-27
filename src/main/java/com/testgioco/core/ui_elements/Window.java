@@ -15,5 +15,6 @@ public class Window extends JFrame {
         this.setSize(settings.screenWidth, settings.screenHeight);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
     }
 }
