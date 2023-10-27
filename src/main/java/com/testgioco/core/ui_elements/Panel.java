@@ -11,9 +11,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel extends JPanel {
-    private InputHandler keyH;
+    private final InputHandler keyH;
     private final GameSettings settings = new GameSettings();
-    private Label label = new Label(new Vector2D(200, 200),"Test", Label.Alignment.CENTER, new Font("Comic Sans", 1, 30),
+    private final Label label = new Label(new Vector2D(200, 200),"Test", Label.Alignment.CENTER, Label.Alignment.CENTER,
+            new Font(
+            "Comic " +
+            "Sans", 1,
+            30),
             Color.WHITE);
 
     // Here put classes to draw
@@ -30,10 +34,7 @@ public class Panel extends JPanel {
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
-
-        label.setBounds(200, 200, label.getPreferredSize().width, label.getPreferredSize().height);
-        this.add(label);
-        label.setVisible(true);
+        add(label.getComponent());
     }
 
     @Override
@@ -45,8 +46,7 @@ public class Panel extends JPanel {
 //        grid.drawDebugGrid(g2);
 //        debug.draw(g2);
 //        player.draw(g2);
-        label.paint(g2);
-
+        label.draw(g2);
         g2.dispose();
     }
 }

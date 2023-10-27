@@ -1,6 +1,7 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2D;
+import com.testgioco.core.exceptions.UnexpectedStringValueException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,85 +9,89 @@ import java.awt.*;
 /**
  * This class allows to draw and update text on the screen.
  * */
-public class Label extends JLabel {
-    private Vector2D vector;
-
+public class Label {
+    private final JLabel label = new JLabel();
     public enum Alignment {
         LEFT, CENTER, RIGHT
     }
 
     /**
-     * Constructor with coordinates (x, y) for position.
+     * Custom label with coordinates (x, y) for position.
      * */
-    public Label(int x, int y, String text, Alignment alignment, Font font, Color fontColor){
-        super(text);
-        this.vector = new Vector2D(x, y);
-        setLocation(x, y);
-        setAlignment(alignment);
-
-        modifyFont(font, fontColor);
-
-        updateVisuals();
+    public Label(int x, int y, String text, Alignment horizontalAlign, Alignment verticalAlign, Font font,
+                 Color fontColor){
+        Vector2D vector = new Vector2D(x, y);
+        setLabel(vector, text, horizontalAlign, verticalAlign, font, fontColor);
     }
 
     /**
-     * Constructor with vector for position.
+     * Custom label with vector for position.
      * */
-    public Label(Vector2D vector, String text, Alignment alignment, Font font, Color fontColor){
-        super(text);
-        this.vector = vector;
-        setLocation((int)vector.getX(), (int)vector.getY());
-        setAlignment(alignment);
-
-        modifyFont(font, fontColor);
-
-        updateVisuals();
+    public Label(Vector2D vector, String text, Alignment horizontalAlign, Alignment verticalAlign, Font font, Color fontColor){
+        setLabel(vector, text, horizontalAlign, verticalAlign, font, fontColor);
     }
 
-    private void setAlignment(Alignment alignment){
+    /**
+     * Default label with vector for position.
+     * */
+    public Label(Vector2D vector, String text){
+        Font font = new Font("Comic Sans", 1, 30);
+        setLabel(vector, text, Alignment.CENTER, Alignment.CENTER, font, Color.BLACK);
+    }
+
+    /**
+     * Set all label's attributes
+     * @param pos Label's position on the screen.
+     * @param text Text of the label
+     * @param x Horizontal alignment.
+     * @param y Vertical alignment.
+     * @param font Font object. Its size will determine label's font size.
+     * @param color Font's color.
+     * */
+    private void setLabel(Vector2D pos, String text, Alignment x, Alignment y, Font font, Color color){
+        label.setText(text);
+        label.setLocation((int)pos.getX(), (int)pos.getY());
+        label.setForeground(color);
+        label.setSize(font.getSize(), font.getSize());
+        label.setFont(font);
+
+        try{
+            setAlignment(label, "horizontal", x);
+            setAlignment(label, "vertical", y);
+        } catch (UnexpectedStringValueException e){
+            e.printStackTrace();
+        }
+        label.setVisible(true);
+        // label.setBounds(200, 200, label.getPreferredSize().width, label.getPreferredSize().height);
+        reDrawLabel(label);
+    }
+
+    private void reDrawLabel(JLabel lbl){
+        lbl.revalidate();
+        lbl.repaint();
+    }
+
+    private void setAlignment(JLabel lbl, String alignmentType, Alignment alignment) throws UnexpectedStringValueException {
+        if (alignmentType == null || !alignmentType.equals("horizontal") && !alignmentType.equals("vertical")){
+            throw new UnexpectedStringValueException("alignmentType value is not equal 'horizontal' or 'vertical'");
+        }
+
         switch (alignment) {
-            case LEFT -> setHorizontalAlignment(SwingConstants.LEFT);
-            case CENTER -> setHorizontalAlignment(SwingConstants.CENTER);
-            case RIGHT -> setHorizontalAlignment(SwingConstants.RIGHT);
-            default ->
-                // Allineamento predefinito in caso di parametro non valido
-                setHorizontalAlignment(SwingConstants.LEFT);
+            case LEFT -> lbl.setHorizontalAlignment(SwingConstants.LEFT);
+            case CENTER -> lbl.setHorizontalAlignment(SwingConstants.CENTER);
+            case RIGHT -> lbl.setHorizontalAlignment(SwingConstants.RIGHT);
         }
     }
 
-    private void modifyFont(Font font, Color color){
-        setFont(font);
-        setSize(font.getSize(), font.getSize());
-        setForeground(color);
-    }
-
-    public void updateText(String text) {
-        this.setText(text);
-        updateVisuals();
-    }
-
-    public void updateCoordinates(int x, int y) {
-        vector.setX(x);
-        vector.setY(y);
-        setLocation((int)vector.getX(), (int)vector.getY());
-        updateVisuals();
-    }
-
     /**
-     * Allows to update font and size.
+     * Returns the JLabel internal implementation.
+     * It should be used just to add the component to a container.
      * */
-    public void updateFont(Font font){
-        setFont(font);
-        updateVisuals();
+    public JLabel getComponent(){
+        return label;
     }
 
-    public void updateColor(Color color){
-        setForeground(color);
-        updateVisuals();
-    }
-
-    private void updateVisuals(){
-        revalidate();
-        repaint();
+    public void draw(Graphics2D g2){
+        label.paint(g2);
     }
 }
