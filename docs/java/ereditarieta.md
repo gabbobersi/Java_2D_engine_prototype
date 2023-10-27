@@ -5,7 +5,8 @@ fondamentale della programmazione
 orientata agli oggetti (**OOP**) che
 consente a una classe di ereditare
 le caratteristiche (come campi e metodi)
-da un'altra classe. \
+da un'altra classe.
+
 
 Questo **significa** che una classe
 può basarsi su una classe
