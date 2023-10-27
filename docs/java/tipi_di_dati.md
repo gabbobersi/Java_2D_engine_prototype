@@ -9,18 +9,21 @@ Ecco una spiegazione dettagliata dei tipi di dati in Java con esempi approfondit
 1. **Tipi numerici**:
 - **byte**: Il tipo di dati byte rappresenta un numero intero con segno a 8 bit. Questo significa che può rappresentare valori compresi tra -128 e 127.
     - Utilizza 1 byte
-  Ad esempio:
+
+Ad esempio:
 ```java 
 byte eta = 30; // Rappresenta l'età come un valore byte.
 ```
 - **short**: Il tipo di dati short rappresenta un numero intero con segno a 16 bit. Questo consente di rappresentare valori compresi tra -32,768 e 32,767.
     - Utilizza 2 byte
+
 Ad esempio:
 ```java
 short popolazioneCitta = 25000; // Rappresenta la popolazione di una città come un valore short.
  ```
 - **long**: Il tipo di dati long rappresenta un numero intero con segno a 64 bit. Questo consente di rappresentare valori molto grandi o molto piccoli.
-    - Utilizza 8 byte 
+    - Utilizza 8 byte
+
 Ad esempio:
 ```java
 long popolazioneMondiale = 7_900_000_000L; // Nota la "L" alla fine per indicare che è di tipo long
@@ -30,7 +33,8 @@ long popolazioneMondiale = 7_900_000_000L; // Nota la "L" alla fine per indicare
 ```Java
 int numeroIntero = 42;
 ```
-- **short int**: Questo è un tipo di dati intero più breve, che rappresenta numeri interi con segno a 16 bit. 
+- **short int**: Questo è un tipo di dati intero più breve, che rappresenta numeri interi con segno a 16 bit.
+
 Ad esempio:
 ```java
 short int codiceProdotto = 12345;
