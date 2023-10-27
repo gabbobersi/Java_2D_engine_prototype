@@ -8,8 +8,13 @@ specifica
 non è soddisfatta. 
 
 Abbiamo due tipi di cicli:
-- **for** (con le sua variante **for each**)
-- **while** (con la sua variante **do-while** )
+- **for**
+- **while**
+
+Ritengo comunque interessante presentare anche altri due cicli fondamentali che non vanno confusi
+con quelli già citati:
+- **for each**
+- **do while**
 
 ### Ciclo for
 
@@ -44,7 +49,7 @@ for (int i = 1; i <= 5; i++) {
 In questo esempio, il ciclo "for" eseguirà le istruzioni 
 all'interno di esso cinque volte e mi stamperà i numeri dall'1 al 5 compreso.
 
-### Variante "for each"
+### for each
 Questo tipo di loop è utilizzato per _attraversare_ e _iterare_ attraverso 
 le collezioni (come **array**, **liste** o altri tipi di **strutture dati**) senza dover gestire 
 manualmente gli indici o i puntatori agli elementi.
@@ -103,7 +108,7 @@ In questo caso, il ciclo "while" continuerà a eseguire le istruzioni
 all'interno di esso fintanto che la variabile "i" è minore o uguale a 5.
 La variabile "i" viene incrementata di 1 alla fine di ogni iterazione.
 
-### Variante do-while
+### do-while
 Il ciclo "do-while" è un altro tipo di ciclo in Java che è _simile_ al ciclo "while", 
 ma ha una differenza fondamentale:
 Nel ciclo "do-while", le istruzioni vengono eseguite 
