@@ -7,15 +7,18 @@ per _eseguire_ una serie di istruzioni
 specifica 
 non è soddisfatta. 
 
-Abbiamo quattro tipi di cicli:
+Abbiamo due tipi di cicli:
 - **for**
 - **while**
+
+Ritengo comunque interessante presentare anche altri due cicli fondamentali che non vanno confusi
+con quelli già citati:
 - **for each**
 - **do while**
 
 ### Ciclo for
 
-Il ciclo FOR crea un ciclo determinato ossia esegue 
+il ciclo FOR crea un ciclo determinato ossia esegue 
 un blocco di istruzioni per N volte. È spesso 
 utilizzato quando si conosce il numero esatto 
 di iterazioni che si desidera eseguire. 
@@ -26,8 +29,8 @@ blocco di codice è stato eseguito
 La sintassi è la seguente:
 ```Java
 for (inizializzazione; condizione; incremento) {
-    // Istruzioni da eseguire
-}
+        // Istruzioni da eseguire
+        }
 ```
 - **Inizializzazione**: Il primo parametro inizializza la variabile 
 contatore assegnandola a un valore iniziale.
@@ -38,9 +41,10 @@ della variabile contatore al termine di ogni ciclo.
 
 Esempio:
 ```Java
+int i = 1
 for (int i = 1; i <= 5; i++) {
-    System.out.println(i);
-}
+        System.out.println(i);
+        }
 ```
 In questo esempio, il ciclo "for" eseguirà le istruzioni 
 all'interno di esso cinque volte e mi stamperà i numeri dall'1 al 5 compreso.
@@ -58,15 +62,16 @@ con diversi oggetti di uno stesso tipo di dati.
 La sintassi è la seguente:
 ```Java
 for (Tipo elemento : collezione) {
-    // Istruzioni da eseguire per ogni elemento
-}
+        // Istruzioni da eseguire per ogni elemento
+        }
 ```
 Esempio:
 ```Java
 int[] numeri = {1, 2, 3, 4, 5};
-for (int numero : numeri) {
-    System.out.println("Numero: " + numero);
-}
+
+        for (int numero : numeri) {
+        System.out.println("Numero: " + numero);
+        }
 ```
 L'output sarà il seguente:
 ```makefile
@@ -88,16 +93,16 @@ istruzioni _finchè_ la condizione specifica è **soddisfatta**.
 La sintassi è la seguente:
 ```Java
 while (condizione) {
-    // Istruzioni da eseguire
-}
+        // Istruzioni da eseguire
+        }
 ```
 Esempio:
 ```Java
 int i = 1;
-while (i <= 5) {
-    System.out.println(i);
-    i++; // Incremento della variabile
-}
+        while (i <= 5) {
+        System.out.println(i);
+        i++; // Incremento della variabile
+        }
 ```
 In questo caso, il ciclo "while" continuerà a eseguire le istruzioni 
 all'interno di esso fintanto che la variabile "i" è minore o uguale a 5.
@@ -114,16 +119,16 @@ eseguire le istruzioni fintanto che la condizione è vera.
 Per la sintassi il while è posto alla fine del ciclo:
 ```Java
 do {
-    // Istruzioni da eseguire
-} while (condizione);
+        // Istruzioni da eseguire
+        } while (condizione);
 ```
 Esempio:
 ```Java
 int i = 1;
-do {
-    System.out.println(i);
-    i++; // Incremento della variabile
-} while (i <= 5);
+        do {
+        System.out.println(i);
+        i++; // Incremento della variabile
+        } while (i <= 5);
 ```
 In questo caso, il ciclo "do-while" eseguirà le istruzioni all'interno _almeno una volta_,
 **indipendentemente** dalla condizione. Dopo l'esecuzione iniziale,
