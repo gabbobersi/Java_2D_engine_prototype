@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * This class allows to draw and update text on the screen.
  * */
-public class Label {
+public class Label  {
     private final JLabel label = new JLabel();
     public enum Alignment {
         LEFT, CENTER, RIGHT
@@ -62,7 +62,7 @@ public class Label {
             e.printStackTrace();
         }
         label.setVisible(true);
-        // label.setBounds(200, 200, label.getPreferredSize().width, label.getPreferredSize().height);
+        label.setBounds(200, 200, label.getPreferredSize().width, label.getPreferredSize().height);
         reDrawLabel(label);
     }
 

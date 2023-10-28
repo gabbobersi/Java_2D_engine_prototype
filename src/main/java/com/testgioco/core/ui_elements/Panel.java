@@ -13,12 +13,6 @@ import java.awt.*;
 public class Panel extends JPanel {
     private final InputHandler keyH;
     private final GameSettings settings = new GameSettings();
-    private final Label label = new Label(new Vector2D(200, 200),"Test", Label.Alignment.CENTER, Label.Alignment.CENTER,
-            new Font(
-            "Comic " +
-            "Sans", 1,
-            30),
-            Color.WHITE);
 
     // Here put classes to draw
     public final TileManager tileManager = new TileManager();
@@ -33,8 +27,7 @@ public class Panel extends JPanel {
         addKeyListener(this.keyH);
         setDoubleBuffered(true);
         setFocusable(true);
-        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
-        add(label.getComponent());
+        // setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     @Override
@@ -42,11 +35,10 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         // Objects to draw, in order.
-//        tileManager.draw(g2);
-//        grid.drawDebugGrid(g2);
-//        debug.draw(g2);
-//        player.draw(g2);
-        label.draw(g2);
+        tileManager.draw(g2);
+        grid.drawDebugGrid(g2);
+        debug.draw(g2);
+        player.draw(g2);
         g2.dispose();
     }
 }
