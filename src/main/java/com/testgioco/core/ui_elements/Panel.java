@@ -39,10 +39,10 @@ public class Panel extends JPanel {
 //        player.draw(g2);
         box.setX(200);
         box.setY(100);
-        box.setWidth(200);
+        box.setWidth(50);
         box.setHeight(100);
-        box.setThickness(5);
-        box.setBoxColor(Color.BLUE);
+        box.setThickness(50);
+        box.setBoxColor(Color.RED);
         box.draw(g2);
         g2.dispose();
     }

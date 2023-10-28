@@ -36,9 +36,6 @@ public class Box extends JPanel{
         int bb_height = y+midHeight_boxBorders-thickness;
         boxBorders.setRect(bb_width,bb_height,width + thickness,height + thickness);
     }
-    public Rectangle2D.Double getComponent(){
-        return box;
-    }
 
     public void setX(int x){
         this.x = x;
@@ -52,12 +49,13 @@ public class Box extends JPanel{
     public void setHeight(int height){
         this.height = height;
     }
-   public int getX(){
-        return x;
-   }
-   public int getY(){
-        return y;
-   }
+    public int getX(){
+
+        return x;}
+    public int getY() {
+
+        return y;}
+
     public int getWidth(){
         return width;
     }
