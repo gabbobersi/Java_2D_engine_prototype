@@ -1,6 +1,8 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Grid;
+import com.testgioco.core.Vector2D;
+import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
 import com.testgioco.core.InputHandler;
 import com.testgioco.entities.Player;
@@ -9,7 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel extends JPanel {
-    private InputHandler keyH;
+    private final InputHandler keyH;
+    private final GameSettings settings = new GameSettings();
 
     // Here put classes to draw
     public final TileManager tileManager = new TileManager();
@@ -19,11 +22,12 @@ public class Panel extends JPanel {
 
     public Panel(InputHandler keyH, Color backGround){
         this.keyH = keyH;
-        this.player.keyH = keyH;
-        this.setBackground(backGround);
-        this.addKeyListener(this.keyH);
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
+        player.keyH = keyH;
+        setBackground(backGround);
+        addKeyListener(this.keyH);
+        setDoubleBuffered(true);
+        setFocusable(true);
+        // setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.testgioco.core;
 
+import com.testgioco.core.ui_elements.Label;
 import com.testgioco.core.ui_elements.Panel;
 import com.testgioco.core.ui_elements.Window;
-import com.testgioco.entities.Player;
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
 
