@@ -22,5 +22,5 @@ int x = (int)xF; // Diventerà 5
 // sto passando da un tipo di dato PIU GRANDE a uno PIU PICCOLO.
 // double (8 byte) --> float (4 byte)
 double x = 5.4;
-float xF = (float) x;
+float xF = (float) x; // Diventerà 5.4, ma passando da un tipo più grande a uno più piccolo, c'è stata comunque perdita di dati, anche se non ha impattato il valore 5.4
 ```
