@@ -1,3 +1,5 @@
+Il cast riguarda i tipi primitivi.
+
 Il cast (o casting) in Java, consiste nel cambiare il tipo del valore di una variabile, in un altro.
 
 Il cast è automatico se passi da un tipo a uno più grande e se non c'è perdita di dati:
