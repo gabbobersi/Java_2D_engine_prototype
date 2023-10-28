@@ -15,8 +15,8 @@ float xF = x;
 
 // Conversione esplicita - Ho perdita di dati. Perdo i valori dopo la virgola, del float.
 // float (4 byte) --> int (4 byte)
-float xF = 5;
-int x = (int)xF;
+float xF = 5.3;
+int x = (int)xF; // Diventerà 5
 
 // Conversione esplicita - Ho perdita di dati. Oltre al perdere alcuni tra i valori con più precisione (più piccoli/meno significativi)
 // sto passando da un tipo di dato PIU GRANDE a uno PIU PICCOLO.
