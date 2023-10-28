@@ -1,7 +1,7 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Grid;
-import com.testgioco.core.Vector2D;
+import com.testgioco.core.Vector2DInt;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
 import com.testgioco.core.InputHandler;
@@ -27,7 +27,7 @@ public class Panel extends JPanel {
         addKeyListener(this.keyH);
         setDoubleBuffered(true);
         setFocusable(true);
-        // setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     @Override

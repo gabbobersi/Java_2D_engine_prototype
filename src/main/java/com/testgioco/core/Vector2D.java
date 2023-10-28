@@ -10,15 +10,12 @@ public class Vector2D {
     }
 
     public double getX(){return x;}
-    public void setX(double value){
-        x = value;
-    }
+    public void setX(double value){x = value;}
 
     public double getY(){
         return y;
     }
     public void setY(double value){y = value;}
-
 
     public double getMagnitude() {
         return Math.sqrt(x * x + y * y);

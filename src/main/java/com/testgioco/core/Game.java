@@ -11,16 +11,14 @@ import java.awt.*;
 public class Game implements Runnable {
     private final GameSettings settings = new GameSettings();
     private final Constants constants = new Constants();
-
-    private final InputHandler keyH = new InputHandler();
     private Thread gameThread;
 
     private final Panel panel;
-    private final Window window;
 
     public Game() {
+        InputHandler keyH = new InputHandler();
         panel = new Panel(keyH, Color.BLACK);
-        window = new Window(panel);
+        Window window = new Window(panel);
     }
 
     public void start(){
