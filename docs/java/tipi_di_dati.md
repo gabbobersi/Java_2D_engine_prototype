@@ -8,7 +8,7 @@ Ecco una spiegazione dettagliata dei tipi di dati in Java con esempi approfondit
 | Tipo      | Numero byte           | Esempio                                    |
 |-----------|-----------------------|--------------------------------------------|
 | Byte      | 1 byte                | byte eta = 30;                             |
-| Short     | 8 byte                | short popolazioneCitta = 25000;            |
+| Short     | 2 byte                | short popolazioneCitta = 255;            |
 | Long      | 4 byte                | long popolazioneMondiale = 7_900_000_000L; |
 | Int       | 4 byte                | int numeroIntero = 42;                     |
 | Short Int | 4 byte                | short int codiceProdotto = 12345;          |
