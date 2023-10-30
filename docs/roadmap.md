@@ -42,37 +42,38 @@ _Roadmap from the top, to the bottom._
 ### Responsabilità
 - Bersi
   - UI 
-    - Label (etichetta, cioè testo a video) 
-    - LayoutManager (disporre le robe UI a schermo)
-  - Audio
+    - [x] Label (etichetta, cioè testo a video) 
+    - [ ] LayoutManager (disporre le robe UI a schermo)
+  - [ ] Audio
   - Game design
-    - Interazione con gli oggetti
-    - Generazione personaggi causali
-  - Core
+    - [ ] World map (movimento personaggio sulla mappa)
+    - [ ] Interazione con gli oggetti
+    - [ ] Generazione personaggi causali
+  - [ ] Core
 - Giammarco
   - UI / TileMap generator
-    - Box (cioè un quadrato con uno sfondo)
-    - Button (cioè un box, interagibile)
+    - [x] Box (cioè un quadrato con uno sfondo)
+    - [ ] Button (cioè un box, interagibile)
   - Level design
   - Game design
-    - Bar varie
+    - [ ] Bar varie
       - Health
       - Stamina
     - Dialoghi / Narrativa / Lore
 - Alessio
   - UI / TileMap generator
-    - Box (cioè un quadrato con uno sfondo)
-    - Button (cioè un box, interagibile)
+    - [x] Box (cioè un quadrato con uno sfondo)
+    - [ ] Button (cioè un box, interagibile)
   - Level design
   - Game design
-    - Inventario
-    - Dialoghi / Narrativa / Lore
+    - [ ] Inventario
+    - [ ] Dialoghi / Narrativa / Lore
 - Francesco
-  - Physics
-  - Audio
+  - [ ] Physics
+  - [ ] Audio
   - Game design
-    - Obiettivi
-    - Regole gioco
+    - [ ] Obiettivi
+    - [ ] Regole gioco
   - Core
 
 TileMap generator:
