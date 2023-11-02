@@ -62,6 +62,7 @@ Le **Flags** nel metodo compile() cambiano il modo in cui viene eseguita la rice
 | n{x,y}         | Corrisponde a qualsiasi stringa che contiene una sequenza di X a Y n    |
 | n{x,}          | Corrisponde a qualsiasi stringa che contiene una sequenza di almeno X n |
 
+Verifica se ci sono occorrenze della parola 'youtube' in una frase
 ```Java
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,6 +80,14 @@ public class Main {
     }
 }
 ```
+## Esempio spiegato
+In questo esempio, si sta cercando la parola "youtube" in una frase.
+Innanzitutto, il modello viene creato utilizzando il metodo Pattern.compile(). Il primo parametro indica quale modello viene cercato e il secondo parametro contiene un flag che indica che la ricerca dovrebbe essere case-insensitive. Il secondo parametro è facoltativo.
+
+Il metodo matcher() viene utilizzato per cercare il modello in una stringa. Esso restituisce un oggetto Matcher che contiene informazioni sulla ricerca effettuata.
+
+Il metodo find() restituisce true se il modello è stato trovato nella stringa e false se non è stato trovato.
+
 Questo è solo un'introduzione alle regex in Java. Si possono creare espressioni regolari più complesse e utili in base alle tue esigenze specifiche.
 
 _N.d.A: Le espressioni regolari sono estremamente utili in un contesto aziendale per diverse applicazioni._
