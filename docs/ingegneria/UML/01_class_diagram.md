@@ -34,6 +34,10 @@ Si indicano in relazione al chiamante, come:
 Uguale alla classe, ma con il nome in corsivo.\
 ![](uml_resources/classi_astratte.PNG)
 
+### Classe annidata
+Anche se "poco comune", ecco un esempio di classe annidata:\
+![](uml_resources/classe_annidata_1.png)
+
 ### Ereditarietà
 Veicolo è la classe padre di Automobile.\
 Automobile è la classe padre di Audi, Ford, ....\
@@ -42,6 +46,8 @@ Automobile è la classe padre di Audi, Ford, ....\
 ### Interfacce
 Si scrivono come le classi, ma prima del nome devi includere "**\<\<interface>>**"\
 ![](uml_resources/interface_1.PNG)
+
+**Nota:** E' comunque possibile specificare una interfaccia, senza specificarne l'implementazione!
 
 Si implementano con una relazione di realizzazione:\
 ![](uml_resources/implementazione_interfacce_1.png)
@@ -78,9 +84,13 @@ Si può esprimere come:
 
 ### Ruolo
 Esprime come un oggetto partecipa a una relazione.\
-Sotto abbiamo che un professore, può scrivere da 0 a più libri.
+Sotto abbiamo che un professore, può scrivere da 0 a più libri.\
 ![img.png](uml_resources/ruolo_1.png)\
-Il ruolo descrive il Professor come author, e il Book come textboo.
+Il ruolo descrive il Professor come author, e il Book come textbook.
+
+Un altro esempio di ruolo, potrebbe essere un dipendente (Employee) che lavora su diversi progetti, e con diverso ruolo
+(title), livello di sicurezza (SecurityLevel) e magari PartTime:
+![img.png](uml_resources/ruolo_2.png)
 
 ## Esempio completo 1
 ![img.png](uml_resources/esempio_completo1.png)
