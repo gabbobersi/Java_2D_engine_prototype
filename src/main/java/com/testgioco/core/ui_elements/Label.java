@@ -13,7 +13,7 @@ public class Label  {
     private Font font = new Font("Comic Sans", Font.PLAIN, 15);
     private Vector2DInt vector = new Vector2DInt(0, 0);
     private String text = "";
-    private Color fontColor = Color.WHITE;
+    private Color color = Color.BLACK;
 
     /**
      * Custom label with coordinates (x, y) for position.
@@ -21,10 +21,10 @@ public class Label  {
      * @param y Y position.
      * @param text Text of the label.
      * @param font Font object represent text's font and text's size.
-     * @param fontColor Color of the text.
+     * @param color Color of the text.
      * */
-    public Label(int x, int y, String text, Font font, Color fontColor){
-        assignConstructorParametersToInstance(new Vector2DInt(x, y), text, font, fontColor);
+    public Label(int x, int y, String text, Font font, Color color){
+        assignConstructorParametersToInstance(new Vector2DInt(x, y), text, font, color);
     }
 
     /**
@@ -32,10 +32,10 @@ public class Label  {
      * @param vector Vector 2D containing x, y position.
      * @param text Text of the label.
      * @param font Font object represent text's font and text's size.
-     * @param fontColor Color of the text.
+     * @param color Color of the text.
      * */
-    public Label(Vector2DInt vector, String text, Font font, Color fontColor){
-        assignConstructorParametersToInstance(vector, text, font, fontColor);
+    public Label(Vector2DInt vector, String text, Font font, Color color){
+        assignConstructorParametersToInstance(vector, text, font, color);
     }
 
     /**
@@ -49,11 +49,13 @@ public class Label  {
     }
 
     /**
-     * Default labels
+     * Custom label with coordinates (x, y) for position.
+     * @param x X position.
+     * @param y Y position.
+     * @param text Text of the label.
      * */
-    public Label(){
-        Font font = new Font("Comic Sans", 1, 30);
-        assignConstructorParametersToInstance(new Vector2DInt(100, 100), "", font, Color.BLACK);
+    public Label(int x, int y, String text){
+        assignConstructorParametersToInstance(new Vector2DInt(x, y), text, font, color);
     }
 
     /**
@@ -61,18 +63,18 @@ public class Label  {
      * @param vector Vector 2D containing x, y position.
      * @param text Text of the label.
      * @param font Font object represent text's font and text's size.
-     * @param fontColor Color of the text.
+     * @param color Color of the text.
      * */
-    private void assignConstructorParametersToInstance(Vector2DInt vector, String text, Font font, Color fontColor){
+    private void assignConstructorParametersToInstance(Vector2DInt vector, String text, Font font, Color color){
         this.vector = vector;
         this.text = text;
         this.font = font;
-        this.fontColor = fontColor;
+        this.color = color;
     }
 
     public void draw(Graphics2D g2){
         g2.setFont(font);
-        g2.setColor(fontColor);
+        g2.setColor(color);
         g2.drawString(text, vector.getX(), vector.getY());
     }
 
@@ -98,5 +100,13 @@ public class Label  {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

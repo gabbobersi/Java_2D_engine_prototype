@@ -1,5 +1,7 @@
 package com.testgioco.core.ui_elements;
 
+import com.testgioco.core.Vector2DInt;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -7,50 +9,75 @@ import java.awt.geom.Rectangle2D;
 public class Box extends JPanel{
     Rectangle2D.Double box = new Rectangle2D.Double();
     Rectangle2D.Double boxBorders = new Rectangle2D.Double();
-    private int x,y;
-    private int width,height;
-    private int thickness;
+    private Vector2DInt vector;
+    private int width, height;
+    private int bordThickness;
     private Color boxColor;
+    private RenderingAlignment renderingAlign = RenderingAlignment.DEFAULT;
 
+    public enum RenderingAlignment {
+        DEFAULT,    // The button will be rendered by the usual x, y coordinates, from the left top corner.
+        CENTER      // The button will be rendered by the usual x, y coordinates, from center of width/height.
+    }
 
-    public Box(){
+    public Box(Vector2DInt vector, int width, int height, int bordThickness, Color boxColor){
+        this.vector = vector;
+        this.width = width;
+        this.height = height;
+        this.bordThickness = bordThickness;
+        this.boxColor = boxColor;
         setVisible(true);
     }
 
-
     public void draw(Graphics2D g2) {
-        update();
+        switch (renderingAlign){
+            case DEFAULT -> renderTopLeft();
+            case CENTER -> renderCenter();
+        }
+
         g2.setColor(Color.BLACK);
         g2.fill(boxBorders);
         g2.setColor(boxColor);
         g2.fill(box);
     }
-    private void update(){
-        int midWidth_box = Math.round((float)(width/2));
-        int midHeight_box = Math.round((float)(height/2));
-        box.setRect(x+midWidth_box,y+midHeight_box,width,height);
 
-        int midWidth_boxBorders = Math.round((float)(width+thickness)/2);
-        int midHeight_boxBorders = Math.round((float)(height+thickness)/2);
-        int bb_width = x+midWidth_boxBorders-thickness;
-        int bb_height = y+midHeight_boxBorders-thickness;
-        boxBorders.setRect(bb_width,bb_height,width + thickness,height + thickness);
+    private void renderTopLeft(){
+        box.setRect(vector.getX(), vector.getY(), width, height);
+        int midThickness = (int)Math.round(((double)bordThickness / 2));
+        boxBorders.setRect(vector.getX() - midThickness, vector.getY() - midThickness,width + bordThickness,
+            height + bordThickness);
     }
 
-    public void setX(int x){
-        this.x = x;
+    private void renderCenter(){
+        Vector2DInt centerCoordinates = getBoxCenter();
+        box.setRect(centerCoordinates.getX(), centerCoordinates.getY(), width,height);
+
+        int midWidth_boxBorders = Math.round((float)(width+bordThickness)/2);
+        int midHeight_boxBorders = Math.round((float)(height+bordThickness)/2);
+        int bb_width = vector.getX() + midWidth_boxBorders-bordThickness;
+        int bb_height = vector.getY() + midHeight_boxBorders-bordThickness;
+        boxBorders.setRect(bb_width,bb_height,width + bordThickness,height + bordThickness);
     }
-    public void setY(int y){
-        this.y = y;
+
+    /**
+     * Returns a new Vector2DInt, with the center of the box as new coordinates.
+     * */
+    public Vector2DInt getBoxCenter(){
+        int midWidth_box = Math.round((float)(getWidth()/2));
+        int midHeight_box = Math.round((float)(getHeight()/2));
+        return new Vector2DInt(vector.getX()+midWidth_box,vector.getY()+midHeight_box);
     }
+
+    public void setX(int x){vector.setX(x);}
+    public void setY(int y){vector.setY(y);}
     public void setWidth(int width){
         this.width = width;
     }
     public void setHeight(int height){
         this.height = height;
     }
-    public int getX(){return x;}
-    public int getY() {return y;}
+    public int getX(){return vector.getX();}
+    public int getY() {return vector.getY();}
     public int getWidth(){
         return width;
     }
@@ -58,15 +85,23 @@ public class Box extends JPanel{
         return height;
     }
     public int getThickness() {
-        return thickness;
+        return bordThickness;
     }
-    public void setThickness(int thickness) {
-        this.thickness = thickness;
+    public void setThickness(int bordThickness) {
+        this.bordThickness = bordThickness;
     }
     public Color getBoxColor() {
         return boxColor;
     }
     public void setBoxColor(Color boxColor) {
         this.boxColor = boxColor;
+    }
+
+    public RenderingAlignment getRenderingAlign() {
+        return renderingAlign;
+    }
+
+    public void setRenderingAlign(RenderingAlignment renderingAlign) {
+        this.renderingAlign = renderingAlign;
     }
 }

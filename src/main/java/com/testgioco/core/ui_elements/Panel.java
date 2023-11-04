@@ -19,7 +19,7 @@ public class Panel extends JPanel {
     public final Grid grid = new Grid();
     public final Player player = new Player();
     public final ScreenLogger debug = new ScreenLogger();
-    private Button button = new Button(this);
+    private Button button = new Button(this, new Vector2DInt(50, 50), 150, 100, "Ciao Pippo", 6, Color.GRAY);
 
     public Panel(InputHandler keyH, Color backGround){
         this.keyH = keyH;
@@ -36,10 +36,11 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
          //Objects to draw, in order.
-        tileManager.draw(g2);
-        grid.drawDebugGrid(g2);
-        debug.draw(g2);
-        player.draw(g2);
+//        tileManager.draw(g2);
+//        grid.drawDebugGrid(g2);
+//        debug.draw(g2);
+//        player.draw(g2);
+        button.draw(g2);
         g2.dispose();
     }
 }
