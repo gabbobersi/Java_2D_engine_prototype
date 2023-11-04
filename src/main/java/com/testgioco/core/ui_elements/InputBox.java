@@ -2,17 +2,17 @@ package com.testgioco.core.ui_elements;
 
 import javax.swing.*;
 
-public class JTextField extends JFrame {
+public class InputBox {
     //Attributi
-    private javax.swing.JTextField provaCampoDiTesto;
+private JTextField textField;
 
     //Costruttore
-    public JTextField(){
+    public InputBox(){
 
         }
 
     //Metodi
-    
+
 
 
 }
