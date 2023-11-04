@@ -93,7 +93,7 @@ public class Box extends JPanel{
     public Color getBoxColor() {
         return boxColor;
     }
-    public void setBoxColor(Color boxColor) {
+    public void setColor(Color boxColor) {
         this.boxColor = boxColor;
     }
 

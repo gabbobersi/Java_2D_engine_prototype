@@ -1,11 +1,9 @@
 package com.testgioco.core.ui_elements;
 
-import com.testgioco.core.Vector2D;
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Singletons;
 
 import java.awt.*;
-import java.awt.desktop.SystemSleepEvent;
-import java.awt.geom.Rectangle2D;
 
 public class Button {
     private Box box;
@@ -35,8 +33,18 @@ public class Button {
         box.setWidth(width);
         box.setHeight(height);
         box.setThickness(bordThickness);
-        box.setBoxColor(buttonColor);
+        box.setColor(buttonColor);
         panel.add(box);
+
+        if ((Singletons.mouseH.xClick >= vector.getX() && Singletons.mouseH.xClick <= vector.getX() + width)
+                && (Singletons.mouseH.yClick > vector.getY() && Singletons.mouseH.yClick < vector.getY() + height)){
+            box.setColor(Color.BLUE);
+        }
+
+        if (Singletons.mouseH.released){
+            box.setColor(buttonColor);
+        }
+
     }
 
     private void setLabel(Graphics2D g2){
@@ -48,16 +56,13 @@ public class Button {
 
         Vector2DInt centerBox = box.getBoxCenter();
         Vector2DInt label_vector = new Vector2DInt(centerBox.getX() - textWidth, centerBox.getY() + midLabelHeight);
-
-        Point mouseCoordinates = MouseInfo.getPointerInfo().getLocation();
-        System.out.println(mouseCoordinates);
-        if (mouseCoordinates.x < vector.getX() && mouseCoordinates.y < vector.getY()){
-            System.out.println("SONO QUI DIO BESTIA");
-            label.setColor(Color.YELLOW);
-        }
-
         label.setVector(label_vector);
         label.setFont(new Font("Comic Sans", Font.PLAIN, 28));
+
+        if ((Singletons.mouseMotionH.x >= vector.getX() && Singletons.mouseMotionH.x <= vector.getX() + width)
+                && (Singletons.mouseMotionH.y > vector.getY() && Singletons.mouseMotionH.y < vector.getY() + height)){
+            label.setColor(Color.ORANGE);
+        }
     }
 
     public void draw(Graphics2D g2){

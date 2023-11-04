@@ -1,23 +1,20 @@
 package com.testgioco.core;
 
-import com.testgioco.core.ui_elements.Label;
 import com.testgioco.core.ui_elements.Panel;
 import com.testgioco.core.ui_elements.Window;
 import com.testgioco.utilities.Constants;
-import com.testgioco.utilities.GameSettings;
 
 import java.awt.*;
 
 public class Game implements Runnable {
-    private final GameSettings settings = new GameSettings();
     private final Constants constants = new Constants();
     private Thread gameThread;
 
     private final Panel panel;
 
     public Game() {
-        InputHandler keyH = new InputHandler();
-        panel = new Panel(keyH, Color.BLACK);
+
+        panel = new Panel();
         Window window = new Window(panel);
     }
 

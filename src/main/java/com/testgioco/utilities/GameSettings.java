@@ -1,5 +1,7 @@
 package com.testgioco.utilities;
 
+import java.awt.event.MouseEvent;
+
 public class GameSettings {
     // For now are final.
     // In the future, with options menu, these options will be normal (so you will be able to change them).

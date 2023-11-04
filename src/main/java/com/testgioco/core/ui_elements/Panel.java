@@ -4,14 +4,13 @@ import com.testgioco.core.Grid;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
-import com.testgioco.core.InputHandler;
 import com.testgioco.entities.Player;
+import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Panel extends JPanel {
-    private final InputHandler keyH;
     private final GameSettings settings = new GameSettings();
 
     // Here put classes to draw
@@ -21,11 +20,14 @@ public class Panel extends JPanel {
     public final ScreenLogger debug = new ScreenLogger();
     private Button button = new Button(this, new Vector2DInt(50, 50), 150, 100, "Ciao Pippo", 6, Color.GRAY);
 
-    public Panel(InputHandler keyH, Color backGround){
-        this.keyH = keyH;
-        player.keyH = keyH;
+    public Panel(){
+        player.keyH = Singletons.keyH;
         setBackground(Color.WHITE);
-        addKeyListener(this.keyH);
+
+        addKeyListener(Singletons.keyH);
+        addMouseListener(Singletons.mouseH);
+        addMouseMotionListener(Singletons.mouseMotionH);
+
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
