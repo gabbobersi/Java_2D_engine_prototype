@@ -42,6 +42,7 @@ Le **Flags** nel metodo compile() cambiano il modo in cui viene eseguita la rice
 |---------------|---------------------------------------------------------------------------------------------------------------------------|
 | \|            | Trova una corrispondenza per una qualsiasi delle sequenze separate da \|, come ad esempio: gatto\|cane\|pesce             |
 | .             | Trova solo un'istanza di qualsiasi carattere                                                                              |
+| .* (wildcard) | Corrisponderà a qualsiasi sequenza di caratteri nella stringa, anche una stringa vuota                                    |
 | ^             | Trova una corrispondenza all'inizio di una stringa, come ad esempio: ^Ciao                                                |
 | $             | Trova una corrispondenza alla fine di una stringa, come ad esempio: Mondo$                                                |
 | \d            | Trova una cifra                                                                                                           |
