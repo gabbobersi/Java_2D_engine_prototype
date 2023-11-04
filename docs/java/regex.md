@@ -5,9 +5,6 @@ Le espressioni regolari (regex) in Java sono rappresentate da classi del package
 _NOTA: Uno dei successi non particolarmente celebrati nei processi di standardizzazione in Computer Science sono state le regular expressions. 
 Una regular expression è una formula che specifica classi di stringhe e che viene realizzata utilizzando un particolare linguaggio._
 
-Una regular expression è una notazione algebrica per caratterizzare insiemi di stringhe. Definiscono un vero e proprio linguaggio formale che viene utilizzato 
-per effettuare ricerche specifiche all'interno di un testo.
-
 Da un punto di vista pratico, definire una regular expression, consiste nello specificare un pattern, ovvero il formato di ciò che vogliamo cercare all'interno di un testo. 
 L'esecuzione della regular expression restituirà come output le occorrenze di stringhe contenute all'interno del testo stesso che sono in match con il pattern definito.
 
