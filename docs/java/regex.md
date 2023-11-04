@@ -9,20 +9,21 @@ Da un punto di vista pratico, definire una regular expression, consiste nello sp
 L'esecuzione della regular expression restituirà come output le occorrenze di stringhe contenute all'interno del testo stesso che sono in match con il pattern definito.
 
 ## Pattern
+
 **Creare un Pattern**: Per iniziare a utilizzare regex in Java, devi creare un oggetto Pattern che rappresenti il modello da cercare. Puoi farlo utilizzando il metodo **Pattern.compile()**:
 ```Java
+// Questo codice cercherà tutte le occorrenze di "abc" nella stringa e stamperà ogni corrispondenza trovata.
+
 import java.util.regex.Pattern;
-Pattern pattern = Pattern.compile("abc");
-```
-**Match**: Puoi utilizzare il Pattern per cercare corrispondenze in una stringa utilizzando l'oggetto **Matcher**. Ecco un esempio:
-```Java
 import java.util.regex.Matcher;
+
+Pattern pattern = Pattern.compile("abc");
+// Match: puoi utilizzare il Pattern per cercare corrispondenze in una stringa utilizzando l'oggetto Matcher.
 Matcher matcher = pattern.matcher("abcxyzabc");
 while (matcher.find()) {
     System.out.println("Trovato: " + matcher.group());
 }
 ```
-_Questo codice cercherà tutte le occorrenze di "abc" nella stringa e stamperà ogni corrispondenza trovata._
 
 | Espressione | Descrizione                                                         |
 |-------------|---------------------------------------------------------------------|
@@ -42,6 +43,7 @@ Le **Flags** nel metodo compile() cambiano il modo in cui viene eseguita la rice
 |---------------|---------------------------------------------------------------------------------------------------------------------------|
 | \|            | Trova una corrispondenza per una qualsiasi delle sequenze separate da \|, come ad esempio: gatto\|cane\|pesce             |
 | .             | Trova solo un'istanza di qualsiasi carattere                                                                              |
+| .* (wildcard) | Corrisponderà a qualsiasi sequenza di caratteri nella stringa, anche una stringa vuota                                    |
 | ^             | Trova una corrispondenza all'inizio di una stringa, come ad esempio: ^Ciao                                                |
 | $             | Trova una corrispondenza alla fine di una stringa, come ad esempio: Mondo$                                                |
 | \d            | Trova una cifra                                                                                                           |
