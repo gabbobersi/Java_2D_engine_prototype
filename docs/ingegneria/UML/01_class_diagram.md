@@ -68,11 +68,11 @@ La classe X utilizza o dipende dalla classe a cui punta.\
 ![img.png](uml_resources/dipendenza_1.png)
 
 L'esistenza della classe di sinistra NON dipende dalla classe di destra.\
-La classe di sinistra quindi è indipendente (es. Motore a sx, Automobile a dx).\
+La classe di sinistra quindi è indipendente (es. Motore a dx, Automobile a sx).\
 ![img.png](uml_resources/aggregazione_1.png)
 
 L'esistenza della classe di sinistra dipende dalla classe di destra.\
-La classe di sinistra quindi non può esistere senza la classe di destra (es. Mano a sx, Uomo a dx).\
+La classe di sinistra quindi non può esistere senza la classe di destra (es. Mano a dx, Uomo a sx).\
 ![img.png](uml_resources/composizione_1.png)
 
 ### Cardinalità
