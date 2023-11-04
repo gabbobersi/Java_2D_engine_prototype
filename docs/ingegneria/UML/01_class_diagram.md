@@ -38,7 +38,7 @@ Uguale alla classe, ma con il nome in corsivo.\
 Anche se "poco comune", ecco un esempio di classe annidata:\
 ![](uml_resources/classe_annidata_1.png)
 
-### Ereditarietà
+### Ereditarietà (o generalizzazione)
 Veicolo è la classe padre di Automobile.\
 Automobile è la classe padre di Audi, Ford, ....\
 ![](uml_resources/ereditarieta_1_bis.PNG)
