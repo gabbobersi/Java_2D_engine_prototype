@@ -108,5 +108,5 @@ rappresenta comunque un'ottima base.
 - [UML Class Diagram in generale](https://sparxsystems.com/resources/tutorials/uml2/class-diagram.html)
 - [Interfacce 1](https://www.ibm.com/docs/en/rational-soft-arch/9.7.0?topic=diagrams-interface-realization-relationships)
 - [Interfacce 2](https://www.ibm.com/docs/en/dma?topic=diagrams-interfaces)
-- [Riassunto base (manca roba, ma fa capire a livello base i diagrammi di classe)](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/)
+- [Riassunto base (mancano elementi, ma fa capire a livello base i diagrammi di classe)](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/)
 - [Ruoli](https://stackoverflow.com/questions/16732607/role-name-in-association-relationship)
