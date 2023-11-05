@@ -1,4 +1,4 @@
-package com.testgioco.core;
+package com.testgioco.core.handlers;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;

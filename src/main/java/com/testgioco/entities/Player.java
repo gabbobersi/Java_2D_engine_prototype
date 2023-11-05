@@ -1,19 +1,19 @@
 package com.testgioco.entities;
 
 import com.testgioco.core.Cell;
-import com.testgioco.core.InputHandler;
+import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
+import com.testgioco.utilities.Singletons;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.desktop.SystemSleepEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity {
-    public InputHandler keyH;
+    private InputHandler keyH;
 
     private double speed;
     private long lastAnimationTime;
@@ -26,6 +26,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues(){
+        keyH = Singletons.keyH;
         direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
         lastAnimationTime = System.nanoTime();

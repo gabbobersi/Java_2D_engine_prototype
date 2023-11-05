@@ -1,21 +1,46 @@
 package com.testgioco.core;
 
-import com.testgioco.core.ui_elements.Panel;
+import com.testgioco.core.scenes.MainMenu;
+import com.testgioco.core.scenes.Test1;
 import com.testgioco.core.ui_elements.Window;
 import com.testgioco.utilities.Constants;
+import com.testgioco.utilities.Singletons;
+import com.tilemapgenerator.TileMapGenerator;
 
-import java.awt.*;
+import javax.swing.*;
 
 public class Game implements Runnable {
     private final Constants constants = new Constants();
     private Thread gameThread;
+    private JPanel activePanel;
+    private GameState gameState;
 
-    private final Panel panel;
+    public enum GameState {
+        MAIN_MENU,
+        TEST_1,
+        TILE_MAP_GENERATOR
+    }
+
+
+    public void changeGameState(GameState newState) {
+        gameState = newState;
+        switch (newState) {
+            case MAIN_MENU:
+                activePanel = new MainMenu();
+                break;
+            case TEST_1:
+                activePanel = new Test1();
+                break;
+            case TILE_MAP_GENERATOR:
+                activePanel = new TileMapGenerator();
+                break;
+        }
+    }
 
     public Game() {
-
-        panel = new Panel();
-        Window window = new Window(panel);
+        // Default panel
+        activePanel = new MainMenu();
+        Window window = new Window(activePanel);
     }
 
     public void start(){
@@ -39,15 +64,15 @@ public class Game implements Runnable {
                 updateGame();
                 lag -= constants.NS_PER_UPDATE;
             }
-            panel.repaint();
+            activePanel.repaint();
         }
     }
 
     private void processInput(){
-        panel.player.getInput();
+        Singletons.player.getInput();
     }
 
     private void updateGame(){
-        panel.player.update();
+        Singletons.player.update();
     }
 }

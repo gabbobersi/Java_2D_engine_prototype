@@ -3,12 +3,13 @@ package com.testgioco.core.ui_elements;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.utilities.Singletons;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Button {
     private Box box;
     private Label label;
-    private Panel panel;
+    private JPanel panel;
     private Vector2DInt vector;
     private int width;
     private int height;
@@ -16,7 +17,7 @@ public class Button {
     private Color buttonColor;
     private String text;
 
-    public Button(Panel panel, Vector2DInt vector, int width, int height, String text, int bordThickness,
+    public Button(JPanel panel, Vector2DInt vector, int width, int height, String text, int bordThickness,
                   Color buttonColor){
         this.vector = vector;
         this.panel = panel;
@@ -36,8 +37,7 @@ public class Button {
         box.setColor(buttonColor);
         panel.add(box);
 
-        if ((Singletons.mouseH.xClick >= vector.getX() && Singletons.mouseH.xClick <= vector.getX() + width)
-                && (Singletons.mouseH.yClick > vector.getY() && Singletons.mouseH.yClick < vector.getY() + height)){
+        if (box.hasBeenClicked()){
             box.setColor(Color.BLUE);
         }
 
@@ -59,8 +59,7 @@ public class Button {
         label.setVector(label_vector);
         label.setFont(new Font("Comic Sans", Font.PLAIN, 28));
 
-        if ((Singletons.mouseMotionH.x >= vector.getX() && Singletons.mouseMotionH.x <= vector.getX() + width)
-                && (Singletons.mouseMotionH.y > vector.getY() && Singletons.mouseMotionH.y < vector.getY() + height)){
+        if (box.hasMouseOver()){
             label.setColor(Color.ORANGE);
         }
     }

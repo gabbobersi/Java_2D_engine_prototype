@@ -1,4 +1,4 @@
-package com.testgioco.core;
+package com.testgioco.core.handlers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

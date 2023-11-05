@@ -1,6 +1,7 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,22 @@ public class Box extends JPanel{
         this.bordThickness = bordThickness;
         this.boxColor = boxColor;
         setVisible(true);
+    }
+
+    /**
+     * Check if mouse has been clicked inside box's boundaries.
+     * */
+    public boolean hasBeenClicked(){
+        return (Singletons.mouseH.xClick >= vector.getX() && Singletons.mouseH.xClick <= vector.getX() + width)
+                && (Singletons.mouseH.yClick > vector.getY() && Singletons.mouseH.yClick < vector.getY() + height);
+    }
+
+    /**
+     * Check if mouse is over the box's boundaries.
+     * */
+    public boolean hasMouseOver(){
+        return (Singletons.mouseMotionH.x >= vector.getX() && Singletons.mouseMotionH.x <= vector.getX() + width)
+                && (Singletons.mouseMotionH.y > vector.getY() && Singletons.mouseMotionH.y < vector.getY() + height);
     }
 
     public void draw(Graphics2D g2) {
