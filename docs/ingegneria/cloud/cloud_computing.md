@@ -27,7 +27,7 @@ Il cloud è un ambiente **multitenant**.
 
 **Architettura Software** -> Più istanze di una o più applicazioni operando in modo indipendente in un ambiente condiviso.
 
-Le istante sono chiamate "**tenant**". Sono separate logicamente pur rimanendo fisicamente sullo stesso HW.
+Le istanze sono chiamate "**tenant**". Sono separate logicamente pur rimanendo fisicamente sullo stesso HW.
 
 **TRUSTED MULTITENANT CLOUD** -> Robustezza e sicurezza
 
