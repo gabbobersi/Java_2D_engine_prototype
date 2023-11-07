@@ -2,6 +2,8 @@
 
 Il **Cloud** è un **modello** che consente di accedere tramite una rete ad un **pool condiviso** di risorse di calcolo (reti, server, storage, applicazioni etc...)
 
+![the_cloud.png](cloud_resources%2Fthe_cloud.png)
+
 Le risorse sono fornite dal Cloud Services Provider.
 
 E' un modo innovativo di utilizzare l'ICT, dove servizi flessibili e scalabili possono essere forniti on demand. Quindi, i dati, le applicazioni, le piattaforme e le infrastrutture hardware sono alla portata di tutti attraverso internet.
@@ -95,6 +97,16 @@ L'utente non gestisce e controlla l'infrastruttura inclusa la rete, i sitemi ope
 
 ## Riepilogo
 ![riepilogo.png](cloud_resources%2Friepilogo.png)
+
+## Quali sono i diversi tipi di implementazioni cloud?
+A differenza dei modelli che abbiamo trattato sopra, che definiscono il modo in cui i servizi sono offerti tramite il cloud, questi diversi tipi di implementazione cloud riguardano dove si trovano i server cloud e chi li gestisce.
+
+Le implementazioni cloud più comuni sono:
+
+- **Cloud privato**: un cloud privato è un server, un datacenter o una rete distribuita interamente dedicati a una sola organizzazione.
+- **Cloud pubblico**: un cloud pubblico è un servizio eseguito da un fornitore esterno che può includere server in uno o più datacenter. A differenza di cloud privati, i cloud pubblici sono condivisi da diverse organizzazioni. Utilizzando macchine virtuali, i singoli server possono essere condivisi da diverse aziende, una situazione denominata "multi-tenant" dato che molteplici aziende prendono in affitto spazio nello stesso server.
+- **Cloud ibrido**: le implementazioni di cloud ibridi combinano cloud pubblici e privati e possono includere anche server legacy on-premise. Un'organizzazione potrebbe usare il proprio cloud privato per determinati servizi e il cloud pubblico per altri, oppure il cloud pubblico potrebbe servire da back up per il cloud privato.
+Multi-cloud: il multi-cloud è un tipo di implementazione cloud che interessa più cloud pubblici. In altre parole, un'organizzazione con un'implementazione multi-cloud prende in affitto server virtuali e servizi da diversi provider esterni: continuando l'analogia precedente, è come prendere in locazione diversi appezzamenti adiacenti da diversi proprietari. Le implementazioni multi-cloud possono anche essere cloud ibridi e viceversa.
 
 
 
