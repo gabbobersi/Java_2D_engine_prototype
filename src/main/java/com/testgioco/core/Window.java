@@ -1,4 +1,4 @@
-package com.testgioco.core.ui_elements;
+package com.testgioco.core;
 
 import com.testgioco.utilities.GameSettings;
 
@@ -15,5 +15,10 @@ public class Window extends JFrame {
         setSize(settings.screenWidth, settings.screenHeight);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void setPanel(JPanel panel){
+        this.setContentPane(panel);
+        this.revalidate();
     }
 }

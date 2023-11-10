@@ -2,7 +2,6 @@ package com.testgioco.core;
 
 import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Test1;
-import com.testgioco.core.ui_elements.Window;
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
@@ -12,35 +11,20 @@ import javax.swing.*;
 public class Game implements Runnable {
     private final Constants constants = new Constants();
     private Thread gameThread;
-    private JPanel activePanel;
-    private GameState gameState;
+    private Window window;
 
-    public enum GameState {
-        MAIN_MENU,
-        TEST_1,
-        TILE_MAP_GENERATOR
-    }
-
-
-    public void changeGameState(GameState newState) {
-        gameState = newState;
-        switch (newState) {
-            case MAIN_MENU:
-                activePanel = new MainMenu();
-                break;
-            case TEST_1:
-                activePanel = new Test1();
-                break;
-            case TILE_MAP_GENERATOR:
-                activePanel = new TileMapGenerator();
-                break;
-        }
-    }
+    private MainMenu mainMenu;
+    private Test1 test1;
+    private TileMapGenerator tmapgen;
 
     public Game() {
+        // Is this necessary? Should I create an instance on demand only?
+        mainMenu = new MainMenu();
+        test1 = new Test1();
+        tmapgen = new TileMapGenerator();
+
         // Default panel
-        activePanel = new MainMenu();
-        Window window = new Window(activePanel);
+        window = new Window(mainMenu);
     }
 
     public void start(){
@@ -64,7 +48,53 @@ public class Game implements Runnable {
                 updateGame();
                 lag -= constants.NS_PER_UPDATE;
             }
-            activePanel.repaint();
+
+            GameState.State activeState = GameState.getActiveState();
+            runScene(activeState);
+            drawScene(activeState);
+
+        }
+    }
+
+    private void runScene(GameState.State state){
+        window.getContentPane().removeAll();
+        GameState.setActiveState(state);
+
+        switch (state){
+            case TEST_1:
+                window.add(test1);
+                test1.run();
+                break;
+            case TILE_MAP_GENERATOR:
+                window.add(tmapgen);
+                tmapgen.run();
+                break;
+            case QUIT:
+                window.dispose();
+                System.exit(0);
+            default:
+                window.add(mainMenu);
+                mainMenu.run();
+        }
+
+        if (GameState.getPreviousState() != GameState.getActiveState()){
+            // Make changes to panel, visible
+            System.out.println("Rivalido! Vecchio: " + GameState.getPreviousState() + " Nuovo: " + GameState.getActiveState());
+            window.revalidate();
+            window.repaint();
+        }
+    }
+
+    private void drawScene(GameState.State state){
+        switch (state){
+            case TEST_1:
+                test1.repaint();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.repaint();
+                break;
+            default:
+                mainMenu.repaint();
         }
     }
 

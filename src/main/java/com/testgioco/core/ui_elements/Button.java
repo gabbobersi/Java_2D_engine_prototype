@@ -26,9 +26,11 @@ public class Button {
         this.text = text;
         this.bordThickness = bordThickness;
         this.buttonColor = buttonColor;
+
+        box = new Box(vector, width, height, bordThickness, buttonColor);
+        label = new Label(vector, text);
     }
     private void setBox(){
-        box = new Box(vector, width, height, bordThickness, buttonColor);
         box.setX(vector.getX());
         box.setY(vector.getY());
         box.setWidth(width);
@@ -40,15 +42,12 @@ public class Button {
         if (box.hasBeenClicked()){
             box.setColor(Color.BLUE);
         }
-
         if (Singletons.mouseH.released){
             box.setColor(buttonColor);
         }
-
     }
 
     private void setLabel(Graphics2D g2){
-        label = new Label(vector, text);
         int textWidth = g2.getFontMetrics().stringWidth(label.getText());
         int textHeight = g2.getFontMetrics().getHeight();
 
@@ -61,7 +60,13 @@ public class Button {
 
         if (box.hasMouseOver()){
             label.setColor(Color.ORANGE);
+        } else {
+            label.setColor(Color.BLACK);
         }
+    }
+
+    public boolean isClicked(){
+        return box.hasBeenClicked();
     }
 
     public void draw(Graphics2D g2){

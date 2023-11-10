@@ -1,6 +1,5 @@
 package com.testgioco.utilities;
 
-import java.awt.event.MouseEvent;
 
 public class GameSettings {
     // For now are final.

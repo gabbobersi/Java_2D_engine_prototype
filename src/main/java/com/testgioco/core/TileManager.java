@@ -1,7 +1,4 @@
-package com.testgioco.core.ui_elements;
-
-import com.testgioco.core.Cell;
-import com.testgioco.core.Grid;
+package com.testgioco.core;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

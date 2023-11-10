@@ -1,5 +1,7 @@
 package com.testgioco.core.scenes;
 
+import com.testgioco.core.Game;
+import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
@@ -10,8 +12,8 @@ import java.awt.*;
 
 public class MainMenu extends JPanel{
     private GameSettings settings = new GameSettings();
-
     private int btnHorizontalAlignment = settings.screenWidth/2 - 75;
+
     private Button playBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 80), 150,
             80, "Play", 6, Color.GRAY);
 
@@ -23,14 +25,18 @@ public class MainMenu extends JPanel{
 
     public MainMenu(){
         setBackground(Color.WHITE);
-
-        addKeyListener(Singletons.keyH);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
-
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+    }
+    public void run(){
+        if (quitBtn.isClicked()) {
+            GameState.setActiveState(GameState.State.QUIT);
+        } else if (playBtn.isClicked()){
+            GameState.setActiveState(GameState.State.TEST_1);
+        }
     }
 
     @Override
