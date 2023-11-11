@@ -20,13 +20,13 @@ public class Player extends Entity {
     private final Cell cell = new Cell();
     private Vector2D vector;
 
-    public Player(){
+    public Player(InputHandler keyH){
+        this.keyH = keyH;
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues(){
-        keyH = new InputHandler();
         direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
         lastAnimationTime = System.nanoTime();
@@ -59,6 +59,7 @@ public class Player extends Entity {
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
+                System.out.println("SU");
                 direction = "up";
                 vector.setY(-1);
             }

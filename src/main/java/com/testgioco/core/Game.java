@@ -24,7 +24,8 @@ public class Game implements Runnable {
         tmapgen = new TileMapGenerator();
 
         // Default panel
-        window = new Window(mainMenu);
+        window = new Window();
+        window.setPanel(mainMenu);
     }
 
     public void start(){

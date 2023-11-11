@@ -18,34 +18,16 @@ public class Play extends JPanel implements Scene {
     private final TileManager tileManager = new TileManager();
     private final Grid grid = new Grid();
     private final ScreenLogger debug = new ScreenLogger();
-    private final Player player = new Player();
+    private final Player player;
     private final InputHandler inputHandler = new InputHandler();
 
     public Play(){
         super();
-        addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                System.out.println("Play Panel has gained focus");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                System.out.println("Play Panel has lost focus");
-            }
-        });
-        setBackground(Color.WHITE);
         addKeyListener(inputHandler);
-//        addMouseListener(Singletons.mouseH);
-//        addMouseMotionListener(Singletons.mouseMotionH);
+        player = new Player(inputHandler);
         setDoubleBuffered(true);
-
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
-
-        requestFocus();
-        System.out.println("Has focus: " + isFocusOwner());
-
     }
 
     @Override
