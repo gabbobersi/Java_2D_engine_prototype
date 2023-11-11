@@ -12,16 +12,23 @@ import java.awt.*;
 
 public class MainMenu extends JPanel implements Scene {
     private GameSettings settings = new GameSettings();
-    private int btnHorizontalAlignment = settings.screenWidth/2 - 75;
 
-    private Button playBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 80), 150,
-            80, "Play", 6, Color.GRAY);
+    // Buttons settings
+    private final int btnHorizontalAlignment = settings.screenWidth/2 - 75;
+    private final int btnWidth = 150;
+    private final int btnHeight = 80;
+    private final int bordThickness = 6;
+    private final Color btnColor = Color.GRAY;
+    private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private Button tMapGenBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), 150,
-            80, "Tmapgen", 6, Color.GRAY);
+    private Button playBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 80), btnWidth,
+            btnHeight, "Play", bordThickness, btnColor, btnFont);
 
-    private Button quitBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 320), 150,
-            80, "Quit", 6, Color.GRAY);
+    private Button tMapGenBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
+            btnHeight, "Tmapgen", bordThickness, btnColor, btnFont);
+
+    private Button quitBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
+            btnHeight, "Quit", bordThickness, btnColor, btnFont);
 
     public MainMenu(){
         super();
@@ -48,7 +55,6 @@ public class MainMenu extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         //Objects to draw, in order.
-
         playBtn.draw(g2);
         tMapGenBtn.draw(g2);
         quitBtn.draw(g2);
