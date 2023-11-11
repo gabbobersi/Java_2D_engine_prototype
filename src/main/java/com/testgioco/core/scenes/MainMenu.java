@@ -24,18 +24,20 @@ public class MainMenu extends JPanel{
             80, "Quit", 6, Color.GRAY);
 
     public MainMenu(){
+        super();
         setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
         setDoubleBuffered(true);
         setFocusable(true);
+        requestFocus();
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
     public void run(){
         if (quitBtn.isClicked()) {
             GameState.setActiveState(GameState.State.QUIT);
         } else if (playBtn.isClicked()){
-            GameState.setActiveState(GameState.State.TEST_1);
+            GameState.setActiveState(GameState.State.PLAY);
         }
     }
 

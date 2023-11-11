@@ -15,10 +15,15 @@ public class Window extends JFrame {
         setSize(settings.screenWidth, settings.screenHeight);
         setLocationRelativeTo(null);
         setVisible(true);
+        setFocusTraversalPolicy(new LayoutFocusTraversalPolicy());
     }
 
-    public void setPanel(JPanel panel){
-        this.setContentPane(panel);
-        this.revalidate();
+    public void setPanel(JPanel panel) {
+        SwingUtilities.invokeLater(() -> {
+            this.getContentPane().removeAll();
+            this.add(panel);
+            this.revalidate();
+            this.repaint();
+        });
     }
 }

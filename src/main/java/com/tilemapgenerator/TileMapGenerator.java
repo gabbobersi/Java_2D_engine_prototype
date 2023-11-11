@@ -11,11 +11,11 @@ public class TileMapGenerator extends JPanel {
 
     public TileMapGenerator(){
         setBackground(Color.WHITE);
-        addKeyListener(Singletons.keyH);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
         setDoubleBuffered(true);
         setFocusable(true);
+        requestFocus();
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 

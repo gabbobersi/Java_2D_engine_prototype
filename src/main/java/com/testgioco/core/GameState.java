@@ -7,7 +7,7 @@ public class GameState {
     private static State activeState = State.MAIN_MENU;
     public enum State {
         MAIN_MENU,
-        TEST_1,
+        PLAY,
         TILE_MAP_GENERATOR,
         QUIT
     }
@@ -19,7 +19,7 @@ public class GameState {
         previousState = activeState;
         activeState = newState;
         switch (newState) {
-            case TEST_1 -> activeState = State.TEST_1;
+            case PLAY -> activeState = State.PLAY;
             case TILE_MAP_GENERATOR -> activeState = State.TILE_MAP_GENERATOR;
             case QUIT -> activeState = State.QUIT;
             default -> activeState = State.MAIN_MENU;
