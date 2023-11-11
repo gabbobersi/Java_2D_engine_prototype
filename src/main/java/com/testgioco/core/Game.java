@@ -1,10 +1,8 @@
 package com.testgioco.core;
 
 import com.testgioco.core.scenes.MainMenu;
-import com.testgioco.core.scenes.Test1;
-import com.testgioco.core.ui_elements.Window;
+import com.testgioco.core.scenes.Play;
 import com.testgioco.utilities.Constants;
-import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
 
 import javax.swing.*;
@@ -12,67 +10,120 @@ import javax.swing.*;
 public class Game implements Runnable {
     private final Constants constants = new Constants();
     private Thread gameThread;
-    private JPanel activePanel;
-    private GameState gameState;
+    private volatile boolean isRunning = true;
+    private Window window;
 
-    public enum GameState {
-        MAIN_MENU,
-        TEST_1,
-        TILE_MAP_GENERATOR
-    }
-
-
-    public void changeGameState(GameState newState) {
-        gameState = newState;
-        switch (newState) {
-            case MAIN_MENU:
-                activePanel = new MainMenu();
-                break;
-            case TEST_1:
-                activePanel = new Test1();
-                break;
-            case TILE_MAP_GENERATOR:
-                activePanel = new TileMapGenerator();
-                break;
-        }
-    }
+    private MainMenu mainMenu;
+    private Play play;
+    private TileMapGenerator tmapgen;
 
     public Game() {
+        // Is this necessary? Should I create an instance on demand only?
+        mainMenu = new MainMenu();
+        play = new Play();
+        tmapgen = new TileMapGenerator();
+
         // Default panel
-        activePanel = new MainMenu();
-        Window window = new Window(activePanel);
+        window = new Window(mainMenu);
     }
 
     public void start(){
-        gameThread = new Thread(this);
-        gameThread.start(); // Calls "run" method, in a new thread.
+        SwingUtilities.invokeLater(() -> {
+            gameThread = new Thread(this);
+            gameThread.start(); // Calls "run" method, in a new thread.
+        });
     }
     @Override
     public void run() {
         double previous = System.nanoTime();
         double lag = 0.0;
 
-        while (gameThread != null){
+        while (isRunning){
+            GameState.State activeState = GameState.getActiveState();
+            boolean setPanel = false;
             double current = System.nanoTime();
             double elapsed = current - previous;
             previous = current;
             lag += elapsed;
 
-            processInput();
+            processInput(activeState);
 
             while (lag >= constants.NS_PER_UPDATE){
-                updateGame();
+                updateGame(activeState);
                 lag -= constants.NS_PER_UPDATE;
             }
-            activePanel.repaint();
+
+            if (GameState.getPreviousState() != GameState.getActiveState()){
+                System.out.println("Cambio scena. Rivalido! Vecchio: " + GameState.getPreviousState() + " Nuovo: " + GameState.getActiveState());
+                setPanel = true;
+            }
+            runScene(activeState, setPanel);
+            drawScene(activeState);
+
+
         }
     }
 
-    private void processInput(){
-        Singletons.player.getInput();
+    private void runScene(GameState.State state, boolean setPanel){
+        if (setPanel){
+            window.setPanel(getPanelForState(state));
+        }
+        GameState.setActiveState(state);
+
+        switch (state){
+            case PLAY:
+                play.run();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.run();
+                break;
+            case QUIT:
+                stop();
+                window.dispose();
+                System.exit(0);
+                break;
+            default:
+                mainMenu.run();
+        }
     }
 
-    private void updateGame(){
-        Singletons.player.update();
+    private JPanel getPanelForState(GameState.State state) {
+        switch (state) {
+            case PLAY:
+                return play;
+            case TILE_MAP_GENERATOR:
+                return tmapgen;
+            default:
+                return mainMenu;
+        }
+    }
+
+    private void drawScene(GameState.State state){
+        switch (state){
+            case PLAY:
+                play.repaint();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.repaint();
+                break;
+            default:
+                mainMenu.repaint();
+        }
+    }
+
+    private void processInput(GameState.State state){
+        if (state == GameState.State.PLAY){
+            play.processInput();
+        }
+    }
+
+    private void updateGame(GameState.State state){
+        if (state == GameState.State.PLAY){
+            play.updateGame();
+        }
+    }
+
+    private void stop(){
+        isRunning = false;
     }
 }

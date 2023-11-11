@@ -32,7 +32,7 @@ Le istanze sono chiamate "**tenant**". Sono separate logicamente pur rimanendo f
 **TRUSTED MULTITENANT CLOUD** -> Robustezza e sicurezza
 
 In base alla sicurezza bisogna:
-- **Gestire e controllare l'identià deglo utenti**
+- **Gestire e controllare l'identià degli utenti**
 - **Allocare le risorse in base alle ricerche degli utenti**
 - **Garantire l'accesso eslusivo alle risorse di ciascun utente**
 - **Eslcudere le possibilità che un utente possa interferire con le attività di altri utenti**

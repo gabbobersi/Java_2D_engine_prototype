@@ -18,6 +18,7 @@ public class InputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        System.out.println(code);
         if (code == KeyEvent.VK_W) {
             upPressed = true;
         }

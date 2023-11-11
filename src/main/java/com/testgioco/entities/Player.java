@@ -26,7 +26,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues(){
-        keyH = Singletons.keyH;
+        keyH = new InputHandler();
         direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
         lastAnimationTime = System.nanoTime();
@@ -56,7 +56,6 @@ public class Player extends Entity {
     public void getInput(){
         vector.setX(0);
         vector.setY(0);
-
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
@@ -141,7 +140,6 @@ public class Player extends Entity {
                 }
                 break;
         };
-
         g2.drawImage(image, (int) Math.round(x), (int) Math.round(y), this.cell.width, this.cell.height, null);
     }
 }
