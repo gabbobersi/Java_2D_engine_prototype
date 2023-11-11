@@ -3,6 +3,7 @@ package com.testgioco.core.scenes;
 import com.testgioco.core.Grid;
 import com.testgioco.core.TileManager;
 import com.testgioco.core.handlers.InputHandler;
+import com.testgioco.core.interfaces.Scene;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
@@ -12,7 +13,7 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class Play extends JPanel{
+public class Play extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
     private final TileManager tileManager = new TileManager();
     private final Grid grid = new Grid();
@@ -47,6 +48,7 @@ public class Play extends JPanel{
 
     }
 
+    @Override
     public void run(){
 
     }

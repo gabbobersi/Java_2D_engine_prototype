@@ -2,6 +2,7 @@ package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
@@ -9,7 +10,7 @@ import com.testgioco.utilities.Singletons;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenu extends JPanel{
+public class MainMenu extends JPanel implements Scene {
     private GameSettings settings = new GameSettings();
     private int btnHorizontalAlignment = settings.screenWidth/2 - 75;
 
@@ -32,6 +33,8 @@ public class MainMenu extends JPanel{
         requestFocus();
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
+
+    @Override
     public void run(){
         if (quitBtn.isClicked()) {
             GameState.setActiveState(GameState.State.QUIT);

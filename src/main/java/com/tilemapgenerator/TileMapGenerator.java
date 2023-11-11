@@ -1,12 +1,13 @@
 package com.tilemapgenerator;
 
+import com.testgioco.core.interfaces.Scene;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TileMapGenerator extends JPanel {
+public class TileMapGenerator extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
 
     public TileMapGenerator(){
