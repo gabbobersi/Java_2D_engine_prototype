@@ -6,12 +6,9 @@ import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
-import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 

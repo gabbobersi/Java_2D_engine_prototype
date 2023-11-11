@@ -1,6 +1,5 @@
 package com.testgioco.core.scenes;
 
-import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.ui_elements.Button;

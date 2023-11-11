@@ -20,6 +20,7 @@ public class TileMapGenerator extends JPanel {
     }
 
     public void run(){
+        System.out.println("Non ancora implementato.");
     }
 
     @Override

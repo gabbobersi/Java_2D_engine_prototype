@@ -3,7 +3,6 @@ package com.testgioco.core;
 import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
 import com.testgioco.utilities.Constants;
-import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
 
 import javax.swing.*;
