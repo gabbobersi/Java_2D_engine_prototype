@@ -10,12 +10,10 @@ import com.testgioco.utilities.ScreenLogger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class Play extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
-    private final TileManager tileManager = new TileManager();
+    private final TileManager tileManager;
     private final Grid grid = new Grid();
     private final ScreenLogger debug = new ScreenLogger();
     private final Player player;
@@ -25,6 +23,7 @@ public class Play extends JPanel implements Scene {
         super();
         addKeyListener(inputHandler);
         player = new Player(inputHandler);
+        tileManager = new TileManager(player);
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));

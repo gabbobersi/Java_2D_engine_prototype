@@ -3,7 +3,7 @@ package com.testgioco.entities.base_classes;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-    public double x, y;                    // Coordinates
+    public int worldX, worldY;
     public BufferedImage testImage;     // Test only
     public BufferedImage up1, up2;
     public BufferedImage down1, down2;
