@@ -7,4 +7,5 @@ public class Constants {
 
     public final long ONE_SECOND_IN_NANOSECONDS = 1000000000L;   // One second in nanoseconds
     public final double NS_PER_UPDATE = ((double)1 / settings.fps) * 1_000_000_000.0; // Nanoseconds to update game
+
 }

@@ -34,6 +34,10 @@ public class Game implements Runnable {
             gameThread.start(); // Calls "run" method, in a new thread.
         });
     }
+
+    /**
+     * Game loop
+     * */
     @Override
     public void run() {
         double previous = System.nanoTime();

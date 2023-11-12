@@ -24,17 +24,6 @@ public class Label  {
      * @param color Color of the text.
      * */
     public Label(Vector2DInt vector, String text, Font font, Color color){
-        assignConstructorParametersToInstance(vector, text, font, color);
-    }
-
-    /**
-     * Assign constructors parameters to instance's attributes.
-     * @param vector Vector 2D containing x, y position.
-     * @param text Text of the label.
-     * @param font Font object represent text's font and text's size.
-     * @param color Color of the text.
-     * */
-    private void assignConstructorParametersToInstance(Vector2DInt vector, String text, Font font, Color color){
         this.vector = vector;
         this.text = text;
         this.font = font;

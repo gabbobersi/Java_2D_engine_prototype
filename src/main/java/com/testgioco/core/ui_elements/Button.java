@@ -5,7 +5,6 @@ import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.charset.StandardCharsets;
 
 public class Button {
     private final Box box;
@@ -80,7 +79,7 @@ public class Button {
         box.draw(g2);
         label.draw(g2);
 
-        // Before drawing, so "g2.setFont" happens at the right time inside the label
+        // After drawing, so "g2.setFont" happens at the right time inside the label
         setLabel(g2);
     }
 }
