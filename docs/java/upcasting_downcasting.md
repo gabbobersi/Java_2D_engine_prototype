@@ -17,7 +17,7 @@ class Animal {
 }
 
 class Cat extends Animal {
-    public void doSomenthing(){
+    public void doSomething(){
         System.out.println("Hey! I'm a cat!");
     }
 }
@@ -28,7 +28,7 @@ public class Main {
         Animal animal = new Cat();
 
         // Downcasting (esplicito - aka "cast" necessario)
-        if (animal instanceof Cat) {
+        if (animal instanceof Cat && animal != null) {
             Cat cat = (Cat) animal;
             cat.doSomething();
         }
@@ -40,3 +40,5 @@ di `Animal`.
 
 Supponiamo di non effettuare la verifica con `instanceof` e che `Cat` non è sottoclasse di `Animal`.\
 In questo caso, otteniamo una `ClassCastException`.
+
+Notate inoltre che controllo se la classe `animal` è effettivamente istanziata (e non null) prima del confronto... 
