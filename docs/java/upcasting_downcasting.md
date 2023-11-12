@@ -1,15 +1,17 @@
+## Upcasting & Downcasting
+![](../resources/upcasting_downcasting_1.png)
 
-## Upcasting
+### Upcasting
 `sottoclasse` --> `superclasse`\
 Upcasting significa convertire il riferimento a una sottoclasse, in un riferimento a una superclasse.\
 E' **implicito**.
 
-## Downcasting
+### Downcasting
 `superclasse` --> `sottoclasse`\
 Downcasting significa convertire il riferimento a una superclasse, in un riferimento a una sottoclasse.\
 E' **esplicito**.
 
-## Esempio complessivo
+### Esempio complessivo
 ```Java
 class Animal {
 }
