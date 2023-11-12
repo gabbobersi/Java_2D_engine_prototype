@@ -1,7 +1,7 @@
-package com.testgioco.core.ui_elements;
+package com.testgioco.core;
 
-import com.testgioco.core.Cell;
-import com.testgioco.core.Grid;
+import com.testgioco.core.scenes.Play;
+import com.testgioco.entities.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,12 +10,14 @@ import java.nio.charset.StandardCharsets;
 
 public class TileManager {
     Cell cell = new Cell();
-    Grid grid = new Grid();
+    Player player;
+    World world = new World();
     Tile[] tiles;
     int[][] mapTileNum;
-    public TileManager() {
+    public TileManager(Player player) {
+        this.player = player;
         tiles = new Tile[10];
-        mapTileNum = new int[grid.rowNumber][grid.columnNumber];
+        mapTileNum = new int[world.maxRow][world.maxColumn];
         loadMap();
         getTileImage();
     }
@@ -39,16 +41,19 @@ public class TileManager {
 
     }
     public void draw (Graphics g2) {
-        int y = 0;
 
-        for (int r = 0; r < grid.rowNumber; r++) {
-            int x = 0;
-            for (int c = 0; c < grid.columnNumber; c++) {
+        for (int r = 0; r < world.maxRow; r++) {
+            for (int c = 0; c < world.maxColumn; c++) {
                 int tileIndex = mapTileNum[r][c];
-                g2.drawImage(tiles[tileIndex].image,x, y, cell.width, cell.height, null);
-                x += cell.width;
+
+                int worldX = c * cell.width;
+                int worldY = r * cell.height;
+
+                int screenX = worldX - player.worldX + player.screenX;
+                int screenY = worldY - player.worldY - player.screenY;
+
+                g2.drawImage(tiles[tileIndex].image,screenX, screenY, cell.width, cell.height, null);
             }
-            y += cell.height;
         }
     }
     public void loadMap (){
@@ -58,21 +63,21 @@ public class TileManager {
             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
 
-            for (int r = 0; r < grid.rowNumber; r++) {
+            for (int r = 0; r < world.maxRow; r++) {
                 String line = br.readLine();
-                String[] numbers = new String[grid.columnNumber];
+                String[] numbers = new String[world.maxColumn];
 
                 // If the line has been correctly read, I just take those values.
                 // Else, I take a default tile
                 if (line != null) {
                     numbers = line.split(" ");
                 } else {
-                    for (int i = 0; i < grid.columnNumber; i++){
+                    for (int i = 0; i < world.maxColumn; i++){
                         numbers[i] = "9";
                     }
                 }
 
-                for ( int c = 0; c < grid.columnNumber; c++) {
+                for ( int c = 0; c < world.maxColumn; c++) {
                     int num = Integer.parseInt(numbers[c]);
                     mapTileNum[r][c] = num;
 

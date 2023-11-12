@@ -4,6 +4,7 @@ import com.testgioco.core.Cell;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
+import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 
 import javax.imageio.ImageIO;
@@ -14,24 +15,30 @@ import java.io.IOException;
 
 public class Player extends Entity {
     private InputHandler keyH;
+    private GameSettings settings = new GameSettings();
 
     private double speed;
     private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
 
-    public Player(){
+    public int screenX;
+    public int screenY;
+
+    public Player(InputHandler keyH){
+        this.keyH = keyH;
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues(){
-        keyH = Singletons.keyH;
         direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
         lastAnimationTime = System.nanoTime();
-        x = 10;
-        y = 10;
+        worldX = 10;
+        worldY = 10;
+        screenX = settings.screenWidth / 2 - (cell.width / 2);
+        screenY = settings.screenHeight / 2 - (cell.height / 2);
         speed = 4;
     }
 
@@ -56,10 +63,10 @@ public class Player extends Entity {
     public void getInput(){
         vector.setX(0);
         vector.setY(0);
-
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
+                System.out.println("SU");
                 direction = "up";
                 vector.setY(-1);
             }
@@ -105,8 +112,8 @@ public class Player extends Entity {
     public void update(){
         vector.normalize();
         vector.multiply(speed);
-        x += vector.getX();
-        y += vector.getY();
+        worldX += vector.getX();
+        worldY += vector.getY();
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = up1;
@@ -141,7 +148,7 @@ public class Player extends Entity {
                 }
                 break;
         };
-
-        g2.drawImage(image, (int) Math.round(x), (int) Math.round(y), this.cell.width, this.cell.height, null);
+        g2.drawImage(image, (int) Math.round(screenX), (int) Math.round(screenY), this.cell.width, this.cell.height,
+                null);
     }
 }

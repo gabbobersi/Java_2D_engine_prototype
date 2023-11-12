@@ -17,18 +17,6 @@ public class Label  {
     private Color color = Color.BLACK;
 
     /**
-     * Custom label with coordinates (x, y) for position.
-     * @param x X position.
-     * @param y Y position.
-     * @param text Text of the label.
-     * @param font Font object represent text's font and text's size.
-     * @param color Color of the text.
-     * */
-    public Label(int x, int y, String text, Font font, Color color){
-        assignConstructorParametersToInstance(new Vector2DInt(x, y), text, font, color);
-    }
-
-    /**
      * Custom label with vector for position.
      * @param vector Vector 2D containing x, y position.
      * @param text Text of the label.
@@ -37,26 +25,6 @@ public class Label  {
      * */
     public Label(Vector2DInt vector, String text, Font font, Color color){
         assignConstructorParametersToInstance(vector, text, font, color);
-    }
-
-    /**
-     * Default label with vector for position.
-     * @param vector Vector 2D containing x, y position.
-     * @param text Text of the label.
-     * */
-    public Label(Vector2DInt vector, String text){
-        Font font = new Font("Comic Sans", 1, 30);
-        assignConstructorParametersToInstance(vector, text, font, Color.BLACK);
-    }
-
-    /**
-     * Custom label with coordinates (x, y) for position.
-     * @param x X position.
-     * @param y Y position.
-     * @param text Text of the label.
-     * */
-    public Label(int x, int y, String text){
-        assignConstructorParametersToInstance(new Vector2DInt(x, y), text, font, color);
     }
 
     /**

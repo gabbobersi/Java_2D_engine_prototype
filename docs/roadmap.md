@@ -42,18 +42,25 @@ _Roadmap from the top, to the bottom._
 ### Responsabilità
 - Bersi
   - UI 
-    - [x] Label (etichetta, cioè testo a video) 
+    - [x] Label (etichetta, cioè testo a video)
     - [ ] LayoutManager (disporre le robe UI a schermo)
   - [ ] Audio
+    - [ ] JavaFX
+    - [ ] OpenAl
   - Game design
     - [ ] World map (movimento personaggio sulla mappa)
     - [ ] Interazione con gli oggetti
     - [ ] Generazione personaggi causali
   - [ ] Core
+    - [x] State machine
+      - [x] Panel add/removal
+      - [x] Input focus for new panels
+      - [x] Game states system
+      - [x] Scenes system
 - Giammarco
   - UI / TileMap generator
     - [x] Box (cioè un quadrato con uno sfondo)
-    - [ ] Button (cioè un box, interagibile)
+    - [x] Button (cioè un box, interagibile)
   - Level design
   - Game design
     - [ ] Bar varie
@@ -63,7 +70,7 @@ _Roadmap from the top, to the bottom._
 - Alessio
   - UI / TileMap generator
     - [x] Box (cioè un quadrato con uno sfondo)
-    - [ ] Button (cioè un box, interagibile)
+    - [x] Button (cioè un box, interagibile)
   - Level design
   - Game design
     - [ ] Inventario
@@ -85,8 +92,6 @@ TileMap generator:
   - Bottoni
   - Grid, in cui dove clicki genera un tile (es cambia da 0 a 3, se abbiamo 4 tile)
 
-
-
 ### Chill
 - [x] Implement a 2D vector class.
 - [ ] MVP game (Minimum Viable Product)
@@ -104,17 +109,3 @@ TileMap generator:
 - [ ] Automated test (Unit test)
 - [ ] Splash screen
 - [ ] Beautify UI (buttons, labels, ...)
-
-
-
-### Completed details
-- Tile System:
-  - [x] Tile class
-    - Features of a tile.
-  - [x] TileManager class
-    - [x] Constructor
-    - [x] Array of all tile types.
-    - [x] Method to draw all tiles
-    - [x] Create the first tile map
-    - [x] Method to read the tile map
-    - [x] Method to load the tile map 
