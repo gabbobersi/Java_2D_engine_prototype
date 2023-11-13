@@ -1,83 +1,69 @@
 ### Strategy Pattern
 
-#### Motivazione/Uso
-Il **Strategy Pattern** viene utilizzato per definire una famiglia di algoritmi, incapsularli come oggetti separati e renderli interscambiabili.
-Questo pattern permette agli algoritmi di variare indipendentemente
-dai clienti che ne fanno uso, e viene impiegato quando si hanno
-molteplici varianti di un algoritmo o quando si prevede che
-l'algoritmo possa cambiare.
 
-#### Funzionamento
-Nel Strategy Pattern, si definisce un'interfaccia
-comune per tutti gli algoritmi concreti che sono interscambiabili.
-La classe context contiene un riferimento a una strategia e delega
-l'esecuzione dell'algoritmo all'oggetto strategia. Gli algoritmi
-concreti implementano l'interfaccia della strategia ed eseguono
-l'algoritmo effettivo.
+Il Pattern Strategy è un design pattern 
+comportamentale
+che consente di definire una famiglia di algoritmi, 
+incapsularli e renderli intercambiabili. 
+**In altre parole, consente di definire diversi comportamenti e di sceglierli dinamicamente a runtime.**
+
+Per implementare il Pattern Strategy:
+
+
+- **Definisci un'interfaccia o una classe astratta** (detta solitamente "Strategia") che dichiara un metodo comune a tutti gli algoritmi.
+
+- **Crea diverse classi concrete che implementano l'interfaccia** o estendono la classe astratta e forniscono implementazioni specifiche per ciascun algoritmo.
+
+- **Nella classe che utilizza il pattern Strategy (il "Context"), dichiara un riferimento alla strategia (l'interfaccia) e un metodo per impostare la strategia desiderata.**
+
 
 #### Esempio Rilevante
-Un caso d'uso comune del Strategy Pattern si
-trova nei sistemi di calcolo delle tasse,
-dove il calcolo delle tasse può variare in base alla regione,
-allo stato o ad altri fattori. Il Strategy Pattern permette di
-selezionare dinamicamente l'algoritmo di calcolo delle tasse appropriato.
-
-
-
 ```Java
-// Define the Strategy interface
-interface Strategy {
-    void executeAlgorithm(data);
+// Passo 1: Definisci un'interfaccia Strategia
+interface Strategia {
+    void eseguiOperazione(int a, int b);
 }
 
-// Create ConcreteStrategyA implementing the Strategy interface
-class ConcreteStrategyA implements Strategy {
-    void executeAlgorithm(data) {
-        // Implement algorithm A
+// Passo 2: Crea diverse classi concrete che implementano l'interfaccia
+class Addizione implements Strategia {
+    @Override
+    public void eseguiOperazione(int a, int b) {
+        System.out.println("Somma: " + (a + b));
     }
 }
 
-// Create ConcreteStrategyB implementing the Strategy interface
-class ConcreteStrategyB implements Strategy {
-    void executeAlgorithm(data) {
-        // Implement algorithm B
+class Sottrazione implements Strategia {
+    @Override
+    public void eseguiOperazione(int a, int b) {
+        System.out.println("Differenza: " + (a - b));
     }
 }
 
-// Create the Context class
-class Context {
-    private Strategy strategy;
+// Passo 3: Crea il contesto
+class Calcolatrice {
+    private Strategia strategia;
 
-    // Method to set the strategy
-    void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public void setStrategia(Strategia strategia) {
+        this.strategia = strategia;
     }
 
-    // Method to execute the strategy
-    void executeStrategy(data) {
-        strategy.executeAlgorithm(data);
+    public void eseguiOperazione(int a, int b) {
+        strategia.eseguiOperazione(a, b);
     }
 }
 
-    // Usage of the Strategy Pattern
-    Context context = new Context();
-    Strategy strategyA = new ConcreteStrategyA();
-    Strategy strategyB = new ConcreteStrategyB();
+// Passo 4: Utilizza il pattern Strategy
+public class Main {
+    public static void main(String[] args) {
+        Calcolatrice calcolatrice = new Calcolatrice();
 
-context.setStrategy(strategyA);
-        context.executeStrategy(data);
+        calcolatrice.setStrategia(new Addizione());
+        calcolatrice.eseguiOperazione(5, 3);  // Output: Somma: 8
 
-        context.setStrategy(strategyB);
-        context.executeStrategy(data);
-
+        calcolatrice.setStrategia(new Sottrazione());
+        calcolatrice.eseguiOperazione(5, 3);  // Output: Differenza: 2
+    }
+}
 ```
+***
 
-#### Applicazione a un Determinato Ambito
-Nel campo dell'intelligenza artificiale, il Strategy Pattern può essere utilizzato per scegliere tra diversi algoritmi di pathfinding o di decision making in base alla situazione di gioco.
-
-
-#### Principio di Programmazione Soddisfatto
-Il Strategy Pattern soddisfa il principio di **Apertura/Chiusura** in quanto il codice client può estendere le funzionalità senza modificare il codice esistente, semplicemente aggiungendo nuove strategie. Soddisfa anche il principio di **Dipendenza Inversa** poiché il codice client dipende da astrazioni (l'interfaccia Strategy), non da classi concrete. Infine, sostiene il principio di **Sostituzione di Liskov**, poiché ogni strategia concreta può essere sostituita da un'altra senza influenzare il comportamento del contesto in cui è utilizzata.
-
-
-NB: per il Class Diagram e altri esempi e spiegazione ulteriore https://refactoring.guru/design-patterns/strategy 
