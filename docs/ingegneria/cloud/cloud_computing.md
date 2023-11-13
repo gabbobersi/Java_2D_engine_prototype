@@ -20,7 +20,7 @@ Gli utenti acquisiscono e utilizzano risorse in base alle esigenze, quindi pagan
 ## Diversi livelli di cloud
 - **SaaS (Software as a Service)** -> tutta la gestione è delegata al fornitore
 - **PaaS (Platform as a Service)** -> si può gestire il tipo di ambiente di programmazione
-- **IaaS (Infrastructure as a Service)** -> si può gestire il tipo di ambiente di programmazione
+- **IaaS (Infrastructure as a Service)** -> si può gestire completamente un server (VM), dal sistema operativo ai software installat
 
 ## Ambiente Multitenant
 Il cloud è un ambiente **multitenant**.
