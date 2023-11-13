@@ -28,3 +28,4 @@ completa della qualità e affidabilità del software.
 dello sviluppo** e per l'integrazione continua, mentre **l'analisi
 dinamica è essenziale per la validazione e il collaudo del prodotto
 finale prima del rilascio.**
+***
