@@ -14,7 +14,7 @@ Le interfacce funzionali **sono istanziabili**, e si istanziano tramite:
 - [Classi anonime](classi_anonime.md)
 
 **Nota importante**\
-Classi anonime ed espressioni lambda, possono utilizzate anche senza interfacce funzionali.
+Classi anonime ed espressioni lambda, possono essere utilizzate anche senza interfacce funzionali.
 
 ### Istanziamento lambda
 ```Java
