@@ -28,7 +28,7 @@ public class TileMapGenerator extends JPanel implements Scene {
     //Probabilità di generare muri ai bordi
     private static final int PROBABILITY_BORDER_WALL = 90;
 
-    // Costanti per lo stato della mappa
+    //Costanti per lo stato della mappa
     private static final int GRASS = 0;
     private static final int WALL = 1;
     private static final int WATER = 2;
