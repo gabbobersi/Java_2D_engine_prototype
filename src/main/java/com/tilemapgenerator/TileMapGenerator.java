@@ -28,6 +28,11 @@ public class TileMapGenerator extends JPanel implements Scene {
     //Probabilità di generare muri ai bordi
     private static final int PROBABILITY_BORDER_WALL = 90;
 
+    // Costanti per lo stato della mappa
+    private static final int GRASS = 0;
+    private static final int WALL = 1;
+    private static final int WATER = 2;
+
     //Stato della generazione della mappa
     private boolean generationInProgress = false;
     private boolean generationCompleted = false;
@@ -88,22 +93,18 @@ public class TileMapGenerator extends JPanel implements Scene {
 
         int[] probabilities = {PROBABILITY_GRASS, PROBABILITY_WALL, PROBABILITY_WATER};
 
-        //Aumenta la probabilità di generare "0" (erba) al centro
         probabilities[0] += Math.abs(row - ROWS / 2) * 2;
 
-        //Riduce la probabilità di generare "1" (muro) al centro
         if (isInCenter(row, col)) {
             probabilities[1] = 5;
         }
 
-        //Genera muri agli estremi con un passaggio
         if (isAtBorder(row, col) && rnd.nextInt(100) < PROBABILITY_BORDER_WALL) {
-            return 1;
+            return WALL;
         }
 
-        //Elimina i muri al centro
         if (isInCenter(row, col)) {
-            return 0; //Passaggio
+            return GRASS; //Passaggio
         }
 
         return getRandomValueBasedOnProbabilities(rnd, probabilities);
