@@ -32,7 +32,7 @@ Mancanti:
 - Crafting system (basico)
 - Building system (posiziono tile che hanno collision = true, oppure estetici con collision= false)
 - Personalizzazione personaggio
-- Modalità di gioco diverse dall'avventura (aka campagna statica)
+- Difficoltà di gioco diverse (hardcore, easy, ...)
 
 #### Sprite
 Software consigliato: [Piskel](https://www.piskelapp.com/)\
