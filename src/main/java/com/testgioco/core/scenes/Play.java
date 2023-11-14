@@ -5,6 +5,7 @@ import com.testgioco.core.TileManager;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.entities.Player;
+import com.testgioco.entities.collision_manager.TileCollisionManager;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
 
@@ -18,11 +19,12 @@ public class Play extends JPanel implements Scene {
     private final ScreenLogger debug = new ScreenLogger();
     private final Player player;
     private final InputHandler inputHandler = new InputHandler();
+    public TileCollisionManager tileCollisionManager = new TileCollisionManager(this);
 
     public Play(){
         super();
         addKeyListener(inputHandler);
-        player = new Player(inputHandler);
+        player = new Player(inputHandler, this);
         tileManager = new TileManager(player);
         setDoubleBuffered(true);
         setFocusable(true);

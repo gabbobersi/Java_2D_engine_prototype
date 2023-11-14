@@ -1,5 +1,8 @@
 package com.testgioco.entities.base_classes;
 
+import com.testgioco.entities.Player;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -13,4 +16,8 @@ public class Entity {
 
     public int spriteCounter = 0;       // Number of drawed animations.
     public int spriteNumber = 1;        // Number of the actual animation.
+    //abstract rectangle for collision system
+    public Rectangle collisionArea;
+    public boolean collisionActive = false;
+    public int speed = (int) Player.speed;
 }

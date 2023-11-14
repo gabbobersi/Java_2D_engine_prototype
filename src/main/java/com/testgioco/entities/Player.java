@@ -3,6 +3,7 @@ package com.testgioco.entities;
 import com.testgioco.core.Cell;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.Vector2D;
+import com.testgioco.core.scenes.Play;
 import com.testgioco.entities.base_classes.Entity;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
@@ -14,19 +15,23 @@ import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity {
+
     private InputHandler keyH;
     private GameSettings settings = new GameSettings();
 
-    private double speed;
+    public static double speed;
     private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
+    Play play;
 
     public int screenX;
     public int screenY;
 
-    public Player(InputHandler keyH){
+    public Player(InputHandler keyH, Play play) {
         this.keyH = keyH;
+        this.play = play;
+        collisionArea = new Rectangle(8, 16, 32, 32);
         setDefaultValues();
         getPlayerImage();
     }
@@ -35,8 +40,8 @@ public class Player extends Entity {
         direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
         lastAnimationTime = System.nanoTime();
-        worldX = 10;
-        worldY = 10;
+        worldX = 100;
+        worldY = -150;
         screenX = settings.screenWidth / 2 - (cell.width / 2);
         screenY = settings.screenHeight / 2 - (cell.height / 2);
         speed = 4;
@@ -66,7 +71,7 @@ public class Player extends Entity {
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
-                System.out.println("SU");
+
                 direction = "up";
                 vector.setY(-1);
             }
@@ -83,8 +88,6 @@ public class Player extends Entity {
                 vector.setX(1);
             }
             animate(direction);
-        } else {
-            direction = "down";     // Default direction, even if no key is pressed
         }
     }
 
@@ -112,8 +115,41 @@ public class Player extends Entity {
     public void update(){
         vector.normalize();
         vector.multiply(speed);
-        worldX += vector.getX();
-        worldY += vector.getY();
+
+        // Collision detection
+        collisionActive= false;
+        play.tileCollisionManager.checkTileCollision(this);
+        if(!collisionActive){
+           switch (direction) {
+               case "up":
+
+
+                   worldY -= speed;
+                   break;
+               case "down":
+
+
+                   worldY += speed;
+                   break;
+               case "left":
+
+
+                   worldX -= speed;
+                   break;
+               case "right":
+
+
+                   worldX += speed;
+                   break;
+           }
+           }else {
+            worldX += vector.getX();
+            worldY += vector.getY();
+        }
+
+
+
+
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = up1;

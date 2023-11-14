@@ -2,6 +2,7 @@ package com.testgioco.core;
 
 import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
+import com.testgioco.entities.Player;
 import com.testgioco.utilities.Constants;
 import com.tilemapgenerator.TileMapGenerator;
 
@@ -12,6 +13,7 @@ public class Game implements Runnable {
     private Thread gameThread;
     private volatile boolean isRunning = true;
     private Window window;
+
 
     private MainMenu mainMenu;
     private Play play;

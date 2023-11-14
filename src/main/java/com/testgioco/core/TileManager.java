@@ -9,11 +9,13 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class TileManager {
-    Cell cell = new Cell();
-    Player player;
+
+    public static Cell cell = new Cell();
+    int   dimensioneTile = Math.min(cell.width, cell.height);
+    public Player player;
     World world = new World();
-    Tile[] tiles;
-    int[][] mapTileNum;
+    public static Tile[] tiles;
+   public static int[][] mapTileNum;
     public TileManager(Player player) {
         this.player = player;
         tiles = new Tile[10];
@@ -26,14 +28,18 @@ public class TileManager {
             tiles[0] = new Tile();
             tiles[0].image = ImageIO.read(new File("assets/tiles/grass_01.png"));
 
+
             tiles[1] = new Tile();
             tiles[1].image = ImageIO.read(new File("assets/tiles/wall_01.png"));
+            tiles[1].collision = true;
 
             tiles[2] = new Tile();
             tiles[2].image = ImageIO.read(new File("assets/tiles/water_01.png"));
 
+
             tiles[9] = new Tile();
             tiles[9].image = ImageIO.read(new File("assets/tiles/not_loaded.png"));
+
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -92,7 +98,6 @@ public class TileManager {
 
     }
 }
-
 
 
 

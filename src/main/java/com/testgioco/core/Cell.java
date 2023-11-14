@@ -9,4 +9,5 @@ public class Cell {
     public int height = settings.screenHeight / grid.rowNumber;
     public int width = settings.screenWidth / grid.columnNumber;
 
+
 }
