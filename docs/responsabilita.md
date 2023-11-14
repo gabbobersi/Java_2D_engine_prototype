@@ -16,7 +16,7 @@ Mancanti:
 - Modalità di gioco diverse dall'avventura (aka campagna statica)
 
 #### Sprite
-Software consigliato: [Piskel](https://www.piskelapp.com/)
+Software consigliato: [Piskel](https://www.piskelapp.com/)\
 NOTA: Per tutte le sprite, dovremmo decidere un'unica palette di colori!!!! [Lospec](https://lospec.com/palette-list)
 | Nome      | Novembre | Dicembre | Gennaio  | Febbraio            |
 |-----------|----------|----------|----------|---------------------|
@@ -24,6 +24,7 @@ NOTA: Per tutte le sprite, dovremmo decidere un'unica palette di colori!!!! [Los
 | Giammarco | 2 nemici | 5 tile   | 2 nemici | Abbellimento nemici |
 | Alessio   | 3 items  | 2 nemici | 3 items  | Abbellimento npc    |
 | Fra       | 2 npc    | 3 items  | 5 tile   | Abbellimento tile   |
+
 (npc e nemici saranno composti da diverse sprite ciascuno, per via di animazioni. Prevedo minimo 4 sprite per le 4 direzioni di movimento + 2 per talk/attack forse?)
 
 Totali
