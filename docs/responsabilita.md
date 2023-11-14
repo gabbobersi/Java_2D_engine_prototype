@@ -1,3 +1,9 @@
+### Decisioni
+- [x] Palette per tutte le sprite
+- [x] Dimensione sprite: 32x32
+- [x] Procedurale o a livelli: procedurale
+- [x] Formato sprite: PNG
+
 ### Premesse
 Le seguenti scadenze sono opzionali.\
 Se portate avanti (o oltre) dovrebbero garantire un buon rilascio del progetto finale.
