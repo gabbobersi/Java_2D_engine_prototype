@@ -1,4 +1,23 @@
-### Scadenze mensili
+### Premesse
+Le seguenti scadenze sono opzionali.\
+Se portate avanti (o oltre) dovrebbero garantire un buon rilascio del progetto finale.
+
+Si è liberi di fare ciò che si vuole con esse.\
+Seguirle, anticiparle, ignorarle. In quest'ultimo caso, è necessario informare uno degli altri programmatori perché si prenda carino dell'attività al posto vostro.
+
+Se viste attentamente, si noterà che sono attività relativamente (in base alle competenze) brevi. Ciò per consentire ulteriore libertà di organizzarsi meglio.
+
+### Premesse per studenti universitari
+Il periodo che va da dicembre a inizio marzo, è considerato prioritario verso l'università.\
+Nessun ritardo o mancanza di contenuti sarà evidenziata.\
+**E' comunque sempre necessario comunicare se non si è in grado di portare avanti una delle attività sottostanti, visto il rilascio in prossimità di febbraio/marzo.**
+
+### Regole generali
+- Le nozioni tecniche imparate fino al giorno corrente (qualsiasi esso sia) sono date per scontate. Quindi git, java, project management, ...
+- Le attività da sviluppare invece, sono permesse in collaborazione (aka potete sempre chiedere una mano lì).
+- **Unica "minaccia":** un'attività che sfora il periodo di scadenza, sarà redistribuita a chi ha tempo di svilupparla. 
+
+## Scadenze mensili
 #### Sistemi
 | Nome      | Novembre                                   | Dicembre                                          | Gennaio                                                              | Febbraio |
 |-----------|--------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------|----------|
