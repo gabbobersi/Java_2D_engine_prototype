@@ -1,11 +1,25 @@
 ### Scadenze mensili
 
-| Nome      | Novembre                        | Dicembre                                                      | Gennaio                  | Febbraio |
-|-----------|---------------------------------|---------------------------------------------------------------|--------------------------|----------|
-| Bersi     | Audio                           | Interazione con oggetti, generazione personaggi casuale       | IA nemici                | BugFix   |
-| Giammarco | Health, stamina, ... system/bar | Dialog System                                                 | Sprite + abbellimento UI | BugFix   |
-| Alessio   | Inventory system                | Level System                                                  | Sprite + abbellimento UI | BugFix   |
-| Fra       | Fisica                          | Stilare, implementare regole di gioco, creare livelli di test | Sistema degli obiettivi  | BugFix   |
+| Nome      | Novembre                                   | Dicembre                                          | Gennaio                  | Febbraio |
+|-----------|--------------------------------------------|---------------------------------------------------|--------------------------|----------|
+| Bersi     | Audio                                      | Interazione con oggetti, logging system           | IA nemici                | BugFix   |
+| Giammarco | Sistema delle barre (health, stamina, ...) | Dialog System, nemici/npc                         | Sprite + abbellimento UI | BugFix   |
+| Alessio   | Inventory system                           | Level System, creare livelli di test funzionalità | Sprite + abbellimento UI | BugFix   |
+| Fra       | Fisica                                     | Stilare/implementare regole di gioco, collisioni  | Sistema degli obiettivi  | BugFix   |
+
+
+Mancanti:
+- Particles system
+- Ciclo giorno/notte
+    - Effetto scurimento interfaccia (vedo meglio con una torcia?)
+- Resources system (legno, pietra, ...)
+- Crafting system (basico)
+- Building system (posiziono tile che hanno collision = true, oppure estetici con collision= false)
+- Mana system
+- Personalizzazione personaggio
+- Modalità di gioco diverse dall'avventura (aka campagna statica)
+- Generazione procedurale mondi
+
 
 ### Responsabilità
 - Bersi
