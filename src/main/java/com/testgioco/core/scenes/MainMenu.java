@@ -47,6 +47,8 @@ public class MainMenu extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.QUIT);
         } else if (playBtn.isClicked()){
             GameState.setActiveState(GameState.State.PLAY);
+        } else if (tMapGenBtn.isClicked()){
+            GameState.setActiveState(GameState.State.TILE_MAP_GENERATOR);
         }
     }
 

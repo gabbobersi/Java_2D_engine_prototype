@@ -14,12 +14,15 @@ public class TileManager {
     World world = new World();
     Tile[] tiles;
     int[][] mapTileNum;
-    public TileManager(Player player) {
+
+    String mapPath;
+
+    public TileManager(Player player, String mapPath) {
         this.player = player;
         tiles = new Tile[10];
         mapTileNum = new int[world.maxRow][world.maxColumn];
-        loadMap();
         getTileImage();
+        this.mapPath = mapPath;
     }
     public void getTileImage() {
         try{
@@ -58,7 +61,9 @@ public class TileManager {
     }
     public void loadMap (){
         try{
-            InputStream is = getClass().getResourceAsStream("/maps/maps01.txt");
+            // Example path "/maps/maps01.txt"
+            InputStream is = getClass().getResourceAsStream(mapPath);
+            System.out.println("Sto usando la mappa: " + mapPath);
             assert is != null;
             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
@@ -92,7 +97,3 @@ public class TileManager {
 
     }
 }
-
-
-
-

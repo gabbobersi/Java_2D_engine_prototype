@@ -10,12 +10,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Arrays;
 import java.util.Random;
 
 public class TileMapGenerator extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
 
-    private final int btnHorizontalAlignment = settings.screenWidth/2 - 75;
+    //Dimensioni della mappa
+    private final int ROWS = 10;
+    private final int COLS = 10;
+
+    //Probabilità per la generazione di erba, muri e acqua
+    private static final int PROBABILITY_GRASS = 60;
+    private static final int PROBABILITY_WALL = 20;
+    private static final int PROBABILITY_WATER = 5;
+
+    //Probabilità di generare muri ai bordi
+    private static final int PROBABILITY_BORDER_WALL = 90;
+
+    //Stato della generazione della mappa
+    private boolean generationInProgress = false;
+    private boolean generationCompleted = false;
+    private final int btnHorizontalAlignment = settings.screenWidth / 2 - 75;
     private final int btnWidth = 150;
     private final int btnHeight = 80;
     private final int bordThickness = 6;
@@ -24,7 +40,7 @@ public class TileMapGenerator extends JPanel implements Scene {
     private Button btnGenerate = new Button(this, new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "Generate",
             bordThickness, btnColor, btnFont);
 
-    public TileMapGenerator(){
+    public TileMapGenerator() {
         setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
@@ -34,15 +50,100 @@ public class TileMapGenerator extends JPanel implements Scene {
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
-    public void run(){
-        System.out.println("Non ancora implementato.");
+    public void run() {
+        if (btnGenerate.isClicked() && !generationInProgress && !generationCompleted) {
+            generationInProgress = true;
+            generateAndWriteTileMap();
+        }
+    }
+    private void generateAndWriteTileMap() {
+        File file = new File("assets/maps/tmapgen_1.txt");
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            for (int row = 0; row < ROWS; row++) {
+                for (int col = 0; col < COLS; col++) {
+                    int randNum = generateRandomNumber(row, col);
+                    fileWriter.write(randNum + " ");
+                }
+                fileWriter.write("\n");
+            }
+            System.out.println("Generated and written tile map!");
+            generationCompleted = true;
+        } catch (Exception e) {
+            handleException(e);
+        } finally {
+            generationInProgress = false;
+        }
     }
 
+    //Gestisce le eccezioni durante la generazione della mappa
+    private void handleException(Exception e) {
+        e.printStackTrace();
+        //Possibilità di personalizzare questo metodo per gestire le eccezioni in modo più specifico
+    }
+
+    //Genera un numero casuale in base alle probabilità specificate
+    private int generateRandomNumber(int row, int col) {
+        Random rnd = new Random();
+
+        int[] probabilities = {PROBABILITY_GRASS, PROBABILITY_WALL, PROBABILITY_WATER};
+
+        //Aumenta la probabilità di generare "0" (erba) al centro
+        probabilities[0] += Math.abs(row - ROWS / 2) * 2;
+
+        //Riduce la probabilità di generare "1" (muro) al centro
+        if (isInCenter(row, col)) {
+            probabilities[1] = 5;
+        }
+
+        //Genera muri agli estremi con un passaggio
+        if (isAtBorder(row, col) && rnd.nextInt(100) < PROBABILITY_BORDER_WALL) {
+            return 1;
+        }
+
+        //Elimina i muri al centro
+        if (isInCenter(row, col)) {
+            return 0; //Passaggio
+        }
+
+        return getRandomValueBasedOnProbabilities(rnd, probabilities);
+    }
+
+    //Genera un numero casuale basato sulle probabilità specificate
+    private int getRandomValueBasedOnProbabilities(Random rnd, int[] probabilities) {
+        int total = Arrays.stream(probabilities).sum();
+        int randomValue = rnd.nextInt(total);
+
+        //Assegna il valore in base alle probabilità
+        if (randomValue < probabilities[0]) {
+            return 0;
+        } else if (randomValue < probabilities[0] + probabilities[1]) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    //Verifica se la posizione è nel centro della mappa
+    private boolean isInCenter(int row, int col) {
+        return row >= ROWS / 4 && row <= 3 * ROWS / 4 && col >= COLS / 4 && col <= 3 * COLS / 4;
+    }
+
+    //Verifica se la posizione è ai bordi della mappa
+    private boolean isAtBorder(int row, int col) {
+        return col == 0 || col == COLS - 1 || row == 0 || row == ROWS - 1;
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         btnGenerate.draw(g2);
+
+        if (generationInProgress && generationCompleted) {
+            System.out.println("Generation completed!");
+            generationCompleted = false;
+        }
+
         g2.dispose();
     }
 }

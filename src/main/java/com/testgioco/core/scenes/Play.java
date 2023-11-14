@@ -23,7 +23,8 @@ public class Play extends JPanel implements Scene {
         super();
         addKeyListener(inputHandler);
         player = new Player(inputHandler);
-        tileManager = new TileManager(player);
+        tileManager = new TileManager(player, "/maps/tmapgen_1.txt");
+        tileManager.loadMap();
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
