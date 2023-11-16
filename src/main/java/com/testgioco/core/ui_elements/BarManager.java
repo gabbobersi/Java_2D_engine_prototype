@@ -32,6 +32,5 @@ public class BarManager extends JFrame {
         staminaBar = new JProgressBar(0, 100);
         staminaBar.setValue(100);
         staminaBar.setStringPainted(true);
-
     }
 }
