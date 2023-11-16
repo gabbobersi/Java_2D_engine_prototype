@@ -11,10 +11,10 @@ import java.awt.*;
  * This class allows to draw and update text on the screen.
  * */
 public class Label  {
-    private Font font = new Font("Comic Sans", Font.PLAIN, 15);
-    private Vector2DInt vector = new Vector2DInt(0, 0);
-    private String text = "";
-    private Color color = Color.BLACK;
+    private Font font;
+    private Vector2DInt vector;
+    private String text;
+    private Color color;
 
     /**
      * Custom label with vector for position.
@@ -31,6 +31,7 @@ public class Label  {
     }
 
     public void draw(Graphics2D g2){
+        // Note: font and color are set ONLY during first draw.
         g2.setFont(font);
         g2.setColor(color);
         g2.drawString(text, vector.getX(), vector.getY());
