@@ -3,8 +3,11 @@
 |--------|------------------------------------------------------------------------------------------------|------------------------------|----------|----------|----------|----------|
 | Giamma |                                                                                                |                              |          |          |          |          |
 | Fra    |                                                                                                |                              |          |          |          |          |
-| Bersi  | <ul><li>Upcasting & Downcasting</li><li>Classi anonime</li><li>Interfacce funzionali</li></ul> | <ul><li>DOOM Story</li></ul> |          |          |          |          |
+| Bersi  | <ul><li>Upcasting & Downcasting</li><li>Classi anonime</li><li>Interfacce funzionali</li></ul> Tile: <ul><li>Albero (per il legno)</li><li>Muro di legno</li><li>Sabbia</li><li>Ghiaia (sentiero)</li><li>Terreno infuocato</li></ul> | <ul><li>DOOM Story</li></ul> |          |          |          |          |
 | Ale    |                                                                                                |                              |          |          |          |          |
+
+
+
 
 
 ## 07/10/23 - 12/11/23
