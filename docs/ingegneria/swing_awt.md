@@ -8,7 +8,7 @@ di gestire un'applicazione e svolgere le attività richieste.
 
 
 - Una GUI è composta
-da vari componenti: Finestra, pulsanti, pulsanti di opzione, caselle di controllo, etichette,
+da vari componenti: finestra, pulsanti, pulsanti di opzione, caselle di controllo, etichette,
 elenchi a discesa, campi di testo, caselle combinate ecc.  
 
 
