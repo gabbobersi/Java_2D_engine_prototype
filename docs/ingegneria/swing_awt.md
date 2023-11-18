@@ -30,9 +30,7 @@ e richiedono **più spazio di memoria** e **tempo
 per essere eseguiti**. 
 - Button, barre di scorrimento, campi di testo, elenchi, finestre di dialogo
 e pannelli sono alcuni componenti AWT. Dopo aver creato gli oggetti, vengono posizionati in un
-**contenitore**. 
-- Di solito AWT in un sistema operativo può apparire diversa in un altro sistema operativo.
-
+**contenitore**.
 ****
 
 ### Swing
