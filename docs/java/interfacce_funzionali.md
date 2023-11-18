@@ -34,12 +34,12 @@ public class Main {
     public static void main(String[] args) {
         Calcolatore sottrazione = new Calcolatore() {
             @Override
-            public int opera(int a, int b) {
+            public int operazione(int a, int b) {
                 return a - b;
             }
         };
 
-        System.out.println("Sottrazione: " + sottrazione.opera(8, 3));
+        System.out.println("Sottrazione: " + sottrazione.operazione(8, 3));
     }
 }
 ```
