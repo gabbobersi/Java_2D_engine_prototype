@@ -53,19 +53,17 @@ public class Game implements Runnable {
 
             processInput(activeState);
 
+            // In this while, FPS limit execution.
             while (lag >= constants.NS_PER_UPDATE){
                 updateGame(activeState);
                 lag -= constants.NS_PER_UPDATE;
+                if (GameState.getPreviousState() != GameState.getActiveState()){
+                    System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
+                    setPanel = true;
+                }
+                runScene(activeState, setPanel);
+                drawScene(activeState);
             }
-
-            if (GameState.getPreviousState() != GameState.getActiveState()){
-                System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
-                setPanel = true;
-            }
-            runScene(activeState, setPanel);
-            drawScene(activeState);
-
-
         }
     }
 

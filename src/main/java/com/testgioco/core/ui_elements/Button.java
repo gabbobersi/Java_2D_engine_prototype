@@ -41,11 +41,8 @@ public class Button {
         box.setColor(buttonColor);
         panel.add(box);
 
-        if (box.hasBeenClicked()){
+        if (isPressed()){
             box.setColor(Color.BLUE);
-        }
-        if (Singletons.mouseH.released){
-            box.setColor(buttonColor);
         }
     }
 
