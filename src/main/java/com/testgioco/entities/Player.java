@@ -66,7 +66,6 @@ public class Player extends Entity {
         // If any key is being pressed...
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
-                System.out.println("SU");
                 direction = "up";
                 vector.setY(-1);
             }

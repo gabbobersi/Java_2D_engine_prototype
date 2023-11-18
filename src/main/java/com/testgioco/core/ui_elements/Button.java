@@ -74,6 +74,10 @@ public class Button {
         return box.hasBeenClicked();
     }
 
+    public boolean isPressed(){
+        return box.hasBeenPressed();
+    }
+
     public void draw(Graphics2D g2){
         setBox();
         box.draw(g2);

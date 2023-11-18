@@ -59,7 +59,7 @@ public class Game implements Runnable {
             }
 
             if (GameState.getPreviousState() != GameState.getActiveState()){
-                System.out.println("Cambio scena. Rivalido! Vecchio: " + GameState.getPreviousState() + " Nuovo: " + GameState.getActiveState());
+                System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
                 setPanel = true;
             }
             runScene(activeState, setPanel);

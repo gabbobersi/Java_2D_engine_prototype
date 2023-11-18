@@ -1,6 +1,7 @@
 package com.testgioco.core;
 
 import com.testgioco.utilities.GameSettings;
+import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,13 @@ public class Window extends JFrame {
     }
 
     public void setPanel(JPanel panel) {
+        // Prevents that mouse pressed event propagate through panels
+        Singletons.mouseH.released = true;
+
+        Singletons.mouseH.xClick = 0;
+        Singletons.mouseH.yClick = 0;
+
+
         SwingUtilities.invokeLater(() -> {
             setResizable(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
