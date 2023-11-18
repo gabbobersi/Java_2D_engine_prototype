@@ -35,9 +35,9 @@ public class Box extends JPanel{
      * */
     public boolean hasBeenPressed(){
         boolean okWidth =
-                Singletons.mouseH.xPressed >= vector.getX() && Singletons.mouseH.xPressed <= vector.getX() + width;
+                Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width;
         boolean okHeight =
-                Singletons.mouseH.yPressed > vector.getY() && Singletons.mouseH.yPressed < vector.getY() + height;
+                Singletons.mouseH.y > vector.getY() && Singletons.mouseH.y < vector.getY() + height;
         boolean isReleased = Singletons.mouseH.released;
 
         boolean condition = okWidth && okHeight && !isReleased;
@@ -49,15 +49,21 @@ public class Box extends JPanel{
      * */
     public boolean hasBeenClicked(){
         boolean okWidth =
-                Singletons.mouseH.xClick >= vector.getX() && Singletons.mouseH.xClick <= vector.getX() + width;
+                Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width;
         boolean okHeight =
-                Singletons.mouseH.yClick > vector.getY() && Singletons.mouseH.yClick < vector.getY() + height;
+                Singletons.mouseH.y > vector.getY() && Singletons.mouseH.y < vector.getY() + height;
+
         boolean isReleased = Singletons.mouseH.released;
         boolean condition = okWidth && okHeight && !isReleased;
 
-        System.out.println("Width " + okWidth);
-        System.out.println("Height " + okHeight);
-        System.out.println("Rilasciato? " + isReleased);
+//        System.out.println("Width: " + okWidth);
+//        System.out.println("Height: " + okHeight);
+//        System.out.println("isReleased: " + isReleased);
+//        System.out.println("Can be pressed: " + Singletons.mouseH.canBePressed);
+//
+//        if (condition) {
+//            System.out.println("**************** SOPRA PUOI VERIFICARE! CLICCATO CORRETTAMENTE");
+//        }
 
         return condition;
     }

@@ -1,7 +1,6 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +29,10 @@ public class Button {
         this.font = font;
 
         box = new Box(vector, width, height, bordThickness, buttonColor);
+        setBox();
+
         label = new Label(vector, text, font, Color.BLACK);
+        setLabel();
     }
     private void setBox(){
         box.setX(vector.getX());
@@ -40,37 +42,27 @@ public class Button {
         box.setThickness(bordThickness);
         box.setColor(buttonColor);
         panel.add(box);
-
-        if (isPressed()){
-            box.setColor(Color.BLUE);
-        }
     }
 
-    private void setLabel(Graphics2D g2){
-        // X center pos
-        int textWidth = g2.getFontMetrics().stringWidth(label.getText());
+    private void setLabel(){
+        FontMetrics fontMetrics = new Canvas().getFontMetrics(label.getFont());
+
+        int textWidth = fontMetrics.stringWidth(label.getText());
         int midLabelWidth = (int)Math.round((double)textWidth / 2);
         int xPos = vector.getX() + width / 2 - midLabelWidth;
 
-        // Y center pos
-        int textHeight = g2.getFontMetrics().getDescent() + g2.getFontMetrics().getDescent() + g2.getFontMetrics().getLeading();
+        int textHeight = fontMetrics.getDescent() + fontMetrics.getDescent() + fontMetrics.getLeading();
         int midLabelHeight = textHeight / 2;
         int yPos = vector.getY() + height / 2 + midLabelHeight;
 
         Vector2DInt label_vector = new Vector2DInt(xPos, yPos);
         label.setVector(label_vector);
-
-        if (box.hasMouseOver()){
-            label.setColor(Color.ORANGE);
-        } else {
-            label.setColor(Color.BLACK);
-        }
     }
 
     public boolean isClicked(){
         boolean cond = box.hasBeenClicked();
         if (cond){
-            System.out.println("-> Bottone " + label.getText() + " cliccato");
+            // System.out.println("-> Bottone " + label.getText() + " cliccato");
         }
         return cond;
     }
@@ -80,12 +72,23 @@ public class Button {
     }
 
     public void draw(Graphics2D g2){
-        setBox();
+        if (isPressed()){
+            box.setColor(Color.BLUE);
+        } else {
+            box.setColor(buttonColor);
+        }
         box.draw(g2);
+
+        // Label
+        if (box.hasMouseOver()){
+            label.setColor(Color.ORANGE);
+        } else {
+            label.setColor(Color.BLACK);
+        }
         label.draw(g2);
 
         // After drawing, so "g2.setFont" happens at the right time inside the label
-        setLabel(g2);
+        // setLabel();
     }
 
     public String getText(){

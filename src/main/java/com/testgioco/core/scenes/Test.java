@@ -1,5 +1,6 @@
 package com.testgioco.core.scenes;
 
+import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
@@ -26,6 +27,9 @@ public class Test extends JPanel implements Scene {
             new Vector2DInt(btnHorizontalAlignment, 200), btnWidth, btnHeight, "Reset counter", bordThickness,
             btnColor, btnFont);
 
+    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
+            btnHeight, "Main menu", bordThickness, btnColor, btnFont);
+
     private int counter = 0;
 
     public Test(){
@@ -34,8 +38,9 @@ public class Test extends JPanel implements Scene {
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
         setDoubleBuffered(true);
-        setFocusable(true);
-        requestFocus();
+
+        // DISABLE KEYBOARD TO TEST JUST MOUSE
+        setFocusable(false);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
@@ -45,6 +50,8 @@ public class Test extends JPanel implements Scene {
             counter++;
         } else if (btnResetCounter.isClicked()){
             counter = 0;
+        } else if (btnMainMenu.isClicked()){
+            GameState.setActiveState(GameState.State.MAIN_MENU);
         }
 
     }
@@ -60,7 +67,7 @@ public class Test extends JPanel implements Scene {
 
         btnResetCounter.draw(g2);
         btnTest.draw(g2);
-
+        btnMainMenu.draw(g2);
         g2.dispose();
     }
 }

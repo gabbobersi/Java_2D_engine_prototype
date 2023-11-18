@@ -1,5 +1,6 @@
 package com.testgioco.core.scenes;
 
+import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
@@ -30,6 +31,9 @@ public class MainMenu extends JPanel implements Scene {
     private Button quitBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
             btnHeight, "Quit", bordThickness, btnColor, btnFont);
 
+    private Button testBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
+            btnHeight, "Test", bordThickness, btnColor, btnFont);
+
     public MainMenu(){
         super();
         setBackground(Color.WHITE);
@@ -49,6 +53,8 @@ public class MainMenu extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.PLAY);
         } else if (tMapGenBtn.isClicked()){
             GameState.setActiveState(GameState.State.TILE_MAP_GENERATOR);
+        } else if (testBtn.isClicked()){
+            GameState.setActiveState(GameState.State.TEST);
         }
     }
 
@@ -60,6 +66,7 @@ public class MainMenu extends JPanel implements Scene {
         playBtn.draw(g2);
         tMapGenBtn.draw(g2);
         quitBtn.draw(g2);
+        testBtn.draw(g2);
         g2.dispose();
     }
 }

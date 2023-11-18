@@ -103,6 +103,8 @@ public class Game implements Runnable {
      * */
     private JPanel getPanelInstance(GameState.State state) {
         switch (state) {
+            case MAIN_MENU:
+                return mainMenu;
             case PLAY:
                 return play;
             case TILE_MAP_GENERATOR:
@@ -110,14 +112,16 @@ public class Game implements Runnable {
             case TEST:
                 return test;
             default:
-                System.out.println("WARNING - Ritorno l'istanza di mainMenu perché non ho trovato l'istanza che ti " +
-                        "interessa!");
+                System.out.println("WARNING - getPanelInstance - Non ho trovato lo stato di cui vuoi l'istanza!");
                 return mainMenu;
         }
     }
 
     private void drawScene(GameState.State state){
         switch (state){
+            case MAIN_MENU:
+                mainMenu.repaint();
+                break;
             case PLAY:
                 play.repaint();
                 break;
@@ -126,7 +130,9 @@ public class Game implements Runnable {
                 break;
             case TEST:
                 test.repaint();
+                break;
             default:
+                System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
                 mainMenu.repaint();
         }
     }

@@ -15,10 +15,8 @@ public class Window extends JFrame {
     public void setPanel(JPanel panel) {
         // Prevents that mouse pressed event propagate through panels
         Singletons.mouseH.released = true;
-
-        Singletons.mouseH.xClick = 0;
-        Singletons.mouseH.yClick = 0;
-
+        Singletons.mouseH.x = 0;
+        Singletons.mouseH.y = 0;
 
         SwingUtilities.invokeLater(() -> {
             setResizable(true);

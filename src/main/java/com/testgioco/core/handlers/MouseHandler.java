@@ -4,33 +4,32 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseHandler implements MouseListener {
-    public int xPressed;
-    public int yPressed;
-    public int xClick;
-    public int yClick;
-
+    public int x;
+    public int y;
     public boolean released;
 
     public MouseHandler(){
-        xPressed = 0;
-        yPressed = 0;
-        xClick = 0;
-        yClick = 0;
         released = true;
     }
+
+    /**
+     * Fired with a "complete" click (pressed, and then released)
+     * */
     @Override
     public void mouseClicked(MouseEvent e) {
-        // Fired with a "complete" click (pressed, and then released)
-        // Mouse clicked never call mouseReleased!!!
-        xClick = e.getX();
-        yClick = e.getY();
-        released = true;
+        System.out.println("Clicked");
+        x = e.getX();
+        y = e.getY();
+        released = false;
+
+        // Prevents event propagation to other components
+        e.consume();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        xPressed = e.getX();
-        yPressed = e.getY();
+        x = e.getX();
+        y = e.getY();
         released = false;
 
         // Prevents event propagation to other components
@@ -39,6 +38,7 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        System.out.println("Released");
         released = true;
     }
 
@@ -49,4 +49,5 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
+
 }
