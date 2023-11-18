@@ -50,6 +50,7 @@ public class Test extends JPanel implements Scene {
             counter++;
         } else if (btnResetCounter.isClicked()){
             counter = 0;
+            btnResetCounter.setReleased(true);
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }

@@ -1,6 +1,7 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,6 +90,10 @@ public class Button {
 
         // After drawing, so "g2.setFont" happens at the right time inside the label
         // setLabel();
+    }
+
+    public void setReleased(boolean value){
+        Singletons.mouseH.released = value;
     }
 
     public String getText(){
