@@ -40,7 +40,7 @@ Swing è un kit di strumenti **widget GUI** per Java.
 - Swing fornisce componenti di base come
 etichette, caselle di testo, pulsanti, ecc. Nonché componenti avanzati come pannelli a schede,
 tabelle e alberi. 
-- Questo pacchetto, ad esempio, fornisce un numero di classi come JButton, JTable, JList, JTextArea e, JCheckBox.
+- Questo pacchetto, ad esempio, fornisce un numero di classi come JButton, JTable, JList, JTextArea, JCheckBox.
 
 ****
 
