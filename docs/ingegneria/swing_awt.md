@@ -63,7 +63,7 @@ ciascun componente. Quindi è il **sistema operativo** che fornisce,
 per esempio, il bottone o la listbox
 
 |          Differenze          |                   AWT | Swing                  | 
-|:----------------------------:|----------------------:|:-----------------------| 
+|:----------------------------:|-----------------------|:-----------------------| 
 |            Genere            |    Componenti pesanti | Componenti leggeri     |
 | Dipendenza dalla piattaforma |            Dipendente | Indipendente           |
 |           Velocità           |                 Lenta | Veloce                 |
