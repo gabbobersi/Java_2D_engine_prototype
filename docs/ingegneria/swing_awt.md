@@ -24,7 +24,7 @@ con l'applicazione.
 ### AWT
 AWT sta per **Toolkit di finestra astratta (Abstract Window Toolkit)**. 
 
-- È un'**API** per sviluppare **GUI** in Java. 
+- È un'**API** per sviluppare **GUI** in Java ed è platform dependent, ovvero che i componenti sono mostrati in base al sistema operativo su cui viene eseguita l'applicazione.
 - Richiede un oggetto OS nativo per implementare le funzionalità, inoltre i componenti AWT sono **pesanti**
 e richiedono **più spazio di memoria** e **tempo
 per essere eseguiti**. 
