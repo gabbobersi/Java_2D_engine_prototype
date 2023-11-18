@@ -23,6 +23,7 @@ public class MouseHandler implements MouseListener {
         // Fired with a "complete" click (pressed, and then released)
         xClick = e.getX();
         yClick = e.getY();
+        released = false;
     }
 
     @Override

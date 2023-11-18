@@ -19,9 +19,6 @@ import java.util.Random;
 
 public class TileMapGenerator extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
-    private final static MouseHandler mouseH = new MouseHandler();
-    private final static MouseMotionHandler mouseMotionH = new MouseMotionHandler();
-
     private final Grid grid = new Grid();
 
     private final int btnHorizontalAlignment = settings.screenWidth / 2 - 75;
@@ -33,7 +30,8 @@ public class TileMapGenerator extends JPanel implements Scene {
     private final Button btnGenerate = new Button(this, new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "Generate",
             bordThickness, btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 150), btnWidth, btnHeight,
+    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
+            btnHeight,
             "Main menu",
             bordThickness, btnColor, btnFont);
 
@@ -42,8 +40,8 @@ public class TileMapGenerator extends JPanel implements Scene {
 
     public TileMapGenerator() {
         setBackground(Color.WHITE);
-        addMouseListener(mouseH);
-        addMouseMotionListener(mouseMotionH);
+        addMouseListener(Singletons.mouseH);
+        addMouseMotionListener(Singletons.mouseMotionH);
         setDoubleBuffered(true);
         setFocusable(true);
         requestFocus();
@@ -53,16 +51,13 @@ public class TileMapGenerator extends JPanel implements Scene {
     public void run() {
         String filePath = "assets/maps/tmapgen_1.txt";
 
-        if (btnGenerate.isClicked() && writer.isAvailable()) {
-            System.out.println("Cliccato: " + btnGenerate.isClicked());
-            System.out.println("Disponibile: " + writer.isAvailable());
+        if (btnGenerate.isClicked()) {
             int [][] tiles = algo1.generateRandomArray(grid.rowNumber, grid.columnNumber);
             writer.generateTileMap(filePath, tiles);
 
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
-
     }
 
     @Override

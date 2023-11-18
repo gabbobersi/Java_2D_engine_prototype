@@ -7,14 +7,8 @@ import java.io.FileWriter;
 
 public class Writer {
     private final Grid grid = new Grid();
-    private boolean available = true;
-
-    public boolean isAvailable(){
-        return available;
-    }
 
     public void generateTileMap(String filePath, int[][] tiles) {
-        available = false;
         File file = new File(filePath);
 
         try (FileWriter fileWriter = new FileWriter(file)) {
@@ -26,9 +20,9 @@ public class Writer {
                 fileWriter.write("\n");
             }
             fileWriter.close();
-            available = true;
             System.out.println("Generated and written tile map!");
         } catch (Exception e) {
+            System.out.println("Something went wrong!");
             e.printStackTrace();
         }
     }
