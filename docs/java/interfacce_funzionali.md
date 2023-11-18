@@ -21,10 +21,10 @@ Classi anonime ed espressioni lambda, possono essere utilizzate anche senza inte
 public class Main {
     public static void main(String[] args) {
         Calcolatore somma = (a, b) -> a + b;
-        System.out.println("Somma: " + somma.opera(5, 3));
+        System.out.println("Somma: " + somma.operazione(5, 3));
 
         Calcolatore moltiplicazione = (a, b) -> a * b;
-        System.out.println("Moltiplicazione: " + moltiplicazione.opera(4, 7));
+        System.out.println("Moltiplicazione: " + moltiplicazione.operazione(4, 7));
     }
 }
 ```
