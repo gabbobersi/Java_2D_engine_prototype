@@ -1,7 +1,6 @@
-package com.tilemapgenerator;
+package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
-import com.testgioco.core.Grid;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
@@ -10,12 +9,9 @@ import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.time.LocalDate;
 
-public class TileMapGenerator extends JPanel implements Scene {
-    private final GameSettings settings = new GameSettings();
-    private final Grid grid = new Grid();
+public class Test extends JPanel implements Scene {
+    GameSettings settings = new GameSettings();
 
     private final int btnHorizontalAlignment = settings.screenWidth / 2 - 75;
     private final int btnWidth = 150;
@@ -23,44 +19,55 @@ public class TileMapGenerator extends JPanel implements Scene {
     private final int bordThickness = 6;
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
-    private final Button btnGenerate = new Button(this, new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "Generate",
-            bordThickness, btnColor, btnFont);
+    private final Button btnTest = new Button(this,
+            new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "test", bordThickness,
+            btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
+    private final Button btnResetCounter = new Button(this,
+            new Vector2DInt(btnHorizontalAlignment, 200), btnWidth, btnHeight, "Reset counter", bordThickness,
+            btnColor, btnFont);
+
+    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
-    private Writer writer = new Writer();
-    private Algorithm1 algo1 = new Algorithm1();
+    private int counter = 0;
 
-    public TileMapGenerator() {
+    public Test(){
+        super();
         setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
         setDoubleBuffered(true);
-        setFocusable(true);
-        requestFocus();
+
+        // DISABLE KEYBOARD TO TEST JUST MOUSE
+        setFocusable(false);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     @Override
     public void run() {
-        String filePath = "assets/maps/tmapgen_1.txt";
-        File f = new File(filePath);
-
-        if (btnGenerate.isClicked() && !f.exists()) {
-            System.out.println("Cuai");
-            int [][] tiles = algo1.generateRandomArray(10, 10);
-            writer.generateTileMap(filePath, tiles);
+        if (btnTest.isClicked()){
+            counter++;
+        } else if (btnResetCounter.isClicked()){
+            counter = 0;
+            btnResetCounter.setReleased(true);
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
+
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        btnGenerate.draw(g2);
+        Graphics2D g2 = (Graphics2D)g;
+
+        String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
+        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        g2.drawString(counterOfClick, 150, 80);
+
+        btnResetCounter.draw(g2);
+        btnTest.draw(g2);
         btnMainMenu.draw(g2);
         g2.dispose();
     }
