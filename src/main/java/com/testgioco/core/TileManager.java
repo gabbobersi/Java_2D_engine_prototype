@@ -52,8 +52,8 @@ public class TileManager {
                 int worldX = c * cell.width;
                 int worldY = r * cell.height;
 
-                int screenX = worldX - player.worldX + player.screenX;
-                int screenY = worldY - player.worldY - player.screenY;
+                int screenX = worldX - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
+                int screenY = worldY - player.positionOnTheMap.getY() - player.positionOnScreen.getY();
 
                 g2.drawImage(tiles[tileIndex].image,screenX, screenY, cell.width, cell.height, null);
             }

@@ -1,11 +1,11 @@
 package com.testgioco.entities;
 
 import com.testgioco.core.Cell;
+import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -22,8 +22,8 @@ public class Player extends Entity {
     private final Cell cell = new Cell();
     private Vector2D vector;
 
-    public int screenX;
-    public int screenY;
+    // Player rendering position on the screen.
+    public Vector2DInt positionOnScreen;
 
     public Player(InputHandler keyH){
         this.keyH = keyH;
@@ -35,11 +35,15 @@ public class Player extends Entity {
         direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
         lastAnimationTime = System.nanoTime();
-        worldX = 10;
-        worldY = 10;
-        screenX = settings.screenWidth / 2 - (cell.width / 2);
-        screenY = settings.screenHeight / 2 - (cell.height / 2);
         speed = 4;
+
+        // Starting position
+        positionOnTheMap = new Vector2DInt(150, 100);
+
+        // Position on the screen
+        int x = settings.screenWidth / 2 - (cell.width / 2);
+        int y = settings.screenHeight / 2 - (cell.height / 2);
+        positionOnScreen = new Vector2DInt(x, y);
     }
 
     public void getPlayerImage(){
@@ -81,13 +85,13 @@ public class Player extends Entity {
                 direction = "right";
                 vector.setX(1);
             }
-            animate(direction);
+            animate(direction, true);
         } else {
-            direction = "down";     // Default direction, even if no key is pressed
+            animate(direction, false);
         }
     }
 
-    private void animate(String newDirection){
+    private void animate(String newDirection, boolean isMoving){
         if (!newDirection.equals(direction)) {
             // Resetta l'animazione se la direzione è cambiata.
             spriteNumber = 1;
@@ -106,13 +110,20 @@ public class Player extends Entity {
                 lastAnimationTime = currentTime;
             }
         }
+        // If the player does not move, he will remain standing.
+        if (!isMoving){
+            spriteNumber = 1;
+        }
     }
 
     public void update(){
         vector.normalize();
         vector.multiply(speed);
-        worldX += vector.getX();
-        worldY += vector.getY();
+
+        int x = positionOnTheMap.getX() + (int) Math.round(vector.getX());
+        int y = positionOnTheMap.getY() + (int) Math.round(vector.getY());
+        positionOnTheMap.setX(x);
+        positionOnTheMap.setY(y);
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = up1;
@@ -147,7 +158,8 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.drawImage(image, (int) Math.round(screenX), (int) Math.round(screenY), this.cell.width, this.cell.height,
+        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), this.cell.width
+                , this.cell.height,
                 null);
     }
 }
