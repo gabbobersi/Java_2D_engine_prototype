@@ -53,8 +53,7 @@ un toolkit di **widget GUI** per Java che è un'estensione di AWT.
 
 Un altra differenza tra i componenti AWT e i componenti Swing **("lightweight"
 o leggeri)** è che i componenti Swing sono implementati **senza una riga di codice
-nativo**: sono scritti in codice Java e **direttamente
-disegnati** dalla **JVM**.
+nativo**.
 
 - Anche l’oggetto swing più semplice ha maggiori
 funzionalità del suo analogo presente nell’AWT **("heavyweight" o pesante)**
