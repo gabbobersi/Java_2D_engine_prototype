@@ -77,6 +77,9 @@ public class Game implements Runnable {
         GameState.setActiveState(state);
 
         switch (state){
+            case MAIN_MENU:
+                mainMenu.run();
+                break;
             case PLAY:
                 play.run();
                 break;
