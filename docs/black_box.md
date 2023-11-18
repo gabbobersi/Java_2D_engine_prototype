@@ -4,7 +4,7 @@
 | Giamma |                                                                                                                                                                                                                                       |                              |          |          |          |          |
 | Fra    |                                                                                                                                                                                                                                       |                              |          |          |          |          |
 | Bersi  | <ul><li>Upcasting & Downcasting</li><li>Classi anonime</li><li>Interfacce funzionali</li></ul> Tile: <ul><li>Albero (per il legno)</li><li>Muro di legno</li><li>Sabbia</li><li>Ghiaia (sentiero)</li><li>Terreno infuocato</li></ul> | <ul><li>DOOM Story</li></ul> |          |          |          |          |
-| Ale    |                                                                                                                                                                                                                                       |                              |          |          |          |          |
+| Ale    |                                                                                                                                                                                                                                       |    <ul><li>Model-view-controller</li><li>Test Driven Development</li>                         |          |          |          |          |
 
 
 
