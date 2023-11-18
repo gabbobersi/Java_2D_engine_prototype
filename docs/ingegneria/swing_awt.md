@@ -57,7 +57,7 @@ nativo**.
 
 - Anche l’oggetto swing più semplice ha maggiori
 funzionalità del suo analogo presente nell’AWT **("heavyweight" o pesante)**
-cioè disegnato dall'**hardware e non dal software** proprio perché crea un **"peer"**, ovvero 
+proprio perché crea un **"peer"**, ovvero 
 un aggancio al sistema sottostante per
 ciascun componente. Quindi è il **sistema operativo** che fornisce,
 per esempio, il bottone o la listbox
