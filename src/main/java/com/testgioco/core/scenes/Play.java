@@ -27,7 +27,6 @@ public class Play extends JPanel implements Scene {
         addKeyListener(inputHandler);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
-
         player = new Player(inputHandler);
         tileManager = new TileManager(player, "/maps/tmapgen_1.txt");
         tileManager.loadMap();

@@ -21,9 +21,10 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         // Fired with a "complete" click (pressed, and then released)
+        // Mouse clicked never call mouseReleased!!!
         xClick = e.getX();
         yClick = e.getY();
-        released = false;
+        released = true;
     }
 
     @Override

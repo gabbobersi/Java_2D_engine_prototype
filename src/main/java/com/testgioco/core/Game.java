@@ -2,6 +2,7 @@ package com.testgioco.core;
 
 import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
+import com.testgioco.core.scenes.Test;
 import com.testgioco.utilities.Constants;
 import com.tilemapgenerator.TileMapGenerator;
 
@@ -16,16 +17,18 @@ public class Game implements Runnable {
     private MainMenu mainMenu;
     private Play play;
     private TileMapGenerator tmapgen;
+    private Test test;
 
     public Game() {
         // Is this necessary? Should I create an instance on demand only?
         mainMenu = new MainMenu();
         play = new Play();
         tmapgen = new TileMapGenerator();
+        test = new Test();
 
         // Default panel
         window = new Window();
-        window.setPanel(mainMenu);
+        window.setPanel(getPanelInstance(GameState.getActiveState()));
     }
 
     public void start(){
@@ -69,7 +72,7 @@ public class Game implements Runnable {
 
     private void runScene(GameState.State state, boolean setPanel){
         if (setPanel){
-            window.setPanel(getPanelForState(state));
+            window.setPanel(getPanelInstance(state));
         }
         GameState.setActiveState(state);
 
@@ -85,18 +88,30 @@ public class Game implements Runnable {
                 window.dispose();
                 System.exit(0);
                 break;
+            case TEST:
+                test.run();
+                break;
             default:
+                System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
+                        "interessa!");
                 mainMenu.run();
         }
     }
 
-    private JPanel getPanelForState(GameState.State state) {
+    /**
+     * Return the instance corresponding to the specified state.
+     * */
+    private JPanel getPanelInstance(GameState.State state) {
         switch (state) {
             case PLAY:
                 return play;
             case TILE_MAP_GENERATOR:
                 return tmapgen;
+            case TEST:
+                return test;
             default:
+                System.out.println("WARNING - Ritorno l'istanza di mainMenu perché non ho trovato l'istanza che ti " +
+                        "interessa!");
                 return mainMenu;
         }
     }
@@ -109,6 +124,8 @@ public class Game implements Runnable {
             case TILE_MAP_GENERATOR:
                 tmapgen.repaint();
                 break;
+            case TEST:
+                test.repaint();
             default:
                 mainMenu.repaint();
         }

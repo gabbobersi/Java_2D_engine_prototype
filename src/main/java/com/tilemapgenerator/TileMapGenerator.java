@@ -10,6 +10,8 @@ import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.time.LocalDate;
 
 public class TileMapGenerator extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
@@ -40,13 +42,15 @@ public class TileMapGenerator extends JPanel implements Scene {
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
+    @Override
     public void run() {
         String filePath = "assets/maps/tmapgen_1.txt";
+        File f = new File(filePath);
 
-        if (btnGenerate.isPressed()) {
-            int [][] tiles = algo1.generateRandomArray(grid.rowNumber, grid.columnNumber);
+        if (btnGenerate.isClicked() && !f.exists()) {
+            System.out.println("Cuai");
+            int [][] tiles = algo1.generateRandomArray(10, 10);
             writer.generateTileMap(filePath, tiles);
-
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }

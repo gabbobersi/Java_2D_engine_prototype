@@ -1,5 +1,6 @@
 package com.testgioco.utilities;
 
+import com.testgioco.core.GameState;
 
 public class GameSettings {
     // For now are final.
@@ -7,8 +8,9 @@ public class GameSettings {
 
     // Note: these are game settings, NOT CONSTANTS!
 
-    public final int fps = 60;
+    public final int fps = 30;
     public final int screenWidth = 600;
     public final int screenHeight = 600;
     public final String gameTitle = "Gioco di esempio";
+    public final GameState.State defaultScene = GameState.State.TEST;
 }

@@ -48,9 +48,18 @@ public class Box extends JPanel{
      * Check if mouse has been clicked inside box's boundaries.
      * */
     public boolean hasBeenClicked(){
-        return (Singletons.mouseH.xClick >= vector.getX() && Singletons.mouseH.xClick <= vector.getX() + width)
-                && (Singletons.mouseH.yClick > vector.getY() && Singletons.mouseH.yClick < vector.getY() + height)
-                && !Singletons.mouseH.released;
+        boolean okWidth =
+                Singletons.mouseH.xClick >= vector.getX() && Singletons.mouseH.xClick <= vector.getX() + width;
+        boolean okHeight =
+                Singletons.mouseH.yClick > vector.getY() && Singletons.mouseH.yClick < vector.getY() + height;
+        boolean isReleased = Singletons.mouseH.released;
+        boolean condition = okWidth && okHeight && !isReleased;
+
+        System.out.println("Width " + okWidth);
+        System.out.println("Height " + okHeight);
+        System.out.println("Rilasciato? " + isReleased);
+
+        return condition;
     }
 
     /**

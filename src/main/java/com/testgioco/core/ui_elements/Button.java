@@ -68,7 +68,11 @@ public class Button {
     }
 
     public boolean isClicked(){
-        return box.hasBeenClicked();
+        boolean cond = box.hasBeenClicked();
+        if (cond){
+            System.out.println("-> Bottone " + label.getText() + " cliccato");
+        }
+        return cond;
     }
 
     public boolean isPressed(){
@@ -82,5 +86,9 @@ public class Button {
 
         // After drawing, so "g2.setFont" happens at the right time inside the label
         setLabel(g2);
+    }
+
+    public String getText(){
+        return label.getText();
     }
 }
