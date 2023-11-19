@@ -49,9 +49,11 @@ public class TileManager {
             for (int c = 0; c < world.maxColumn; c++) {
                 int tileIndex = mapTileNum[r][c];
 
+                // Tile position, to draw.
                 int worldX = c * cell.width;
                 int worldY = r * cell.height;
 
+                // Tile position, to draw, taking into consideration player position.
                 int screenX = worldX - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
                 int screenY = worldY - player.positionOnTheMap.getY() - player.positionOnScreen.getY();
 
