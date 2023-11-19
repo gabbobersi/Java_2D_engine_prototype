@@ -16,7 +16,7 @@ versione più verbosa delle lambda, è decrementato nel tempo.
 - In pre Java-8, le classi anonime venivano utilizzate per la gestione di eventi, o implementare callback in framework come Swing.
 ****
 #### Spiegazione
-- Le classi anonime si utilizzano per sovrascrivere "al bisogno" un metodo di una classe esistente.\
+- Le classi anonime si utilizzano per sovrascrivere "al bisogno" un metodo di una classe esistente.
 - Ciò è vero anche nel caso delle interfacce funzionali, in cui grazie alle classi anonime, è
 possibile fornire una vera e propria implementazione del loro unico metodo astratto.
 - Non è possibile modificare la classe che ospita la classe anonima, con quest'ultima. La classe da modificare 

@@ -8,8 +8,21 @@ public class InputHandler implements KeyListener {
     public boolean rightPressed;
     public boolean upPressed;
     public boolean downPressed;
-
+    public boolean escPressed;
     public boolean anyKeyPressed;
+
+    public InputHandler(){
+        reset();
+    }
+
+    public void reset(){
+        leftPressed = false;
+        rightPressed = false;
+        upPressed = false;
+        downPressed = false;
+        escPressed = false;
+        anyKeyPressed = false;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -29,6 +42,10 @@ public class InputHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
+        }
+
+        if (code == KeyEvent.VK_ESCAPE) {
+            escPressed = true;
         }
 
         // A key is being pressed.

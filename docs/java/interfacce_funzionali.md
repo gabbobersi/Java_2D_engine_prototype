@@ -14,17 +14,17 @@ Le interfacce funzionali **sono istanziabili**, e si istanziano tramite:
 - [Classi anonime](classi_anonime.md)
 
 **Nota importante**\
-Classi anonime ed espressioni lambda, possono utilizzate anche senza interfacce funzionali.
+Classi anonime ed espressioni lambda, possono essere utilizzate anche senza interfacce funzionali.
 
 ### Istanziamento lambda
 ```Java
 public class Main {
     public static void main(String[] args) {
         Calcolatore somma = (a, b) -> a + b;
-        System.out.println("Somma: " + somma.opera(5, 3));
+        System.out.println("Somma: " + somma.operazione(5, 3));
 
         Calcolatore moltiplicazione = (a, b) -> a * b;
-        System.out.println("Moltiplicazione: " + moltiplicazione.opera(4, 7));
+        System.out.println("Moltiplicazione: " + moltiplicazione.operazione(4, 7));
     }
 }
 ```
@@ -34,12 +34,12 @@ public class Main {
     public static void main(String[] args) {
         Calcolatore sottrazione = new Calcolatore() {
             @Override
-            public int opera(int a, int b) {
+            public int operazione(int a, int b) {
                 return a - b;
             }
         };
 
-        System.out.println("Sottrazione: " + sottrazione.opera(8, 3));
+        System.out.println("Sottrazione: " + sottrazione.operazione(8, 3));
     }
 }
 ```

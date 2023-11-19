@@ -12,6 +12,7 @@ _Roadmap from the top, to the bottom._
 - Possible fixes:
   - [x] Independent movement FPS.
   - [x] Fixed Update
+- [ ] Button clicked one time, is seen as it was clicked 3 or more times...
 ### Core
 - [x] Main class
 - [x] Game class
@@ -24,73 +25,20 @@ _Roadmap from the top, to the bottom._
 - [x] Sprites loading
 - [x] Animations system
 - [x] Tile system
-  - [ ] OPTIONALS
-    - [ ] Tile maps generator
-- [ ] World map
-- [ ] Camera
+  - [x] OPTIONALS
+    - [x] Tile maps generator
+- [x] World map
+- [x] Camera
 - [ ] Collision detection
 - [ ] Object placement
 - [ ] Object interaction
 - [ ] Sound
-- [ ] State machine
-- [ ] Scenes
-  - [ ] Main menu
-  - [ ] Option menu
-  - [ ] Quit game menu
-  - [ ] TEST
-
-### Responsabilità
-- Bersi
-  - UI 
-    - [x] Label (etichetta, cioè testo a video)
-    - [ ] LayoutManager (disporre le robe UI a schermo)
-  - [ ] Audio
-    - [ ] JavaFX
-    - [ ] OpenAl
-  - Game design
-    - [ ] World map (movimento personaggio sulla mappa)
-    - [ ] Interazione con gli oggetti
-    - [ ] Generazione personaggi causali
-  - [ ] Core
-    - [x] State machine
-      - [x] Panel add/removal
-      - [x] Input focus for new panels
-      - [x] Game states system
-      - [x] Scenes system
-- Giammarco
-  - UI / TileMap generator
-    - [x] Box (cioè un quadrato con uno sfondo)
-    - [x] Button (cioè un box, interagibile)
-  - Level design
-  - Game design
-    - [ ] Bar varie
-      - Health
-      - Stamina
-    - Dialoghi / Narrativa / Lore
-- Alessio
-  - UI / TileMap generator
-    - [x] Box (cioè un quadrato con uno sfondo)
-    - [x] Button (cioè un box, interagibile)
-  - Level design
-  - Game design
-    - [ ] Inventario
-    - [ ] Dialoghi / Narrativa / Lore
-- Francesco
-  - [ ] Physics
-  - [ ] Audio
-  - Game design
-    - [ ] Obiettivi
-    - [ ] Regole gioco
-  - Core
-
-TileMap generator:
-- Quanti tile ho adesso nella cartella assets/tiles?
-  - Guarda il numero dei file.
-- Che etichetta do al tile?
-  - Prendi il nome
-- UI
-  - Bottoni
-  - Grid, in cui dove clicki genera un tile (es cambia da 0 a 3, se abbiamo 4 tile)
+- [x] State machine
+- [x] Scenes
+  - [x] Main menu
+  - [x] Option menu
+  - [x] Quit game menu
+  - [x] TEST
 
 ### Chill
 - [x] Implement a 2D vector class.

@@ -1,10 +1,8 @@
 package com.testgioco.core;
 
-import com.testgioco.utilities.GameSettings;
-
 public class World {
-    private Cell cell = new Cell();
-    private Grid grid = new Grid();
+    private final Cell cell = new Cell();
+    private final Grid grid = new Grid();
 
     public int maxColumn = grid.columnNumber;
     public int maxRow = grid.rowNumber;
