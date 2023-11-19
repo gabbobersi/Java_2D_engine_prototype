@@ -55,7 +55,7 @@ public class TileManager {
 
                 // Tile position, to draw, taking into consideration player position.
                 int screenX = worldX - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
-                int screenY = worldY - player.positionOnTheMap.getY() - player.positionOnScreen.getY();
+                int screenY = worldY - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
 
                 g2.drawImage(tiles[tileIndex].image,screenX, screenY, cell.width, cell.height, null);
             }

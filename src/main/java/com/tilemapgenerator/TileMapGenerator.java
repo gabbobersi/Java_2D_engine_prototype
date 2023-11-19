@@ -29,6 +29,8 @@ public class TileMapGenerator extends JPanel implements Scene {
     private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
+    private boolean alreadyGenerated = false;
+
     private Writer writer = new Writer();
     private Algorithm1 algo1 = new Algorithm1();
 
@@ -45,13 +47,16 @@ public class TileMapGenerator extends JPanel implements Scene {
     @Override
     public void run() {
         String filePath = "assets/maps/tmapgen_1.txt";
-        File f = new File(filePath);
 
-        if (btnGenerate.isClicked() && !f.exists()) {
-            System.out.println("Cuai");
+        if (btnGenerate.isClicked() && !alreadyGenerated) {
+            alreadyGenerated = true;
             int [][] tiles = algo1.generateRandomArray(10, 10);
             writer.generateTileMap(filePath, tiles);
-        } else if (btnMainMenu.isClicked()){
+        } else if (alreadyGenerated){
+            System.out.println("Non genero più mappe! Riavvia il gioco per sovrascrivere la mappa esistente!");
+        }
+
+        if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
     }

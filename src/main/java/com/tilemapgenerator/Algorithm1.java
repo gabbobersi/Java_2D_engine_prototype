@@ -1,3 +1,7 @@
+/*
+* Questo algoritmo cerca di creare una stanza, lasciando libero il centro della mappa.
+* */
+
 package com.tilemapgenerator;
 
 import com.testgioco.core.Grid;
@@ -39,7 +43,7 @@ public class Algorithm1 implements Algorithm {
                 }
 
                 if (isAtBorder(row, col) && rnd.nextInt(100) < PROBABILITY_BORDER_WALL) {
-                    tile = WATER;
+                    tile = WALL;
                 }
 
                 if (isInCenter(row, col)) {
