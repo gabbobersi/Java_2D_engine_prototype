@@ -1,5 +1,7 @@
 package com.testgioco.core.scenes;
 
+import com.testgioco.core.Game;
+import com.testgioco.core.GameState;
 import com.testgioco.core.Grid;
 import com.testgioco.core.TileManager;
 import com.testgioco.core.handlers.InputHandler;
@@ -7,6 +9,7 @@ import com.testgioco.core.interfaces.Scene;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
+import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,8 +25,11 @@ public class Play extends JPanel implements Scene {
     public Play(){
         super();
         addKeyListener(inputHandler);
+        addMouseListener(Singletons.mouseH);
+        addMouseMotionListener(Singletons.mouseMotionH);
         player = new Player(inputHandler);
-        tileManager = new TileManager(player);
+        tileManager = new TileManager(player, "/maps/tmapgen_1.txt");
+        tileManager.loadMap();
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
@@ -31,7 +37,10 @@ public class Play extends JPanel implements Scene {
 
     @Override
     public void run(){
-
+        if (inputHandler.escPressed){
+            GameState.setActiveState(GameState.State.MAIN_MENU);
+            inputHandler.reset();
+        }
     }
 
     @Override

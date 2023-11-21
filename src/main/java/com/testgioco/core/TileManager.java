@@ -14,12 +14,15 @@ public class TileManager {
     World world = new World();
     Tile[] tiles;
     int[][] mapTileNum;
-    public TileManager(Player player) {
+
+    String mapPath;
+
+    public TileManager(Player player, String mapPath) {
         this.player = player;
         tiles = new Tile[10];
         mapTileNum = new int[world.maxRow][world.maxColumn];
-        loadMap();
         getTileImage();
+        this.mapPath = mapPath;
     }
     public void getTileImage() {
         try{
@@ -46,11 +49,13 @@ public class TileManager {
             for (int c = 0; c < world.maxColumn; c++) {
                 int tileIndex = mapTileNum[r][c];
 
+                // Tile position, to draw.
                 int worldX = c * cell.width;
                 int worldY = r * cell.height;
 
-                int screenX = worldX - player.worldX + player.screenX;
-                int screenY = worldY - player.worldY - player.screenY;
+                // Tile position, to draw, taking into consideration player position.
+                int screenX = worldX - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
+                int screenY = worldY - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
 
                 g2.drawImage(tiles[tileIndex].image,screenX, screenY, cell.width, cell.height, null);
             }
@@ -58,7 +63,9 @@ public class TileManager {
     }
     public void loadMap (){
         try{
-            InputStream is = getClass().getResourceAsStream("/maps/maps01.txt");
+            // Example path "/maps/maps01.txt"
+            InputStream is = getClass().getResourceAsStream(mapPath);
+            System.out.println("Sto usando la mappa: " + mapPath);
             assert is != null;
             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
@@ -92,7 +99,3 @@ public class TileManager {
 
     }
 }
-
-
-
-
