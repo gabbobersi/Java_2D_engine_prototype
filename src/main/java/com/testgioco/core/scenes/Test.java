@@ -2,7 +2,9 @@ package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
+import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
@@ -32,15 +34,18 @@ public class Test extends JPanel implements Scene {
 
     private int counter = 0;
 
+    private final InputHandler inputH = new InputHandler();
+
+    private BarManager barManager = new BarManager();
+
     public Test(){
         super();
-        setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
-        setDoubleBuffered(true);
+        addKeyListener(inputH);
 
-        // DISABLE KEYBOARD TO TEST JUST MOUSE
-        setFocusable(false);
+        GridLayout grid = new GridLayout(2, 1);
+        setLayout(grid);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
@@ -55,6 +60,11 @@ public class Test extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
 
+        if (inputH.spacePressed){
+            barManager.reduceHealth(10);
+        } else if (inputH.leftPressed){
+            barManager.resetHealth();
+        }
     }
 
     @Override
@@ -62,13 +72,15 @@ public class Test extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
-        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
-        g2.drawString(counterOfClick, 150, 80);
+//        String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
+//        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+//        g2.drawString(counterOfClick, 150, 80);
 
-        btnResetCounter.draw(g2);
-        btnTest.draw(g2);
-        btnMainMenu.draw(g2);
+//        btnResetCounter.draw(g2)
+//        btnTest.draw(g2);
+//        btnMainMenu.draw(g2);
+
+        barManager.draw(g2);
         g2.dispose();
     }
 }

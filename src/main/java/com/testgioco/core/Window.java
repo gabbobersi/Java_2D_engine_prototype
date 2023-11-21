@@ -25,7 +25,11 @@ public class Window extends JFrame {
             getContentPane().removeAll();
             add(panel);
             panel.setBackground(Color.WHITE);
+            panel.setFocusable(true);
             panel.requestFocus();
+            panel.setDoubleBuffered(true);
+
+
             pack();
             revalidate();
             repaint();
