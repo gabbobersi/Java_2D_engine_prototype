@@ -9,11 +9,11 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class TileManager {
-    Cell cell = new Cell();
+    public Cell cell = new Cell();
     Player player;
     World world = new World();
     Tile[] tiles;
-    int[][] mapTileNum;
+    public int[][] mapTileNum;
 
     String mapPath;
 

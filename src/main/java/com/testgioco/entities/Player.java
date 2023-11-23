@@ -17,7 +17,7 @@ public class Player extends Entity {
     private InputHandler keyH;
     private GameSettings settings = new GameSettings();
 
-    private double speed;
+    public double speed;
     private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
@@ -124,6 +124,16 @@ public class Player extends Entity {
         int y = positionOnTheMap.getY() + (int) Math.round(vector.getY());
         positionOnTheMap.setX(x);
         positionOnTheMap.setY(y);
+    }
+
+    public int getPlayerWidth() {
+        // Restituisci la larghezza dell'immagine corrente del giocatore
+        return up1.getWidth(); // Cambia "up1" con l'immagine corretta
+    }
+
+    public int getPlayerHeight() {
+        // Restituisci l'altezza dell'immagine corrente del giocatore
+        return up1.getHeight(); // Cambia "up1" con l'immagine corretta
     }
     public void draw(Graphics2D g2) {
         BufferedImage image = up1;
