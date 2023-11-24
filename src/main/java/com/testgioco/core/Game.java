@@ -106,12 +106,15 @@ public class Game implements Runnable {
 
         switch (state){
             case MAIN_MENU:
+                if (setPanel) mainMenu.awake();
                 mainMenu.fixedUpdate();
                 break;
             case PLAY:
+                if (setPanel) play.awake();
                 play.fixedUpdate();
                 break;
             case TILE_MAP_GENERATOR:
+                if (setPanel) tmapgen.awake();
                 tmapgen.fixedUpdate();
                 break;
             case QUIT:
@@ -120,6 +123,7 @@ public class Game implements Runnable {
                 System.exit(0);
                 break;
             case TEST:
+                if (setPanel) test.awake();
                 test.fixedUpdate();
                 break;
             default:
