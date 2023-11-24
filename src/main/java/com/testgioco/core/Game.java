@@ -87,6 +87,8 @@ public class Game implements Runnable {
     }
 
     private void runScene(GameState.State state, boolean setPanel){
+        GameState.setActiveState(state);
+
         if (setPanel){
             // Prevents that mouse pressed event propagate through panels
             Singletons.mouseH.released = true;
@@ -101,17 +103,16 @@ public class Game implements Runnable {
             window.revalidate();
             window.repaint();
         }
-        GameState.setActiveState(state);
 
         switch (state){
             case MAIN_MENU:
-                mainMenu.run();
+                mainMenu.fixedUpdate();
                 break;
             case PLAY:
-                play.run();
+                play.fixedUpdate();
                 break;
             case TILE_MAP_GENERATOR:
-                tmapgen.run();
+                tmapgen.fixedUpdate();
                 break;
             case QUIT:
                 stop();
@@ -119,12 +120,12 @@ public class Game implements Runnable {
                 System.exit(0);
                 break;
             case TEST:
-                test.run();
+                test.fixedUpdate();
                 break;
             default:
                 System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
                         "interessa!");
-                mainMenu.run();
+                mainMenu.fixedUpdate();
         }
     }
 

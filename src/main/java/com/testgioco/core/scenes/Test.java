@@ -51,8 +51,12 @@ public class Test extends JPanel implements Scene {
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
+    public void awake(){
+
+    }
+
     @Override
-    public void run() {
+    public void fixedUpdate() {
         if (btnTest.isClicked()){
             counter++;
         } else if (btnResetCounter.isClicked()){

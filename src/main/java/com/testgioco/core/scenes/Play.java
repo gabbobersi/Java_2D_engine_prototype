@@ -34,8 +34,12 @@ public class Play extends JPanel implements Scene {
         tileManager.loadMap("/maps/tmapgen_1.txt");
     }
 
+    public void awake(){
+
+    }
+
     @Override
-    public void run(){
+    public void fixedUpdate(){
         if (inputHandler.escPressed){
             GameState.setActiveState(GameState.State.MAIN_MENU);
             inputHandler.reset();

@@ -43,8 +43,12 @@ public class MainMenu extends JPanel implements Scene {
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
+    public void awake(){
+
+    }
+
     @Override
-    public void run(){
+    public void fixedUpdate(){
         if (quitBtn.isClicked()) {
             GameState.setActiveState(GameState.State.QUIT);
         } else if (playBtn.isClicked()){
