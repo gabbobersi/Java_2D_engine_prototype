@@ -16,7 +16,6 @@ import java.awt.*;
 public class Play extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
     private final TileManager tileManager;
-    private final DebugGrid debugGrid = new DebugGrid();
     private final ScreenLogger debug = new ScreenLogger();
     private final Player player;
     private final InputHandler inputHandler = new InputHandler();
