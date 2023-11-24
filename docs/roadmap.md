@@ -12,7 +12,9 @@ _Roadmap from the top, to the bottom._
 - Possible fixes:
   - [x] Independent movement FPS.
   - [x] Fixed Update
-- [ ] Button clicked one time, is seen as it was clicked 3 or more times...
+- [x] Button clicked one time, is seen as it was clicked 3 or more times...
+  - Not really fixed...but now is working fine.
+- [ ] Changing camera, change game speed.
 ### Core
 - [x] Main class
 - [x] Game class
