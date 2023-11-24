@@ -17,7 +17,6 @@ public class Writer {
                 fileWriter.write("\n");
             }
             fileWriter.close();
-            fileWriter.flush();
             System.out.println("Generated and written tile map!");
         } catch (Exception e) {
             System.out.println("Something went wrong!");

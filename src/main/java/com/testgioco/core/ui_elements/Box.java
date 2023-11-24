@@ -15,6 +15,7 @@ public class Box extends JPanel{
     private int bordThickness;
     private Color boxColor;
     private RenderingAlignment renderingAlign = RenderingAlignment.DEFAULT;
+    private boolean isClicked = false;
 
     public enum RenderingAlignment {
         DEFAULT,    // The button will be rendered by the usual x, y coordinates, from the left top corner.
@@ -56,16 +57,14 @@ public class Box extends JPanel{
         boolean isReleased = Singletons.mouseH.released;
         boolean condition = okWidth && okHeight && !isReleased;
 
-//        System.out.println("Width: " + okWidth);
-//        System.out.println("Height: " + okHeight);
-//        System.out.println("isReleased: " + isReleased);
-//        System.out.println("Can be pressed: " + Singletons.mouseH.canBePressed);
-//
-//        if (condition) {
-//            System.out.println("**************** SOPRA PUOI VERIFICARE! CLICCATO CORRETTAMENTE");
-//        }
-
-        return condition;
+        // If the button doesn't results already clicked, and I've clicked on it, will be clicked.
+        // Prevents the button to remain triggered, after the first click!
+        if (!isClicked && condition){
+            isClicked = true;
+        } else {
+            isClicked = false;
+        }
+        return isClicked;
     }
 
     /**

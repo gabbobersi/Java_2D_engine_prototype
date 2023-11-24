@@ -20,7 +20,6 @@ public class MouseHandler implements MouseListener {
         System.out.println("Clicked");
         x = e.getX();
         y = e.getY();
-        released = false;
 
         // Prevents event propagation to other components
         e.consume();

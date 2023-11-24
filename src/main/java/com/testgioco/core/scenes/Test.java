@@ -72,15 +72,15 @@ public class Test extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-//        String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
-//        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
-//        g2.drawString(counterOfClick, 150, 80);
+        String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
+        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        g2.drawString(counterOfClick, 150, 80);
 
-//        btnResetCounter.draw(g2)
-//        btnTest.draw(g2);
-//        btnMainMenu.draw(g2);
+        btnResetCounter.draw(g2);
+        btnTest.draw(g2);
+        btnMainMenu.draw(g2);
 
-        barManager.draw(g2);
+//        barManager.draw(g2);
         g2.dispose();
     }
 }

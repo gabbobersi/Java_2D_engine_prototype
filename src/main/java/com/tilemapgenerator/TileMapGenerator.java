@@ -48,12 +48,17 @@ public class TileMapGenerator extends JPanel implements Scene {
     public void run() {
         String filePath = "assets/maps/tmapgen_1.txt";
 
-        if (btnGenerate.isClicked() && !alreadyGenerated) {
+        if (btnGenerate.isClicked()) {
+            File file = new File(filePath);
+            if (file.exists()){
+                System.out.println("I'm overwriting the following map: " + filePath);
+            } else {
+                System.out.println("I'm creating the following map: " + filePath);
+            }
+
             alreadyGenerated = true;
             int [][] tiles = algo1.generateRandomArray(10, 10);
             writer.generateTileMap(filePath, tiles);
-        } else if (alreadyGenerated){
-            System.out.println("Non genero più mappe! Riavvia il gioco per sovrascrivere la mappa esistente!");
         }
 
         if (btnMainMenu.isClicked()){
