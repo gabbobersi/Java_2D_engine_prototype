@@ -7,6 +7,7 @@ import com.testgioco.utilities.Constants;
 import com.tilemapgenerator.TileMapGenerator;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Game implements Runnable {
     private final Constants constants = new Constants();

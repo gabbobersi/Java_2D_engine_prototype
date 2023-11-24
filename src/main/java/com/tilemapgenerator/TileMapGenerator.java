@@ -12,10 +12,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class TileMapGenerator extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
-    private final Grid grid = new Grid();
 
     private final int btnHorizontalAlignment = settings.screenWidth / 2 - 75;
     private final int btnWidth = 150;
@@ -23,25 +23,21 @@ public class TileMapGenerator extends JPanel implements Scene {
     private final int bordThickness = 6;
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
+
     private final Button btnGenerate = new Button(this, new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "Generate",
             bordThickness, btnColor, btnFont);
-
     private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
-
-    private boolean alreadyGenerated = false;
 
     private Writer writer = new Writer();
     private Algorithm1 algo1 = new Algorithm1();
 
+    private int rowsNumber = 10;
+    private int columnsNumber = 10;
+
     public TileMapGenerator() {
-        setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
-        setDoubleBuffered(true);
-        setFocusable(true);
-        requestFocus();
-        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     @Override
@@ -55,14 +51,20 @@ public class TileMapGenerator extends JPanel implements Scene {
             } else {
                 System.out.println("I'm creating the following map: " + filePath);
             }
-
-            alreadyGenerated = true;
-            int [][] tiles = algo1.generateRandomArray(10, 10);
-            writer.generateTileMap(filePath, tiles);
+            int [][] tileMap = algo1.generateRandomArray(rowsNumber, columnsNumber);
+            writer.generateTileMap(filePath, tileMap);
+            printGeneratedTileMap(tileMap);
         }
 
         if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
+        }
+    }
+
+    private void printGeneratedTileMap(int [][]map){
+        System.out.println("---------- Generated Map ---------");
+        for (int r = 0; r < rowsNumber; r++){
+            System.out.println(Arrays.toString(map[r]));
         }
     }
 

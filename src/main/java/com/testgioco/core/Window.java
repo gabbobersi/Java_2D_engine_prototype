@@ -24,11 +24,13 @@ public class Window extends JFrame {
             setSize(settings.screenWidth, settings.screenHeight);
             getContentPane().removeAll();
             add(panel);
+
+            // Panel settings
             panel.setBackground(Color.WHITE);
             panel.setFocusable(true);
             panel.requestFocus();
             panel.setDoubleBuffered(true);
-
+            panel.setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
 
             pack();
             revalidate();

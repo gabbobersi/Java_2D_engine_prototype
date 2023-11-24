@@ -61,11 +61,11 @@ public class Button {
     }
 
     public boolean isClicked(){
-        boolean cond = box.hasBeenClicked();
-        if (cond){
-            // System.out.println("-> Bottone " + label.getText() + " cliccato");
+        boolean condition = box.hasBeenClicked();
+        if (condition){
+            System.out.println("Cliccato " + label.getText());
         }
-        return cond;
+        return condition;
     }
 
     public boolean isPressed(){
