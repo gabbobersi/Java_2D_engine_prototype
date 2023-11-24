@@ -13,4 +13,8 @@ public class GameSettings {
     public final int screenHeight = 600;
     public final String gameTitle = "Gioco di esempio";
     public final GameState.State defaultScene = GameState.State.MAIN_MENU;
+
+    // Active map informations.
+    public static int mapRowsNumber = 10;
+    public static int mapColumnsNumber = 10;
 }

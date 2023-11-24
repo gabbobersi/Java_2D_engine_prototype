@@ -1,6 +1,7 @@
 package com.testgioco.core;
 
 import com.testgioco.entities.Player;
+import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -123,10 +124,17 @@ public class TileManager {
             bufferReader.close();
             System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
             printTileMap(mapTileNum, mapRows);
-
+            updateSettings();
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+    /**
+     * Adjust global map's informations
+     * */
+    private void updateSettings() {
+        GameSettings.mapRowsNumber = mapRows;
+        GameSettings.mapColumnsNumber = mapCols;
     }
 
     /**

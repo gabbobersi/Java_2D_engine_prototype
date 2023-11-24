@@ -1,7 +1,5 @@
 package com.tilemapgenerator;
 
-import com.testgioco.core.Grid;
-
 import java.io.File;
 import java.io.FileWriter;
 

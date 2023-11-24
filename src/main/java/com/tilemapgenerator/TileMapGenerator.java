@@ -1,7 +1,6 @@
 package com.tilemapgenerator;
 
 import com.testgioco.core.GameState;
-import com.testgioco.core.Grid;
 import com.testgioco.core.TileManager;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
@@ -12,8 +11,6 @@ import com.testgioco.utilities.Singletons;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.time.LocalDate;
-import java.util.Arrays;
 
 public class TileMapGenerator extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();
@@ -33,8 +30,8 @@ public class TileMapGenerator extends JPanel implements Scene {
     private Writer writer = new Writer();
     private Algorithm1 algo1 = new Algorithm1();
 
-    private int rowsNumber = 15;
-    private int columnsNumber = 15;
+    private int rowsNumber = GameSettings.mapRowsNumber;
+    private int columnsNumber = GameSettings.mapColumnsNumber;
 
     public TileMapGenerator() {
         addMouseListener(Singletons.mouseH);

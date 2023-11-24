@@ -4,7 +4,7 @@
 
 package com.tilemapgenerator;
 
-import com.testgioco.core.Grid;
+import com.testgioco.utilities.GameSettings;
 import com.tilemapgenerator.interfaces.Algorithm;
 
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class Algorithm1 implements Algorithm {
     private final int WALL = 1;
     private final int WATER = 2;
 
-    private final Grid grid = new Grid();
+    private GameSettings settings = new GameSettings();
 
     @Override
     public int[][] generateRandomArray (int rowNumber, int colNumber) {
@@ -34,7 +34,7 @@ public class Algorithm1 implements Algorithm {
 
         for (int row=0; row < rowNumber; row++){
             for (int col=0; col < rowNumber; col++){
-                probabilities[0] += Math.abs(row - grid.rowNumber / 2) * 2;
+                probabilities[0] += Math.abs(row - GameSettings.mapRowsNumber / 2) * 2;
 
                 int tile = getRandomValueBasedOnProbabilities(rnd, probabilities);;
 
@@ -42,8 +42,12 @@ public class Algorithm1 implements Algorithm {
                     probabilities[1] = 5;
                 }
 
-                if (isAtBorder(row, col) && rnd.nextInt(100) < PROBABILITY_BORDER_WALL) {
+                if (isInCenter(row, col) && rnd.nextInt(100) < PROBABILITY_BORDER_WALL) {
                     tile = WALL;
+                }
+
+                if (isAtBorder(row, col) && rnd.nextInt(100) < PROBABILITY_WALL) {
+                    tile = WATER;
                 }
 
                 if (isInCenter(row, col)) {
@@ -72,12 +76,12 @@ public class Algorithm1 implements Algorithm {
 
     //Verifica se la posizione è nel centro della mappa
     private boolean isInCenter(int row, int col) {
-        return row >= grid.rowNumber / 4 && row <= 3 * grid.rowNumber / 4 && col >= grid.columnNumber / 4 && col <= 3 * grid.columnNumber / 4;
+        return row >= GameSettings.mapRowsNumber / 4 && row <= 3 * GameSettings.mapRowsNumber / 4 && col >= GameSettings.mapColumnsNumber / 4 && col <= 3 * GameSettings.mapColumnsNumber / 4;
     }
 
     //Verifica se la posizione è ai bordi della mappa
     private boolean isAtBorder(int row, int col) {
-        return col == 0 || col == grid.columnNumber - 1 || row == 0 || row == grid.rowNumber - 1;
+        return col == 0 || col == GameSettings.mapColumnsNumber - 1 || row == 0 || row == GameSettings.mapRowsNumber - 1;
     }
 
 }

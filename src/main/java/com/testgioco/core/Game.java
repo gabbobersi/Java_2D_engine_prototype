@@ -4,7 +4,6 @@ import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
 import com.testgioco.core.scenes.Test;
 import com.testgioco.utilities.Constants;
-import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
 

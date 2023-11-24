@@ -1,11 +1,12 @@
 package com.testgioco.core;
 
+import com.testgioco.utilities.DebugGrid;
+
 public class World {
     private final Cell cell = new Cell();
-    private final Grid grid = new Grid();
 
-    public int maxColumn = grid.columnNumber;
-    public int maxRow = grid.rowNumber;
+    public int maxColumn = 100;
+    public int maxRow = 100;
     public int width = cell.width * maxColumn;
     public int height = cell.height * maxColumn;
 
