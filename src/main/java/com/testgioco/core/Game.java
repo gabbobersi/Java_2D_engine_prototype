@@ -4,6 +4,8 @@ import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
 import com.testgioco.core.scenes.Test;
 import com.testgioco.utilities.Constants;
+import com.testgioco.utilities.GameSettings;
+import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
 
 import javax.swing.*;
@@ -13,23 +15,37 @@ public class Game implements Runnable {
     private final Constants constants = new Constants();
     private Thread gameThread;
     private volatile boolean isRunning = true;
-    private Window window;
 
-    private MainMenu mainMenu;
-    private Play play;
-    private TileMapGenerator tmapgen;
-    private Test test;
+    private final Window window;
+    private final JPanel mainPanel;
+    private final CardLayout cardLayout;
+
+    private final MainMenu mainMenu;
+    private final Play play;
+    private final TileMapGenerator tmapgen;
+    private final Test test;
 
     public Game() {
-        // Is this necessary? Should I create an instance on demand only?
         mainMenu = new MainMenu();
         play = new Play();
         tmapgen = new TileMapGenerator();
         test = new Test();
 
-        // Default panel
-        window = new Window();
-        window.setPanel(getPanelInstance(GameState.getActiveState()));
+        // Setting the cardLayout system
+        mainPanel = new JPanel();
+        cardLayout = new CardLayout();
+        mainPanel.setLayout(cardLayout);
+
+        // Adding all the "cards" to the main panel
+        mainPanel.add(mainMenu, GameState.State.MAIN_MENU.name());
+        mainPanel.add(play, GameState.State.PLAY.name());
+        mainPanel.add(tmapgen, GameState.State.TILE_MAP_GENERATOR.name());
+        mainPanel.add(test, GameState.State.TEST.name());
+
+        // Show the default card
+        cardLayout.show(mainPanel, GameState.getActiveStateName());
+
+        window = new Window(mainPanel);
     }
 
     public void start(){
@@ -73,7 +89,18 @@ public class Game implements Runnable {
 
     private void runScene(GameState.State state, boolean setPanel){
         if (setPanel){
-            window.setPanel(getPanelInstance(state));
+            // Prevents that mouse pressed event propagate through panels
+            Singletons.mouseH.released = true;
+            Singletons.mouseH.x = 0;
+            Singletons.mouseH.y = 0;
+
+            cardLayout.show(mainPanel, GameState.getActiveStateName());
+            JPanel activePanel = getPanelInstance(GameState.getActiveState());
+            activePanel.setBackground(Color.WHITE);
+            activePanel.requestFocus();
+
+            window.revalidate();
+            window.repaint();
         }
         GameState.setActiveState(state);
 

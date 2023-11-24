@@ -43,7 +43,6 @@ public class Test extends JPanel implements Scene {
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
         addKeyListener(inputH);
-
         GridLayout grid = new GridLayout(2, 1);
         setLayout(grid);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
