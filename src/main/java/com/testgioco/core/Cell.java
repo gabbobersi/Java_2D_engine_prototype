@@ -5,6 +5,6 @@ import com.testgioco.utilities.DebugGrid;
 
 public class Cell {
     private final GameSettings settings = new GameSettings();
-    public int height = settings.screenHeight / GameSettings.mapRowsNumber;
-    public int width = settings.screenWidth / GameSettings.mapColumnsNumber;
+    public int height = settings.screenHeight / settings.cameraHeight;
+    public int width = settings.screenWidth / settings.cameraWidth;
 }

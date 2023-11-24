@@ -88,6 +88,7 @@ public class TileManager {
             }
             mapRows++;
         }
+        reader.close();
     }
 
     public void loadMap (String mapPath){
@@ -122,6 +123,9 @@ public class TileManager {
                 }
             }
             bufferReader.close();
+            streamReader.close();
+            stream.close();
+
             System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
             printTileMap(mapTileNum, mapRows);
             updateSettings();

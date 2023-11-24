@@ -1,7 +1,5 @@
 package com.testgioco.core;
 
-import com.testgioco.utilities.DebugGrid;
-
 public class World {
     private final Cell cell = new Cell();
 

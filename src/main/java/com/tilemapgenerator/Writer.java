@@ -7,14 +7,13 @@ public class Writer {
     public void generateTileMap(String filePath, int[][] tiles) {
         File file = new File(filePath);
         try (FileWriter fileWriter = new FileWriter(file)) {
-            for (int row = 0; row < tiles.length; row++) {
+            for (int[] tile : tiles) {
                 for (int col = 0; col < tiles[0].length; col++) {
-                    String value = Integer.toString(tiles[row][col]);
+                    String value = Integer.toString(tile[col]);
                     fileWriter.write(value + " ");
                 }
                 fileWriter.write("\n");
             }
-            fileWriter.close();
             System.out.println("Generated and written tile map!");
         } catch (Exception e) {
             System.out.println("Something went wrong!");

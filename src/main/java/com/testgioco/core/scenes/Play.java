@@ -31,13 +31,13 @@ public class Play extends JPanel implements Scene {
 
         player = new Player(inputHandler);
         tileManager = new TileManager(player);
-        tileManager.loadMap("/maps/tmapgen_1.txt");
     }
 
     @Override
     public void awake(){
         System.out.println("AWAKE");
         tileManager.loadMap("/maps/tmapgen_1.txt");
+        repaint();
     }
 
     @Override
