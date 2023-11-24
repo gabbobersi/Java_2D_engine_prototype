@@ -32,8 +32,8 @@ public class Play extends JPanel implements Scene {
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
 
         player = new Player(inputHandler);
-        tileManager = new TileManager(player, "/maps/tmapgen_1.txt");
-        tileManager.loadMap();
+        tileManager = new TileManager(player);
+        tileManager.loadMap("/maps/tmapgen_1.txt");
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Play extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileManager.draw(g2);
-        grid.drawDebugGrid(g2);
+//        grid.drawDebugGrid(g2);
         debug.draw(g2);
         player.draw(g2);
         g2.dispose();

@@ -143,7 +143,10 @@ public class Game implements Runnable {
             case TEST:
                 return test;
             default:
-                System.out.println("WARNING - getPanelInstance - Non ho trovato lo stato di cui vuoi l'istanza!");
+                // Warning only if I'm not exiting the game.
+                if (!state.name().equals(GameState.State.QUIT.name())) {
+                    System.out.println("WARNING - getPanelInstance - Non riesco a trovare l'istanza voluta: '" + state.name() +  "'!");
+                }
                 return mainMenu;
         }
     }

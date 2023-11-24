@@ -2,6 +2,7 @@ package com.tilemapgenerator;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.Grid;
+import com.testgioco.core.TileManager;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
@@ -32,8 +33,8 @@ public class TileMapGenerator extends JPanel implements Scene {
     private Writer writer = new Writer();
     private Algorithm1 algo1 = new Algorithm1();
 
-    private int rowsNumber = 10;
-    private int columnsNumber = 10;
+    private int rowsNumber = 15;
+    private int columnsNumber = 15;
 
     public TileMapGenerator() {
         addMouseListener(Singletons.mouseH);
@@ -57,18 +58,11 @@ public class TileMapGenerator extends JPanel implements Scene {
             }
             int [][] tileMap = algo1.generateRandomArray(rowsNumber, columnsNumber);
             writer.generateTileMap(filePath, tileMap);
-            printGeneratedTileMap(tileMap);
+            TileManager.printTileMap(tileMap, rowsNumber);
         }
 
         if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
-        }
-    }
-
-    private void printGeneratedTileMap(int [][]map){
-        System.out.println("---------- Generated Map ---------");
-        for (int r = 0; r < rowsNumber; r++){
-            System.out.println(Arrays.toString(map[r]));
         }
     }
 
