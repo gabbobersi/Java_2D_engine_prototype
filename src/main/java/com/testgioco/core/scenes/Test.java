@@ -45,6 +45,9 @@ public class Test extends JPanel implements Scene {
         addKeyListener(inputH);
         GridLayout grid = new GridLayout(2, 1);
         setLayout(grid);
+
+        setDoubleBuffered(true);
+        setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 

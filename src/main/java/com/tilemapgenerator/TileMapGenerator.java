@@ -38,6 +38,10 @@ public class TileMapGenerator extends JPanel implements Scene {
     public TileMapGenerator() {
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
+
+        setDoubleBuffered(true);
+        setFocusable(true);
+        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     @Override
