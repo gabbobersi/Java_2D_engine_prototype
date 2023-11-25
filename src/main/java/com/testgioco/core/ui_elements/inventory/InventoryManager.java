@@ -1,18 +1,22 @@
 package com.testgioco.core.ui_elements.inventory;
 
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.ui_elements.ButtonImage;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.core.ui_elements.Button;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryManager {
     private GameSettings settings = new GameSettings();
     private JPanel panel;
-    private List<Button> slots;
+    private List<ButtonImage> slots;
     private int rows;
     private int columns;
     private int slotWidth;
@@ -43,14 +47,20 @@ public class InventoryManager {
 
     private void initSlots() {
         slots = new ArrayList<>();
+        BufferedImage defaultImage;
+        try {
+            defaultImage = ImageIO.read(new File("assets/tiles/grass_01.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 int x = col * (slotWidth + padding);
                 int y = row * (slotHeight + padding);
 
-                Button slot = new Button(panel, new Vector2DInt(x, y), slotWidth , slotHeight, "", 4,
-                        Color.GRAY, btnFont);
+                ButtonImage slot = new ButtonImage(panel, new Vector2DInt(x, y), slotWidth , slotHeight, 4,
+                        defaultImage);
                 slots.add(slot);
             }
         }
@@ -60,7 +70,7 @@ public class InventoryManager {
         int currentX = inventoryX;
         int currentY = inventoryY;
 
-        for (Button slot : slots) {
+        for (ButtonImage slot : slots) {
             slot.setVector(new Vector2DInt(currentX, currentY));
             slot.draw(g2);
 

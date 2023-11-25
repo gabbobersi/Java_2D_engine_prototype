@@ -159,7 +159,6 @@ public class Player extends Entity {
                 break;
         };
         g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), this.cell.width
-                , this.cell.height,
-                null);
+                , this.cell.height, null);
     }
 }

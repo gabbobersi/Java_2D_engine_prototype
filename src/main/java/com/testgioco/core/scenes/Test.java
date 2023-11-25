@@ -4,14 +4,19 @@ import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
+import com.testgioco.core.ui_elements.ButtonImage;
 import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Test extends JPanel implements Scene {
     GameSettings settings = new GameSettings();
@@ -22,6 +27,7 @@ public class Test extends JPanel implements Scene {
     private final int bordThickness = 6;
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
+
     private final Button btnTest = new Button(this,
             new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "test", bordThickness,
             btnColor, btnFont);
@@ -39,6 +45,9 @@ public class Test extends JPanel implements Scene {
 
     private BarManager barManager = new BarManager();
     private final InventoryManager inventory;
+
+
+    private ButtonImage btnImage;
 
     public Test(){
         super();
@@ -90,7 +99,9 @@ public class Test extends JPanel implements Scene {
         //btnTest.draw(g2);
         //btnMainMenu.draw(g2);
 
-        inventory.draw(g2);
+        if (inputH.spacePressed){
+            inventory.draw(g2);
+        }
         g2.dispose();
     }
 }
