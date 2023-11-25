@@ -1,4 +1,4 @@
-## OOOP, OOD E OOA: Cosa sono?
+## OOP, OOD E OOA: Cosa sono?
 **OOP (Object-Oriented Programming)**, **OOD (Object-Oriented Design)**, 
 e **OOA (Object-Oriented Analysis)** sono concetti correlati ma _distinti_ nel
 contesto della programmazione orientata agli oggetti.
