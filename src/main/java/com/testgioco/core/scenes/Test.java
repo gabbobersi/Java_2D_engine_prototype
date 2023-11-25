@@ -48,7 +48,7 @@ public class Test extends JPanel implements Scene {
         setFocusable(false);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
 
-        inventory = new InventoryManager(4, 4, 50, 50, 5);
+        inventory = new InventoryManager(this, 2, 4, 50, 50, 3);
     }
 
     @Override
@@ -61,7 +61,6 @@ public class Test extends JPanel implements Scene {
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
-
     }
 
     @Override
@@ -77,7 +76,7 @@ public class Test extends JPanel implements Scene {
         //btnTest.draw(g2);
         //btnMainMenu.draw(g2);
 
-        inventory.draw(g2, settings);
+        inventory.draw(g2);
         g2.dispose();
     }
 }

@@ -1,15 +1,18 @@
 package com.testgioco.core.ui_elements.inventory;
 
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.core.ui_elements.Box;
 import com.testgioco.utilities.GameSettings;
+import com.testgioco.core.ui_elements.Button;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryManager {
-    private List<Box> slots;
+    private GameSettings settings = new GameSettings();
+    private JPanel panel;
+    private List<Button> slots;
     private int rows;
     private int columns;
     private int slotWidth;
@@ -17,17 +20,28 @@ public class InventoryManager {
     private int padding;
     private int margin;
 
-    public InventoryManager(int rows, int columns, int slotWidth, int slotHeight, int padding) {
+    private int inventoryWidth;
+    private int inventoryX;
+    private int inventoryY;
+
+    private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
+
+    public InventoryManager(JPanel panel, int rows, int columns, int slotWidth, int slotHeight, int padding) {
+        this.panel = panel;
         this.rows = rows;
         this.columns = columns;
         this.slotWidth = slotWidth;
         this.slotHeight = slotHeight;
         this.padding = padding;
         this.margin = 10;
-        initSlot();
+        initSlots();
+
+        inventoryWidth = columns * (slotWidth + padding) - padding;
+        inventoryX = settings.screenWidth - inventoryWidth - margin;
+        inventoryY = margin;
     }
 
-    private void initSlot() {
+    private void initSlots() {
         slots = new ArrayList<>();
 
         for (int row = 0; row < rows; row++) {
@@ -35,25 +49,19 @@ public class InventoryManager {
                 int x = col * (slotWidth + padding);
                 int y = row * (slotHeight + padding);
 
-                Box slot = new Box(new Vector2DInt(x, y), slotWidth, slotHeight, 2, Color.GRAY);
+                Button slot = new Button(panel, new Vector2DInt(x, y), slotWidth , slotHeight, "", 4,
+                        Color.GRAY, btnFont);
                 slots.add(slot);
             }
         }
     }
 
-    public void draw(Graphics2D g2, GameSettings settings) {
-        int inventoryWidth = columns * (slotWidth + padding) - padding;
-
-        int inventoryX = settings.screenWidth - inventoryWidth - margin;
-        int inventoryY = margin;
-
+    public void draw(Graphics2D g2) {
         int currentX = inventoryX;
         int currentY = inventoryY;
 
-        for (Box slot : slots) {
-            slot.setX(currentX);
-            slot.setY(currentY);
-
+        for (Button slot : slots) {
+            slot.setVector(new Vector2DInt(currentX, currentY));
             slot.draw(g2);
 
             currentX += slotWidth + padding;

@@ -10,13 +10,13 @@ public class Button {
     private final Box box;
     private final Label label;
     private final JPanel panel;
-    private final Vector2DInt vector;
     private final int width;
     private final int height;
     private final int bordThickness;
     private final Color buttonColor;
     private final String text;
     private final Font font;
+    private Vector2DInt vector;
 
     public Button(JPanel panel, Vector2DInt vector, int width, int height, String text, int bordThickness,
                   Color buttonColor, Font font){
@@ -30,10 +30,8 @@ public class Button {
         this.font = font;
 
         box = new Box(vector, width, height, bordThickness, buttonColor);
-        setBox();
-
         label = new Label(vector, text, font, Color.BLACK);
-        setLabel();
+        update();
     }
     private void setBox(){
         box.setX(vector.getX());
@@ -61,11 +59,7 @@ public class Button {
     }
 
     public boolean isClicked(){
-        boolean cond = box.hasBeenClicked();
-        if (cond){
-            // System.out.println("-> Bottone " + label.getText() + " cliccato");
-        }
-        return cond;
+        return box.hasBeenClicked();
     }
 
     public boolean isPressed(){
@@ -78,7 +72,6 @@ public class Button {
         } else {
             box.setColor(buttonColor);
         }
-        box.draw(g2);
 
         // Label
         if (box.hasMouseOver()){
@@ -86,10 +79,9 @@ public class Button {
         } else {
             label.setColor(Color.BLACK);
         }
-        label.draw(g2);
 
-        // After drawing, so "g2.setFont" happens at the right time inside the label
-        // setLabel();
+        box.draw(g2);
+        label.draw(g2);
     }
 
     public void setReleased(boolean value){
@@ -98,5 +90,18 @@ public class Button {
 
     public String getText(){
         return label.getText();
+    }
+
+    public void setVector(Vector2DInt vector){
+        this.vector = vector;
+        update();
+    }
+
+    /**
+     * Updates button's elements.
+     * */
+    private void update(){
+        setBox();
+        setLabel();
     }
 }
