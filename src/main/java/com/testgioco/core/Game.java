@@ -156,22 +156,15 @@ public class Game implements Runnable {
     }
 
     private void drawScene(GameState.State state){
-        switch (state){
-            case MAIN_MENU:
-                mainMenu.repaint();
-                break;
-            case PLAY:
-                play.repaint();
-                break;
-            case TILE_MAP_GENERATOR:
-                tmapgen.repaint();
-                break;
-            case TEST:
-                test.repaint();
-                break;
-            default:
+        switch (state) {
+            case MAIN_MENU -> mainMenu.repaint();
+            case PLAY -> play.repaint();
+            case TILE_MAP_GENERATOR -> tmapgen.repaint();
+            case TEST -> test.repaint();
+            default -> {
                 System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
                 mainMenu.repaint();
+            }
         }
     }
 

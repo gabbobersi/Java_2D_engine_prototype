@@ -53,7 +53,7 @@ public class Play extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileManager.draw(g2);
-//        debugGrid.drawDebugGrid(g2);
+//        debugGrid.draw(g2);
         debug.draw(g2);
         player.draw(g2);
         g2.dispose();
