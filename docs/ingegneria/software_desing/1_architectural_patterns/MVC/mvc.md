@@ -5,7 +5,7 @@ Il pattern MVC prevede la suddivisione di un'interfaccia grafica in tre parti:
 - **View** rappresenta i dati
 - **Controller**, in base all'input dell'utente aggiorna Model o View
 
-![mvc.png](..%2F..%2Fresources%2Fmvc.png)
+![mvc.png](..%2F..%2F..%2F..%2Fresources%2Fmvc.png)
 
 _Separare il codice in tre parti distinte lo rende più pulito e comprensibile, ciò viene in aiuto quando dobbiamo sviluppare e debuggare applicazioni complesse._
 

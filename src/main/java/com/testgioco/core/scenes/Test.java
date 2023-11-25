@@ -2,7 +2,9 @@ package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
+import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.utilities.GameSettings;
@@ -33,26 +35,32 @@ public class Test extends JPanel implements Scene {
 
     private int counter = 0;
 
+    private final InputHandler inputH = new InputHandler();
+
+    private BarManager barManager = new BarManager();
     private final InventoryManager inventory;
-
-
 
     public Test(){
         super();
-        setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
-        setDoubleBuffered(true);
+        addKeyListener(inputH);
+        GridLayout grid = new GridLayout(2, 1);
+        setLayout(grid);
 
-        // DISABLE KEYBOARD TO TEST JUST MOUSE
-        setFocusable(false);
+        setDoubleBuffered(true);
+        setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
 
         inventory = new InventoryManager(this, 2, 4, 50, 50, 3);
     }
 
+    public void awake(){
+
+    }
+
     @Override
-    public void run() {
+    public void fixedUpdate() {
         if (btnTest.isClicked()){
             counter++;
         } else if (btnResetCounter.isClicked()){
@@ -60,6 +68,12 @@ public class Test extends JPanel implements Scene {
             btnResetCounter.setReleased(true);
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
+        }
+
+        if (inputH.spacePressed){
+            barManager.reduceHealth(10);
+        } else if (inputH.leftPressed){
+            barManager.resetHealth();
         }
     }
 

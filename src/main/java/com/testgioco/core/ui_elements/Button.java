@@ -10,6 +10,7 @@ public class Button {
     private final Box box;
     private final Label label;
     private final JPanel panel;
+    private final Vector2DInt vector;
     private final int width;
     private final int height;
     private final int bordThickness;

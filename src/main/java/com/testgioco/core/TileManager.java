@@ -1,30 +1,31 @@
 package com.testgioco.core;
 
-import com.testgioco.core.scenes.Play;
 import com.testgioco.entities.Player;
+import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class TileManager {
-    Cell cell = new Cell();
-    Player player;
-    World world = new World();
-    Tile[] tiles;
-    int[][] mapTileNum;
+    private final Cell cell = new Cell();
+    private final Player player;
+    private final Tile[] tiles = new Tile[10];
+    private int[][] mapTileNum;
 
-    String mapPath;
+    private int mapRows;
+    private int mapCols;
 
-    public TileManager(Player player, String mapPath) {
+    public TileManager(Player player) {
         this.player = player;
-        tiles = new Tile[10];
-        mapTileNum = new int[world.maxRow][world.maxColumn];
-        getTileImage();
-        this.mapPath = mapPath;
+        loadTileImages();
     }
-    public void getTileImage() {
+
+
+    private void loadTileImages() {
         try{
             tiles[0] = new Tile();
             tiles[0].image = ImageIO.read(new File("assets/tiles/grass_01.png"));
@@ -44,9 +45,8 @@ public class TileManager {
 
     }
     public void draw (Graphics g2) {
-
-        for (int r = 0; r < world.maxRow; r++) {
-            for (int c = 0; c < world.maxColumn; c++) {
+        for (int r = 0; r < mapRows; r++) {
+            for (int c = 0; c < mapCols; c++) {
                 int tileIndex = mapTileNum[r][c];
 
                 // Tile position, to draw.
@@ -61,41 +61,94 @@ public class TileManager {
             }
         }
     }
-    public void loadMap (){
+
+    /**
+     * Get map rows and columns number.
+     * */
+    private void getMapDimension(String filePath) throws FileNotFoundException {
+        mapRows = 0;
+        mapCols = 0;
+
+        File f = new File(filePath);
+        if (!f.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner reader = null;
+
+        try {
+            reader = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        while(reader.hasNext()){
+            String line = reader.nextLine();
+            if (mapCols == 0){
+                mapCols = line.length() / 2;
+            }
+            mapRows++;
+        }
+        reader.close();
+    }
+
+    public void loadMap (String mapPath){
         try{
             // Example path "/maps/maps01.txt"
-            InputStream is = getClass().getResourceAsStream(mapPath);
-            System.out.println("Sto usando la mappa: " + mapPath);
-            assert is != null;
-            InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(isr);
+            getMapDimension("assets/" + mapPath);
+            mapTileNum = new int[mapRows][mapCols];
 
-            for (int r = 0; r < world.maxRow; r++) {
-                String line = br.readLine();
-                String[] numbers = new String[world.maxColumn];
+            InputStream stream = getClass().getResourceAsStream(mapPath);
+            assert stream != null;
 
-                // If the line has been correctly read, I just take those values.
-                // Else, I take a default tile
+            InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+            BufferedReader bufferReader = new BufferedReader(streamReader);
+
+            for (int r = 0; r < mapRows; r++) {
+                String line = bufferReader.readLine();
+                String[] numbers = new String[mapCols];
+
+                // If line has not been correctly read, just take a default line.
                 if (line != null) {
                     numbers = line.split(" ");
                 } else {
-                    for (int i = 0; i < world.maxColumn; i++){
+                    for (int i = 0; i < mapCols; i++){
                         numbers[i] = "9";
                     }
                 }
 
-                for ( int c = 0; c < world.maxColumn; c++) {
+                // Populate final array containing all the tiles in "array of int" format.
+                for (int c = 0; c < mapCols; c++) {
                     int num = Integer.parseInt(numbers[c]);
                     mapTileNum[r][c] = num;
-
                 }
             }
-            br.close();
+            bufferReader.close();
+            streamReader.close();
+            stream.close();
 
+            System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
+            printTileMap(mapTileNum, mapRows);
+            updateSettings();
         } catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
+    /**
+     * Adjust global map's informations
+     * */
+    private void updateSettings() {
+        GameSettings.mapRowsNumber = mapRows;
+        GameSettings.mapColumnsNumber = mapCols;
+    }
+
+    /**
+     * Print a tile map
+     * */
+    public static void printTileMap(int [][]map, int rowsNumber){
+        System.out.println("---------- Tile map dimension ----------");
+        for (int r = 0; r < rowsNumber; r++){
+            System.out.println(Arrays.toString(map[r]));
+        }
+    }
+
 }
