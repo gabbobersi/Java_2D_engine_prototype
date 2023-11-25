@@ -1,6 +1,7 @@
 package com.testgioco.entities.collision_manager;
 
 
+import com.testgioco.core.Cell;
 import com.testgioco.core.TileManager;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.entities.Player;
@@ -14,14 +15,16 @@ alla direzione di input fornita
  */
 public class CollisionManager {
     private static final int TILE_INDEX_OF_WALL = 1;
+    private Cell cell = new Cell();
     private TileManager tileManager;
-    private Player player;
     private InputHandler inputHandler;
+    private Player player;
+    private int [][]tileMap;
 
     public CollisionManager(TileManager tileManager, Player player, InputHandler inputHandler) {
         this.tileManager = tileManager;
-        this.player = player;
         this.inputHandler = inputHandler;
+        this.player = player;
     }
 
     /**
@@ -43,33 +46,28 @@ public class CollisionManager {
      */
 
     public boolean canMove() {
-        int futureX = player.positionOnTheMap.getX();
-        int futureY = player.positionOnTheMap.getY();
-        int tileSize = tileManager.cell.width;
+        int futureX = player.positionOnTheMap.getX() - cell.width / 2;
+        int futureY = player.positionOnTheMap.getY() - cell.height / 2;
 
         if (inputHandler.upPressed) {
-            futureY -= player.speed;
+            futureY -= cell.height;
         }
         if (inputHandler.downPressed) {
-            futureY += player.speed;
+            futureY += cell.height;;
         }
         if (inputHandler.leftPressed) {
-            futureX -= player.speed;
+            futureX -= cell.width;
         }
         if (inputHandler.rightPressed) {
-            futureX += player.speed;
+            futureX += cell.width;
         }
 
-        int futureTileColumn = futureX / tileSize;
-        int futureTileRow = futureY / tileSize;
+        int futureTileColumn = futureX / cell.width;
+        int futureTileRow = futureY / cell.height;
 
         // Controlla se il movimento colpisce un muro
         return canMoveToTile(futureTileRow, futureTileColumn, futureX, futureY);
     }
-
-
-
-
 
     /*
      This code snippet defines a method called canMoveToTile that checks
@@ -93,26 +91,29 @@ public class CollisionManager {
      */
 
     private boolean canMoveToTile(int tileRow, int tileColumn, int futureX, int futureY) {
-        boolean withinBounds = tileRow >= 0 && tileRow < tileManager.mapTileNum.length &&
-                tileColumn >= 0 && tileColumn < tileManager.mapTileNum[0].length;
+        tileMap = tileManager.getTileMap();
+
+        boolean withinBounds = tileRow >= 0 && tileRow < tileMap.length &&
+                tileColumn >= 0 && tileColumn < tileMap[0].length;
 
         if (!withinBounds) {
             return false;
         }
 
-        int tileX = tileColumn * tileManager.cell.width;
-        int tileY = tileRow * tileManager.cell.height;
+        int tileX = tileColumn * cell.width;
+        int tileY = tileRow * cell.height;
 
-        boolean collides = tileManager.mapTileNum[tileRow][tileColumn] == TILE_INDEX_OF_WALL;
+        int [][] tileMap = tileManager.getTileMap();
+        boolean collides = tileMap[tileRow][tileColumn] == TILE_INDEX_OF_WALL;
 
-        int playerWidth = player.getPlayerWidth(); // Ottieni la larghezza del giocatore
-        int playerHeight = player.getPlayerHeight(); // Ottieni l'altezza del giocatore
+        int playerWidth = cell.width; // Ottieni la larghezza del giocatore
+        int playerHeight = cell.height; // Ottieni l'altezza del giocatore
 
         // Verifica se il personaggio si sovrappone al tile del muro considerando un offset
         boolean collidesWithWall = futureX + playerWidth > tileX &&
-                futureX < tileX + tileManager.cell.width &&
+                futureX < tileX + cell.width &&
                 futureY + playerHeight > tileY &&
-                futureY < tileY + tileManager.cell.height;
+                futureY < tileY + cell.height;
 
         return !collides || !collidesWithWall;
     }

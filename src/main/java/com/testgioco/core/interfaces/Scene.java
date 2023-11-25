@@ -1,5 +1,6 @@
 package com.testgioco.core.interfaces;
 
 public interface Scene {
-    void run();
+    void awake();
+    void fixedUpdate();
 }

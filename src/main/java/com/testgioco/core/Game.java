@@ -4,31 +4,47 @@ import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
 import com.testgioco.core.scenes.Test;
 import com.testgioco.utilities.Constants;
+import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Game implements Runnable {
     private final Constants constants = new Constants();
     private Thread gameThread;
     private volatile boolean isRunning = true;
-    private Window window;
 
-    private MainMenu mainMenu;
-    private Play play;
-    private TileMapGenerator tmapgen;
-    private Test test;
+    private final Window window;
+    private final JPanel mainPanel;
+    private final CardLayout cardLayout;
+
+    private final MainMenu mainMenu;
+    private final Play play;
+    private final TileMapGenerator tmapgen;
+    private final Test test;
 
     public Game() {
-        // Is this necessary? Should I create an instance on demand only?
         mainMenu = new MainMenu();
         play = new Play();
         tmapgen = new TileMapGenerator();
         test = new Test();
 
-        // Default panel
-        window = new Window();
-        window.setPanel(getPanelInstance(GameState.getActiveState()));
+        // Setting the cardLayout system
+        mainPanel = new JPanel();
+        cardLayout = new CardLayout();
+        mainPanel.setLayout(cardLayout);
+
+        // Adding all the "cards" to the main panel
+        mainPanel.add(mainMenu, GameState.State.MAIN_MENU.name());
+        mainPanel.add(play, GameState.State.PLAY.name());
+        mainPanel.add(tmapgen, GameState.State.TILE_MAP_GENERATOR.name());
+        mainPanel.add(test, GameState.State.TEST.name());
+
+        // Show the default card
+        cardLayout.show(mainPanel, GameState.getActiveStateName());
+
+        window = new Window(mainPanel);
     }
 
     public void start(){
@@ -71,20 +87,35 @@ public class Game implements Runnable {
     }
 
     private void runScene(GameState.State state, boolean setPanel){
-        if (setPanel){
-            window.setPanel(getPanelInstance(state));
-        }
         GameState.setActiveState(state);
+
+        if (setPanel){
+            // Prevents that mouse pressed event propagate through panels
+            Singletons.mouseH.released = true;
+            Singletons.mouseH.x = 0;
+            Singletons.mouseH.y = 0;
+
+            cardLayout.show(mainPanel, GameState.getActiveStateName());
+            JPanel activePanel = getPanelInstance(GameState.getActiveState());
+            activePanel.setBackground(Color.WHITE);
+            activePanel.requestFocus();
+
+            window.revalidate();
+            window.repaint();
+        }
 
         switch (state){
             case MAIN_MENU:
-                mainMenu.run();
+                if (setPanel) mainMenu.awake();
+                mainMenu.fixedUpdate();
                 break;
             case PLAY:
-                play.run();
+                if (setPanel) play.awake();
+                play.fixedUpdate();
                 break;
             case TILE_MAP_GENERATOR:
-                tmapgen.run();
+                if (setPanel) tmapgen.awake();
+                tmapgen.fixedUpdate();
                 break;
             case QUIT:
                 stop();
@@ -92,12 +123,13 @@ public class Game implements Runnable {
                 System.exit(0);
                 break;
             case TEST:
-                test.run();
+                if (setPanel) test.awake();
+                test.fixedUpdate();
                 break;
             default:
                 System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
                         "interessa!");
-                mainMenu.run();
+                mainMenu.fixedUpdate();
         }
     }
 
@@ -115,28 +147,24 @@ public class Game implements Runnable {
             case TEST:
                 return test;
             default:
-                System.out.println("WARNING - getPanelInstance - Non ho trovato lo stato di cui vuoi l'istanza!");
+                // Warning only if I'm not exiting the game.
+                if (!state.name().equals(GameState.State.QUIT.name())) {
+                    System.out.println("WARNING - getPanelInstance - Non riesco a trovare l'istanza voluta: '" + state.name() +  "'!");
+                }
                 return mainMenu;
         }
     }
 
     private void drawScene(GameState.State state){
-        switch (state){
-            case MAIN_MENU:
-                mainMenu.repaint();
-                break;
-            case PLAY:
-                play.repaint();
-                break;
-            case TILE_MAP_GENERATOR:
-                tmapgen.repaint();
-                break;
-            case TEST:
-                test.repaint();
-                break;
-            default:
+        switch (state) {
+            case MAIN_MENU -> mainMenu.repaint();
+            case PLAY -> play.repaint();
+            case TILE_MAP_GENERATOR -> tmapgen.repaint();
+            case TEST -> test.repaint();
+            default -> {
                 System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
                 mainMenu.repaint();
+            }
         }
     }
 

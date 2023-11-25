@@ -91,6 +91,11 @@ public class Player extends Entity {
         }
     }
 
+    public void stopMovement(){
+        vector.setX(0);
+        vector.setY(0);
+    }
+
     private void animate(String newDirection, boolean isMoving){
         if (!newDirection.equals(direction)) {
             // Resetta l'animazione se la direzione è cambiata.
@@ -126,15 +131,6 @@ public class Player extends Entity {
         positionOnTheMap.setY(y);
     }
 
-    public int getPlayerWidth() {
-        // Restituisci la larghezza dell'immagine corrente del giocatore
-        return up1.getWidth(); // Cambia "up1" con l'immagine corretta
-    }
-
-    public int getPlayerHeight() {
-        // Restituisci l'altezza dell'immagine corrente del giocatore
-        return up1.getHeight(); // Cambia "up1" con l'immagine corretta
-    }
     public void draw(Graphics2D g2) {
         BufferedImage image = up1;
 

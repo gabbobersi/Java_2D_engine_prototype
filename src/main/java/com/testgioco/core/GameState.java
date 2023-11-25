@@ -29,6 +29,10 @@ public class GameState {
         return activeState;
     }
 
+    public static String getActiveStateName(){
+        return getActiveState().toString();
+    }
+
     public static State getPreviousState(){
         return previousState;
     }

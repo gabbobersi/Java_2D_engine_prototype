@@ -13,4 +13,12 @@ public class GameSettings {
     public final int screenHeight = 600;
     public final String gameTitle = "Gioco di esempio";
     public final GameState.State defaultScene = GameState.State.MAIN_MENU;
+
+    // Camera
+    public final int cameraHeight = 10;
+    public final int cameraWidth = 10;
+
+    // Active map informations.
+    public static int mapRowsNumber = 15;
+    public static int mapColumnsNumber = 15;
 }

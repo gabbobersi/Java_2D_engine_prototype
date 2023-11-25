@@ -11,11 +11,11 @@ Il TDD segue il ciclo noto come **Red-Green-Refactor**, che si compone delle seg
 
 3. **Refactoring**: Una volta che il test è superato, il codice produttivo viene rifattorizzato. Questo passaggio mira a migliorare la struttura del codice senza alterarne la funzionalità. L'obiettivo è mantenere un codice pulito ed efficiente.
 
-![TDD.png](..%2Fresources%2FTDD.png)
+![TDD.png](..%2F..%2Fresources%2FTDD.png)
 
 È importante notare che ogni fase deve essere completata separatamente, evitando sovrapposizioni tra la scrittura di test e codice produttivo.
 
-## Differenze Rispetto Ad Altri Metodi di Test
+## Differenze rispetto ad altri metodi di test
 
 Il TDD si distingue da altri metodi di test in quanto i test fanno parte integrante del processo di sviluppo fin dall'inizio. I test nel contesto del TDD variano per scopo ed estensione: gli **unit test** verificano singoli componenti, mentre i **test di integrazione e funzionalità** valutano l'interazione tra le parti del sistema e la funzionalità generale del software.
 

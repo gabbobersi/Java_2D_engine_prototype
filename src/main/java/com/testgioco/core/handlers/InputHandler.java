@@ -10,6 +10,8 @@ public class InputHandler implements KeyListener {
     public boolean downPressed;
     public boolean escPressed;
     public boolean anyKeyPressed;
+    public boolean spacePressed;
+
 
     public InputHandler(){
         reset();
@@ -22,6 +24,7 @@ public class InputHandler implements KeyListener {
         downPressed = false;
         escPressed = false;
         anyKeyPressed = false;
+        spacePressed = false;
     }
 
     @Override
@@ -48,6 +51,10 @@ public class InputHandler implements KeyListener {
             escPressed = true;
         }
 
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = true;
+        }
+
         // A key is being pressed.
         if (code != KeyEvent.VK_UNDEFINED){
             anyKeyPressed = true;
@@ -67,6 +74,10 @@ public class InputHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
         }
 
         // A key is being pressed.
