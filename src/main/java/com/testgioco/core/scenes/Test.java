@@ -10,12 +10,9 @@ import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class Test extends JPanel implements Scene, KeyListener {
-    private GameSettings settings = new GameSettings();
-    private int inventoryKey = KeyEvent.VK_I;
+public class Test extends JPanel implements Scene {
+    GameSettings settings = new GameSettings();
 
     private final int btnHorizontalAlignment = settings.screenWidth / 2 - 75;
     private final int btnWidth = 150;
@@ -36,62 +33,51 @@ public class Test extends JPanel implements Scene, KeyListener {
 
     private int counter = 0;
 
-    private final InventoryManager inventory = new InventoryManager(4, 4, 50, 50, 5);
+    private final InventoryManager inventory;
 
-    public Test() {
+
+
+    public Test(){
         super();
         setBackground(Color.WHITE);
         addMouseListener(Singletons.mouseH);
         addMouseMotionListener(Singletons.mouseMotionH);
         setDoubleBuffered(true);
-        setFocusable(true);
-        addKeyListener(this);
 
+        // DISABLE KEYBOARD TO TEST JUST MOUSE
+        setFocusable(false);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+
+        inventory = new InventoryManager(4, 4, 50, 50, 5);
     }
 
     @Override
     public void run() {
-        if (btnTest.isClicked()) {
+        if (btnTest.isClicked()){
             counter++;
-        } else if (btnResetCounter.isClicked()) {
+        } else if (btnResetCounter.isClicked()){
             counter = 0;
             btnResetCounter.setReleased(true);
-        } else if (btnMainMenu.isClicked()) {
+        } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
 
-        // Esegui il metodo run dell'inventario
-        inventory.run();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D)g;
+
+        //String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
+        //g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        //g2.drawString(counterOfClick, 150, 80);
 
         //btnResetCounter.draw(g2);
         //btnTest.draw(g2);
         //btnMainMenu.draw(g2);
+
         inventory.draw(g2, settings);
-
         g2.dispose();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // Non necessario per questa implementazione
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // Apri o chiudi l'inventario quando viene premuto il tasto associato
-        if (e.getKeyCode() == inventoryKey) {
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // Non necessario per questa implementazione
     }
 }

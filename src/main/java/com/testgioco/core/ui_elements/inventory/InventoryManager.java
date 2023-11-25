@@ -64,8 +64,4 @@ public class InventoryManager {
             }
         }
     }
-
-
-    public void run() {
-    }
 }
