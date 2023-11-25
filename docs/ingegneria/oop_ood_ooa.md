@@ -7,9 +7,6 @@ La programmazione Object Oriented è diventata lo stile di programmazione
 nell'industria del software negli ultimi anni. La ragione di questo è da
 ricercare nella crescita di dimensione dei progetti software.
 
-È diventato estremamente difficile riuscire a capire un programma
-sviluppato con approccio procedurale una volta che esso raggiunge
-una certa dimensione. 
 
 I programmi Object Oriented sono più semplici
 da **scrivere**, **capire** e **mantenere**.
