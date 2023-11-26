@@ -12,6 +12,7 @@ public class ButtonImage{
     private final int height;
     private final int bordThickness;
     private Vector2DInt vector;
+    public int id;
 
     private BoxImage boxImage;
     private BufferedImage image;
@@ -33,7 +34,27 @@ public class ButtonImage{
 
     public void setVector(Vector2DInt vector){
         this.vector = vector;
-        boxImage.setX(vector.getX());
-        boxImage.setY(vector.getY());
+        boxImage.setX(this.vector.getX());
+        boxImage.setY(this.vector.getY());
+    }
+
+    public boolean isClicked(){
+        return boxImage.hasBeenClicked();
+    }
+
+    public boolean isPressed(){
+        return boxImage.hasBeenPressed();
+    }
+
+    public void modifyImage(int R, int G, int B){
+        Color color = new Color(R, G, B);
+        int rgb = color.getRGB();
+
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                image.setRGB(i, j, rgb);
+            }
+        }
+        boxImage.setImage(image);
     }
 }

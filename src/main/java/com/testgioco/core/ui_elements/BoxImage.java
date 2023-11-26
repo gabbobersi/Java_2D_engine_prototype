@@ -147,4 +147,8 @@ public class BoxImage extends JPanel {
     public void setRenderingAlign(Box.RenderingAlignment renderingAlign) {
         this.renderingAlign = renderingAlign;
     }
+
+    public void setImage(BufferedImage image){
+        this.image = image;
+    }
 }
