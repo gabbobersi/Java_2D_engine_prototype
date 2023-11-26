@@ -23,10 +23,7 @@ public class TileManager {
     private int mapRows;
     private int mapCols;
 
-    private static final String GRASS_01 = "grass_01";
-    private static final String WALL_01 = "wall_01";
-    private static final String WATER_01 = "water_01";
-    private static final String NOT_LOADED = "not_loaded";
+
 
     public TileManager(Player player) {
         this.player = player;
@@ -35,7 +32,12 @@ public class TileManager {
 
 
     private void loadTileImages() {
-        String[] tileNames = {GRASS_01, WALL_01, WATER_01, NOT_LOADED};
+        String[] tileNames = {
+                TilesName.grass_01.name(),
+                TilesName.wall_01.name(),
+                TilesName.water_01.name(),
+                TilesName.not_loaded.name()
+        };
 
         for (String name : tileNames) {
             try {
@@ -48,10 +50,10 @@ public class TileManager {
 
     private Tile getTileByIndex(int index){
         return switch (index) {
-            case 0 -> tiles.get(GRASS_01);
-            case 1 -> tiles.get(WALL_01);
-            case 2 -> tiles.get(WATER_01);
-            default -> tiles.get(NOT_LOADED);
+            case 0 -> tiles.get(TilesName.grass_01.name());
+            case 1 -> tiles.get(TilesName.wall_01.name());
+            case 2 -> tiles.get(TilesName.water_01.name());
+            default -> tiles.get(TilesName.not_loaded.name());
         };
     }
 
@@ -59,7 +61,7 @@ public class TileManager {
         Tile tile = tiles.get(name);
 
         if (tile == null){
-            return tiles.get(NOT_LOADED);
+            return tiles.get(TilesName.not_loaded.name());
         }
         return tile;
     }
