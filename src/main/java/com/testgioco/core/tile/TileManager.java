@@ -1,7 +1,6 @@
 package com.testgioco.core.tile;
 
 import com.testgioco.core.Cell;
-import com.testgioco.core.tile.Tile;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 
@@ -23,32 +22,34 @@ public class TileManager {
     private int mapRows;
     private int mapCols;
 
-
-
     public TileManager(Player player) {
         this.player = player;
         loadTileImages();
+        mapTileNum = new int[GameSettings.mapRowsNumber][GameSettings.mapColumnsNumber];
     }
 
-
     private void loadTileImages() {
-        String[] tileNames = {
-                TilesName.grass_01.name(),
-                TilesName.wall_01.name(),
-                TilesName.water_01.name(),
-                TilesName.not_loaded.name()
-        };
+        try {
+            String name;
 
-        for (String name : tileNames) {
-            try {
-                tiles.put(name, new Tile(ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            name = TilesName.grass_01.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
+
+            name = TilesName.wall_01.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), true));
+
+            name = TilesName.water_01.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
+
+            name = TilesName.not_loaded.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private Tile getTileByIndex(int index){
+    public Tile getTileByIndex(int index){
         return switch (index) {
             case 0 -> tiles.get(TilesName.grass_01.name());
             case 1 -> tiles.get(TilesName.wall_01.name());

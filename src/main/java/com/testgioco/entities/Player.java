@@ -16,8 +16,6 @@ import java.io.IOException;
 public class Player extends Entity {
     private InputHandler keyH;
     private GameSettings settings = new GameSettings();
-
-    public double speed;
     private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
@@ -44,6 +42,10 @@ public class Player extends Entity {
         int x = settings.screenWidth / 2 - (cell.width / 2);
         int y = settings.screenHeight / 2 - (cell.height / 2);
         positionOnScreen = new Vector2DInt(x, y);
+
+        // Collision
+        solidArea = new Rectangle(8, 16, cell.width - 14, cell.height - 14);
+        isColliding = true;
     }
 
     public void getPlayerImage(){
@@ -71,7 +73,7 @@ public class Player extends Entity {
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
                 direction = "up";
-                vector.setY(-1);
+
             }
             if (keyH.downPressed){
                 direction = "down";
@@ -79,12 +81,23 @@ public class Player extends Entity {
             }
             if (keyH.leftPressed){
                 direction = "left";
-                vector.setX(-1);
+
             }
             if (keyH.rightPressed){
                 direction = "right";
-                vector.setX(1);
+
             }
+
+            // I move only if I'm not colliding with anything.
+            if (!isColliding){
+                switch (direction){
+                    case "up" -> vector.setY(-1);
+                    case "down" -> vector.setY(1);
+                    case "left" -> vector.setX(-1);
+                    case "right" -> vector.setX(1);
+                }
+            }
+
             animate(direction, true);
         } else {
             animate(direction, false);

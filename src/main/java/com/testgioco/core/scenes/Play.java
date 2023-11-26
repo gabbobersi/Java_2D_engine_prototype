@@ -33,7 +33,7 @@ public class Play extends JPanel implements Scene {
 
         player = new Player(inputHandler);
         tileManager = new TileManager(player);
-        collisionManager = new CollisionManager(tileManager, player, inputHandler);
+        collisionManager = new CollisionManager(tileManager);
     }
 
     @Override
@@ -49,11 +49,11 @@ public class Play extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
             inputHandler.reset();
         }
-        playerCanMove = collisionManager.canMove();
+        // playerCanMove = collisionManager.canMove();
 
-        if (!playerCanMove){
-            System.out.println("BLOCCATO");
-        }
+//        if (!playerCanMove){
+//            System.out.println("BLOCCATO");
+//        }
     }
 
     @Override
@@ -68,11 +68,8 @@ public class Play extends JPanel implements Scene {
     }
 
     public void processInput(){
-        if (tileManager.getTileMap() != null && playerCanMove){
-            player.getInput();
-        } else {
-            player.stopMovement();
-        }
+        collisionManager.checkCollision(player);
+        player.getInput();
     }
 
     public void updateGame(){
