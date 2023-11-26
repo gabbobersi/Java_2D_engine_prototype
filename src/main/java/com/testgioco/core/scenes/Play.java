@@ -1,9 +1,8 @@
 package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
-import com.testgioco.entities.collision_manager.CollisionManager;
-import com.testgioco.utilities.DebugGrid;
-import com.testgioco.core.TileManager;
+import com.testgioco.core.CollisionManager;
+import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.entities.Player;
@@ -13,7 +12,6 @@ import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class Play extends JPanel implements Scene {
     private final GameSettings settings = new GameSettings();

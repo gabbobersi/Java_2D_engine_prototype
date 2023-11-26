@@ -1,9 +1,7 @@
-package com.testgioco.entities.collision_manager;
+package com.testgioco.core;
 
-
-import com.testgioco.core.Cell;
-import com.testgioco.core.TileManager;
 import com.testgioco.core.handlers.InputHandler;
+import com.testgioco.core.tile.TileManager;
 import com.testgioco.entities.Player;
 /*
 Calcolo della posizione futura del giocatore: Utilizza le variabili futureX e futureY
@@ -117,6 +115,4 @@ public class CollisionManager {
 
         return !collides || !collidesWithWall;
     }
-
-
 }

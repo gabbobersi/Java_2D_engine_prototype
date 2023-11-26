@@ -1,13 +1,12 @@
 package com.tilemapgenerator;
 
 import com.testgioco.core.GameState;
-import com.testgioco.core.TileManager;
+import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
-import com.tilemapgenerator.interfaces.Algorithm;
 
 import javax.swing.*;
 import java.awt.*;
