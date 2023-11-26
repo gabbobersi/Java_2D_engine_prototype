@@ -6,6 +6,7 @@ import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.Button;
+import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 
@@ -37,6 +38,7 @@ public class Test extends JPanel implements Scene {
     private final InputHandler inputH = new InputHandler();
 
     private BarManager barManager = new BarManager();
+    private final InventoryManager inventory;
 
     public Test(){
         super();
@@ -49,6 +51,8 @@ public class Test extends JPanel implements Scene {
         setDoubleBuffered(true);
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+
+        inventory = new InventoryManager(4, 4, 50, 50, 5);
     }
 
     public void awake(){
@@ -78,15 +82,22 @@ public class Test extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
-        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
-        g2.drawString(counterOfClick, 150, 80);
+        //String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
+        //g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        //g2.drawString(counterOfClick, 150, 80);
+
 
         btnResetCounter.draw(g2);
         btnTest.draw(g2);
         btnMainMenu.draw(g2);
 
 //        barManager.draw(g2);
+
+        //btnResetCounter.draw(g2);
+        //btnTest.draw(g2);
+        //btnMainMenu.draw(g2);
+
+        inventory.draw(g2, settings);
         g2.dispose();
     }
 }
