@@ -1,5 +1,6 @@
-package com.testgioco.core;
+package com.testgioco.core.tile;
 
+import com.testgioco.core.Cell;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 
@@ -8,12 +9,14 @@ import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TileManager {
     private final Cell cell = new Cell();
     private final Player player;
-    private final Tile[] tiles = new Tile[10];
+    private final Map<String, Tile> tiles = new HashMap<>();
     private int[][] mapTileNum;
 
     private int mapRows;
@@ -22,28 +25,52 @@ public class TileManager {
     public TileManager(Player player) {
         this.player = player;
         loadTileImages();
+        mapTileNum = new int[GameSettings.mapRowsNumber][GameSettings.mapColumnsNumber];
     }
-
 
     private void loadTileImages() {
-        try{
-            tiles[0] = new Tile();
-            tiles[0].image = ImageIO.read(new File("assets/tiles/grass_01.png"));
+        try {
+            String name;
 
-            tiles[1] = new Tile();
-            tiles[1].image = ImageIO.read(new File("assets/tiles/wall_01.png"));
+            name = TilesName.grass_01.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
 
-            tiles[2] = new Tile();
-            tiles[2].image = ImageIO.read(new File("assets/tiles/water_01.png"));
+            name = TilesName.wall_01.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), true));
 
-            tiles[9] = new Tile();
-            tiles[9].image = ImageIO.read(new File("assets/tiles/not_loaded.png"));
+            name = TilesName.water_01.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
 
-        } catch(IOException e) {
+            name = TilesName.not_loaded.name();
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
+    public Tile getTileByIndex(int index){
+        return switch (index) {
+            case 0 -> tiles.get(TilesName.grass_01.name());
+            case 1 -> tiles.get(TilesName.wall_01.name());
+            case 2 -> tiles.get(TilesName.water_01.name());
+            default -> tiles.get(TilesName.not_loaded.name());
+        };
+    }
+
+    public Tile getTileByName(String name){
+        Tile tile = tiles.get(name);
+
+        if (tile == null){
+            return tiles.get(TilesName.not_loaded.name());
+        }
+        return tile;
+    }
+
+    public int[][] getTileMap(){
+        return mapTileNum;
+    }
+
     public void draw (Graphics g2) {
         for (int r = 0; r < mapRows; r++) {
             for (int c = 0; c < mapCols; c++) {
@@ -57,13 +84,13 @@ public class TileManager {
                 int screenX = worldX - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
                 int screenY = worldY - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
 
-                g2.drawImage(tiles[tileIndex].image,screenX, screenY, cell.width, cell.height, null);
+                g2.drawImage(getTileByIndex(tileIndex).getImage(),screenX, screenY, cell.width, cell.height, null);
             }
         }
     }
 
     /**
-     * Get map rows and columns number.
+     * Get map rows and columns number by reading the tilemap (.txt file).
      * */
     private void getMapDimension(String filePath) throws FileNotFoundException {
         mapRows = 0;
@@ -133,6 +160,7 @@ public class TileManager {
             e.printStackTrace();
         }
     }
+
     /**
      * Adjust global map's informations
      * */
@@ -150,5 +178,4 @@ public class TileManager {
             System.out.println(Arrays.toString(map[r]));
         }
     }
-
 }

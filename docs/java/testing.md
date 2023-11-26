@@ -1,9 +1,9 @@
 ## Testing - JUnit & others...
 
 Il **testing** in Java è
-fondamentale per garantire la qualità e
+fondamentale per garantire la qualità e 
 l'affidabilità del software.
-Attraverso l'uso di framework di testing e buone pratiche di sviluppo,
+Attraverso l'uso di framework di testing e buone pratiche di sviluppo, 
 **è possibile ridurre significativamente
 il rischio di errori e migliorare l'esperienza degli utenti finali.**
 

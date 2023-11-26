@@ -1,8 +1,8 @@
 package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
-import com.testgioco.utilities.DebugGrid;
-import com.testgioco.core.TileManager;
+import com.testgioco.core.CollisionManager;
+import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.entities.Player;
@@ -19,6 +19,8 @@ public class Play extends JPanel implements Scene {
     private final ScreenLogger debug = new ScreenLogger();
     private final Player player;
     private final InputHandler inputHandler = new InputHandler();
+    private final CollisionManager collisionManager;
+    private boolean playerCanMove = false;
 
     public Play(){
         super();
@@ -31,6 +33,7 @@ public class Play extends JPanel implements Scene {
 
         player = new Player(inputHandler);
         tileManager = new TileManager(player);
+        collisionManager = new CollisionManager(tileManager);
     }
 
     @Override
@@ -46,6 +49,11 @@ public class Play extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
             inputHandler.reset();
         }
+        // playerCanMove = collisionManager.canMove();
+
+//        if (!playerCanMove){
+//            System.out.println("BLOCCATO");
+//        }
     }
 
     @Override
@@ -60,6 +68,7 @@ public class Play extends JPanel implements Scene {
     }
 
     public void processInput(){
+        collisionManager.checkCollision(player);
         player.getInput();
     }
 
