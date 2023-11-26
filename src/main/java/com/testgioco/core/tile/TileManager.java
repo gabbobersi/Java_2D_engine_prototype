@@ -67,6 +67,11 @@ public class TileManager {
         return tile;
     }
 
+    public Tile getTileByCoordinates(int x, int y){
+        int tileNum = mapTileNum[x][y];
+        return getTileByIndex(tileNum);
+    }
+
     public int[][] getTileMap(){
         return mapTileNum;
     }

@@ -77,7 +77,6 @@ public class Player extends Entity {
             }
             if (keyH.downPressed){
                 direction = "down";
-                vector.setY(1);
             }
             if (keyH.leftPressed){
                 direction = "left";

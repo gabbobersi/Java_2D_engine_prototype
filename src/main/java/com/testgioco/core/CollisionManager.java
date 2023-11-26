@@ -4,9 +4,8 @@ import com.testgioco.core.tile.TileManager;
 import com.testgioco.entities.base_classes.Entity;
 
 public class CollisionManager {
-    private static final int TILE_INDEX_OF_WALL = 1;
-    private Cell cell = new Cell();
-    private TileManager tileManager;
+    private final Cell cell = new Cell();
+    private final TileManager tileManager;
 
     public CollisionManager(TileManager tileManager) {
         this.tileManager = tileManager;
@@ -25,45 +24,34 @@ public class CollisionManager {
         int entityUpCell = entityUp / cell.height;
         int entityDownCell = entityDown / cell.height;
 
-        int tile1;
-        int tile2;
-
-        //                System.out.println("Sopra di me, ho il tile 1: " + tileManager.getTileByIndex(tile1).getName());
-        //                System.out.println("Sopra di me, ho il tile 2: " + tileManager.getTileByIndex(tile2).getName());
-
+        // We check collision, based on direction, over the near two tiles.
+        boolean tile1Collision;
+        boolean tile2Collision;
 
         switch (entity.direction){
             case "up":
                 entityUpCell = (entityUp - entity.speed) / cell.height;
-                tile1 = tileManager.getTileMap()[entityUpCell][entityLeftCell];
-                tile2 = tileManager.getTileMap()[entityUpCell][entityRightCell];
-                if (tileManager.getTileByIndex(tile1).hasCollision() || tileManager.getTileByIndex(tile2).hasCollision()){
-                    entity.isColliding = true;
-                } else entity.isColliding = false;
+                tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityLeftCell).hasCollision();
+                tile2Collision = tileManager.getTileByCoordinates(entityUpCell, entityRightCell).hasCollision();
+                entity.isColliding = tile1Collision || tile2Collision;
                 break;
             case "down":
                 entityDownCell = (entityDown + entity.speed) / cell.height;
-                tile1 = tileManager.getTileMap()[entityDownCell][entityLeftCell];
-                tile2 = tileManager.getTileMap()[entityDownCell][entityRightCell];
-                if (tileManager.getTileByIndex(tile1).hasCollision() || tileManager.getTileByIndex(tile2).hasCollision()){
-                    entity.isColliding = true;
-                } else entity.isColliding = false;
+                tile1Collision = tileManager.getTileByCoordinates(entityDownCell, entityLeftCell).hasCollision();
+                tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityRightCell).hasCollision();
+                entity.isColliding = tile1Collision || tile2Collision;
                 break;
             case "left":
                 entityLeftCell = (entityLeft - entity.speed) / cell.height;
-                tile1 = tileManager.getTileMap()[entityUpCell][entityLeftCell];
-                tile2 = tileManager.getTileMap()[entityDownCell][entityLeftCell];
-                if (tileManager.getTileByIndex(tile1).hasCollision() || tileManager.getTileByIndex(tile2).hasCollision()){
-                    entity.isColliding = true;
-                } else entity.isColliding = false;
+                tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityLeftCell).hasCollision();
+                tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityLeftCell).hasCollision();
+                entity.isColliding = tile1Collision || tile2Collision;
                 break;
             case "right":
                 entityRightCell = (entityRight + entity.speed) / cell.height;
-                tile1 = tileManager.getTileMap()[entityUpCell][entityRightCell];
-                tile2 = tileManager.getTileMap()[entityDownCell][entityRightCell];
-                if (tileManager.getTileByIndex(tile1).hasCollision() || tileManager.getTileByIndex(tile2).hasCollision()){
-                    entity.isColliding = true;
-                } else entity.isColliding = false;
+                tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityRightCell).hasCollision();
+                tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityRightCell).hasCollision();
+                entity.isColliding = tile1Collision || tile2Collision;
                 break;
         }
     }
