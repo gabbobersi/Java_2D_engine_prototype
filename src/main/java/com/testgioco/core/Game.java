@@ -64,6 +64,7 @@ public class Game implements Runnable {
 
         int fps = 0;
         double fpsTimer = 0;
+        double fixedUpdateTimer = 0;
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
             boolean setPanel = false;
@@ -85,10 +86,17 @@ public class Game implements Runnable {
                     System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
                     setPanel = true;
                 }
-                runScene(activeState, setPanel);
+                updateScene(activeState, setPanel);
                 fps++;
             }
             drawScene(activeState);
+
+            // When 0.2 (constants) seconds is passed, execute the fixedUpdate of the scene.
+            fixedUpdateTimer += elapsed;
+            if (fixedUpdateTimer >= constants.NANOSECONDS_PER_FIXED_UPDATE){
+                fixedUpdateTimer = 0;
+                fixedUpdateScene(activeState);
+            }
 
             // When a second is passed, print the FPS.
             fpsTimer += elapsed;
@@ -100,7 +108,28 @@ public class Game implements Runnable {
         }
     }
 
-    private void runScene(GameState.State state, boolean setPanel){
+    private void fixedUpdateScene(GameState.State state){
+        switch (state){
+            case MAIN_MENU:
+                mainMenu.fixedUpdate();
+                break;
+            case PLAY:
+                play.update();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.fixedUpdate();
+                break;
+            case TEST:
+                test.fixedUpdate();
+                break;
+            default:
+                System.out.println("WARNING - Eseguo il fixedUpdate di mainMenu perché non ho trovato lo stato che ti" +
+                        " interessa!");
+                mainMenu.fixedUpdate();
+        }
+    }
+
+    private void updateScene(GameState.State state, boolean setPanel){
         GameState.setActiveState(state);
 
         if (setPanel){
@@ -121,15 +150,15 @@ public class Game implements Runnable {
         switch (state){
             case MAIN_MENU:
                 if (setPanel) mainMenu.awake();
-                mainMenu.fixedUpdate();
+                mainMenu.update();
                 break;
             case PLAY:
                 if (setPanel) play.awake();
-                play.fixedUpdate();
+                play.update();
                 break;
             case TILE_MAP_GENERATOR:
                 if (setPanel) tmapgen.awake();
-                tmapgen.fixedUpdate();
+                tmapgen.update();
                 break;
             case QUIT:
                 stop();
@@ -138,12 +167,12 @@ public class Game implements Runnable {
                 break;
             case TEST:
                 if (setPanel) test.awake();
-                test.fixedUpdate();
+                test.update();
                 break;
             default:
                 System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
                         "interessa!");
-                mainMenu.fixedUpdate();
+                mainMenu.update();
         }
     }
 

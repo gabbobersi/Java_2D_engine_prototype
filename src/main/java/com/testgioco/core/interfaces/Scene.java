@@ -8,14 +8,15 @@ public interface Scene {
     void awake();
 
     /**
-     * Executed every fixed time (not influenced by FPS).
-     * For physics or in general, to apply movement by physics forces.
-     * */
-    void fixedUpdate();
-
-    /**
      * Executed every frame (influenced by FPS).
      * For games logic, input handling.
      * */
-    // void update();
+    void update();
+
+    /**
+     * Executed every fixed time (not influenced by FPS).
+     * Happens usually every 0.2 seconds.
+     * For physics or in general, to apply movement by physics forces.
+     * */
+    void fixedUpdate();
 }

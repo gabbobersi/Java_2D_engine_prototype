@@ -65,7 +65,7 @@ public class TileMapGenerator extends JPanel implements Scene {
     }
 
     @Override
-    public void fixedUpdate() {
+    public void update() {
         String filePath = "assets/maps/tmapgen_1.txt";
 
         if (btnGenerateAlgo1.isClicked()) {
@@ -83,6 +83,9 @@ public class TileMapGenerator extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
     }
+
+    @Override
+    public void fixedUpdate(){}
 
     private void checkFile(String path){
         File file = new File(path);

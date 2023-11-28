@@ -60,7 +60,7 @@ public class Test extends JPanel implements Scene {
     }
 
     @Override
-    public void fixedUpdate() {
+    public void update() {
         if (btnTest.isClicked()){
             counter++;
         } else if (btnResetCounter.isClicked()){
@@ -76,6 +76,9 @@ public class Test extends JPanel implements Scene {
             barManager.resetHealth();
         }
     }
+
+    @Override
+    public void fixedUpdate(){}
 
     @Override
     protected void paintComponent(Graphics g) {

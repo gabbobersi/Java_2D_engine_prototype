@@ -14,6 +14,7 @@ public class Constants {
     // 1 sec / number of fps == Update frequency in seconds * NS == Update frequency in NS
     public final double NANOSECONDS_PER_UPDATE = (1.0 / settings.fps) * ONE_SECOND_IN_NANOSECONDS;
 
+    public final double NANOSECONDS_PER_FIXED_UPDATE = 0.2 * ONE_SECOND_IN_NANOSECONDS;
 }
 
 //10^-3	ms	millisecondo

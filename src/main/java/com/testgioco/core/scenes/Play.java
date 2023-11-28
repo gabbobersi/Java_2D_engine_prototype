@@ -20,7 +20,6 @@ public class Play extends JPanel implements Scene {
     private final Player player;
     private final InputHandler inputHandler = new InputHandler();
     private final CollisionManager collisionManager;
-    private boolean playerCanMove = false;
 
     public Play(){
         super();
@@ -44,24 +43,21 @@ public class Play extends JPanel implements Scene {
     }
 
     @Override
-    public void fixedUpdate(){
+    public void update(){
         if (inputHandler.escPressed){
             GameState.setActiveState(GameState.State.MAIN_MENU);
             inputHandler.reset();
         }
-        // playerCanMove = collisionManager.canMove();
-
-//        if (!playerCanMove){
-//            System.out.println("BLOCCATO");
-//        }
     }
+
+    @Override
+    public void fixedUpdate(){}
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileManager.draw(g2);
-//        debugGrid.draw(g2);
         debug.draw(g2);
         player.draw(g2);
         g2.dispose();
