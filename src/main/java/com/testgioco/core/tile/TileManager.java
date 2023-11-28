@@ -42,7 +42,7 @@ public class TileManager {
             tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
 
             name = TilesName.not_loaded.name();
-            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), false));
+            tiles.put(name, new Tile(name, ImageIO.read(new File("assets/tiles/" + name + ".png")), true));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,6 +68,11 @@ public class TileManager {
     }
 
     public Tile getTileByCoordinates(int x, int y){
+        // If entity gets out of map. Return a "not loaded" tile.
+        if (x < 0 || y < 0 || x >= mapRows || y >= mapCols){
+            return getTileByName(TilesName.not_loaded.name());
+        }
+
         int tileNum = mapTileNum[x][y];
         return getTileByIndex(tileNum);
     }

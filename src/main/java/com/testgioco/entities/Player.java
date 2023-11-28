@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity {
     private InputHandler keyH;
@@ -84,17 +85,21 @@ public class Player extends Entity {
             }
             if (keyH.rightPressed){
                 direction = "right";
-
             }
 
             // I move only if I'm not colliding with anything.
             if (!isColliding){
-                switch (direction){
-                    case "up" -> vector.setY(-1);
-                    case "down" -> vector.setY(1);
-                    case "left" -> vector.setX(-1);
-                    case "right" -> vector.setX(1);
+                if (Objects.equals(direction, "up")){
+                    vector.setY(-1);
+                } else if (Objects.equals(direction, "down")){
+                    vector.setY(1);
+                } else if (Objects.equals(direction, "left")){
+                    vector.setX(-1);
+                } else if (Objects.equals(direction, "right")){
+                    vector.setX(1);
+
                 }
+
                 animate(direction, true);
             }
         } else {
@@ -178,8 +183,9 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), this.cell.width
-                , this.cell.height,
+        g2.setColor(Color.RED);
+        g2.fillRect(Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), solidArea.width, solidArea.height);
+        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), cell.width, cell.height,
                 null);
     }
 }
