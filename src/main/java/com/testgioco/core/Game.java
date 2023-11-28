@@ -205,7 +205,9 @@ public class Game implements Runnable {
             case TILE_MAP_GENERATOR -> tmapgen.repaint();
             case TEST -> test.repaint();
             default -> {
-                System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
+                if (!state.name().equals(GameState.State.QUIT.name())) {
+                    System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
+                }
                 mainMenu.repaint();
             }
         }
