@@ -62,26 +62,40 @@ public class Game implements Runnable {
         double previous = System.nanoTime();
         double lag = 0.0;
 
+        int fps = 0;
+        double fpsTimer = 0;
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
             boolean setPanel = false;
+
             double current = System.nanoTime();
+
             double elapsed = current - previous;
+
             previous = current;
             lag += elapsed;
 
             processInput(activeState);
 
             // In this while, FPS limit execution.
-            while (lag >= constants.NS_PER_UPDATE){
+            while (lag >= constants.NANOSECONDS_PER_UPDATE){
                 updateGame(activeState);
-                lag -= constants.NS_PER_UPDATE;
+                lag -= constants.NANOSECONDS_PER_UPDATE;
                 if (GameState.getPreviousState() != GameState.getActiveState()){
                     System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
                     setPanel = true;
                 }
                 runScene(activeState, setPanel);
-                drawScene(activeState);
+                fps++;
+            }
+            drawScene(activeState);
+
+            // When a second is passed, print the FPS.
+            fpsTimer += elapsed;
+            if (fpsTimer >= constants.ONE_SECOND_IN_NANOSECONDS) {
+                System.out.println("FPS: " + fps);
+                fps = 0;
+                fpsTimer = 0;
             }
         }
     }

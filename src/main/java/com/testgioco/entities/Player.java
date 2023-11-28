@@ -133,6 +133,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Updates player's position on the map.
+     * */
     public void update(){
         vector.normalize();
         vector.multiply(speed);

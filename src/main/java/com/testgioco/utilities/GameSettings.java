@@ -8,7 +8,7 @@ public class GameSettings {
 
     // Note: these are game settings, NOT CONSTANTS!
 
-    public final int fps = 60;
+    public final double fps = 60.0;
     public final int screenWidth = 600;
     public final int screenHeight = 600;
     public final String gameTitle = "Gioco di esempio";
