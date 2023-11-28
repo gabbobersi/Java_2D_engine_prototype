@@ -99,7 +99,6 @@ public class Player extends Entity {
                     vector.setX(1);
 
                 }
-
                 animate(direction, true);
             }
         } else {
@@ -183,8 +182,6 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.setColor(Color.RED);
-        g2.fillRect(Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), solidArea.width, solidArea.height);
         g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), cell.width, cell.height,
                 null);
     }

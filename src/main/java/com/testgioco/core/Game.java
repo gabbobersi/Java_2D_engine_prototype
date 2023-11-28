@@ -101,7 +101,7 @@ public class Game implements Runnable {
             // When a second is passed, print the FPS.
             fpsTimer += elapsed;
             if (fpsTimer >= constants.ONE_SECOND_IN_NANOSECONDS) {
-                System.out.println("FPS: " + fps);
+//                System.out.println("FPS: " + fps);
                 fps = 0;
                 fpsTimer = 0;
             }

@@ -17,7 +17,7 @@ public class TileManager {
     private final Cell cell = new Cell();
     private final Player player;
     private final Map<String, Tile> tiles = new HashMap<>();
-    private int[][] mapTileNum;
+    private static int[][] mapTileNum;
 
     private int mapRows;
     private int mapCols;

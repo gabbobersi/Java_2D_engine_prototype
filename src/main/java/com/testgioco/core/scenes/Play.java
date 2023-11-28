@@ -39,7 +39,6 @@ public class Play extends JPanel implements Scene {
     public void awake(){
         System.out.println("AWAKE");
         tileManager.loadMap("/maps/tmapgen_1.txt");
-        repaint();
     }
 
     @Override
