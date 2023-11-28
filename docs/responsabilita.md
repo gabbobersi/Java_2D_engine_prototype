@@ -95,7 +95,7 @@ Totali
         - [ ] Inventario
         - [ ] Dialoghi / Narrativa / Lore
 - Francesco
-    - [ ] Physics
+    - [x] Physics
     - [ ] Audio
     - Game design
         - [ ] Obiettivi
