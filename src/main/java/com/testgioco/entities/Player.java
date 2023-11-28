@@ -95,9 +95,8 @@ public class Player extends Entity {
                     case "left" -> vector.setX(-1);
                     case "right" -> vector.setX(1);
                 }
+                animate(direction, true);
             }
-
-            animate(direction, true);
         } else {
             animate(direction, false);
         }
