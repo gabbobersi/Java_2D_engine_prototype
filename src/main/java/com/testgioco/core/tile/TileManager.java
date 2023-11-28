@@ -77,10 +77,6 @@ public class TileManager {
         return getTileByIndex(tileNum);
     }
 
-    public int[][] getTileMap(){
-        return mapTileNum;
-    }
-
     public void draw (Graphics g2) {
         for (int r = 0; r < mapRows; r++) {
             for (int c = 0; c < mapCols; c++) {
