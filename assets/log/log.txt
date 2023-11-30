@@ -1,0 +1,4 @@
+nov 30, 2023 5:27:18 PM com.testgioco.core.Main main
+WARNING: worning msg
+nov 30, 2023 5:27:18 PM com.testgioco.core.Main main
+SEVERE: Severe msg
