@@ -29,7 +29,7 @@ public class Health {
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(Color.RED);
+        g2.setColor(Color.decode("#c65046"));
         g2.fillRect(position.getX(), position.getY(), width, height);
     }
 

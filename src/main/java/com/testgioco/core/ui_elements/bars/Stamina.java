@@ -29,7 +29,7 @@ public class Stamina {
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(Color.GREEN);
+        g2.setColor(Color.decode("#a1bf41"));
         g2.fillRect(position.getX(), position.getY(), width, height);
     }
 
