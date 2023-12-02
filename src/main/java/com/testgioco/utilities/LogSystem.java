@@ -11,23 +11,23 @@ public class LogSystem {
     FileHandler fh;
 
     public LogSystem(String fileName) throws SecurityException, IOException {
-        String folderPath = "assets/log"; //Sostituisce con il percorso della cartella desiderata
+        String folderPath = "assets/log"; //Replace with the desired folder path
 
-        //Crea il percorso completo per il file di log nella cartella "assets/log"
+        //Create the complete path for the log file in the 'assets/log' folder"
         String filePath = folderPath + File.separator + fileName;
 
-        //Crea il file se non esiste
+        //Create the file if it doesn't exist
         File logFile = new File(filePath);
         if (!logFile.exists()) {
             logFile.createNewFile();
         }
 
-        //Inizializza il gestore del file di log
+        //Initialize the log file handler.
         fh = new FileHandler(filePath, true);
         logger = Logger.getLogger("test");
         logger.addHandler(fh);
 
-        //Configura il formatter
+        //Configure the formatter
         SimpleFormatter formatter = new SimpleFormatter();
         fh.setFormatter(formatter);
     }
