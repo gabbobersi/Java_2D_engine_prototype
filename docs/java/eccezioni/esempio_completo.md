@@ -3,8 +3,13 @@
  * Custom exception
 */
 class OrderNotFoundException extends Exception {
+    // Custom message
+    public OrderNotFoundException(String message) {
+        super(message);
+    }
+    // Default message
     public OrderNotFoundException() {
-        super("Order not found");
+        super("The order is not valid, or not present.");
     }
 }
 
