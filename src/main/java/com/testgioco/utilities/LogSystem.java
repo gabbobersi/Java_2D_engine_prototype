@@ -3,14 +3,18 @@ package com.testgioco.utilities;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class LogSystem {
-    public Logger logger;
-    FileHandler fh;
+    private final Logger logger;
+    FileHandler fileHandler;
 
-    public LogSystem(String fileName) throws SecurityException, IOException {
+
+    public LogSystem(String loggerName, Level loggerLevel, String fileName) throws SecurityException, IOException {
+        logger = Logger.getLogger(loggerName);
+        logger.setLevel(loggerLevel);
         String folderPath = "assets/log"; //Replace with the desired folder path
 
         //Create the complete path for the log file in the 'assets/log' folder
@@ -23,12 +27,21 @@ public class LogSystem {
         }
 
         //Initialize the log file handler.
-        fh = new FileHandler(filePath, true);
-        logger = Logger.getLogger("test");
-        logger.addHandler(fh);
+        fileHandler = new FileHandler(filePath, true);
+        logger.addHandler(fileHandler);
 
         //Configure the formatter
         SimpleFormatter formatter = new SimpleFormatter();
-        fh.setFormatter(formatter);
+        fileHandler.setFormatter(formatter);
+    }
+    public void logInfo(String message){
+        logger.info(message);
+    }
+    public void logWarning(String message){
+        logger.warning(message);
+    }
+
+    public void logSevere(String message){
+        logger.severe(message);
     }
 }

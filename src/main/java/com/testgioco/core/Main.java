@@ -10,13 +10,10 @@ public class Main {
         Game game = new Game();
         game.start();
         try {
-            LogSystem my_log = new LogSystem("log.txt");
+            LogSystem my_log = new LogSystem( Main.class.getName(), Level.INFO,"log.txt");
+            my_log.logInfo("info message");
 
-            my_log.logger.setLevel(Level.WARNING);
 
-            my_log.logger.info("Info msg");
-            my_log.logger.warning("worning msg");
-            my_log.logger.severe("Severe msg");
 
         } catch (Exception e) {
 
