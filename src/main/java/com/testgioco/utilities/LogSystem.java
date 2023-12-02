@@ -13,7 +13,7 @@ public class LogSystem {
     public LogSystem(String fileName) throws SecurityException, IOException {
         String folderPath = "assets/log"; //Replace with the desired folder path
 
-        //Create the complete path for the log file in the 'assets/log' folder"
+        //Create the complete path for the log file in the 'assets/log' folder
         String filePath = folderPath + File.separator + fileName;
 
         //Create the file if it doesn't exist
