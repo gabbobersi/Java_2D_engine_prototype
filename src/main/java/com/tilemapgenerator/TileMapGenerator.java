@@ -24,16 +24,16 @@ public class TileMapGenerator extends JPanel implements Scene {
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private final Button btnGenerateAlgo1 = new Button(this, new Vector2DInt(btnHorizontalAlignment, 100), btnWidth,
+    private final Button btnGenerateAlgo1 = new Button(new Vector2DInt(btnHorizontalAlignment, 100), btnWidth,
             btnHeight, "Algorithm 1 - Room", bordThickness, btnColor, btnFont);
 
-    private final Button btnGenerateAlgo2 = new Button(this, new Vector2DInt(btnHorizontalAlignment, 160), btnWidth,
+    private final Button btnGenerateAlgo2 = new Button( new Vector2DInt(btnHorizontalAlignment, 160), btnWidth,
             btnHeight, "Algorithm 2 - Random", bordThickness, btnColor, btnFont);
 
-    private final Button btnGenerateAlgo3 = new Button(this, new Vector2DInt(btnHorizontalAlignment, 220), btnWidth,
+    private final Button btnGenerateAlgo3 = new Button( new Vector2DInt(btnHorizontalAlignment, 220), btnWidth,
             btnHeight, "Algorithm 3 - Zebra", bordThickness, btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment,
+    private final Button btnMainMenu = new Button(new Vector2DInt(btnHorizontalAlignment,
             settings.screenHeight - 100), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public class Box extends JPanel{
+public class Box {
     Rectangle2D.Double box = new Rectangle2D.Double();
     Rectangle2D.Double boxBorders = new Rectangle2D.Double();
     private Vector2DInt vector;
@@ -28,7 +28,6 @@ public class Box extends JPanel{
         this.height = height;
         this.bordThickness = bordThickness;
         this.boxColor = boxColor;
-        setVisible(true);
     }
 
     /**

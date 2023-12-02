@@ -28,15 +28,13 @@ public class Test extends JPanel implements Scene {
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private final Button btnTest = new Button(this,
-            new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "test", bordThickness,
-            btnColor, btnFont);
+    private final Button btnTest = new Button(new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight,
+            "test", bordThickness, btnColor, btnFont);
 
-    private final Button btnResetCounter = new Button(this,
-            new Vector2DInt(btnHorizontalAlignment, 200), btnWidth, btnHeight, "Reset counter", bordThickness,
-            btnColor, btnFont);
+    private final Button btnResetCounter = new Button(new Vector2DInt(btnHorizontalAlignment, 200), btnWidth, btnHeight,
+            "Reset counter", bordThickness, btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
+    private final Button btnMainMenu = new Button(new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
     private int counter = 0;

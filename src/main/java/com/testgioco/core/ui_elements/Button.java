@@ -9,7 +9,6 @@ import java.awt.*;
 public class Button {
     private final Box box;
     private final Label label;
-    private final JPanel panel;
     private final int width;
     private final int height;
     private final int bordThickness;
@@ -18,10 +17,9 @@ public class Button {
     private final Font font;
     private Vector2DInt vector;
 
-    public Button(JPanel panel, Vector2DInt vector, int width, int height, String text, int bordThickness,
+    public Button(Vector2DInt vector, int width, int height, String text, int bordThickness,
                   Color buttonColor, Font font){
         this.vector = vector;
-        this.panel = panel;
         this.width = width;
         this.height = height;
         this.text = text;
@@ -40,7 +38,6 @@ public class Button {
         box.setHeight(height);
         box.setThickness(bordThickness);
         box.setColor(buttonColor);
-        panel.add(box);
     }
 
     private void setLabel(){
