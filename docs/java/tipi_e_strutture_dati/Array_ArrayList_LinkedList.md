@@ -20,7 +20,7 @@
   - Dimensione dinamica.
   - Buoni per l'inserimento o la rimozione di elementi.
 - CONTRO:
-  - Lentazza di accesso.
+  - Lentezza di accesso.
   - Occupano memoria superiore agli ArrayList.    
 
 ****
