@@ -47,7 +47,7 @@ Per leggere altri tipi si rimanda alla seguente tabella:
 - **nextInt()**: Legge un numero di tipo intero e lo restituisce all'utente,
 o lancia un eccezione di tipo **InputMismatchException** se il token **non** è un intero.
 - **nextLine()**: Legge una riga di testo e la restituisce all'utente.
-- **next()**: legge il successivo token **senza delimitatori** e lo restituisce al chiamante.
+- **next()**: legge il successivo token **senza delimitatori** e lo restituisce all'utente.
 - **nextLong()**: Legge un valore long dall'utente
 - **nextShort()**: Legge un valore short dall'utente
 - **nextBoolean()**: Legge un valore boolean dall'utente
