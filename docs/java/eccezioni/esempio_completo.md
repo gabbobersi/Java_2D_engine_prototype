@@ -43,7 +43,7 @@ class OrderFinder {
     public void getOrderById(int id) throws OrderNotFoundException {
         Order order = database.select(id);
         if (!order){
-            throw new OrderNotFoundException();
+            throw new OrderNotFoundException("The order '" + id + ' is not found.);
         } else {
             return database.select(id);
         }
