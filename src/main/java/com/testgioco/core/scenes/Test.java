@@ -36,7 +36,7 @@ public class Test extends JPanel implements Scene {
 
     private final InputHandler inputH = new InputHandler();
 
-    private BarManager barManager = new BarManager();
+    private BarManager barManager = new BarManager(new Vector2DInt(50, 100));
 
     public Test(){
         super();

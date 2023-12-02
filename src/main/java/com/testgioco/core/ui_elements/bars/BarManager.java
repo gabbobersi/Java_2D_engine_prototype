@@ -4,6 +4,7 @@ import com.testgioco.utilities.GameSettings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 /**
  * Da inserire nelle classi apposite
@@ -17,17 +18,10 @@ public class BarManager  {
 
     private Health healthBar;
     private Stamina staminaBar;
-    private JLabel healthLabel;
-    private JLabel staminaLabel;
 
-    public BarManager(){
-        healthBar = new Health(new Vector2DInt(10, 10), width, height);
-        staminaBar = new Stamina(new Vector2DInt(10, 50), width, height);
-
-        healthLabel = new JLabel("Health:");
-        healthLabel.setBounds(80, 50, 100, healthLabelHeight);
-        staminaLabel = new JLabel("Stamina:");
-        staminaLabel.setBounds(10, 50, 60, staminaLabelHeight);
+    public BarManager(Vector2DInt barsPosition){
+        healthBar = new Health(new Vector2DInt(barsPosition.getX(), barsPosition.getY()), width, height, "Health");
+        staminaBar = new Stamina(new Vector2DInt(barsPosition.getX(), barsPosition.getY() +40), width, height, "Stamina");
     }
 
     public void reduceHealth(int value){
@@ -49,8 +43,6 @@ public class BarManager  {
     public void draw(Graphics2D g2){
         healthBar.draw(g2);
         staminaBar.draw(g2);
-        healthLabel.paint(g2);
-        staminaLabel.paint(g2);
     }
 
 }
