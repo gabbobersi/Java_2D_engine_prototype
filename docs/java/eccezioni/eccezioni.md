@@ -17,7 +17,8 @@ in modo da avere a disposizione un'eccezione che più si adatta al contesto.
 #### Gestione vs propagazione eccezioni
 - Gestire significa utilizzare un blocco `try/catch` per gestire una eccezione dell'interprete (sollevata automaticamente) o del programmatore (sollevata manualmente con `throw`).
 - Propagare significa utilizzare le clausole `throws` e `throw`.
-  - Quando utilizzi `throw`, stai propagando (o sollevando) quella eccezione. 
+  - Quando utilizzi `throw`, stai propagando (o sollevando) quella eccezione.
+  - Quando utilizzi `throws`, stai propagango l'eccezione sollevata eventualmente con il `throw`, al metodo chiamante.
 
 #### throws vs throw
 `throws` si mette alla fine della firma del metodo, per indicare che tipo di eccezione il metodo può sollevare.\
@@ -25,7 +26,7 @@ Una volta impostato, è obbligatorio gestire (o ulteriormente propagare, sempre 
 
 `throw` si utilizza nel codice, per sollevare manualmente un'eccezione.\
 Se è contenuto in un blocco `try/catch`, sei già a posto.\
-Se non è contenuto in un blocco `try/catch`, allora bisogna passare al throws nel firma del metodo (stessa storia sopra).
+Se non è contenuto in un blocco `try/catch`, allora bisogna passare al `throws` nel firma del metodo (stessa storia sopra).
 
 #### Esempio di creazione di una eccezione "personalizzata":
 ```Java
