@@ -3,7 +3,6 @@ package com.testgioco.core.ui_elements;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.utilities.Singletons;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 

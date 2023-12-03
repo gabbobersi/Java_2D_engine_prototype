@@ -79,12 +79,6 @@ public class Test extends JPanel implements Scene {
         } else if (inputH.leftPressed){
             barManager.resetHealth();
         }
-
-        if (inventory.anySlotPressed()){
-            ButtonImage btn = inventory.getPressedSlot();
-            System.out.println("Modifico il bottone: " + btn.id);
-            btn.modifyImage(181, 153, 63);
-        }
     }
 
     @Override
@@ -100,9 +94,7 @@ public class Test extends JPanel implements Scene {
         //btnTest.draw(g2);
         //btnMainMenu.draw(g2);
 
-//        if (inputH.spacePressed){
-            inventory.draw(g2);
-//        }
+        inventory.draw(g2);
         g2.dispose();
     }
 }

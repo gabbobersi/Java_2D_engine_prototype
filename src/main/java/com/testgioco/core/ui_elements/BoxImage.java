@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class BoxImage extends JPanel {
+public class BoxImage {
     private Cell cell = new Cell();
     Rectangle2D.Double box = new Rectangle2D.Double();
     Rectangle2D.Double boxBorders = new Rectangle2D.Double();
@@ -32,7 +32,6 @@ public class BoxImage extends JPanel {
         this.height = height;
         this.bordThickness = bordThickness;
         this.image = image;
-        setVisible(true);
     }
 
     /**

@@ -92,16 +92,13 @@ public class TileManager {
     }
 
     public void loadMap (String mapPath){
-        try{
+        try (InputStream stream = getClass().getResourceAsStream(mapPath);
+             InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+             BufferedReader bufferReader = new BufferedReader(streamReader)) {
+
             // Example path "/maps/maps01.txt"
             getMapDimension("assets/" + mapPath);
             mapTileNum = new int[mapRows][mapCols];
-
-            InputStream stream = getClass().getResourceAsStream(mapPath);
-            assert stream != null;
-
-            InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-            BufferedReader bufferReader = new BufferedReader(streamReader);
 
             for (int r = 0; r < mapRows; r++) {
                 String line = bufferReader.readLine();
@@ -122,10 +119,6 @@ public class TileManager {
                     mapTileNum[r][c] = num;
                 }
             }
-            bufferReader.close();
-            streamReader.close();
-            stream.close();
-
             System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
             printTileMap(mapTileNum, mapRows);
             updateSettings();

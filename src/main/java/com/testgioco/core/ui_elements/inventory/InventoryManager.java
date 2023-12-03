@@ -15,27 +15,18 @@ import java.util.List;
 
 public class InventoryManager {
     private GameSettings settings = new GameSettings();
-    private JPanel panel;
+    private final JPanel panel;
     private List<ButtonImage> slots;
-    private int index;
 
-    private int rows;
-    private int columns;
-    private int slotWidth;
-    private int slotHeight;
-    private int padding;
-    private int margin;
-
-    private int inventoryWidth;
-    private int inventoryX;
-    private int inventoryY;
-
-    private BufferedImage defaultImage;
-    private ButtonImage defaultSlot;
-    private ButtonImage selectedSlot;
-
-    private int currentX;
-    private int currentY;
+    private final int rows;
+    private final int columns;
+    private final int slotWidth;
+    private final int slotHeight;
+    private final int padding;
+    private int margin = 5;
+    private Vector2DInt inventoryPosition;
+    private Vector2DInt slotPosition = new Vector2DInt(0, 0);
+    private int inventoryWidth = 0;
 
     public InventoryManager(JPanel panel, int rows, int columns, int slotWidth, int slotHeight, int padding) {
         this.panel = panel;
@@ -44,29 +35,20 @@ public class InventoryManager {
         this.slotWidth = slotWidth;
         this.slotHeight = slotHeight;
         this.padding = padding;
-        this.margin = 10;
-        index = 1;
 
+        initSlots();
+        inventoryWidth = columns * (slotWidth + padding) - padding;
+        inventoryPosition = new Vector2DInt(settings.screenWidth - inventoryWidth - margin, margin);
+    }
+
+    private void initSlots() {
+        BufferedImage defaultImage;
         try {
             defaultImage = ImageIO.read(new File("assets/tiles/not_loaded.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        initSlots();
-
-        inventoryWidth = columns * (slotWidth + padding) - padding;
-        inventoryX = settings.screenWidth - inventoryWidth - margin;
-        inventoryY = margin;
-
-        currentX = inventoryX;
-        currentY = inventoryY;
-
-        defaultSlot = new ButtonImage(panel, new Vector2DInt(100, 100), slotWidth, slotWidth, 5,
-                defaultImage);
-    }
-
-    private void initSlots() {
         slots = new ArrayList<>();
         int counter = 0;
         for (int row = 0; row < rows; row++) {
@@ -74,8 +56,7 @@ public class InventoryManager {
                 int x = col * (slotWidth + padding);
                 int y = row * (slotHeight + padding);
 
-                ButtonImage slot = new ButtonImage(panel, new Vector2DInt(x, y), slotWidth , slotHeight, 4,
-                        defaultImage);
+                ButtonImage slot = new ButtonImage(panel, new Vector2DInt(x, y), slotWidth , slotHeight, 4, defaultImage);
                 slot.id = counter;
                 counter++;
                 slots.add(slot);
@@ -83,48 +64,22 @@ public class InventoryManager {
         }
     }
 
-    public boolean anySlotPressed(){
-        selectedSlot = defaultSlot;
-        boolean isClicked = false;
-        for (ButtonImage slot: slots){
-            if (slot.isClicked()){
-                selectedSlot = slot;
-                isClicked = true;
-                break;
+    public void draw(Graphics2D g2) {
+        // reset starting position
+        slotPosition.setX(inventoryPosition.getX());
+        slotPosition.setY(inventoryPosition.getY());
+
+        for (ButtonImage slot : slots) {
+            slot.setVector(new Vector2DInt(slotPosition.getX(), slotPosition.getY()));
+            slot.draw(g2);
+
+            slotPosition.setX(slotPosition.getX() + slotWidth + padding);
+
+            if (slotPosition.getX() >= settings.screenWidth - margin) {
+                // reset x, increment y
+                slotPosition.setX(inventoryPosition.getX());
+                slotPosition.setY(slotPosition.getY() + slotHeight + padding);
             }
         }
-        return isClicked;
-    }
-
-    public ButtonImage getPressedSlot(){
-        return selectedSlot;
-    }
-
-    private int getIndexOfLastDrawedSlot(){
-        if (index == (rows * columns)){
-            currentX = inventoryX;
-            currentY = inventoryY;
-            index = 1;
-            return index;
-        }
-        index++;
-        return index;
-    }
-    private void drawNextSlot(Graphics2D g2){
-        System.out.println("Index: " + index);
-        ButtonImage slot = slots.get(getIndexOfLastDrawedSlot() - 1);
-
-        slot.setVector(new Vector2DInt(currentX, currentY));
-        slot.draw(g2);
-
-        currentX = slotWidth * (index % columns) + inventoryX;
-        if (index % 4 == 0){
-            currentX = inventoryX;
-            currentY += slotHeight + padding;
-        }
-    }
-
-    public void draw(Graphics2D g2) {
-        drawNextSlot(g2);
     }
 }
