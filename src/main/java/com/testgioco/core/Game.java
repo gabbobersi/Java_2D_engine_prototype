@@ -62,31 +62,74 @@ public class Game implements Runnable {
         double previous = System.nanoTime();
         double lag = 0.0;
 
+        int fps = 0;
+        double fpsTimer = 0;
+        double fixedUpdateTimer = 0;
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
             boolean setPanel = false;
+
             double current = System.nanoTime();
+
             double elapsed = current - previous;
+
             previous = current;
             lag += elapsed;
 
             processInput(activeState);
 
             // In this while, FPS limit execution.
-            while (lag >= constants.NS_PER_UPDATE){
+            while (lag >= constants.NANOSECONDS_PER_UPDATE){
                 updateGame(activeState);
-                lag -= constants.NS_PER_UPDATE;
+                lag -= constants.NANOSECONDS_PER_UPDATE;
                 if (GameState.getPreviousState() != GameState.getActiveState()){
                     System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
                     setPanel = true;
                 }
-                runScene(activeState, setPanel);
-                drawScene(activeState);
+                updateScene(activeState, setPanel);
+                fps++;
+            }
+            drawScene(activeState);
+
+            // When 0.2 (constants) seconds is passed, execute the fixedUpdate of the scene.
+            fixedUpdateTimer += elapsed;
+            if (fixedUpdateTimer >= constants.NANOSECONDS_PER_FIXED_UPDATE){
+                fixedUpdateTimer = 0;
+                fixedUpdateScene(activeState);
+            }
+
+            // When a second is passed, print the FPS.
+            fpsTimer += elapsed;
+            if (fpsTimer >= constants.ONE_SECOND_IN_NANOSECONDS) {
+//                System.out.println("FPS: " + fps);
+                fps = 0;
+                fpsTimer = 0;
             }
         }
     }
 
-    private void runScene(GameState.State state, boolean setPanel){
+    private void fixedUpdateScene(GameState.State state){
+        switch (state){
+            case MAIN_MENU:
+                mainMenu.fixedUpdate();
+                break;
+            case PLAY:
+                play.update();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.fixedUpdate();
+                break;
+            case TEST:
+                test.fixedUpdate();
+                break;
+            default:
+                System.out.println("WARNING - Eseguo il fixedUpdate di mainMenu perché non ho trovato lo stato che ti" +
+                        " interessa!");
+                mainMenu.fixedUpdate();
+        }
+    }
+
+    private void updateScene(GameState.State state, boolean setPanel){
         GameState.setActiveState(state);
 
         if (setPanel){
@@ -107,15 +150,15 @@ public class Game implements Runnable {
         switch (state){
             case MAIN_MENU:
                 if (setPanel) mainMenu.awake();
-                mainMenu.fixedUpdate();
+                mainMenu.update();
                 break;
             case PLAY:
                 if (setPanel) play.awake();
-                play.fixedUpdate();
+                play.update();
                 break;
             case TILE_MAP_GENERATOR:
                 if (setPanel) tmapgen.awake();
-                tmapgen.fixedUpdate();
+                tmapgen.update();
                 break;
             case QUIT:
                 stop();
@@ -124,12 +167,12 @@ public class Game implements Runnable {
                 break;
             case TEST:
                 if (setPanel) test.awake();
-                test.fixedUpdate();
+                test.update();
                 break;
             default:
                 System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
                         "interessa!");
-                mainMenu.fixedUpdate();
+                mainMenu.update();
         }
     }
 
@@ -162,7 +205,9 @@ public class Game implements Runnable {
             case TILE_MAP_GENERATOR -> tmapgen.repaint();
             case TEST -> test.repaint();
             default -> {
-                System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
+                if (!state.name().equals(GameState.State.QUIT.name())) {
+                    System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
+                }
                 mainMenu.repaint();
             }
         }

@@ -1,8 +1,8 @@
 package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
-import com.testgioco.utilities.DebugGrid;
-import com.testgioco.core.TileManager;
+import com.testgioco.core.CollisionManager;
+import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.entities.Player;
@@ -19,6 +19,7 @@ public class Play extends JPanel implements Scene {
     private final ScreenLogger debug = new ScreenLogger();
     private final Player player;
     private final InputHandler inputHandler = new InputHandler();
+    private final CollisionManager collisionManager;
 
     public Play(){
         super();
@@ -31,17 +32,17 @@ public class Play extends JPanel implements Scene {
 
         player = new Player(inputHandler);
         tileManager = new TileManager(player);
+        collisionManager = new CollisionManager(tileManager);
     }
 
     @Override
     public void awake(){
         System.out.println("AWAKE");
         tileManager.loadMap("/maps/tmapgen_1.txt");
-        repaint();
     }
 
     @Override
-    public void fixedUpdate(){
+    public void update(){
         if (inputHandler.escPressed){
             GameState.setActiveState(GameState.State.MAIN_MENU);
             inputHandler.reset();
@@ -49,17 +50,20 @@ public class Play extends JPanel implements Scene {
     }
 
     @Override
+    public void fixedUpdate(){}
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileManager.draw(g2);
-//        debugGrid.draw(g2);
         debug.draw(g2);
         player.draw(g2);
         g2.dispose();
     }
 
     public void processInput(){
+        collisionManager.checkCollision(player);
         player.getInput();
     }
 

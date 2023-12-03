@@ -48,7 +48,7 @@ public class MainMenu extends JPanel implements Scene {
     }
 
     @Override
-    public void fixedUpdate(){
+    public void update(){
         if (quitBtn.isClicked()) {
             GameState.setActiveState(GameState.State.QUIT);
         } else if (playBtn.isClicked()){
@@ -59,6 +59,9 @@ public class MainMenu extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.TEST);
         }
     }
+
+    @Override
+    public void fixedUpdate(){}
 
     @Override
     public void paintComponent(Graphics g) {

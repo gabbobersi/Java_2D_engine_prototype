@@ -12,12 +12,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity {
     private InputHandler keyH;
     private GameSettings settings = new GameSettings();
-
-    private double speed;
     private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
@@ -44,6 +43,10 @@ public class Player extends Entity {
         int x = settings.screenWidth / 2 - (cell.width / 2);
         int y = settings.screenHeight / 2 - (cell.height / 2);
         positionOnScreen = new Vector2DInt(x, y);
+
+        // Collision
+        solidArea = new Rectangle(8, 16, cell.width - 14, cell.height - 14);
+        isColliding = true;
     }
 
     public void getPlayerImage(){
@@ -71,24 +74,41 @@ public class Player extends Entity {
         if (keyH.anyKeyPressed){
             if (keyH.upPressed){
                 direction = "up";
-                vector.setY(-1);
+
             }
             if (keyH.downPressed){
                 direction = "down";
-                vector.setY(1);
             }
             if (keyH.leftPressed){
                 direction = "left";
-                vector.setX(-1);
+
             }
             if (keyH.rightPressed){
                 direction = "right";
-                vector.setX(1);
             }
-            animate(direction, true);
+
+            // I move only if I'm not colliding with anything.
+            if (!isColliding){
+                if (Objects.equals(direction, "up")){
+                    vector.setY(-1);
+                } else if (Objects.equals(direction, "down")){
+                    vector.setY(1);
+                } else if (Objects.equals(direction, "left")){
+                    vector.setX(-1);
+                } else if (Objects.equals(direction, "right")){
+                    vector.setX(1);
+
+                }
+                animate(direction, true);
+            }
         } else {
             animate(direction, false);
         }
+    }
+
+    public void stopMovement(){
+        vector.setX(0);
+        vector.setY(0);
     }
 
     private void animate(String newDirection, boolean isMoving){
@@ -116,6 +136,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Updates player's position on the map.
+     * */
     public void update(){
         vector.normalize();
         vector.multiply(speed);
@@ -125,6 +148,7 @@ public class Player extends Entity {
         positionOnTheMap.setX(x);
         positionOnTheMap.setY(y);
     }
+
     public void draw(Graphics2D g2) {
         BufferedImage image = up1;
 
@@ -158,7 +182,7 @@ public class Player extends Entity {
                 }
                 break;
         };
-        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), this.cell.width
-                , this.cell.height, null);
+        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), cell.width, cell.height,
+                null);
     }
 }

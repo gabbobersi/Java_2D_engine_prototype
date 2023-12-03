@@ -43,6 +43,7 @@ Mancanti:
 #### Sprite
 Software consigliato: [Piskel](https://www.piskelapp.com/)\
 NOTA: Per tutte le sprite, dovremmo decidere un'unica palette di colori!!!! [Lospec](https://lospec.com/palette-list)
+
 | Nome      | Novembre | Dicembre | Gennaio  | Febbraio            |
 |-----------|----------|----------|----------|---------------------|
 | Bersi     | 5 tile   | 3 items  | 1 npc    | Abbellimento tile   |
@@ -95,7 +96,7 @@ Totali
         - [ ] Inventario
         - [ ] Dialoghi / Narrativa / Lore
 - Francesco
-    - [ ] Physics
+    - [x] Physics
     - [ ] Audio
     - Game design
         - [ ] Obiettivi

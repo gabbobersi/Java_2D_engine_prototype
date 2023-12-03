@@ -1,13 +1,12 @@
 package com.tilemapgenerator;
 
 import com.testgioco.core.GameState;
-import com.testgioco.core.TileManager;
+import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
-import com.tilemapgenerator.interfaces.Algorithm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +65,7 @@ public class TileMapGenerator extends JPanel implements Scene {
     }
 
     @Override
-    public void fixedUpdate() {
+    public void update() {
         String filePath = "assets/maps/tmapgen_1.txt";
 
         if (btnGenerateAlgo1.isClicked()) {
@@ -84,6 +83,9 @@ public class TileMapGenerator extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
     }
+
+    @Override
+    public void fixedUpdate(){}
 
     private void checkFile(String path){
         File file = new File(path);
