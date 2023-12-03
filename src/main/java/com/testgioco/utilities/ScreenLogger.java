@@ -19,6 +19,7 @@ public class ScreenLogger {
         g2.drawString("Dimensione cella: " + cell.width + " x " + cell.height, x, 80);
         g2.drawString("========== COMANDI ==========", x, 120);
         g2.drawString("> ESC == Torna al menu principale", x, 140);
+        g2.drawString("> I == Inventario", x, 160);
 
     }
 
