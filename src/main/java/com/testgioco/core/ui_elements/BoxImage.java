@@ -150,4 +150,6 @@ public class BoxImage {
     public void setImage(BufferedImage image){
         this.image = image;
     }
+
+
 }

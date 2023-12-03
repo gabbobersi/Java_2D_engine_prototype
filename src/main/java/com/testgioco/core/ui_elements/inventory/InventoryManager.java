@@ -42,20 +42,18 @@ public class InventoryManager {
     }
 
     private void initSlots() {
-        BufferedImage defaultImage;
-        try {
-            defaultImage = ImageIO.read(new File("assets/tiles/not_loaded.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         slots = new ArrayList<>();
         int counter = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 int x = col * (slotWidth + padding);
                 int y = row * (slotHeight + padding);
-
+                BufferedImage defaultImage;
+                try {
+                    defaultImage = ImageIO.read(new File("assets/tiles/not_loaded.png"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 ButtonImage slot = new ButtonImage(panel, new Vector2DInt(x, y), slotWidth , slotHeight, 4, defaultImage);
                 slot.id = counter;
                 counter++;
@@ -74,6 +72,10 @@ public class InventoryManager {
             slot.draw(g2);
 
             slotPosition.setX(slotPosition.getX() + slotWidth + padding);
+
+            if (slot.isClicked()){
+                System.out.println("Clicked slot " + slot.id);
+            }
 
             if (slotPosition.getX() >= settings.screenWidth - margin) {
                 // reset x, increment y
