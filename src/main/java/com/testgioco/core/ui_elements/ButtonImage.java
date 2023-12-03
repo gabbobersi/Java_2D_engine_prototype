@@ -36,7 +36,6 @@ public class ButtonImage{
         if ((isClicked() || isPressed()) && !isClicked){
             isClicked = true;
             isBright = false;
-            System.out.println("Clicked");
             brightImage(500);
         } else if (!isClicked() && !isPressed() && isClicked){
             isClicked = false;
@@ -47,7 +46,6 @@ public class ButtonImage{
         if (boxImage.hasMouseOver() && !isBright && !isClicked){
             isBright = true;
             brightImage(100);
-            System.out.println("Mouse over");
         } else if (!boxImage.hasMouseOver() && isBright && !isClicked){
             isBright = false;
             resetImage();

@@ -5,6 +5,7 @@ import com.testgioco.core.CollisionManager;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
+import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
@@ -20,6 +21,9 @@ public class Play extends JPanel implements Scene {
     private final Player player;
     private final InputHandler inputHandler = new InputHandler();
     private final CollisionManager collisionManager;
+
+    private final InventoryManager inventoryManager = new InventoryManager(this, 2, 4, 50, 50, 3);
+    private boolean drawInventory = false;
 
     public Play(){
         super();
@@ -47,6 +51,7 @@ public class Play extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
             inputHandler.reset();
         }
+        drawInventory = inputHandler.i_pressed;
     }
 
     @Override
@@ -59,6 +64,11 @@ public class Play extends JPanel implements Scene {
         tileManager.draw(g2);
         debug.draw(g2);
         player.draw(g2);
+
+        if (drawInventory){
+            inventoryManager.draw(g2);
+        }
+
         g2.dispose();
     }
 

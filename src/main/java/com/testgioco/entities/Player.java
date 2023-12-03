@@ -70,8 +70,8 @@ public class Player extends Entity {
     public void getInput(){
         vector.setX(0);
         vector.setY(0);
-        // If any key is being pressed...
-        if (keyH.anyKeyPressed){
+        // If any key is being pressed... (except for the inventory key)
+        if (keyH.anyKeyPressed && !keyH.i_pressed){
             if (keyH.upPressed){
                 direction = "up";
 
