@@ -1,32 +1,37 @@
 package com.testgioco.core.ui_elements;
 
+import com.testgioco.core.Cell;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.utilities.Singletons;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
-public class Box {
+public class BoxImage {
+    private Cell cell = new Cell();
     Rectangle2D.Double box = new Rectangle2D.Double();
     Rectangle2D.Double boxBorders = new Rectangle2D.Double();
     private Vector2DInt vector;
     private int width, height;
     private int bordThickness;
-    private Color boxColor;
-    private RenderingAlignment renderingAlign = RenderingAlignment.DEFAULT;
+    private Box.RenderingAlignment renderingAlign = Box.RenderingAlignment.DEFAULT;
     private boolean isClicked = false;
+    private BufferedImage image;
+
 
     public enum RenderingAlignment {
         DEFAULT,    // The button will be rendered by the usual x, y coordinates, from the left top corner.
         CENTER      // The button will be rendered by the usual x, y coordinates, from center of width/height.
     }
 
-    public Box(Vector2DInt vector, int width, int height, int bordThickness, Color boxColor){
+    public BoxImage(Vector2DInt vector, int width, int height, int bordThickness, BufferedImage image){
         this.vector = vector;
         this.width = width;
         this.height = height;
         this.bordThickness = bordThickness;
-        this.boxColor = boxColor;
+        this.image = image;
     }
 
     /**
@@ -81,15 +86,14 @@ public class Box {
 
         g2.setColor(Color.BLACK);
         g2.fill(boxBorders);
-        g2.setColor(boxColor);
-        g2.fill(box);
+        g2.drawImage(image, vector.getX(), vector.getY(), width, height, null);
     }
 
     private void renderTopLeft(){
         box.setRect(vector.getX(), vector.getY(), width, height);
         int midThickness = (int)Math.round(((double)bordThickness / 2));
         boxBorders.setRect(vector.getX() - midThickness, vector.getY() - midThickness,width + bordThickness,
-            height + bordThickness);
+                height + bordThickness);
     }
 
     private void renderCenter(){
@@ -134,18 +138,18 @@ public class Box {
     public void setThickness(int bordThickness) {
         this.bordThickness = bordThickness;
     }
-    public Color getBoxColor() {
-        return boxColor;
-    }
-    public void setColor(Color boxColor) {
-        this.boxColor = boxColor;
-    }
 
-    public RenderingAlignment getRenderingAlign() {
+    public Box.RenderingAlignment getRenderingAlign() {
         return renderingAlign;
     }
 
-    public void setRenderingAlign(RenderingAlignment renderingAlign) {
+    public void setRenderingAlign(Box.RenderingAlignment renderingAlign) {
         this.renderingAlign = renderingAlign;
     }
+
+    public void setImage(BufferedImage image){
+        this.image = image;
+    }
+
+
 }

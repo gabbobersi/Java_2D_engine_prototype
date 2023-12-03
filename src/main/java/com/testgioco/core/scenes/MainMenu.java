@@ -22,16 +22,16 @@ public class MainMenu extends JPanel implements Scene {
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private Button playBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 80), btnWidth,
+    private Button playBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 80), btnWidth,
             btnHeight, "Play", bordThickness, btnColor, btnFont);
 
-    private Button tMapGenBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
+    private Button tMapGenBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
             btnHeight, "Tmapgen", bordThickness, btnColor, btnFont);
 
-    private Button quitBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
+    private Button quitBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
             btnHeight, "Quit", bordThickness, btnColor, btnFont);
 
-    private Button testBtn = new Button(this, new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
+    private Button testBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
             btnHeight, "Test", bordThickness, btnColor, btnFont);
 
     public MainMenu(){

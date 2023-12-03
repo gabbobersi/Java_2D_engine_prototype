@@ -4,14 +4,19 @@ import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
+import com.testgioco.core.ui_elements.ButtonImage;
 import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Test extends JPanel implements Scene {
     GameSettings settings = new GameSettings();
@@ -22,15 +27,14 @@ public class Test extends JPanel implements Scene {
     private final int bordThickness = 6;
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
-    private final Button btnTest = new Button(this,
-            new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight, "test", bordThickness,
-            btnColor, btnFont);
 
-    private final Button btnResetCounter = new Button(this,
-            new Vector2DInt(btnHorizontalAlignment, 200), btnWidth, btnHeight, "Reset counter", bordThickness,
-            btnColor, btnFont);
+    private final Button btnTest = new Button(new Vector2DInt(btnHorizontalAlignment, 100), btnWidth, btnHeight,
+            "test", bordThickness, btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
+    private final Button btnResetCounter = new Button(new Vector2DInt(btnHorizontalAlignment, 200), btnWidth, btnHeight,
+            "Reset counter", bordThickness, btnColor, btnFont);
+
+    private final Button btnMainMenu = new Button(new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
     private int counter = 0;
@@ -52,7 +56,7 @@ public class Test extends JPanel implements Scene {
         setFocusable(true);
         setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
 
-        inventory = new InventoryManager(4, 4, 50, 50, 5);
+        inventory = new InventoryManager(this, 2, 4, 50, 50, 3);
     }
 
     public void awake(){
@@ -89,18 +93,11 @@ public class Test extends JPanel implements Scene {
         //g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
         //g2.drawString(counterOfClick, 150, 80);
 
-
-        btnResetCounter.draw(g2);
-        btnTest.draw(g2);
-        btnMainMenu.draw(g2);
-
-//        barManager.draw(g2);
-
         //btnResetCounter.draw(g2);
         //btnTest.draw(g2);
         //btnMainMenu.draw(g2);
 
-        inventory.draw(g2, settings);
+        inventory.draw(g2);
         g2.dispose();
     }
 }
