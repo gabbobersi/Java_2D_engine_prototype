@@ -77,15 +77,15 @@ class Test extends Padre {
   
         // call the instance method 
         // using double colon operator 
-        list.forEach(new GFG()::print); 
+        list.forEach(new Test()::print); 
     } 
 } 
 ```
 #### Metodo statico
 ```Java
-list.forEach(GFG::someFunction); 
+list.forEach(Test::someFunction); 
 ```
 #### Metodo di istanza
 ```Java
-list.forEach((new GFG())::someFunction);
+list.forEach((new Test())::someFunction);
 ```
