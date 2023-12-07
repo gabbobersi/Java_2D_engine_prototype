@@ -5,13 +5,8 @@ import com.testgioco.entities.base_classes.Entity;
 
 public class CollisionManager {
     private final Cell cell = new Cell();
-    private final TileManager tileManager;
 
-    public CollisionManager(TileManager tileManager) {
-        this.tileManager = tileManager;
-    }
-
-    public void checkCollision(Entity entity){
+    public void checkCollision(TileManager tileManager, Entity entity){
         // Position of the entity's solid area, in the map.
         int entityLeft = entity.positionOnTheMap.getX() + entity.solidArea.x;
         int entityRight = entity.positionOnTheMap.getX() + entity.solidArea.x + entity.solidArea.width;

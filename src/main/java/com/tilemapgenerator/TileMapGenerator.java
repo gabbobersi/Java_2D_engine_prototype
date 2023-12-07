@@ -11,12 +11,11 @@ import com.testgioco.utilities.Singletons;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 public class TileMapGenerator extends JPanel implements Scene {
-    private final GameSettings settings = new GameSettings();
-
     private final int btnWidth = 300;
-    private final int btnHorizontalAlignment = settings.screenWidth / 2 - btnWidth / 2;
+    private final int btnHorizontalAlignment = GameSettings.screenWidth / 2 - btnWidth / 2;
 
     private final int btnHeight = 50;
     private final int bordThickness = 6;
@@ -33,7 +32,7 @@ public class TileMapGenerator extends JPanel implements Scene {
             btnHeight, "Algorithm 3 - Zebra", bordThickness, btnColor, btnFont);
 
     private final Button btnMainMenu = new Button(new Vector2DInt(btnHorizontalAlignment,
-            settings.screenHeight - 100), btnWidth,
+            GameSettings.screenHeight - 100), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
     private Writer writer = new Writer();
@@ -44,37 +43,36 @@ public class TileMapGenerator extends JPanel implements Scene {
     private int rowsNumber = GameSettings.mapRowsNumber;
     private int columnsNumber = GameSettings.mapColumnsNumber;
 
+    private String defaultFile = "assets/maps/tmapgen_1.txt";
+
     private enum Algorithms {
         ALGO1,
         ALGO2,
         ALGO3
     }
 
-    public TileMapGenerator() {
-        addMouseListener(Singletons.mouseH);
-        addMouseMotionListener(Singletons.mouseMotionH);
-
-        setDoubleBuffered(true);
-        setFocusable(true);
-        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+    public TileMapGenerator(){
+        super();
     }
 
+    @Override
     public void awake(){
-        File f = new File("assets/maps/tmapgen_1.txt");
-        f.delete();
     }
 
     @Override
     public void update() {
-        String filePath = "assets/maps/tmapgen_1.txt";
+        String filePath = defaultFile;
 
         if (btnGenerateAlgo1.isClicked()) {
+            deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO1);
         } else if (btnGenerateAlgo2.isClicked()){
+            deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO2);
         } else if (btnGenerateAlgo3.isClicked()) {
+            deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO3);
         }
@@ -119,4 +117,17 @@ public class TileMapGenerator extends JPanel implements Scene {
         btnMainMenu.draw(g2);
         g2.dispose();
     }
+
+    private void deleteFile(){
+        File f = new File(defaultFile);
+        try {
+            f.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("File eliminato.");
+    }
+
+    @Override
+    public void unload(){}
 }

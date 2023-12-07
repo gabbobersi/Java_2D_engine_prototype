@@ -2,6 +2,7 @@ package com.testgioco.core.ui_elements.inventory;
 
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.ui_elements.ButtonImage;
+import com.testgioco.core.ui_elements.Image;
 import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
@@ -14,9 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryManager {
-    private GameSettings settings = new GameSettings();
     private final JPanel panel;
-    private List<ButtonImage> slots;
+    private List<Slot> slots;
 
     private final int rows;
     private final int columns;
@@ -24,7 +24,7 @@ public class InventoryManager {
     private final int slotHeight;
     private final int padding;
     private int margin = 5;
-    private Vector2DInt inventoryPosition;
+    private final Vector2DInt inventoryPosition;
     private Vector2DInt slotPosition = new Vector2DInt(0, 0);
     private int inventoryWidth = 0;
 
@@ -37,8 +37,8 @@ public class InventoryManager {
         this.padding = padding;
 
         initSlots();
-        inventoryWidth = columns * (slotWidth + padding) - padding;
-        inventoryPosition = new Vector2DInt(settings.screenWidth - inventoryWidth - margin, margin);
+        inventoryWidth = columns * (slotWidth + padding) - padding + margin * 4;
+        inventoryPosition = new Vector2DInt(GameSettings.screenWidth - inventoryWidth - margin, margin);
     }
 
     private void initSlots() {
@@ -54,8 +54,8 @@ public class InventoryManager {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                ButtonImage slot = new ButtonImage(panel, new Vector2DInt(x, y), slotWidth , slotHeight, 4, defaultImage);
-                slot.id = counter;
+                Slot slot = new Slot(panel, new Vector2DInt(x, y), new Dimension(slotWidth, slotHeight), defaultImage);
+                slot.setId(counter);
                 counter++;
                 slots.add(slot);
             }
@@ -67,21 +67,36 @@ public class InventoryManager {
         slotPosition.setX(inventoryPosition.getX());
         slotPosition.setY(inventoryPosition.getY());
 
-        for (ButtonImage slot : slots) {
-            slot.setVector(new Vector2DInt(slotPosition.getX(), slotPosition.getY()));
+        for (Slot slot : slots) {
+            slot.setPosition(new Vector2DInt(slotPosition.getX(), slotPosition.getY()));
             slot.draw(g2);
 
             slotPosition.setX(slotPosition.getX() + slotWidth + padding);
 
             if (slot.isClicked()){
-                System.out.println("Clicked slot " + slot.id);
+                System.out.println("Clicked slot " + slot.getId());
+                BufferedImage slotImage;
+                try {
+                    slotImage = ImageIO.read(new File("assets/tiles/grass_01.png"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setItem(slot.getId(), new Item("test", "test", new Image(slotImage)));
             }
 
-            if (slotPosition.getX() >= settings.screenWidth - margin) {
+            if (slotPosition.getX() >= GameSettings.screenWidth - margin - slotWidth){
                 // reset x, increment y
                 slotPosition.setX(inventoryPosition.getX());
                 slotPosition.setY(slotPosition.getY() + slotHeight + padding);
             }
         }
+    }
+
+    public void setItem(int slotId, Item item){
+        slots.get(slotId).setItem(item);
+    }
+
+    public void removeItem(int slotId){
+        slots.get(slotId).setItem(null);
     }
 }

@@ -1,27 +1,27 @@
 package com.testgioco.core.handlers;
 
+import com.testgioco.utilities.Singletons;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseHandler implements MouseListener {
     public int x;
     public int y;
-    public boolean released;
-
-    public MouseHandler(){
-        released = true;
-    }
-
+    public boolean released = true;
+    public int clickCount;
     /**
      * Fired with a "complete" click (pressed, and then released)
      * */
     @Override
     public void mouseClicked(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();
-
-        // Prevents event propagation to other components
-        e.consume();
+        if (released) {
+            x = e.getX();
+            y = e.getY();
+            clickCount = e.getClickCount();
+            // Prevents event propagation to other components
+            e.consume();
+        }
     }
 
     @Override
@@ -45,6 +45,15 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    /**
+     * Prevents that mouse pressed event propagate through panels.
+     * */
+    public void reset(){
+        released = true;
+        x = 0;
+        y = 0;
     }
 
 }

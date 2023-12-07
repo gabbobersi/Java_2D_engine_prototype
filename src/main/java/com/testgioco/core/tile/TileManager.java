@@ -1,10 +1,12 @@
 package com.testgioco.core.tile;
 
 import com.testgioco.core.Cell;
+import com.testgioco.core.Vector2DInt;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -24,8 +26,7 @@ public class TileManager {
 
     public TileManager(Player player) {
         this.player = player;
-        loadTileImages();
-        mapTileNum = new int[GameSettings.mapRowsNumber][GameSettings.mapColumnsNumber];
+        reset();
     }
 
     private void loadTileImages() {
@@ -83,14 +84,18 @@ public class TileManager {
                 int tileIndex = mapTileNum[r][c];
 
                 // Tile position, to draw.
-                int worldX = c * cell.width;
-                int worldY = r * cell.height;
+                Vector2DInt tilePosition = new Vector2DInt(c * cell.width, r * cell.height);
 
                 // Tile position, to draw, taking into consideration player position.
-                int screenX = worldX - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
-                int screenY = worldY - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
+                int screenX = tilePosition.getX() - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
+                int screenY = tilePosition.getY() - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
 
-                g2.drawImage(getTileByIndex(tileIndex).getImage(),screenX, screenY, cell.width, cell.height, null);
+                if (tilePosition.getX() + cell.width > player.positionOnTheMap.getX() - player.positionOnScreen.getX() &&
+                    tilePosition.getX() - cell.width < player.positionOnTheMap.getX() + player.positionOnScreen.getX() &&
+                    tilePosition.getY() + cell.height > player.positionOnTheMap.getY() - player.positionOnScreen.getY() &&
+                    tilePosition.getY() - cell.height < player.positionOnTheMap.getY() + player.positionOnScreen.getY()){
+                    g2.drawImage(getTileByIndex(tileIndex).getImage(),screenX, screenY, cell.width, cell.height, null);
+                }
             }
         }
     }
@@ -125,6 +130,8 @@ public class TileManager {
     }
 
     public void loadMap (String mapPath){
+        System.out.println("TileManager - Loading map: " + mapPath);
+        reset();
         try (InputStream stream = getClass().getResourceAsStream(mapPath);
              InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
              BufferedReader bufferReader = new BufferedReader(streamReader)) {
@@ -155,6 +162,7 @@ public class TileManager {
             System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
             printTileMap(mapTileNum, mapRows);
             updateSettings();
+
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -176,5 +184,10 @@ public class TileManager {
         for (int r = 0; r < rowsNumber; r++){
             System.out.println(Arrays.toString(map[r]));
         }
+    }
+
+    public void reset(){
+        loadTileImages();
+        mapTileNum = null;
     }
 }

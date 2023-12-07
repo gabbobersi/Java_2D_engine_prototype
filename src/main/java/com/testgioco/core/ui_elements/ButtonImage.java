@@ -14,10 +14,9 @@ public class ButtonImage{
     private final int height;
     private final int bordThickness;
     private Vector2DInt vector;
-    public int id;
 
     private final BoxImage boxImage;
-    private final Image image;
+    private Image image;
 
     private boolean isBright = false;
     private boolean isClicked = false;
@@ -78,5 +77,10 @@ public class ButtonImage{
     private void resetImage(){
         image.resetImage();
         boxImage.setImage(image.getImage());
+    }
+
+    public void setImage(Image image){
+        this.image = image;
+        boxImage.setImage(this.image.getImage());
     }
 }

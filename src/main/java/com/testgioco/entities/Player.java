@@ -6,6 +6,7 @@ import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.Vector2D;
 import com.testgioco.entities.base_classes.Entity;
 import com.testgioco.utilities.GameSettings;
+import com.testgioco.utilities.Singletons;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,8 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity {
-    private InputHandler keyH;
-    private GameSettings settings = new GameSettings();
+    private InputHandler keyH = Singletons.keyH;
     private long lastAnimationTime;
     private final Cell cell = new Cell();
     private Vector2D vector;
@@ -24,8 +24,7 @@ public class Player extends Entity {
     // Player rendering position on the screen.
     public Vector2DInt positionOnScreen;
 
-    public Player(InputHandler keyH){
-        this.keyH = keyH;
+    public Player(){
         setDefaultValues();
         getPlayerImage();
     }
@@ -40,8 +39,8 @@ public class Player extends Entity {
         positionOnTheMap = new Vector2DInt(150, 100);
 
         // Position on the screen
-        int x = settings.screenWidth / 2 - (cell.width / 2);
-        int y = settings.screenHeight / 2 - (cell.height / 2);
+        int x = GameSettings.screenWidth / 2 - (cell.width / 2);
+        int y = GameSettings.screenHeight / 2 - (cell.height / 2);
         positionOnScreen = new Vector2DInt(x, y);
 
         // Collision

@@ -47,21 +47,17 @@ public class Box {
      * Check if mouse has been clicked inside box's boundaries.
      * */
     public boolean hasBeenClicked(){
-        boolean okWidth =
-                Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width;
-        boolean okHeight =
-                Singletons.mouseH.y > vector.getY() && Singletons.mouseH.y < vector.getY() + height;
+        boolean isInside = (Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width)
+                && (Singletons.mouseH.y >= vector.getY() && Singletons.mouseH.y <= vector.getY() + height);
 
         boolean isReleased = Singletons.mouseH.released;
-        boolean condition = okWidth && okHeight && !isReleased;
 
-        // If the button doesn't results already clicked, and I've clicked on it, will be clicked.
-        // Prevents the button to remain triggered, after the first click!
-        if (!isClicked && condition){
+        if (isInside && !isReleased) {
             isClicked = true;
         } else {
             isClicked = false;
         }
+
         return isClicked;
     }
 

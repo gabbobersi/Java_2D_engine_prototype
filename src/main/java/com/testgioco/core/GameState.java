@@ -3,9 +3,8 @@ package com.testgioco.core;
 import com.testgioco.utilities.GameSettings;
 
 public class GameState {
-    private static GameSettings settings = new GameSettings();
-    private static State previousState =  settings.defaultScene;
-    private static State activeState = settings.defaultScene;
+    private static State previousState =  GameSettings.defaultScene;
+    private static State activeState = GameSettings.defaultScene;
     public enum State {
         MAIN_MENU,
         PLAY,

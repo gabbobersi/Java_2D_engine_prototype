@@ -1,6 +1,5 @@
 package com.testgioco.core.scenes;
 
-import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
@@ -12,10 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainMenu extends JPanel implements Scene {
-    private GameSettings settings = new GameSettings();
-
     // Buttons settings
-    private final int btnHorizontalAlignment = settings.screenWidth/2 - 75;
+    private final int btnHorizontalAlignment = GameSettings.screenWidth /2 - 75;
     private final int btnWidth = 150;
     private final int btnHeight = 80;
     private final int bordThickness = 6;
@@ -31,16 +28,13 @@ public class MainMenu extends JPanel implements Scene {
     private Button quitBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
             btnHeight, "Quit", bordThickness, btnColor, btnFont);
 
-    private Button testBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
+    private Button testBtn = new Button(new Vector2DInt(btnHorizontalAlignment,
+            GameSettings.screenHeight - btnHeight*2),
+            btnWidth,
             btnHeight, "Test", bordThickness, btnColor, btnFont);
 
     public MainMenu(){
         super();
-        addMouseListener(Singletons.mouseH);
-        addMouseMotionListener(Singletons.mouseMotionH);
-        setDoubleBuffered(true);
-        setFocusable(true);
-        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
     }
 
     public void awake(){
@@ -74,4 +68,7 @@ public class MainMenu extends JPanel implements Scene {
         testBtn.draw(g2);
         g2.dispose();
     }
+
+    @Override
+    public void unload(){}
 }

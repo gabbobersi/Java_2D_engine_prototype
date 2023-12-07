@@ -4,6 +4,7 @@ import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
 import com.testgioco.core.scenes.Test;
 import com.testgioco.utilities.Constants;
+import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Singletons;
 import com.tilemapgenerator.TileMapGenerator;
 
@@ -34,6 +35,8 @@ public class Game implements Runnable {
         mainPanel = new JPanel();
         cardLayout = new CardLayout();
         mainPanel.setLayout(cardLayout);
+        mainPanel.setBounds(0, 0, GameSettings.screenWidth, GameSettings.screenHeight);
+        mainPanel.setPreferredSize(new Dimension(GameSettings.screenWidth, GameSettings.screenHeight));
 
         // Adding all the "cards" to the main panel
         mainPanel.add(mainMenu, GameState.State.MAIN_MENU.name());
@@ -42,9 +45,8 @@ public class Game implements Runnable {
         mainPanel.add(test, GameState.State.TEST.name());
 
         // Show the default card
-        cardLayout.show(mainPanel, GameState.getActiveStateName());
-
         window = new Window(mainPanel);
+        setupScene(GameSettings.defaultScene);
     }
 
     public void start(){
@@ -67,28 +69,29 @@ public class Game implements Runnable {
         double fixedUpdateTimer = 0;
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
-            boolean setPanel = false;
 
             double current = System.nanoTime();
-
             double elapsed = current - previous;
-
             previous = current;
             lag += elapsed;
 
-            processInput(activeState);
+            if (GameState.getPreviousState() != GameState.getActiveState()){
+                System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
+                // Changing scene actions.
+                unloadScene(GameState.getPreviousState());
+                changeScene(activeState);
+                awakeScene(activeState);
+            }
 
             // In this while, FPS limit execution.
             while (lag >= constants.NANOSECONDS_PER_UPDATE){
                 updateGame(activeState);
                 lag -= constants.NANOSECONDS_PER_UPDATE;
-                if (GameState.getPreviousState() != GameState.getActiveState()){
-                    System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
-                    setPanel = true;
-                }
-                updateScene(activeState, setPanel);
+                updateScene(activeState);
                 fps++;
             }
+
+            processInput(activeState);
             drawScene(activeState);
 
             // When 0.2 (constants) seconds is passed, execute the fixedUpdate of the scene.
@@ -129,35 +132,61 @@ public class Game implements Runnable {
         }
     }
 
-    private void updateScene(GameState.State state, boolean setPanel){
+    private void changeScene(GameState.State state){
         GameState.setActiveState(state);
+        setupPanel(state);
+        Singletons.mouseH.reset();
+        setupScene(state);
+    }
 
-        if (setPanel){
-            // Prevents that mouse pressed event propagate through panels
-            Singletons.mouseH.released = true;
-            Singletons.mouseH.x = 0;
-            Singletons.mouseH.y = 0;
-
-            cardLayout.show(mainPanel, GameState.getActiveStateName());
-            JPanel activePanel = getPanelInstance(GameState.getActiveState());
-            activePanel.setBackground(Color.WHITE);
-            activePanel.requestFocus();
-
-            window.revalidate();
-            window.repaint();
-        }
-
+    private void awakeScene(GameState.State state){
         switch (state){
             case MAIN_MENU:
-                if (setPanel) mainMenu.awake();
+                mainMenu.awake();
+                break;
+            case PLAY:
+                play.awake();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.awake();
+                break;
+            case TEST:
+                test.awake();
+                break;
+            default:
+                System.out.println("WARNING - Awake - Can't find scene");
+                mainMenu.awake();
+        }
+    }
+
+    private void unloadScene(GameState.State state){
+        switch (state){
+            case MAIN_MENU:
+                mainMenu.unload();
+                break;
+            case PLAY:
+                play.unload();
+                break;
+            case TILE_MAP_GENERATOR:
+                tmapgen.unload();
+                break;
+            case TEST:
+                test.unload();
+                break;
+            default:
+                System.out.println("WARNING - Unload - Can't find scene");
+        }
+    }
+
+    private void updateScene(GameState.State state){
+        switch (state){
+            case MAIN_MENU:
                 mainMenu.update();
                 break;
             case PLAY:
-                if (setPanel) play.awake();
                 play.update();
                 break;
             case TILE_MAP_GENERATOR:
-                if (setPanel) tmapgen.awake();
                 tmapgen.update();
                 break;
             case QUIT:
@@ -166,7 +195,6 @@ public class Game implements Runnable {
                 System.exit(0);
                 break;
             case TEST:
-                if (setPanel) test.awake();
                 test.update();
                 break;
             default:
@@ -174,6 +202,44 @@ public class Game implements Runnable {
                         "interessa!");
                 mainMenu.update();
         }
+    }
+
+    /**
+     * Setup the scene corresponding to a state, and then, its panel.
+     * */
+    private void setupScene(GameState.State state){
+        cardLayout.show(mainPanel, state.name());
+        setupPanel(state);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        window.repaint();
+        window.revalidate();
+    }
+
+    /**
+     * Setup the panel corresponding to a state.
+     * */
+    private void setupPanel(GameState.State state){
+        JPanel panel = getPanelInstance(state);
+
+        // Handlers
+        panel.setFocusable(true);
+        panel.addMouseListener(Singletons.mouseH);
+        panel.addMouseMotionListener(Singletons.mouseMotionH);
+        panel.addKeyListener(Singletons.keyH);
+        panel.requestFocus();
+
+        // Position
+        panel.setPreferredSize(new Dimension(GameSettings.screenWidth, GameSettings.screenHeight));
+        panel.setBounds(0, 0, GameSettings.screenWidth, GameSettings.screenHeight);
+
+        // Others
+        panel.setDoubleBuffered(true);
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(null);
+
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }
 
     /**

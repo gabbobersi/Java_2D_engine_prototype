@@ -19,9 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Test extends JPanel implements Scene {
-    GameSettings settings = new GameSettings();
-
-    private final int btnHorizontalAlignment = settings.screenWidth / 2 - 75;
+    private final int btnHorizontalAlignment = GameSettings.screenWidth / 2 - 75;
     private final int btnWidth = 150;
     private final int btnHeight = 80;
     private final int bordThickness = 6;
@@ -37,25 +35,13 @@ public class Test extends JPanel implements Scene {
     private final Button btnMainMenu = new Button(new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
-    private int counter = 0;
-
-    private final InputHandler inputH = new InputHandler();
-
     private BarManager barManager = new BarManager();
     private final InventoryManager inventory;
 
     public Test(){
         super();
-        addMouseListener(Singletons.mouseH);
-        addMouseMotionListener(Singletons.mouseMotionH);
-        addKeyListener(inputH);
         GridLayout grid = new GridLayout(2, 1);
         setLayout(grid);
-
-        setDoubleBuffered(true);
-        setFocusable(true);
-        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
-
         inventory = new InventoryManager(this, 2, 4, 50, 50, 3);
     }
 
@@ -66,17 +52,14 @@ public class Test extends JPanel implements Scene {
     @Override
     public void update() {
         if (btnTest.isClicked()){
-            counter++;
         } else if (btnResetCounter.isClicked()){
-            counter = 0;
-            btnResetCounter.setReleased(true);
         } else if (btnMainMenu.isClicked()){
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
 
-        if (inputH.spacePressed){
+        if (Singletons.keyH.spacePressed){
             barManager.reduceHealth(10);
-        } else if (inputH.leftPressed){
+        } else if (Singletons.keyH.leftPressed){
             barManager.resetHealth();
         }
     }
@@ -89,15 +72,18 @@ public class Test extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        //String counterOfClick = btnTest.getText() + " clicked: " + counter + " times";
-        //g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
-        //g2.drawString(counterOfClick, 150, 80);
+        String counterOfClick = btnTest.getText() + " clicked: " + Singletons.mouseH.clickCount + " times";
+        g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        g2.drawString(counterOfClick, 150, 80);
 
-        //btnResetCounter.draw(g2);
-        //btnTest.draw(g2);
-        //btnMainMenu.draw(g2);
+        btnResetCounter.draw(g2);
+        btnTest.draw(g2);
+        btnMainMenu.draw(g2);
 
-        inventory.draw(g2);
+//        inventory.draw(g2);
         g2.dispose();
     }
+
+    @Override
+    public void unload(){}
 }
