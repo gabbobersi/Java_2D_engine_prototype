@@ -18,7 +18,6 @@ public class Play extends JPanel implements Scene {
     private Player player;
     private CollisionManager collisionManager;
     private InventoryManager inventoryManager;
-    private boolean drawInventory = false;
 
     public Play(){
         super();
@@ -40,7 +39,13 @@ public class Play extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
             Singletons.keyH.reset();
         }
-        drawInventory = Singletons.keyH.i_pressed;
+
+        if (Singletons.keyH.spacePressed){
+            inventoryManager.enable();
+        }
+        if (Singletons.keyH.spacePressed && inventoryManager.isActive()){
+            inventoryManager.disable();
+        }
     }
 
     @Override
@@ -58,10 +63,7 @@ public class Play extends JPanel implements Scene {
         tileManager.draw(g2);
         debug.draw(g2);
         player.draw(g2);
-
-        if (drawInventory){
-            inventoryManager.draw(g2);
-        }
+        inventoryManager.draw(g2);
 
         g2.dispose();
     }

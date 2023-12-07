@@ -8,6 +8,8 @@ import com.testgioco.utilities.GameSettings;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +30,28 @@ public class InventoryManager {
     private Vector2DInt slotPosition = new Vector2DInt(0, 0);
     private int inventoryWidth = 0;
 
+    private boolean isActive = false;
+    private boolean canDisable = false;
+    private boolean canEnable = true;
+
+    Timer disableTimer = new Timer(500, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            canEnable = true;
+        }
+    });
+
+    Timer enableTimer = new Timer(500, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            canDisable = true;
+        }
+    });
+
     public InventoryManager(JPanel panel, int rows, int columns, int slotWidth, int slotHeight, int padding) {
+        disableTimer.setRepeats(false);
+        enableTimer.setRepeats(false);
+
         this.panel = panel;
         this.rows = rows;
         this.columns = columns;
@@ -63,6 +86,10 @@ public class InventoryManager {
     }
 
     public void draw(Graphics2D g2) {
+        if (!isActive) {
+            return;
+        }
+
         // reset starting position
         slotPosition.setX(inventoryPosition.getX());
         slotPosition.setY(inventoryPosition.getY());
@@ -98,5 +125,35 @@ public class InventoryManager {
 
     public void removeItem(int slotId){
         slots.get(slotId).setItem(null);
+    }
+
+    public void enable(){
+        if (isActive){
+            return;
+        }
+
+        if (canEnable){
+            System.out.println("Inventory enabled");
+            isActive = true;
+            canEnable = false;
+            enableTimer.start();
+        }
+    }
+
+    public void disable(){
+        if (!isActive){
+            return;
+        }
+
+        if (canDisable){
+            System.out.println("Inventory disabled");
+            isActive = false;
+            canDisable = false;
+            disableTimer.start();
+        }
+    }
+
+    public boolean isActive(){
+        return isActive;
     }
 }

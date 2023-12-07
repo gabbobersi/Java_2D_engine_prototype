@@ -69,25 +69,30 @@ public class Player extends Entity {
     public void getInput(){
         vector.setX(0);
         vector.setY(0);
-        // If any key is being pressed... (except for the inventory key)
-        if (keyH.anyKeyPressed && !keyH.i_pressed){
-            if (keyH.upPressed){
-                direction = "up";
 
+        boolean isMoving = false;
+
+        // If any key is being pressed... (except for the inventory key)
+        if (keyH.anyKeyPressed){
+            if (keyH.upPressed){
+                isMoving = true;
+                direction = "up";
             }
             if (keyH.downPressed){
+                isMoving = true;
                 direction = "down";
             }
             if (keyH.leftPressed){
+                isMoving = true;
                 direction = "left";
-
             }
             if (keyH.rightPressed){
+                isMoving = true;
                 direction = "right";
             }
 
             // I move only if I'm not colliding with anything.
-            if (!isColliding){
+            if (!isColliding && isMoving){
                 if (Objects.equals(direction, "up")){
                     vector.setY(-1);
                 } else if (Objects.equals(direction, "down")){
@@ -96,7 +101,6 @@ public class Player extends Entity {
                     vector.setX(-1);
                 } else if (Objects.equals(direction, "right")){
                     vector.setX(1);
-
                 }
                 animate(direction, true);
             }
