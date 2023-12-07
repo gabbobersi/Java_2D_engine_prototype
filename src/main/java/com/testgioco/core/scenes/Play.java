@@ -1,5 +1,6 @@
 package com.testgioco.core.scenes;
 
+import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
 import com.testgioco.core.CollisionManager;
 import com.testgioco.core.tile.TileManager;
@@ -14,7 +15,7 @@ import java.awt.*;
 
 public class Play extends JPanel implements Scene {
     private TileManager tileManager;
-    private final ScreenLogger debug = new ScreenLogger();
+    private ScreenLogger debug;
     private Player player;
     private CollisionManager collisionManager;
     private InventoryManager inventoryManager;
@@ -26,6 +27,7 @@ public class Play extends JPanel implements Scene {
     @Override
     public void awake(){
         System.out.println("AWAKE");
+        debug = new ScreenLogger();
         player = new Player();
         tileManager = new TileManager(player);
         tileManager.loadMap("/maps/tmapgen_1.txt");
@@ -36,7 +38,7 @@ public class Play extends JPanel implements Scene {
     @Override
     public void update(){
         if (Singletons.keyH.escPressed){
-            GameState.setActiveState(GameState.State.MAIN_MENU);
+            GameState.setActiveState(GameState.State.LOADING_SCREEN);
             Singletons.keyH.reset();
         }
 
@@ -78,11 +80,16 @@ public class Play extends JPanel implements Scene {
     }
 
     @Override
-    public void unload(){
-        System.out.println("UNLOAD");
-        tileManager = null;
-        player = null;
-        collisionManager = null;
-        inventoryManager = null;
+    public void unload(int delay){
+        Timer unloadTimer = new Timer(delay, e -> {
+            System.out.println("UNLOAD");
+            tileManager = null;
+            player = null;
+            collisionManager = null;
+            inventoryManager = null;
+            debug = null;
+        });
+        unloadTimer.setRepeats(false);
+        unloadTimer.start();
     }
 }

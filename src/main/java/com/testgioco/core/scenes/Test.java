@@ -85,5 +85,5 @@ public class Test extends JPanel implements Scene {
     }
 
     @Override
-    public void unload(){}
+    public void unload(int delay){}
 }

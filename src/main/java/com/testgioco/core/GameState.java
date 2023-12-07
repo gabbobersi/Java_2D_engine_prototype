@@ -10,7 +10,8 @@ public class GameState {
         PLAY,
         TILE_MAP_GENERATOR,
         QUIT,
-        TEST
+        TEST,
+        LOADING_SCREEN
     }
 
     public static void setActiveState(State newState) {
@@ -20,6 +21,7 @@ public class GameState {
             case TILE_MAP_GENERATOR -> activeState = State.TILE_MAP_GENERATOR;
             case QUIT -> activeState = State.QUIT;
             case TEST -> activeState = State.TEST;
+            case LOADING_SCREEN -> activeState = State.LOADING_SCREEN;
             default -> activeState = State.MAIN_MENU;
         }
     }

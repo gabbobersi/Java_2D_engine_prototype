@@ -1,5 +1,6 @@
 package com.testgioco.core;
 
+import com.testgioco.core.scenes.LoadingScreen;
 import com.testgioco.core.scenes.MainMenu;
 import com.testgioco.core.scenes.Play;
 import com.testgioco.core.scenes.Test;
@@ -24,12 +25,14 @@ public class Game implements Runnable {
     private final Play play;
     private final TileMapGenerator tmapgen;
     private final Test test;
+    private final LoadingScreen loadingScreen;
 
     public Game() {
         mainMenu = new MainMenu();
         play = new Play();
         tmapgen = new TileMapGenerator();
         test = new Test();
+        loadingScreen = new LoadingScreen();
 
         // Setting the cardLayout system
         mainPanel = new JPanel();
@@ -43,6 +46,7 @@ public class Game implements Runnable {
         mainPanel.add(play, GameState.State.PLAY.name());
         mainPanel.add(tmapgen, GameState.State.TILE_MAP_GENERATOR.name());
         mainPanel.add(test, GameState.State.TEST.name());
+        mainPanel.add(loadingScreen, GameState.State.LOADING_SCREEN.name());
 
         // Show the default card
         window = new Window(mainPanel);
@@ -78,7 +82,7 @@ public class Game implements Runnable {
             if (GameState.getPreviousState() != GameState.getActiveState()){
                 System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
                 // Changing scene actions.
-                unloadScene(GameState.getPreviousState());
+                unloadScene(GameState.getPreviousState(), 80);
                 changeScene(activeState);
                 awakeScene(activeState);
             }
@@ -125,6 +129,9 @@ public class Game implements Runnable {
             case TEST:
                 test.fixedUpdate();
                 break;
+            case LOADING_SCREEN:
+                loadingScreen.fixedUpdate();
+                break;
             default:
                 System.out.println("WARNING - Eseguo il fixedUpdate di mainMenu perché non ho trovato lo stato che ti" +
                         " interessa!");
@@ -153,25 +160,31 @@ public class Game implements Runnable {
             case TEST:
                 test.awake();
                 break;
+            case LOADING_SCREEN:
+                loadingScreen.awake();
+                break;
             default:
                 System.out.println("WARNING - Awake - Can't find scene");
                 mainMenu.awake();
         }
     }
 
-    private void unloadScene(GameState.State state){
+    private void unloadScene(GameState.State state, int delay){
         switch (state){
             case MAIN_MENU:
-                mainMenu.unload();
+                mainMenu.unload(delay);
                 break;
             case PLAY:
-                play.unload();
+                play.unload(delay);
                 break;
             case TILE_MAP_GENERATOR:
-                tmapgen.unload();
+                tmapgen.unload(delay);
                 break;
             case TEST:
-                test.unload();
+                test.unload(delay);
+                break;
+            case LOADING_SCREEN:
+                loadingScreen.unload(delay);
                 break;
             default:
                 System.out.println("WARNING - Unload - Can't find scene");
@@ -196,6 +209,9 @@ public class Game implements Runnable {
                 break;
             case TEST:
                 test.update();
+                break;
+            case LOADING_SCREEN:
+                loadingScreen.update();
                 break;
             default:
                 System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
@@ -255,6 +271,8 @@ public class Game implements Runnable {
                 return tmapgen;
             case TEST:
                 return test;
+            case LOADING_SCREEN:
+                return loadingScreen;
             default:
                 // Warning only if I'm not exiting the game.
                 if (!state.name().equals(GameState.State.QUIT.name())) {
@@ -270,6 +288,7 @@ public class Game implements Runnable {
             case PLAY -> play.repaint();
             case TILE_MAP_GENERATOR -> tmapgen.repaint();
             case TEST -> test.repaint();
+            case LOADING_SCREEN -> loadingScreen.repaint();
             default -> {
                 if (!state.name().equals(GameState.State.QUIT.name())) {
                     System.out.println("WARNING - drawScene - Non ho trovato lo stato che vorresti disegnare!");
