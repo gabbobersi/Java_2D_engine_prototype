@@ -68,6 +68,7 @@ public class Game implements Runnable {
         double fixedUpdateTimer = 0;
 
         changeScene(GameState.getActiveState());
+        awakeScene(GameState.getActiveState());
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
             GameState.State nextState = GameState.getNextState();
