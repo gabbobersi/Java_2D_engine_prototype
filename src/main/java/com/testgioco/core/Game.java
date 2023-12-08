@@ -6,19 +6,18 @@ import com.testgioco.core.scenes.Play;
 import com.testgioco.core.scenes.Test;
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
+import com.testgioco.utilities.Handlers;
 import com.tilemapgenerator.TileMapGenerator;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Game implements Runnable {
-    private final Constants constants = new Constants();
     private Thread gameThread;
     private volatile boolean isRunning = true;
 
     private final Window window;
-    private final JPanel mainPanel;
+    private static final JPanel mainPanel = new JPanel();
     private final CardLayout cardLayout;
 
     private final MainMenu mainMenu;
@@ -35,7 +34,6 @@ public class Game implements Runnable {
         loadingScreen = new LoadingScreen();
 
         // Setting the cardLayout system
-        mainPanel = new JPanel();
         cardLayout = new CardLayout();
         mainPanel.setLayout(cardLayout);
         mainPanel.setBounds(0, 0, GameSettings.screenWidth, GameSettings.screenHeight);
@@ -50,7 +48,6 @@ public class Game implements Runnable {
 
         // Show the default card
         window = new Window(mainPanel);
-        setupScene(GameSettings.defaultScene);
     }
 
     public void start(){
@@ -65,12 +62,11 @@ public class Game implements Runnable {
      * */
     @Override
     public void run() {
+        Fps fps = new Fps();
         double previous = System.nanoTime();
         double lag = 0.0;
-
-        int fps = 0;
-        double fpsTimer = 0;
         double fixedUpdateTimer = 0;
+
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
 
@@ -88,30 +84,22 @@ public class Game implements Runnable {
             }
 
             // In this while, FPS limit execution.
-            while (lag >= constants.NANOSECONDS_PER_UPDATE){
-                updateGame(activeState);
-                lag -= constants.NANOSECONDS_PER_UPDATE;
+            while (lag >= Constants.NANOSECONDS_PER_UPDATE){
+                lag -= Constants.NANOSECONDS_PER_UPDATE;
                 updateScene(activeState);
-                fps++;
+                fps.increment();
             }
 
-            processInput(activeState);
             drawScene(activeState);
 
             // When 0.2 (constants) seconds is passed, execute the fixedUpdate of the scene.
             fixedUpdateTimer += elapsed;
-            if (fixedUpdateTimer >= constants.NANOSECONDS_PER_FIXED_UPDATE){
+            if (fixedUpdateTimer >= Constants.NANOSECONDS_PER_FIXED_UPDATE){
                 fixedUpdateTimer = 0;
                 fixedUpdateScene(activeState);
             }
 
-            // When a second is passed, print the FPS.
-            fpsTimer += elapsed;
-            if (fpsTimer >= constants.ONE_SECOND_IN_NANOSECONDS) {
-//                System.out.println("FPS: " + fps);
-                fps = 0;
-                fpsTimer = 0;
-            }
+            fps.print(elapsed);
         }
     }
 
@@ -142,7 +130,7 @@ public class Game implements Runnable {
     private void changeScene(GameState.State state){
         GameState.setActiveState(state);
         setupPanel(state);
-        Singletons.mouseH.reset();
+        Handlers.mouseH.reset();
         setupScene(state);
     }
 
@@ -164,7 +152,9 @@ public class Game implements Runnable {
                 loadingScreen.awake();
                 break;
             default:
-                System.out.println("WARNING - Awake - Can't find scene");
+                if (!state.name().equals(GameState.State.QUIT.name())) {
+                    System.out.println("WARNING - Awake - Can't find scene");
+                }
                 mainMenu.awake();
         }
     }
@@ -187,7 +177,9 @@ public class Game implements Runnable {
                 loadingScreen.unload(delay);
                 break;
             default:
-                System.out.println("WARNING - Unload - Can't find scene");
+                if (!state.name().equals(GameState.State.QUIT.name())) {
+                    System.out.println("WARNING - Unload - Can't find scene");
+                }
         }
     }
 
@@ -214,8 +206,7 @@ public class Game implements Runnable {
                 loadingScreen.update();
                 break;
             default:
-                System.out.println("WARNING - Eseguo il run di mainMenu perché non ho trovato lo stato che ti " +
-                        "interessa!");
+                System.out.println("WARNING - Update - Can't find scene");
                 mainMenu.update();
         }
     }
@@ -226,10 +217,7 @@ public class Game implements Runnable {
     private void setupScene(GameState.State state){
         cardLayout.show(mainPanel, state.name());
         setupPanel(state);
-        mainPanel.repaint();
-        mainPanel.revalidate();
-        window.repaint();
-        window.revalidate();
+        updateScenePaint();
     }
 
     /**
@@ -240,9 +228,9 @@ public class Game implements Runnable {
 
         // Handlers
         panel.setFocusable(true);
-        panel.addMouseListener(Singletons.mouseH);
-        panel.addMouseMotionListener(Singletons.mouseMotionH);
-        panel.addKeyListener(Singletons.keyH);
+        panel.addMouseListener(Handlers.mouseH);
+        panel.addMouseMotionListener(Handlers.mouseMotionH);
+        panel.addKeyListener(Handlers.keyH);
         panel.requestFocus();
 
         // Position
@@ -254,6 +242,10 @@ public class Game implements Runnable {
         panel.setBackground(Color.WHITE);
         panel.setLayout(null);
 
+        updateScenePaint();
+    }
+
+    public static void updateScenePaint(){
         mainPanel.repaint();
         mainPanel.revalidate();
     }
@@ -295,18 +287,6 @@ public class Game implements Runnable {
                 }
                 mainMenu.repaint();
             }
-        }
-    }
-
-    private void processInput(GameState.State state){
-        if (state == GameState.State.PLAY){
-            play.processInput();
-        }
-    }
-
-    private void updateGame(GameState.State state){
-        if (state == GameState.State.PLAY){
-            play.updateGame();
         }
     }
 

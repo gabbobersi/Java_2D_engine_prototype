@@ -1,14 +1,13 @@
 package com.testgioco.core.scenes;
 
-import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
-import com.testgioco.core.CollisionManager;
+import com.testgioco.entities.CollisionManager;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.ScreenLogger;
-import com.testgioco.utilities.Singletons;
+import com.testgioco.utilities.Handlers;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,21 +32,24 @@ public class Play extends JPanel implements Scene {
         tileManager.loadMap("/maps/tmapgen_1.txt");
         collisionManager = new CollisionManager();
         inventoryManager = new InventoryManager(this, 2, 4, 50, 50, 7);
+        Handlers.keyH.reset();
     }
 
     @Override
     public void update(){
-        if (Singletons.keyH.escPressed){
+        if (Handlers.keyH.esc_pressed){
             GameState.setActiveState(GameState.State.LOADING_SCREEN);
-            Singletons.keyH.reset();
+            Handlers.keyH.reset();
         }
 
-        if (Singletons.keyH.spacePressed){
+        if (Handlers.keyH.space_pressed){
             inventoryManager.enable();
         }
-        if (Singletons.keyH.spacePressed && inventoryManager.isActive()){
+        if (Handlers.keyH.space_pressed && inventoryManager.isActive()){
             inventoryManager.disable();
         }
+        collisionManager.checkCollision(tileManager, player);
+        player.update();
     }
 
     @Override
@@ -68,15 +70,6 @@ public class Play extends JPanel implements Scene {
         inventoryManager.draw(g2);
 
         g2.dispose();
-    }
-
-    public void processInput(){
-        collisionManager.checkCollision(tileManager, player);
-        player.getInput();
-    }
-
-    public void updateGame(){
-        player.update();
     }
 
     @Override

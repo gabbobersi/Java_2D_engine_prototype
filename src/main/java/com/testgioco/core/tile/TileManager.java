@@ -1,12 +1,11 @@
 package com.testgioco.core.tile;
 
-import com.testgioco.core.Cell;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.entities.Player;
+import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +15,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class TileManager {
-    private final Cell cell = new Cell();
     private final Player player;
     private final Map<String, Tile> tiles = new HashMap<>();
     private static int[][] mapTileNum;
@@ -84,17 +82,20 @@ public class TileManager {
                 int tileIndex = mapTileNum[r][c];
 
                 // Tile position, to draw.
-                Vector2DInt tilePosition = new Vector2DInt(c * cell.width, r * cell.height);
+                Vector2DInt tilePosition = new Vector2DInt(c * Constants.cellWidth, r * Constants.cellHeight);
 
                 // Tile position, to draw, taking into consideration player position.
                 int screenX = tilePosition.getX() - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
                 int screenY = tilePosition.getY() - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
 
-                if (tilePosition.getX() + cell.width > player.positionOnTheMap.getX() - player.positionOnScreen.getX() &&
-                    tilePosition.getX() - cell.width < player.positionOnTheMap.getX() + player.positionOnScreen.getX() &&
-                    tilePosition.getY() + cell.height > player.positionOnTheMap.getY() - player.positionOnScreen.getY() &&
-                    tilePosition.getY() - cell.height < player.positionOnTheMap.getY() + player.positionOnScreen.getY()){
-                    g2.drawImage(getTileByIndex(tileIndex).getImage(),screenX, screenY, cell.width, cell.height, null);
+                // Draw only tiles that are visible on the screen.
+                if (tilePosition.getX() + Constants.cellWidth > player.positionOnTheMap.getX() - player.positionOnScreen.getX() &&
+                    tilePosition.getX() - Constants.cellWidth < player.positionOnTheMap.getX() + player.positionOnScreen.getX() &&
+                    tilePosition.getY() + Constants.cellHeight > player.positionOnTheMap.getY() - player.positionOnScreen.getY() &&
+                    tilePosition.getY() - Constants.cellHeight < player.positionOnTheMap.getY() + player.positionOnScreen.getY()){
+
+                    g2.drawImage(getTileByIndex(tileIndex).getImage(), screenX, screenY, Constants.cellWidth,
+                            Constants.cellHeight, null);
                 }
             }
         }
@@ -111,7 +112,7 @@ public class TileManager {
         if (!f.exists()) {
             throw new FileNotFoundException();
         }
-        Scanner reader = null;
+        Scanner reader;
 
         try {
             reader = new Scanner(f);
@@ -132,37 +133,40 @@ public class TileManager {
     public void loadMap (String mapPath){
         System.out.println("TileManager - Loading map: " + mapPath);
         reset();
-        try (InputStream stream = getClass().getResourceAsStream(mapPath);
-             InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-             BufferedReader bufferReader = new BufferedReader(streamReader)) {
+        try (InputStream stream = getClass().getResourceAsStream(mapPath)) {
+            assert stream != null;
 
-            // Example path "/maps/maps01.txt"
-            getMapDimension("assets/" + mapPath);
-            mapTileNum = new int[mapRows][mapCols];
+            try (InputStreamReader streamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+                 BufferedReader bufferReader = new BufferedReader(streamReader)) {
 
-            for (int r = 0; r < mapRows; r++) {
-                String line = bufferReader.readLine();
-                String[] numbers = new String[mapCols];
+                // Example path "/maps/maps01.txt"
+                getMapDimension("assets/" + mapPath);
+                mapTileNum = new int[mapRows][mapCols];
 
-                // If line has not been correctly read, just take a default line.
-                if (line != null) {
-                    numbers = line.split(" ");
-                } else {
-                    for (int i = 0; i < mapCols; i++){
-                        numbers[i] = "9";
+                for (int r = 0; r < mapRows; r++) {
+                    String line = bufferReader.readLine();
+                    String[] numbers = new String[mapCols];
+
+                    // If line has not been correctly read, just take a default line.
+                    if (line != null) {
+                        numbers = line.split(" ");
+                    } else {
+                        for (int i = 0; i < mapCols; i++){
+                            numbers[i] = "9";
+                        }
+                    }
+
+                    // Populate final array containing all the tiles in "array of int" format.
+                    for (int c = 0; c < mapCols; c++) {
+                        int num = Integer.parseInt(numbers[c]);
+                        mapTileNum[r][c] = num;
                     }
                 }
+                System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
+                printTileMap(mapTileNum, mapRows);
+                updateSettings();
 
-                // Populate final array containing all the tiles in "array of int" format.
-                for (int c = 0; c < mapCols; c++) {
-                    int num = Integer.parseInt(numbers[c]);
-                    mapTileNum[r][c] = num;
-                }
             }
-            System.out.println("TileManager - I'm using the map: " + mapPath + " that has " + mapRows + " rows and " + mapCols + " columns.");
-            printTileMap(mapTileNum, mapRows);
-            updateSettings();
-
         } catch(Exception e){
             e.printStackTrace();
         }

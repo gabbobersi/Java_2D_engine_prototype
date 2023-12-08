@@ -1,9 +1,8 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.utilities.Singletons;
+import com.testgioco.utilities.Handlers;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Button {
@@ -82,7 +81,7 @@ public class Button {
     }
 
     public void setReleased(boolean value){
-        Singletons.mouseH.released = value;
+        Handlers.mouseH.released = value;
     }
 
     public String getText(){

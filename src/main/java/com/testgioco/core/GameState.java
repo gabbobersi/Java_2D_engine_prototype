@@ -3,7 +3,7 @@ package com.testgioco.core;
 import com.testgioco.utilities.GameSettings;
 
 public class GameState {
-    private static State previousState =  GameSettings.defaultScene;
+    private static State previousState =  State.QUIT;
     private static State activeState = GameSettings.defaultScene;
     public enum State {
         MAIN_MENU,

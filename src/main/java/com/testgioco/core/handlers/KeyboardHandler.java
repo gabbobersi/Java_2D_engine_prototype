@@ -3,28 +3,33 @@ package com.testgioco.core.handlers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class InputHandler implements KeyListener {
-    public boolean leftPressed;
-    public boolean rightPressed;
-    public boolean upPressed;
-    public boolean downPressed;
-    public boolean escPressed;
-    public boolean anyKeyPressed;
-    public boolean spacePressed;
+public class KeyboardHandler implements KeyListener {
+    public boolean a_pressed;
+    public boolean d_pressed;
+    public boolean w_pressed;
+    public boolean s_pressed;
+    public boolean esc_pressed;
+    public boolean space_pressed;
     public boolean i_pressed;
 
-    public InputHandler(){
+    private boolean anyKey_pressed;
+
+    public KeyboardHandler(){
         reset();
     }
 
     public void reset(){
-        leftPressed = false;
-        rightPressed = false;
-        upPressed = false;
-        downPressed = false;
-        escPressed = false;
-        anyKeyPressed = false;
-        spacePressed = false;
+        resetKeys();
+    }
+
+    public void resetKeys(){
+        a_pressed = false;
+        d_pressed = false;
+        w_pressed = false;
+        s_pressed = false;
+        esc_pressed = false;
+        anyKey_pressed = false;
+        space_pressed = false;
         i_pressed = false;
     }
 
@@ -36,24 +41,24 @@ public class InputHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_W) {
-            upPressed = true;
+            w_pressed = true;
         }
         if (code == KeyEvent.VK_S){
-            downPressed = true;
+            s_pressed = true;
         }
         if (code == KeyEvent.VK_A) {
-            leftPressed = true;
+            a_pressed = true;
         }
         if (code == KeyEvent.VK_D) {
-            rightPressed = true;
+            d_pressed = true;
         }
 
         if (code == KeyEvent.VK_ESCAPE) {
-            escPressed = true;
+            esc_pressed = true;
         }
 
         if (code == KeyEvent.VK_SPACE) {
-            spacePressed = true;
+            space_pressed = true;
         }
 
         if (code == KeyEvent.VK_I) {
@@ -62,27 +67,27 @@ public class InputHandler implements KeyListener {
 
         // A key is being pressed.
         if (code != KeyEvent.VK_UNDEFINED){
-            anyKeyPressed = true;
+            anyKey_pressed = true;
         }
     }
 
     @Override public void keyReleased (KeyEvent e){
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_W) {
-            upPressed = false;
+            w_pressed = false;
         }
         if (code == KeyEvent.VK_S) {
-            downPressed = false;
+            s_pressed = false;
         }
         if (code == KeyEvent.VK_A) {
-            leftPressed = false;
+            a_pressed = false;
         }
         if (code == KeyEvent.VK_D) {
-            rightPressed = false;
+            d_pressed = false;
         }
 
         if (code == KeyEvent.VK_SPACE) {
-            spacePressed = false;
+            space_pressed = false;
         }
 
         if (code == KeyEvent.VK_I) {
@@ -90,9 +95,13 @@ public class InputHandler implements KeyListener {
         }
 
         // A key is being pressed.
-        if (!upPressed && !downPressed && !leftPressed && !rightPressed){
-            anyKeyPressed = false;
+        if (!w_pressed && !s_pressed && !a_pressed && !d_pressed){
+            anyKey_pressed = false;
         }
+    }
+
+    public boolean isAnyKeyPressed(){
+        return anyKey_pressed;
     }
 }
 

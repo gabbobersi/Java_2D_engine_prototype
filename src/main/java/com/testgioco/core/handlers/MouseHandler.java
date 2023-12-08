@@ -1,7 +1,5 @@
 package com.testgioco.core.handlers;
 
-import com.testgioco.utilities.Singletons;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

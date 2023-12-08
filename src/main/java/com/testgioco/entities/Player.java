@@ -1,25 +1,26 @@
 package com.testgioco.entities;
 
-import com.testgioco.core.Cell;
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.Vector2D;
+import com.testgioco.core.interfaces.entity.Animatable;
+import com.testgioco.core.interfaces.entity.SolidMovableEntity;
 import com.testgioco.entities.base_classes.Entity;
+import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.HashMap;
 
-public class Player extends Entity {
-    private InputHandler keyH = Singletons.keyH;
-    private long lastAnimationTime;
-    private final Cell cell = new Cell();
+public class Player extends Entity implements SolidMovableEntity, Animatable {
     private Vector2D vector;
+    private final AxisController axisController = new AxisController();
+    private int speed = 4;
+    private final EntityAnimator animator;
+    private Direction direction = Direction.DOWN;
 
     // Player rendering position on the screen.
     public Vector2DInt positionOnScreen;
@@ -27,25 +28,36 @@ public class Player extends Entity {
     public Player(){
         setDefaultValues();
         getPlayerImage();
+
+        HashMap<EntityAnimator.AnimationType, BufferedImage> sprites = new HashMap<>();
+        // This will be the default sprite.
+        sprites.put(EntityAnimator.AnimationType.IDLE, down1);
+
+        sprites.put(EntityAnimator.AnimationType.UP1, up1);
+        sprites.put(EntityAnimator.AnimationType.UP2, up2);
+        sprites.put(EntityAnimator.AnimationType.DOWN1, down1);
+        sprites.put(EntityAnimator.AnimationType.DOWN2, down2);
+        sprites.put(EntityAnimator.AnimationType.LEFT1, left1);
+        sprites.put(EntityAnimator.AnimationType.LEFT2, left2);
+        sprites.put(EntityAnimator.AnimationType.RIGHT1, right1);
+        sprites.put(EntityAnimator.AnimationType.RIGHT2, right2);
+        animator = new EntityAnimator(sprites, 100_000_000L);
     }
 
     public void setDefaultValues(){
-        direction = "down";         // Default direction
         vector = new Vector2D(0, 0);
-        lastAnimationTime = System.nanoTime();
-        speed = 4;
 
         // Starting position
         positionOnTheMap = new Vector2DInt(150, 100);
 
         // Position on the screen
-        int x = GameSettings.screenWidth / 2 - (cell.width / 2);
-        int y = GameSettings.screenHeight / 2 - (cell.height / 2);
+        int x = GameSettings.screenWidth / 2 - (Constants.cellWidth / 2);
+        int y = GameSettings.screenHeight / 2 - (Constants.cellHeight / 2);
         positionOnScreen = new Vector2DInt(x, y);
 
         // Collision
-        solidArea = new Rectangle(8, 16, cell.width - 14, cell.height - 14);
-        isColliding = true;
+        solidArea = new Rectangle(8, 16, Constants.cellWidth - 14, Constants.cellHeight - 14);
+        isColliding = false;
     }
 
     public void getPlayerImage(){
@@ -66,126 +78,104 @@ public class Player extends Entity {
         }
     }
 
-    public void getInput(){
+    /**
+     * Gets input from the keyboard.
+     * */
+    private void getInput() {
         vector.setX(0);
         vector.setY(0);
-
-        boolean isMoving = false;
-
-        // If any key is being pressed... (except for the inventory key)
-        if (keyH.anyKeyPressed){
-            if (keyH.upPressed){
-                isMoving = true;
-                direction = "up";
-            }
-            if (keyH.downPressed){
-                isMoving = true;
-                direction = "down";
-            }
-            if (keyH.leftPressed){
-                isMoving = true;
-                direction = "left";
-            }
-            if (keyH.rightPressed){
-                isMoving = true;
-                direction = "right";
-            }
-
-            // I move only if I'm not colliding with anything.
-            if (!isColliding && isMoving){
-                if (Objects.equals(direction, "up")){
-                    vector.setY(-1);
-                } else if (Objects.equals(direction, "down")){
-                    vector.setY(1);
-                } else if (Objects.equals(direction, "left")){
-                    vector.setX(-1);
-                } else if (Objects.equals(direction, "right")){
-                    vector.setX(1);
+        if (axisController.anyAxisIsActive() && !isColliding) {
+            Direction h = axisController.getHorizontalDirection();
+            Direction v = axisController.getVerticalDirection();
+            // Left, right
+            if (h != null) {
+                switch (h) {
+                    case LEFT -> vector.setX(-1);
+                    case RIGHT -> vector.setX(1);
                 }
-                animate(direction, true);
             }
-        } else {
-            animate(direction, false);
+            // Up, down
+            if (v != null) {
+                switch (v) {
+                    case UP -> vector.setY(-1);
+                    case DOWN -> vector.setY(1);
+                }
+            }
+            if (vector.getX() != 0 || vector.getY() != 0) {
+                direction = Direction.getDirection(vector);
+                if (direction == Direction.DOWN_LEFT || direction == Direction.UP_LEFT) {
+                    direction = Direction.LEFT;
+                } else if (direction == Direction.DOWN_RIGHT || direction == Direction.UP_RIGHT) {
+                    direction = Direction.RIGHT;
+                }
+            }
         }
     }
 
-    public void stopMovement(){
-        vector.setX(0);
-        vector.setY(0);
-    }
-
-    private void animate(String newDirection, boolean isMoving){
-        if (!newDirection.equals(direction)) {
-            // Resetta l'animazione se la direzione è cambiata.
-            spriteNumber = 1;
-            direction = newDirection;
-        } else {
-            long currentTime = System.nanoTime();
-            long elapsedTime = currentTime - lastAnimationTime;
-            long animationInterval = 100_000_000;
-            if (elapsedTime >= animationInterval) {
-                // Cambia l'immagine dell'animazione.
-                if (spriteNumber == 1) {
-                    spriteNumber = 2;
-                } else {
-                    spriteNumber = 1;
-                }
-                lastAnimationTime = currentTime;
-            }
-        }
-        // If the player does not move, he will remain standing.
-        if (!isMoving){
-            spriteNumber = 1;
-        }
+    public boolean isMoving(){
+        return vector.getX() != 0 || vector.getY() != 0;
     }
 
     /**
      * Updates player's position on the map.
      * */
     public void update(){
+        getInput();
+        animator.updateAnimation(isMoving());
+
         vector.normalize();
         vector.multiply(speed);
-
         int x = positionOnTheMap.getX() + (int) Math.round(vector.getX());
         int y = positionOnTheMap.getY() + (int) Math.round(vector.getY());
+
         positionOnTheMap.setX(x);
         positionOnTheMap.setY(y);
     }
 
     public void draw(Graphics2D g2) {
-        BufferedImage image = up1;
+        BufferedImage image = animator.getActiveSprite(direction);
 
-        switch (direction) {
-            case "up":
-                if (spriteNumber == 1){
-                    image = up1;
-                } else if (spriteNumber == 2){
-                    image = up2;
-                }
-                break;
-            case "down":
-                if (spriteNumber == 1){
-                    image = down1;
-                } else if (spriteNumber == 2){
-                    image = down2;
-                }
-                break;
-            case "left":
-                if (spriteNumber == 1){
-                    image = left1;
-                } else if (spriteNumber == 2){
-                    image = left2;
-                }
-                break;
-            case "right":
-                if (spriteNumber == 1){
-                    image = right1;
-                } else if (spriteNumber == 2){
-                    image = right2;
-                }
-                break;
-        };
-        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()), cell.width, cell.height,
-                null);
+        g2.drawImage(image, Math.round(positionOnScreen.getX()), Math.round(positionOnScreen.getY()),
+                Constants.cellWidth, Constants.cellHeight, null);
+    }
+
+    @Override
+    public void onCollision() {
+        System.out.println(this.getClass().getName() + " collided.");
+    }
+
+    @Override
+    public Rectangle getSolidArea() {
+        return solidArea;
+    }
+
+    @Override
+    public void setCollision(boolean isColliding) {
+        this.isColliding = isColliding;
+    }
+
+    @Override
+    public Vector2DInt getPositionOnTheMap() {
+        return positionOnTheMap;
+    }
+
+    @Override
+    public Direction getVerticalDirection() {
+        return axisController.getVerticalDirection();
+    }
+
+    @Override
+    public Direction getHorizontalDirection() {
+        return axisController.getHorizontalDirection();
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }

@@ -1,7 +1,6 @@
 package com.testgioco.core;
 
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;

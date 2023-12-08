@@ -9,13 +9,17 @@ import com.testgioco.core.Game;
 public class Constants {
 
     // One second in nanoseconds
-    public final long ONE_SECOND_IN_NANOSECONDS = 1_000_000_000L;
+    public static final long ONE_SECOND_IN_NANOSECONDS = 1_000_000_000L;
 
     // Nanoseconds to update the game
     // 1 sec / number of fps == Update frequency in seconds * NS == Update frequency in NS
-    public final double NANOSECONDS_PER_UPDATE = (1.0 / GameSettings.fps) * ONE_SECOND_IN_NANOSECONDS;
+    public static final double NANOSECONDS_PER_UPDATE = (1.0 / GameSettings.fps) * ONE_SECOND_IN_NANOSECONDS;
 
-    public final double NANOSECONDS_PER_FIXED_UPDATE = 0.2 * ONE_SECOND_IN_NANOSECONDS;
+    public static final double NANOSECONDS_PER_FIXED_UPDATE = 0.2 * ONE_SECOND_IN_NANOSECONDS;
+
+    // Cell dimension
+    public static int cellHeight = GameSettings.screenHeight / GameSettings.cameraHeight;
+    public static int cellWidth = GameSettings.screenWidth / GameSettings.cameraWidth;
 }
 
 //10^-3	ms	millisecondo

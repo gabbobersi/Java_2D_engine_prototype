@@ -1,16 +1,13 @@
 package com.testgioco.core.ui_elements;
 
-import com.testgioco.core.Cell;
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.utilities.Singletons;
+import com.testgioco.utilities.Handlers;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class BoxImage {
-    private Cell cell = new Cell();
     Rectangle2D.Double box = new Rectangle2D.Double();
     Rectangle2D.Double boxBorders = new Rectangle2D.Double();
     private Vector2DInt vector;
@@ -39,10 +36,10 @@ public class BoxImage {
      * */
     public boolean hasBeenPressed(){
         boolean okWidth =
-                Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width;
+                Handlers.mouseH.x >= vector.getX() && Handlers.mouseH.x <= vector.getX() + width;
         boolean okHeight =
-                Singletons.mouseH.y > vector.getY() && Singletons.mouseH.y < vector.getY() + height;
-        boolean isReleased = Singletons.mouseH.released;
+                Handlers.mouseH.y > vector.getY() && Handlers.mouseH.y < vector.getY() + height;
+        boolean isReleased = Handlers.mouseH.released;
 
         boolean condition = okWidth && okHeight && !isReleased;
         return condition;
@@ -53,11 +50,11 @@ public class BoxImage {
      * */
     public boolean hasBeenClicked(){
         boolean okWidth =
-                Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width;
+                Handlers.mouseH.x >= vector.getX() && Handlers.mouseH.x <= vector.getX() + width;
         boolean okHeight =
-                Singletons.mouseH.y > vector.getY() && Singletons.mouseH.y < vector.getY() + height;
+                Handlers.mouseH.y > vector.getY() && Handlers.mouseH.y < vector.getY() + height;
 
-        boolean isReleased = Singletons.mouseH.released;
+        boolean isReleased = Handlers.mouseH.released;
         boolean condition = okWidth && okHeight && !isReleased;
 
         // If the button doesn't results already clicked, and I've clicked on it, will be clicked.
@@ -74,8 +71,8 @@ public class BoxImage {
      * Check if mouse is over the box's boundaries.
      * */
     public boolean hasMouseOver(){
-        return (Singletons.mouseMotionH.x >= vector.getX() && Singletons.mouseMotionH.x <= vector.getX() + width)
-                && (Singletons.mouseMotionH.y > vector.getY() && Singletons.mouseMotionH.y < vector.getY() + height);
+        return (Handlers.mouseMotionH.x >= vector.getX() && Handlers.mouseMotionH.x <= vector.getX() + width)
+                && (Handlers.mouseMotionH.y > vector.getY() && Handlers.mouseMotionH.y < vector.getY() + height);
     }
 
     public void draw(Graphics2D g2) {

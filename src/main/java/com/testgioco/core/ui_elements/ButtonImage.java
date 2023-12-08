@@ -1,6 +1,5 @@
 package com.testgioco.core.ui_elements;
 
-import com.testgioco.core.Cell;
 import com.testgioco.core.Vector2DInt;
 
 import javax.swing.*;
@@ -9,7 +8,6 @@ import java.awt.image.BufferedImage;
 
 public class ButtonImage{
     private final JPanel panel;
-    private Cell cell = new Cell();
     private final int width;
     private final int height;
     private final int bordThickness;

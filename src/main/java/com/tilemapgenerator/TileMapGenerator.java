@@ -6,12 +6,10 @@ import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 
 public class TileMapGenerator extends JPanel implements Scene {
     private final int btnWidth = 300;

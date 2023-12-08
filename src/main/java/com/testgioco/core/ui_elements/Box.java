@@ -1,7 +1,7 @@
 package com.testgioco.core.ui_elements;
 
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.utilities.Singletons;
+import com.testgioco.utilities.Handlers;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -34,10 +34,10 @@ public class Box {
      * */
     public boolean hasBeenPressed(){
         boolean okWidth =
-                Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width;
+                Handlers.mouseH.x >= vector.getX() && Handlers.mouseH.x <= vector.getX() + width;
         boolean okHeight =
-                Singletons.mouseH.y > vector.getY() && Singletons.mouseH.y < vector.getY() + height;
-        boolean isReleased = Singletons.mouseH.released;
+                Handlers.mouseH.y > vector.getY() && Handlers.mouseH.y < vector.getY() + height;
+        boolean isReleased = Handlers.mouseH.released;
 
         boolean condition = okWidth && okHeight && !isReleased;
         return condition;
@@ -47,10 +47,10 @@ public class Box {
      * Check if mouse has been clicked inside box's boundaries.
      * */
     public boolean hasBeenClicked(){
-        boolean isInside = (Singletons.mouseH.x >= vector.getX() && Singletons.mouseH.x <= vector.getX() + width)
-                && (Singletons.mouseH.y >= vector.getY() && Singletons.mouseH.y <= vector.getY() + height);
+        boolean isInside = (Handlers.mouseH.x >= vector.getX() && Handlers.mouseH.x <= vector.getX() + width)
+                && (Handlers.mouseH.y >= vector.getY() && Handlers.mouseH.y <= vector.getY() + height);
 
-        boolean isReleased = Singletons.mouseH.released;
+        boolean isReleased = Handlers.mouseH.released;
 
         if (isInside && !isReleased) {
             isClicked = true;
@@ -65,8 +65,8 @@ public class Box {
      * Check if mouse is over the box's boundaries.
      * */
     public boolean hasMouseOver(){
-        return (Singletons.mouseMotionH.x >= vector.getX() && Singletons.mouseMotionH.x <= vector.getX() + width)
-                && (Singletons.mouseMotionH.y > vector.getY() && Singletons.mouseMotionH.y < vector.getY() + height);
+        return (Handlers.mouseMotionH.x >= vector.getX() && Handlers.mouseMotionH.x <= vector.getX() + width)
+                && (Handlers.mouseMotionH.y > vector.getY() && Handlers.mouseMotionH.y < vector.getY() + height);
     }
 
     public void draw(Graphics2D g2) {

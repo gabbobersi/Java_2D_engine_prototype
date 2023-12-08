@@ -1,11 +1,11 @@
 package com.testgioco.core.scenes;
 
+import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,12 +33,11 @@ public class MainMenu extends JPanel implements Scene {
             btnWidth,
             btnHeight, "Test", bordThickness, btnColor, btnFont);
 
-    public MainMenu(){
-        super();
-    }
+    public MainMenu(){super();}
 
     public void awake(){
-
+        setBackground(Color.BLACK);
+        Game.updateScenePaint();
     }
 
     @Override

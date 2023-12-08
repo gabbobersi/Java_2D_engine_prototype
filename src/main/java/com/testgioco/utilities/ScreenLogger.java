@@ -1,11 +1,8 @@
 package com.testgioco.utilities;
 
-import com.testgioco.core.Cell;
-
 import java.awt.*;
 
 public class ScreenLogger {
-    private final Cell cell = new Cell();
 
     public void draw(Graphics2D g2){
         int x = 10;
@@ -15,7 +12,7 @@ public class ScreenLogger {
         g2.drawString("Risoluzione: " + GameSettings.screenWidth + " x " + GameSettings.screenHeight, x, 20);
         g2.drawString("Numero colonne: " + GameSettings.mapColumnsNumber, x, 40);
         g2.drawString("Numero righe: " + GameSettings.mapRowsNumber, x, 60);
-        g2.drawString("Dimensione cella: " + cell.width + " x " + cell.height, x, 80);
+        g2.drawString("Dimensione cella: " + Constants.cellWidth + " x " + Constants.cellHeight, x, 80);
         g2.drawString("========== COMANDI ==========", x, 120);
         g2.drawString("> ESC == Torna al menu principale", x, 140);
         g2.drawString("> I == Inventario", x, 160);

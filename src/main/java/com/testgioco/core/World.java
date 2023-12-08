@@ -1,11 +1,11 @@
 package com.testgioco.core;
 
-public class World {
-    private final Cell cell = new Cell();
+import com.testgioco.utilities.Constants;
 
+public class World {
     public int maxColumn = 100;
     public int maxRow = 100;
-    public int width = cell.width * maxColumn;
-    public int height = cell.height * maxColumn;
+    public int width = Constants.cellWidth * maxColumn;
+    public int height = Constants.cellHeight * maxRow;
 
 }

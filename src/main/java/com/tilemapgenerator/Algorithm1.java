@@ -5,7 +5,7 @@
 package com.tilemapgenerator;
 
 import com.testgioco.utilities.GameSettings;
-import com.tilemapgenerator.interfaces.Algorithm;
+import com.testgioco.core.interfaces.Algorithm;
 
 import java.util.Arrays;
 import java.util.Random;

@@ -2,21 +2,15 @@ package com.testgioco.core.scenes;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.Vector2DInt;
-import com.testgioco.core.handlers.InputHandler;
 import com.testgioco.core.interfaces.Scene;
-import com.testgioco.core.ui_elements.ButtonImage;
 import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.Button;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
+import com.testgioco.utilities.Handlers;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Test extends JPanel implements Scene {
     private final int btnHorizontalAlignment = GameSettings.screenWidth / 2 - 75;
@@ -57,9 +51,9 @@ public class Test extends JPanel implements Scene {
             GameState.setActiveState(GameState.State.MAIN_MENU);
         }
 
-        if (Singletons.keyH.spacePressed){
+        if (Handlers.keyH.space_pressed){
             barManager.reduceHealth(10);
-        } else if (Singletons.keyH.leftPressed){
+        } else if (Handlers.keyH.a_pressed){
             barManager.resetHealth();
         }
     }
@@ -72,7 +66,7 @@ public class Test extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        String counterOfClick = btnTest.getText() + " clicked: " + Singletons.mouseH.clickCount + " times";
+        String counterOfClick = btnTest.getText() + " clicked: " + Handlers.mouseH.clickCount + " times";
         g2.setFont(new Font("Comic Sans", Font.PLAIN, 20));
         g2.drawString(counterOfClick, 150, 80);
 
