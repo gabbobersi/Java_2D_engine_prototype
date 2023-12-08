@@ -5,7 +5,10 @@ import com.testgioco.utilities.GameSettings;
 public class GameState {
     private static State previousState =  State.QUIT;
     private static State activeState = GameSettings.defaultScene;
+    private static State nextState = State.EMPTY;
+    
     public enum State {
+        EMPTY,              // Means that no next state has been set.
         MAIN_MENU,
         PLAY,
         TILE_MAP_GENERATOR,
@@ -16,22 +19,20 @@ public class GameState {
 
     public static void setActiveState(State newState) {
         previousState = activeState;
-        switch (newState) {
-            case PLAY -> activeState = State.PLAY;
-            case TILE_MAP_GENERATOR -> activeState = State.TILE_MAP_GENERATOR;
-            case QUIT -> activeState = State.QUIT;
-            case TEST -> activeState = State.TEST;
-            case LOADING_SCREEN -> activeState = State.LOADING_SCREEN;
-            default -> activeState = State.MAIN_MENU;
-        }
+        activeState = newState;
+        nextState = State.EMPTY;
+    }
+
+    public static void setNextState(State newState) {
+        nextState = newState;
+    }
+
+    public static State getNextState() {
+        return nextState;
     }
 
     public static State getActiveState() {
         return activeState;
-    }
-
-    public static String getActiveStateName(){
-        return getActiveState().toString();
     }
 
     public static State getPreviousState(){

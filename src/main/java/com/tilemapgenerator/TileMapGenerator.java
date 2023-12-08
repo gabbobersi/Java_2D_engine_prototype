@@ -76,7 +76,7 @@ public class TileMapGenerator extends JPanel implements Scene {
         }
 
         if (btnMainMenu.isClicked()){
-            GameState.setActiveState(GameState.State.MAIN_MENU);
+            GameState.setNextState(GameState.State.MAIN_MENU);
         }
     }
 

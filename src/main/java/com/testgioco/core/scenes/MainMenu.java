@@ -43,13 +43,13 @@ public class MainMenu extends JPanel implements Scene {
     @Override
     public void update(){
         if (quitBtn.isClicked()) {
-            GameState.setActiveState(GameState.State.QUIT);
+            GameState.setNextState(GameState.State.QUIT);
         } else if (playBtn.isClicked()){
-            GameState.setActiveState(GameState.State.PLAY);
+            GameState.setNextState(GameState.State.LOADING_SCREEN);
         } else if (tMapGenBtn.isClicked()){
-            GameState.setActiveState(GameState.State.TILE_MAP_GENERATOR);
+            GameState.setNextState(GameState.State.TILE_MAP_GENERATOR);
         } else if (testBtn.isClicked()){
-            GameState.setActiveState(GameState.State.TEST);
+            GameState.setNextState(GameState.State.TEST);
         }
     }
 

@@ -48,7 +48,7 @@ public class Test extends JPanel implements Scene {
         if (btnTest.isClicked()){
         } else if (btnResetCounter.isClicked()){
         } else if (btnMainMenu.isClicked()){
-            GameState.setActiveState(GameState.State.MAIN_MENU);
+            GameState.setNextState(GameState.State.MAIN_MENU);
         }
 
         if (Handlers.keyH.space_pressed){

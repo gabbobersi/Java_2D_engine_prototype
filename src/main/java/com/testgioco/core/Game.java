@@ -67,20 +67,22 @@ public class Game implements Runnable {
         double lag = 0.0;
         double fixedUpdateTimer = 0;
 
+        changeScene(GameState.getActiveState());
         while (isRunning){
             GameState.State activeState = GameState.getActiveState();
+            GameState.State nextState = GameState.getNextState();
 
             double current = System.nanoTime();
             double elapsed = current - previous;
             previous = current;
             lag += elapsed;
 
-            if (GameState.getPreviousState() != GameState.getActiveState()){
-                System.out.println("Cambio scena: da " + GameState.getPreviousState() + " a " + GameState.getActiveState());
+            if (nextState != GameState.State.EMPTY){
+                System.out.println("Cambio scena: da " + activeState + " a " + nextState);
                 // Changing scene actions.
-                unloadScene(GameState.getPreviousState(), 80);
-                changeScene(activeState);
-                awakeScene(activeState);
+                unloadScene(activeState, 80);
+                changeScene(nextState);
+                awakeScene(nextState);
             }
 
             // In this while, FPS limit execution.
@@ -127,15 +129,15 @@ public class Game implements Runnable {
         }
     }
 
-    private void changeScene(GameState.State state){
-        GameState.setActiveState(state);
-        setupPanel(state);
+    private void changeScene(GameState.State nextState){
+        GameState.setActiveState(nextState);
+        setupPanel(nextState);
         Handlers.mouseH.reset();
-        setupScene(state);
+        setupScene(nextState);
     }
 
-    private void awakeScene(GameState.State state){
-        switch (state){
+    private void awakeScene(GameState.State nextState){
+        switch (nextState){
             case MAIN_MENU:
                 mainMenu.awake();
                 break;
@@ -152,7 +154,7 @@ public class Game implements Runnable {
                 loadingScreen.awake();
                 break;
             default:
-                if (!state.name().equals(GameState.State.QUIT.name())) {
+                if (!nextState.name().equals(GameState.State.QUIT.name())) {
                     System.out.println("WARNING - Awake - Can't find scene");
                 }
                 mainMenu.awake();

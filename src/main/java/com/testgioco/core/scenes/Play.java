@@ -38,7 +38,7 @@ public class Play extends JPanel implements Scene {
     @Override
     public void update(){
         if (Handlers.keyH.esc_pressed){
-            GameState.setActiveState(GameState.State.LOADING_SCREEN);
+            GameState.setNextState(GameState.State.LOADING_SCREEN);
             Handlers.keyH.reset();
         }
 
@@ -69,7 +69,6 @@ public class Play extends JPanel implements Scene {
         player.draw(g2);
         inventoryManager.draw(g2);
 
-        g2.dispose();
     }
 
     @Override
