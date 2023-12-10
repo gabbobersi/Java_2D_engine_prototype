@@ -1,7 +1,7 @@
-package com.testgioco.core.scenes;
+package com.testgioco.scenes;
 
 import com.testgioco.core.GameState;
-import com.testgioco.entities.CollisionManager;
+import com.testgioco.core.CollisionManager;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
@@ -42,14 +42,16 @@ public class Play extends JPanel implements Scene {
             Handlers.keyH.reset();
         }
 
-        if (Handlers.keyH.space_pressed){
-            inventoryManager.enable();
-        }
-        if (Handlers.keyH.space_pressed && inventoryManager.isActive()){
-            inventoryManager.disable();
-        }
         collisionManager.checkCollision(tileManager, player);
         player.update();
+
+        if (Handlers.keyH.i_pressed){
+            player.setVisible(!player.isVisible());
+        }
+
+        if (Handlers.keyH.space_pressed){
+            inventoryManager.setVisible(!inventoryManager.isVisible());
+        }
     }
 
     @Override
@@ -68,6 +70,7 @@ public class Play extends JPanel implements Scene {
         debug.draw(g2);
         player.draw(g2);
         inventoryManager.draw(g2);
+        collisionManager.drawCollision(g2, player);
 
     }
 

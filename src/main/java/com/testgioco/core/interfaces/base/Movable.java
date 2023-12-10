@@ -1,7 +1,7 @@
-package com.testgioco.core.interfaces.entity;
+package com.testgioco.core.interfaces.base;
 
-import com.testgioco.entities.Direction;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.Direction;
+import com.testgioco.utilities.Vector2DInt;
 
 public interface Movable {
     int getSpeed();
@@ -9,6 +9,8 @@ public interface Movable {
 
     Direction getVerticalDirection();
     Direction getHorizontalDirection();
+
+    boolean isMoving();
 
     /**
      * Returns the position of the entity on the map.

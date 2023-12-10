@@ -2,9 +2,9 @@ package com.tilemapgenerator;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.tile.TileManager;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.ui_elements.button.ButtonLabel;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
-import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
 
 import javax.swing.*;
@@ -20,16 +20,16 @@ public class TileMapGenerator extends JPanel implements Scene {
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private final Button btnGenerateAlgo1 = new Button(new Vector2DInt(btnHorizontalAlignment, 100), btnWidth,
+    private final ButtonLabel btnGenerateAlgo1 = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment, 100), btnWidth,
             btnHeight, "Algorithm 1 - Room", bordThickness, btnColor, btnFont);
 
-    private final Button btnGenerateAlgo2 = new Button( new Vector2DInt(btnHorizontalAlignment, 160), btnWidth,
+    private final ButtonLabel btnGenerateAlgo2 = new ButtonLabel( new Vector2DInt(btnHorizontalAlignment, 160), btnWidth,
             btnHeight, "Algorithm 2 - Random", bordThickness, btnColor, btnFont);
 
-    private final Button btnGenerateAlgo3 = new Button( new Vector2DInt(btnHorizontalAlignment, 220), btnWidth,
+    private final ButtonLabel btnGenerateAlgo3 = new ButtonLabel( new Vector2DInt(btnHorizontalAlignment, 220), btnWidth,
             btnHeight, "Algorithm 3 - Zebra", bordThickness, btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(new Vector2DInt(btnHorizontalAlignment,
+    private final ButtonLabel btnMainMenu = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment,
             GameSettings.screenHeight - 100), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
@@ -61,21 +61,21 @@ public class TileMapGenerator extends JPanel implements Scene {
     public void update() {
         String filePath = defaultFile;
 
-        if (btnGenerateAlgo1.isClicked()) {
+        if (btnGenerateAlgo1.hasBeenClicked()) {
             deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO1);
-        } else if (btnGenerateAlgo2.isClicked()){
+        } else if (btnGenerateAlgo2.hasBeenClicked()){
             deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO2);
-        } else if (btnGenerateAlgo3.isClicked()) {
+        } else if (btnGenerateAlgo3.hasBeenClicked()) {
             deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO3);
         }
 
-        if (btnMainMenu.isClicked()){
+        if (btnMainMenu.hasBeenClicked()){
             GameState.setNextState(GameState.State.MAIN_MENU);
         }
     }

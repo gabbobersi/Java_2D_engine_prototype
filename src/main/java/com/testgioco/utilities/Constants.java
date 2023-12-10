@@ -20,6 +20,12 @@ public class Constants {
     // Cell dimension
     public static int cellHeight = GameSettings.screenHeight / GameSettings.cameraHeight;
     public static int cellWidth = GameSettings.screenWidth / GameSettings.cameraWidth;
+
+    // World dimension
+    public static int maxWorldColumn = 100;
+    public static int maxWorldRow = 100;
+    public static int WorldWidth = Constants.cellWidth * maxWorldColumn;
+    public static int WorldHeight = Constants.cellHeight * maxWorldRow;
 }
 
 //10^-3	ms	millisecondo

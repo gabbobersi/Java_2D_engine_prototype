@@ -1,7 +1,7 @@
-package com.testgioco.core.scenes;
+package com.testgioco.scenes;
 
 import com.testgioco.core.GameState;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.Label;
 import com.testgioco.utilities.GameSettings;

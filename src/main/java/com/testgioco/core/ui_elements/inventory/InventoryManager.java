@@ -1,8 +1,8 @@
 package com.testgioco.core.ui_elements.inventory;
 
-import com.testgioco.core.Vector2DInt;
-import com.testgioco.core.ui_elements.ButtonImage;
-import com.testgioco.core.ui_elements.Image;
+import com.testgioco.core.interfaces.ui.VisibleUI;
+import com.testgioco.utilities.Vector2DInt;
+import com.testgioco.utilities.Image;
 import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryManager {
+public class InventoryManager implements VisibleUI {
     private final JPanel panel;
     private List<Slot> slots;
 
@@ -26,32 +26,22 @@ public class InventoryManager {
     private final int slotHeight;
     private final int padding;
     private int margin = 5;
-    private final Vector2DInt inventoryPosition;
+    private final Vector2DInt positionOnTheScreen;
     private Vector2DInt slotPosition = new Vector2DInt(0, 0);
     private int inventoryWidth = 0;
 
-    private boolean isActive = false;
-    private boolean canDisable = false;
-    private boolean canEnable = true;
+    private boolean isVisible = false;
+    private boolean canChangeVisibility = true;
 
-    Timer disableTimer = new Timer(500, new ActionListener() {
+    private Timer changeVisibility = new Timer(500, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            canEnable = true;
-        }
-    });
-
-    Timer enableTimer = new Timer(500, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            canDisable = true;
+            canChangeVisibility = true;
         }
     });
 
     public InventoryManager(JPanel panel, int rows, int columns, int slotWidth, int slotHeight, int padding) {
-        disableTimer.setRepeats(false);
-        enableTimer.setRepeats(false);
-
+        changeVisibility.setRepeats(false);
         this.panel = panel;
         this.rows = rows;
         this.columns = columns;
@@ -61,7 +51,7 @@ public class InventoryManager {
 
         initSlots();
         inventoryWidth = columns * (slotWidth + padding) - padding + margin * 4;
-        inventoryPosition = new Vector2DInt(GameSettings.screenWidth - inventoryWidth - margin, margin);
+        positionOnTheScreen = new Vector2DInt(GameSettings.screenWidth - inventoryWidth - margin, margin);
     }
 
     private void initSlots() {
@@ -77,7 +67,7 @@ public class InventoryManager {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Slot slot = new Slot(panel, new Vector2DInt(x, y), new Dimension(slotWidth, slotHeight), defaultImage);
+                Slot slot = new Slot(new Vector2DInt(x, y), new Dimension(slotWidth, slotHeight), defaultImage);
                 slot.setId(counter);
                 counter++;
                 slots.add(slot);
@@ -86,16 +76,16 @@ public class InventoryManager {
     }
 
     public void draw(Graphics2D g2) {
-        if (!isActive) {
+        if (!isVisible) {
             return;
         }
 
         // reset starting position
-        slotPosition.setX(inventoryPosition.getX());
-        slotPosition.setY(inventoryPosition.getY());
+        slotPosition.setX(positionOnTheScreen.getX());
+        slotPosition.setY(positionOnTheScreen.getY());
 
         for (Slot slot : slots) {
-            slot.setPosition(new Vector2DInt(slotPosition.getX(), slotPosition.getY()));
+            slot.setPositionOnTheScreen(new Vector2DInt(slotPosition.getX(), slotPosition.getY()));
             slot.draw(g2);
 
             slotPosition.setX(slotPosition.getX() + slotWidth + padding);
@@ -113,7 +103,7 @@ public class InventoryManager {
 
             if (slotPosition.getX() >= GameSettings.screenWidth - margin - slotWidth){
                 // reset x, increment y
-                slotPosition.setX(inventoryPosition.getX());
+                slotPosition.setX(positionOnTheScreen.getX());
                 slotPosition.setY(slotPosition.getY() + slotHeight + padding);
             }
         }
@@ -127,33 +117,23 @@ public class InventoryManager {
         slots.get(slotId).setItem(null);
     }
 
-    public void enable(){
-        if (isActive){
-            return;
-        }
-
-        if (canEnable){
-            System.out.println("Inventory enabled");
-            isActive = true;
-            canEnable = false;
-            enableTimer.start();
-        }
+    @Override
+    public boolean isVisible() {
+        return isVisible;
     }
 
-    public void disable(){
-        if (!isActive){
+    @Override
+    public void setVisible(boolean isVisible) {
+        if (!canChangeVisibility){
             return;
         }
-
-        if (canDisable){
-            System.out.println("Inventory disabled");
-            isActive = false;
-            canDisable = false;
-            disableTimer.start();
-        }
+        this.isVisible = isVisible;
+        canChangeVisibility = false;
+        changeVisibility.start();
     }
 
-    public boolean isActive(){
-        return isActive;
+    @Override
+    public Vector2DInt getPositionOnTheScreen() {
+        return positionOnTheScreen;
     }
 }

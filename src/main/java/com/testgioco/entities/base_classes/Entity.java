@@ -1,12 +1,10 @@
 package com.testgioco.entities.base_classes;
 
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Vector2D;
+import com.testgioco.utilities.Vector2DInt;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.security.PublicKey;
-import java.util.HashMap;
 
 public class Entity {
     // Sprites
@@ -17,9 +15,11 @@ public class Entity {
 
     // Positions
     public Vector2DInt positionOnTheMap;
+    public Vector2D positionOnTheScreen;
 
     // Collisions
-    public boolean isColliding = false;
+    public boolean isCollidingVertically = false;
+    public boolean isCollidingHorizontally = false;
     public Rectangle solidArea;       // Indicates the solid area of the entity, under collision.
 }
 

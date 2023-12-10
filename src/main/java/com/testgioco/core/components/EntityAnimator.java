@@ -1,4 +1,6 @@
-package com.testgioco.entities;
+package com.testgioco.core.components;
+
+import com.testgioco.core.Direction;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ public class EntityAnimator {
     }
 
     private final HashMap<AnimationType, BufferedImage> sprites;
-    private long animationInterval;
+    private final long animationInterval;
     private long lastAnimationTime = System.nanoTime();
 
     private int spriteNumber = 1;

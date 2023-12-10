@@ -1,8 +1,7 @@
 package com.testgioco.core.ui_elements.bars;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.utilities.GameSettings;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**

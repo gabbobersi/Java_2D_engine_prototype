@@ -1,6 +1,6 @@
 package com.testgioco.core.tile;
 
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
@@ -82,17 +82,19 @@ public class TileManager {
                 int tileIndex = mapTileNum[r][c];
 
                 // Tile position, to draw.
-                Vector2DInt tilePosition = new Vector2DInt(c * Constants.cellWidth, r * Constants.cellHeight);
+                Vector2DInt tilePositionOnTheMap = new Vector2DInt(c * Constants.cellWidth, r * Constants.cellHeight);
 
                 // Tile position, to draw, taking into consideration player position.
-                int screenX = tilePosition.getX() - player.positionOnTheMap.getX() + player.positionOnScreen.getX();
-                int screenY = tilePosition.getY() - player.positionOnTheMap.getY() + player.positionOnScreen.getY();
+                int screenX =
+                        tilePositionOnTheMap.getX() - player.positionOnTheMap.getX() + (int)Math.round(player.positionOnTheScreen.getX());
+                int screenY =
+                        tilePositionOnTheMap.getY() - player.positionOnTheMap.getY() + (int)Math.round(player.positionOnTheScreen.getY());
 
                 // Draw only tiles that are visible on the screen.
-                if (tilePosition.getX() + Constants.cellWidth > player.positionOnTheMap.getX() - player.positionOnScreen.getX() &&
-                    tilePosition.getX() - Constants.cellWidth < player.positionOnTheMap.getX() + player.positionOnScreen.getX() &&
-                    tilePosition.getY() + Constants.cellHeight > player.positionOnTheMap.getY() - player.positionOnScreen.getY() &&
-                    tilePosition.getY() - Constants.cellHeight < player.positionOnTheMap.getY() + player.positionOnScreen.getY()){
+                if (tilePositionOnTheMap.getX() + Constants.cellWidth > player.positionOnTheMap.getX() - player.positionOnTheScreen.getX() &&
+                    tilePositionOnTheMap.getX() - Constants.cellWidth < player.positionOnTheMap.getX() + player.positionOnTheScreen.getX() &&
+                    tilePositionOnTheMap.getY() + Constants.cellHeight > player.positionOnTheMap.getY() - player.positionOnTheScreen.getY() &&
+                    tilePositionOnTheMap.getY() - Constants.cellHeight < player.positionOnTheMap.getY() + player.positionOnTheScreen.getY()){
 
                     g2.drawImage(getTileByIndex(tileIndex).getImage(), screenX, screenY, Constants.cellWidth,
                             Constants.cellHeight, null);

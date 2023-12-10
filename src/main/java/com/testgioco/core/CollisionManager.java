@@ -1,6 +1,6 @@
-package com.testgioco.entities;
+package com.testgioco.core;
 
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.interfaces.entity.SolidMovableEntity;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.utilities.Constants;
@@ -30,14 +30,16 @@ public class CollisionManager {
         // We check collision, based on direction, over the near two tiles.
         boolean tile1Collision = false;
         boolean tile2Collision = false;
-        boolean isColliding = false;
+        boolean isCollidingVertically = false;
+        boolean isCollidingHorizontally = false;
 
         Direction verticalDirection = entity.getVerticalDirection();
         Direction horizontalDirection = entity.getHorizontalDirection();
 
         // Entity is not moving.
         if (verticalDirection == null && horizontalDirection == null){
-            entity.setCollision(false);
+            entity.setVerticalCollision(false);
+            entity.setHorizontalCollision(false);
             return;
         }
 
@@ -51,10 +53,10 @@ public class CollisionManager {
                 tile1Collision = tileManager.getTileByCoordinates(entityDownCell, entityLeftCell).hasCollision();
                 tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityRightCell).hasCollision();
             }
-            isColliding = tile1Collision || tile2Collision;
+            isCollidingVertically = tile1Collision || tile2Collision;
         }
 
-        if (horizontalDirection != null && !isColliding){
+        if (horizontalDirection != null){
             if (Objects.equals(horizontalDirection, Direction.LEFT)) {
                 entityLeftCell = (entityLeft - speed) / Constants.cellWidth;
                 tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityLeftCell).hasCollision();
@@ -64,12 +66,19 @@ public class CollisionManager {
                 tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityRightCell).hasCollision();
                 tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityRightCell).hasCollision();
             }
-            isColliding = tile1Collision || tile2Collision;
+            isCollidingHorizontally = tile1Collision || tile2Collision;
         }
 
-        entity.setCollision(isColliding);
-        if (isColliding){
+        entity.setVerticalCollision(isCollidingVertically);
+        entity.setHorizontalCollision(isCollidingHorizontally);
+        if (entity.isColliding()){
             entity.onCollision();
         }
+    }
+
+    public void drawCollision(Graphics2D g2, SolidMovableEntity entity){
+        g2.setColor(Color.RED);
+        g2.drawRect(entity.getSolidArea().x, entity.getSolidArea().y, entity.getSolidArea().width,
+                entity.getSolidArea().height);
     }
 }

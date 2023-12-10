@@ -14,9 +14,9 @@ public class ScreenLogger {
         g2.drawString("Numero righe: " + GameSettings.mapRowsNumber, x, 60);
         g2.drawString("Dimensione cella: " + Constants.cellWidth + " x " + Constants.cellHeight, x, 80);
         g2.drawString("========== COMANDI ==========", x, 120);
-        g2.drawString("> ESC == Torna al menu principale", x, 140);
-        g2.drawString("> I == Inventario", x, 160);
-
+        g2.drawString("> ESC == Menu principale", x, 140);
+        g2.drawString("> SPACE == Inventario", x, 160);
+        g2.drawString("> I == Invisibile", x, 180);
     }
 
 }

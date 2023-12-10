@@ -1,9 +1,9 @@
 package com.testgioco.core;
 
-import com.testgioco.core.scenes.LoadingScreen;
-import com.testgioco.core.scenes.MainMenu;
-import com.testgioco.core.scenes.Play;
-import com.testgioco.core.scenes.Test;
+import com.testgioco.scenes.LoadingScreen;
+import com.testgioco.scenes.MainMenu;
+import com.testgioco.scenes.Play;
+import com.testgioco.scenes.Test;
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.Handlers;
@@ -78,9 +78,10 @@ public class Game implements Runnable {
             previous = current;
             lag += elapsed;
 
+
+            // Changing scene.
             if (nextState != GameState.State.EMPTY){
                 System.out.println("Cambio scena: da " + activeState + " a " + nextState);
-                // Changing scene actions.
                 unloadScene(activeState, 80);
                 changeScene(nextState);
                 awakeScene(nextState);

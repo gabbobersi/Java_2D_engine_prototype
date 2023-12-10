@@ -28,7 +28,7 @@ AWT sta per **Toolkit di finestra astratta (Abstract Window Toolkit)**.
 - Richiede un oggetto OS nativo per implementare le funzionalità, inoltre i componenti AWT sono **pesanti**
 e richiedono **più spazio di memoria** e **tempo
 per essere eseguiti**. 
-- Button, barre di scorrimento, campi di testo, elenchi, finestre di dialogo
+- ButtonLabel, barre di scorrimento, campi di testo, elenchi, finestre di dialogo
 e pannelli sono alcuni componenti AWT. Dopo aver creato gli oggetti, vengono posizionati in un
 **contenitore**.
 ****

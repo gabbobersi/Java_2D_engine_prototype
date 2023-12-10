@@ -1,10 +1,10 @@
-package com.testgioco.core.scenes;
+package com.testgioco.scenes;
 
 import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.ui_elements.button.ButtonLabel;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
-import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
 
 import javax.swing.*;
@@ -19,16 +19,16 @@ public class MainMenu extends JPanel implements Scene {
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private Button playBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 80), btnWidth,
+    private ButtonLabel playBtn = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment, 80), btnWidth,
             btnHeight, "Play", bordThickness, btnColor, btnFont);
 
-    private Button tMapGenBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
+    private ButtonLabel tMapGenBtn = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment, 200), btnWidth,
             btnHeight, "Tmapgen", bordThickness, btnColor, btnFont);
 
-    private Button quitBtn = new Button(new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
+    private ButtonLabel quitBtn = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment, 320), btnWidth,
             btnHeight, "Quit", bordThickness, btnColor, btnFont);
 
-    private Button testBtn = new Button(new Vector2DInt(btnHorizontalAlignment,
+    private ButtonLabel testBtn = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment,
             GameSettings.screenHeight - btnHeight*2),
             btnWidth,
             btnHeight, "Test", bordThickness, btnColor, btnFont);
@@ -42,13 +42,13 @@ public class MainMenu extends JPanel implements Scene {
 
     @Override
     public void update(){
-        if (quitBtn.isClicked()) {
+        if (quitBtn.hasBeenClicked()) {
             GameState.setNextState(GameState.State.QUIT);
-        } else if (playBtn.isClicked()){
+        } else if (playBtn.hasBeenClicked()){
             GameState.setNextState(GameState.State.LOADING_SCREEN);
-        } else if (tMapGenBtn.isClicked()){
+        } else if (tMapGenBtn.hasBeenClicked()){
             GameState.setNextState(GameState.State.TILE_MAP_GENERATOR);
-        } else if (testBtn.isClicked()){
+        } else if (testBtn.hasBeenClicked()){
             GameState.setNextState(GameState.State.TEST);
         }
     }

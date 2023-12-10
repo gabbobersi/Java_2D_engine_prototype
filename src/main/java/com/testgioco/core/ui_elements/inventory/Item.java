@@ -1,6 +1,6 @@
 package com.testgioco.core.ui_elements.inventory;
 
-import com.testgioco.core.ui_elements.Image;
+import com.testgioco.utilities.Image;
 
 public class Item {
     private String name;

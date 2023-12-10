@@ -80,7 +80,7 @@ Totali
 - Giammarco
     - UI / TileMap generator
         - [x] Box (cioè un quadrato con uno sfondo)
-        - [x] Button (cioè un box, interagibile)
+        - [x] ButtonLabel (cioè un box, interagibile)
     - Level design
     - Game design
         - [ ] Bar varie
@@ -90,7 +90,7 @@ Totali
 - Alessio
     - UI / TileMap generator
         - [x] Box (cioè un quadrato con uno sfondo)
-        - [x] Button (cioè un box, interagibile)
+        - [x] ButtonLabel (cioè un box, interagibile)
     - Level design
     - Game design
         - [ ] Inventario

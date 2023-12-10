@@ -1,4 +1,4 @@
-package com.testgioco.core;
+package com.testgioco.utilities;
 
 public class Vector2DInt {
     private int x;

@@ -1,27 +1,13 @@
-package com.testgioco.entities;
+package com.testgioco.core;
 
 import com.testgioco.utilities.Handlers;
 
 public class AxisController {
-    private Direction previousHorizontalDirection = null;
-    private Direction previousVerticalDirection = null;
-
-    private Direction horizontalDirection = null;
-    private Direction verticalDirection = null;
-
-    /**
-     * Returns true if the direction has changed.
-     * */
-    public boolean directionHasChanged(){
-        return previousHorizontalDirection != horizontalDirection || previousVerticalDirection != verticalDirection;
-    }
-
     /**
      * Returns the vertical direction of the entity.
      * */
     public Direction getVerticalDirection() {
-        previousVerticalDirection = verticalDirection;
-        verticalDirection = null;
+        Direction verticalDirection = null;
 
         if (Handlers.keyH.w_pressed){
             verticalDirection = Direction.UP;
@@ -36,8 +22,7 @@ public class AxisController {
      * Returns the horizontal direction of the entity.
      * */
     public Direction getHorizontalDirection() {
-        previousHorizontalDirection = horizontalDirection;
-        horizontalDirection = null;
+        Direction horizontalDirection = null;
 
         if ( Handlers.keyH.a_pressed){
             horizontalDirection = Direction.LEFT;

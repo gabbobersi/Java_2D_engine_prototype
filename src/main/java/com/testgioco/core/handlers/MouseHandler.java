@@ -1,5 +1,8 @@
 package com.testgioco.core.handlers;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -7,13 +10,28 @@ public class MouseHandler implements MouseListener {
     public int x;
     public int y;
     public boolean released = true;
+    public boolean clicked = false;
     public int clickCount;
+
+    Timer clickedTimer = new Timer(30, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            clicked = false;
+        }
+    });
+
+    public MouseHandler(){
+        clickedTimer.setRepeats(false);
+    }
+
     /**
      * Fired with a "complete" click (pressed, and then released)
      * */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (released) {
+            clicked = true;
+            clickedTimer.start();
             x = e.getX();
             y = e.getY();
             clickCount = e.getClickCount();

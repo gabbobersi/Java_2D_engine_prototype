@@ -1,4 +1,4 @@
-package com.testgioco.core.ui_elements;
+package com.testgioco.utilities;
 
 import java.awt.image.BufferedImage;
 
