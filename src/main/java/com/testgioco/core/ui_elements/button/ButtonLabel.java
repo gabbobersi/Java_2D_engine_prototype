@@ -1,5 +1,6 @@
 package com.testgioco.core.ui_elements.button;
 
+import com.testgioco.core.audio.AudioMaster;
 import com.testgioco.core.ui_elements.Label;
 import com.testgioco.core.ui_elements.box.BoxColor;
 import com.testgioco.utilities.Vector2DInt;
@@ -9,6 +10,8 @@ import java.awt.*;
 public class ButtonLabel extends BaseButton {
     private final BoxColor boxColor;
     private final Label label;
+    private boolean audioOverPlayed = false;
+    private boolean audioClickedPlayer = false;
 
     public ButtonLabel(Vector2DInt positionOnTheScreen, int width, int height, String text, int bordThickness,
                   Color buttonColor, Font font){
@@ -44,15 +47,24 @@ public class ButtonLabel extends BaseButton {
     public void draw(Graphics2D g2){
         if (hasBeenPressed()){
             boxColor.setColor(Color.BLUE);
+            if (!audioClickedPlayer){
+                AudioMaster.play("assets/audio/btn_clicked_1.wav");
+                audioClickedPlayer = true;
+            }
         } else {
             boxColor.setColor(buttonColor);
+            audioClickedPlayer = false;
         }
 
-        // Label
         if (hasMouseOver()){
             label.setColor(Color.ORANGE);
+            if (!audioOverPlayed){
+                AudioMaster.play("assets/audio/btn_over_1.wav");
+                audioOverPlayed = true;
+            }
         } else {
             label.setColor(Color.BLACK);
+            audioOverPlayed = false;
         }
 
         boxColor.draw(g2);
