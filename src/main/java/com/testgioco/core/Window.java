@@ -11,7 +11,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        setPreferredSize(new Dimension(GameSettings.screenWidth, GameSettings.screenHeight));
+        setSize(new Dimension(GameSettings.screenWidth, GameSettings.screenHeight));
         add(mainPanel);
 
         pack();

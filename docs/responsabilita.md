@@ -65,7 +65,7 @@ Totali
         - [x] Label (etichetta, cioè testo a video)
         - [ ] LayoutManager (disporre le robe UI a schermo)
     - [ ] Audio
-        - [ ] JavaFX
+        - [x] JavaFX
         - [ ] OpenAl
     - Game design
         - [x] World map (movimento personaggio sulla mappa)
@@ -77,13 +77,16 @@ Totali
             - [x] Input focus for new panels
             - [x] Game states system
             - [x] Scenes system
+            - [x] Animation system
+            - [x] Axis system
+            - [x] Refactoring UI with inheritance
 - Giammarco
     - UI / TileMap generator
         - [x] Box (cioè un quadrato con uno sfondo)
         - [x] ButtonLabel (cioè un box, interagibile)
     - Level design
     - Game design
-        - [ ] Bar varie
+        - [x] Bar varie
             - Health
             - Stamina
         - Dialoghi / Narrativa / Lore
@@ -93,11 +96,11 @@ Totali
         - [x] ButtonLabel (cioè un box, interagibile)
     - Level design
     - Game design
-        - [ ] Inventario
+        - [x] Inventario
         - [ ] Dialoghi / Narrativa / Lore
 - Francesco
     - [x] Physics
-    - [ ] Audio
+    - [x] Audio
     - Game design
         - [ ] Obiettivi
         - [ ] Regole gioco
