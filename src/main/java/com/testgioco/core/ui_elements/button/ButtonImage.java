@@ -1,5 +1,7 @@
 package com.testgioco.core.ui_elements.button;
 
+import com.testgioco.core.interfaces.Interactive;
+import com.testgioco.core.interfaces.ui.VisibleUI;
 import com.testgioco.core.ui_elements.box.BoxImage;
 import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.utilities.Image;
@@ -7,7 +9,7 @@ import com.testgioco.utilities.Image;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ButtonImage extends BaseButton {
+public class ButtonImage extends BaseButton implements VisibleUI, Interactive {
     private final BoxImage boxImage;
     private Image image;
 
@@ -60,5 +62,35 @@ public class ButtonImage extends BaseButton {
     public void setImage(Image image){
         this.image = image;
         boxImage.setImage(this.image.getImage());
+    }
+
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    @Override
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
+    @Override
+    public Vector2DInt getPositionOnTheScreen() {
+        return positionOnTheScreen;
+    }
+
+    @Override
+    public boolean hasBeenPressed() {
+        return mouseInteractivityManager.hasBeenPressed();
+    }
+
+    @Override
+    public boolean hasBeenClicked() {
+        return mouseInteractivityManager.hasBeenClicked();
+    }
+
+    @Override
+    public boolean hasMouseOver() {
+        return mouseInteractivityManager.hasMouseOver();
     }
 }

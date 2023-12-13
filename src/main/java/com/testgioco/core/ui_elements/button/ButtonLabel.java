@@ -1,13 +1,15 @@
 package com.testgioco.core.ui_elements.button;
 
 import com.testgioco.core.audio.AudioMaster;
+import com.testgioco.core.interfaces.Interactive;
+import com.testgioco.core.interfaces.ui.VisibleUI;
 import com.testgioco.core.ui_elements.Label;
 import com.testgioco.core.ui_elements.box.BoxColor;
 import com.testgioco.utilities.Vector2DInt;
 
 import java.awt.*;
 
-public class ButtonLabel extends BaseButton {
+public class ButtonLabel extends BaseButton implements VisibleUI, Interactive {
     private final BoxColor boxColor;
     private final Label label;
     private boolean audioOverPlayed = false;
@@ -83,6 +85,33 @@ public class ButtonLabel extends BaseButton {
         setLabel();
     }
 
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
 
+    @Override
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
 
+    @Override
+    public Vector2DInt getPositionOnTheScreen() {
+        return positionOnTheScreen;
+    }
+
+    @Override
+    public boolean hasBeenPressed() {
+        return mouseInteractivityManager.hasBeenPressed();
+    }
+
+    @Override
+    public boolean hasBeenClicked() {
+        return mouseInteractivityManager.hasBeenClicked();
+    }
+
+    @Override
+    public boolean hasMouseOver() {
+        return mouseInteractivityManager.hasMouseOver();
+    }
 }

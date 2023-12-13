@@ -3,10 +3,9 @@ package com.testgioco.entities;
 import com.testgioco.core.AxisController;
 import com.testgioco.core.Direction;
 import com.testgioco.core.components.EntityAnimator;
-import com.testgioco.core.interfaces.entity.VisibleEntity;
+import com.testgioco.core.interfaces.entity.SolidVisibleEntity;
 import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.utilities.Vector2D;
-import com.testgioco.core.interfaces.entity.SolidMovableEntity;
 import com.testgioco.entities.base_classes.Entity;
 import com.testgioco.utilities.Constants;
 import com.testgioco.utilities.GameSettings;
@@ -21,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class Player extends Entity implements VisibleEntity, SolidMovableEntity {
+public class Player extends Entity implements SolidVisibleEntity {
     private Vector2D vector;
     private final AxisController axisController = new AxisController();
     private int speed = 4;
@@ -70,7 +69,14 @@ public class Player extends Entity implements VisibleEntity, SolidMovableEntity 
         positionOnTheScreen = new Vector2D(x, y);
 
         // Collision
-        solidArea = new Rectangle(0, 0, Constants.cellWidth - 14, Constants.cellHeight - 14);
+        int solidHeight = Constants.cellHeight - 20;
+        int solidWidth = Constants.cellWidth - 20;
+        solidArea = new Rectangle(
+                (Constants.cellWidth - solidWidth) / 2,
+                Constants.cellHeight - solidHeight,
+                solidWidth,
+                solidHeight
+        );
     }
 
     public void getPlayerImage(){
@@ -212,6 +218,15 @@ public class Player extends Entity implements VisibleEntity, SolidMovableEntity 
     @Override
     public Rectangle getSolidArea() {
         return solidArea;
+    }
+
+    @Override
+    public Vector2DInt getSolidAreaPositionOnTheScreen() {
+        Vector2DInt pos = new Vector2DInt(
+                (int)Math.round(positionOnTheScreen.getX()) + solidArea.x,
+                (int)Math.round(positionOnTheScreen.getY()) + solidArea.y
+        );
+        return pos;
     }
 
     @Override

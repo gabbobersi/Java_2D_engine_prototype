@@ -1,14 +1,11 @@
 package com.testgioco.core.ui_elements.box;
-
-import com.testgioco.core.components.MouseInteractivityManager;
-import com.testgioco.core.interfaces.base.Drawable;
+import com.testgioco.core.interfaces.ui.VisibleUI;
 import com.testgioco.utilities.Vector2DInt;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class BoxImage extends BaseBox implements Drawable {
+public class BoxImage extends BaseBox implements VisibleUI {
     private BufferedImage image;
 
     public BoxImage(Vector2DInt positionOnTheScreen, int width, int height, int bordThickness, BufferedImage image){
@@ -29,5 +26,20 @@ public class BoxImage extends BaseBox implements Drawable {
 
     public void setImage(BufferedImage image){
         this.image = image;
+    }
+
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    @Override
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
+    @Override
+    public Vector2DInt getPositionOnTheScreen() {
+        return positionOnTheScreen;
     }
 }

@@ -1,7 +1,10 @@
 package com.testgioco.core;
 
+import com.testgioco.core.interfaces.base.Collidable;
+import com.testgioco.core.interfaces.entity.SolidEntity;
+import com.testgioco.core.interfaces.entity.SolidVisibleEntity;
+import com.testgioco.core.interfaces.entity.VisibleEntity;
 import com.testgioco.utilities.Vector2DInt;
-import com.testgioco.core.interfaces.entity.SolidMovableEntity;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.utilities.Constants;
 
@@ -10,7 +13,7 @@ import java.util.Objects;
 
 public class CollisionManager {
 
-    public void checkCollision(TileManager tileManager, SolidMovableEntity entity){
+    public void checkCollision(TileManager tileManager, SolidEntity entity){
         Rectangle solidArea = entity.getSolidArea();
         Vector2DInt positionOnTheMap = entity.getPositionOnTheMap();
         int speed = entity.getSpeed();
@@ -76,9 +79,13 @@ public class CollisionManager {
         }
     }
 
-    public void drawCollision(Graphics2D g2, SolidMovableEntity entity){
+    public void drawCollision(Graphics2D g2, Collidable entity){
         g2.setColor(Color.RED);
-        g2.drawRect(entity.getSolidArea().x, entity.getSolidArea().y, entity.getSolidArea().width,
-                entity.getSolidArea().height);
+        g2.drawRect(
+            entity.getSolidAreaPositionOnTheScreen().getX(),
+            entity.getSolidAreaPositionOnTheScreen().getY(),
+            entity.getSolidArea().width,
+            entity.getSolidArea().height
+        );
     }
 }

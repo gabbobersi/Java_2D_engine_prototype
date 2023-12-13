@@ -1,5 +1,7 @@
 package com.testgioco.core.interfaces.base;
 
+import com.testgioco.utilities.Vector2DInt;
+
 import java.awt.*;
 
 public interface Collidable {
@@ -17,6 +19,11 @@ public interface Collidable {
      * Returns the collision area occupied by the entity.
      * */
     Rectangle getSolidArea();
+
+    /**
+     * Returns the position of the collision area occupied by the entity on the screen.
+     * */
+    Vector2DInt getSolidAreaPositionOnTheScreen();
 
     /**
      * Sets the vertical collision state of the entity.

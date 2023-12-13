@@ -1,13 +1,11 @@
 package com.testgioco.core.ui_elements.button;
 
 import com.testgioco.core.components.MouseInteractivityManager;
-import com.testgioco.core.interfaces.Interactive;
-import com.testgioco.core.interfaces.ui.VisibleUI;
 import com.testgioco.utilities.Vector2DInt;
 
 import java.awt.*;
 
-public class BaseButton implements VisibleUI, Interactive {
+public class BaseButton {
 
     protected Vector2DInt positionOnTheScreen;
     protected int width, height;
@@ -29,35 +27,5 @@ public class BaseButton implements VisibleUI, Interactive {
         this.buttonColor = buttonColor;
         this.font = font;
         this.mouseInteractivityManager = new MouseInteractivityManager(positionOnTheScreen, width, height);
-    }
-
-    @Override
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    @Override
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
-    }
-
-    @Override
-    public Vector2DInt getPositionOnTheScreen() {
-        return positionOnTheScreen;
-    }
-
-    @Override
-    public boolean hasBeenPressed() {
-        return mouseInteractivityManager.hasBeenPressed();
-    }
-
-    @Override
-    public boolean hasBeenClicked() {
-        return mouseInteractivityManager.hasBeenClicked();
-    }
-
-    @Override
-    public boolean hasMouseOver() {
-        return mouseInteractivityManager.hasMouseOver();
     }
 }

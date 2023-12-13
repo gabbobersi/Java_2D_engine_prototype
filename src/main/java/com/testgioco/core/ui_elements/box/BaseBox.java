@@ -1,11 +1,10 @@
 package com.testgioco.core.ui_elements.box;
 
-import com.testgioco.core.interfaces.ui.VisibleUI;
 import com.testgioco.utilities.Vector2DInt;
 
 import java.awt.geom.Rectangle2D;
 
-public class BaseBox implements VisibleUI {
+public class BaseBox {
     protected Rectangle2D.Double box = new Rectangle2D.Double();
     protected Rectangle2D.Double boxBorders = new Rectangle2D.Double();
     protected Vector2DInt positionOnTheScreen;
@@ -51,21 +50,6 @@ public class BaseBox implements VisibleUI {
         int midWidth_box = Math.round((float)(width/2));
         int midHeight_box = Math.round((float)(height/2));
         return new Vector2DInt(positionOnTheScreen.getX()+midWidth_box,positionOnTheScreen.getY()+midHeight_box);
-    }
-
-    @Override
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    @Override
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
-    }
-
-    @Override
-    public Vector2DInt getPositionOnTheScreen() {
-        return positionOnTheScreen;
     }
 
     public int getX(){return positionOnTheScreen.getX();}
