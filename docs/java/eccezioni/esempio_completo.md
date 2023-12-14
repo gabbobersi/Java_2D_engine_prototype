@@ -3,8 +3,13 @@
  * Custom exception
 */
 class OrderNotFoundException extends Exception {
+    // Custom message
+    public OrderNotFoundException(String message) {
+        super(message);
+    }
+    // Default message
     public OrderNotFoundException() {
-        super("Order not found");
+        super("The order is not valid, or not present.");
     }
 }
 
@@ -38,7 +43,8 @@ class OrderFinder {
     public void getOrderById(int id) throws OrderNotFoundException {
         Order order = database.select(id);
         if (!order){
-            throw new OrderNotFoundException();
+            // Example output: The order '5923' is not found.
+            throw new OrderNotFoundException("The order '" + id + "' is not found.");
         } else {
             return database.select(id);
         }

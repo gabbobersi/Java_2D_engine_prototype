@@ -1,15 +1,13 @@
 package com.testgioco.core.ui_elements.bars;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.utilities.GameSettings;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
  * Da inserire nelle classi apposite
  */
 public class BarManager  {
-    private GameSettings settings = new GameSettings();
     private int width = 400;
     private int height = 30;
 
@@ -17,8 +15,8 @@ public class BarManager  {
     private Stamina staminaBar;
 
     public BarManager(){
-        healthBar = new Health(new Vector2DInt(100, settings.screenHeight - 100), width, height);
-        staminaBar = new Stamina(new Vector2DInt(100, settings.screenHeight - 50), width, height);
+        healthBar = new Health(new Vector2DInt(100, GameSettings.screenHeight - 100), width, height);
+        staminaBar = new Stamina(new Vector2DInt(100, GameSettings.screenHeight - 50), width, height);
     }
 
     public void reduceHealth(int value){

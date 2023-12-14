@@ -4,9 +4,7 @@
 
 package com.tilemapgenerator;
 
-import com.tilemapgenerator.interfaces.Algorithm;
-
-import java.util.Random;
+import com.testgioco.core.interfaces.Algorithm;
 
 public class Algorithm3 implements Algorithm {
     @Override

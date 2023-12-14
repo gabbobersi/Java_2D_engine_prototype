@@ -1,4 +1,4 @@
-package com.testgioco.core;
+package com.testgioco.utilities;
 
 public class Vector2D {
     private double x;

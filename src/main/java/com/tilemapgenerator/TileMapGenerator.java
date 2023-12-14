@@ -2,38 +2,35 @@ package com.tilemapgenerator;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.tile.TileManager;
-import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.ui_elements.button.ButtonLabel;
+import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
-import com.testgioco.core.ui_elements.Button;
 import com.testgioco.utilities.GameSettings;
-import com.testgioco.utilities.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
 public class TileMapGenerator extends JPanel implements Scene {
-    private final GameSettings settings = new GameSettings();
-
     private final int btnWidth = 300;
-    private final int btnHorizontalAlignment = settings.screenWidth / 2 - btnWidth / 2;
+    private final int btnHorizontalAlignment = GameSettings.screenWidth / 2 - btnWidth / 2;
 
     private final int btnHeight = 50;
     private final int bordThickness = 6;
     private final Color btnColor = Color.GRAY;
     private final Font btnFont = new Font("Comic Sans", Font.PLAIN, 25);
 
-    private final Button btnGenerateAlgo1 = new Button(this, new Vector2DInt(btnHorizontalAlignment, 100), btnWidth,
+    private final ButtonLabel btnGenerateAlgo1 = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment, 100), btnWidth,
             btnHeight, "Algorithm 1 - Room", bordThickness, btnColor, btnFont);
 
-    private final Button btnGenerateAlgo2 = new Button(this, new Vector2DInt(btnHorizontalAlignment, 160), btnWidth,
+    private final ButtonLabel btnGenerateAlgo2 = new ButtonLabel( new Vector2DInt(btnHorizontalAlignment, 160), btnWidth,
             btnHeight, "Algorithm 2 - Random", bordThickness, btnColor, btnFont);
 
-    private final Button btnGenerateAlgo3 = new Button(this, new Vector2DInt(btnHorizontalAlignment, 220), btnWidth,
+    private final ButtonLabel btnGenerateAlgo3 = new ButtonLabel( new Vector2DInt(btnHorizontalAlignment, 220), btnWidth,
             btnHeight, "Algorithm 3 - Zebra", bordThickness, btnColor, btnFont);
 
-    private final Button btnMainMenu = new Button(this, new Vector2DInt(btnHorizontalAlignment,
-            settings.screenHeight - 100), btnWidth,
+    private final ButtonLabel btnMainMenu = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment,
+            GameSettings.screenHeight - 100), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
     private Writer writer = new Writer();
@@ -44,43 +41,42 @@ public class TileMapGenerator extends JPanel implements Scene {
     private int rowsNumber = GameSettings.mapRowsNumber;
     private int columnsNumber = GameSettings.mapColumnsNumber;
 
+    private String defaultFile = "assets/maps/tmapgen_1.txt";
+
     private enum Algorithms {
         ALGO1,
         ALGO2,
         ALGO3
     }
 
-    public TileMapGenerator() {
-        addMouseListener(Singletons.mouseH);
-        addMouseMotionListener(Singletons.mouseMotionH);
-
-        setDoubleBuffered(true);
-        setFocusable(true);
-        setPreferredSize(new Dimension(settings.screenWidth, settings.screenHeight));
+    public TileMapGenerator(){
+        super();
     }
 
+    @Override
     public void awake(){
-        File f = new File("assets/maps/tmapgen_1.txt");
-        f.delete();
     }
 
     @Override
     public void update() {
-        String filePath = "assets/maps/tmapgen_1.txt";
+        String filePath = defaultFile;
 
-        if (btnGenerateAlgo1.isClicked()) {
+        if (btnGenerateAlgo1.hasBeenClicked()) {
+            deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO1);
-        } else if (btnGenerateAlgo2.isClicked()){
+        } else if (btnGenerateAlgo2.hasBeenClicked()){
+            deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO2);
-        } else if (btnGenerateAlgo3.isClicked()) {
+        } else if (btnGenerateAlgo3.hasBeenClicked()) {
+            deleteFile();
             checkFile(filePath);
             generateAndDebug(filePath, Algorithms.ALGO3);
         }
 
-        if (btnMainMenu.isClicked()){
-            GameState.setActiveState(GameState.State.MAIN_MENU);
+        if (btnMainMenu.hasBeenClicked()){
+            GameState.setNextState(GameState.State.MAIN_MENU);
         }
     }
 
@@ -119,4 +115,17 @@ public class TileMapGenerator extends JPanel implements Scene {
         btnMainMenu.draw(g2);
         g2.dispose();
     }
+
+    private void deleteFile(){
+        File f = new File(defaultFile);
+        try {
+            f.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("File eliminato.");
+    }
+
+    @Override
+    public void unload(int delay){}
 }

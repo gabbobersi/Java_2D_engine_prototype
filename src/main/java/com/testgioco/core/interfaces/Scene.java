@@ -19,4 +19,11 @@ public interface Scene {
      * For physics or in general, to apply movement by physics forces.
      * */
     void fixedUpdate();
+
+    /**
+     * Executed just before the scene is unloaded.
+     * For cleaning, resources unloading.
+     * @param delay time in milliseconds to wait before unloading. Allows swing to terminate its async operations.
+     * */
+    void unload(int delay);
 }

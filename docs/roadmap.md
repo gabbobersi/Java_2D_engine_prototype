@@ -19,7 +19,7 @@ _Roadmap from the top, to the bottom._
 - [x] Collision detection
 - [ ] Object placement
 - [ ] Object interaction
-- [ ] Sound
+- [x] Sound
 - [x] State machine
 - [x] Scenes
   - [x] Main menu
@@ -35,8 +35,8 @@ _Roadmap from the top, to the bottom._
 - [ ] Improving rendering
 - [x] Draw sprites (software Piskel)
 - [ ] Game systems
-  - [ ] Inventory system
-  - [ ] Health, stamina, magick bars
+  - [x] Inventory system
+  - [x] Health, stamina, magick bars
   - [ ] Skill tree
   - [ ] XP points
 ### Optional
