@@ -1,7 +1,8 @@
 package com.testgioco.core.ui_elements.bars;
 
-import com.testgioco.utilities.Vector2DInt;
-
+import com.testgioco.core.Vector2DInt;
+import com.testgioco.core.ui_elements.Box;
+import com.testgioco.core.ui_elements.Label;
 import java.awt.*;
 
 public class Health {
@@ -9,12 +10,21 @@ public class Health {
     private int startingWidth;
     private int width;
     private int height;
+    private String text;
+    private Label label;
+    private Box box;
 
-    public Health(Vector2DInt position, int width, int height){
+    public Health(Vector2DInt position, int width, int height, String text){
         this.position = position;
         startingWidth = width;
         this.width = width;
         this.height = height;
+        this.text = text;
+        Font font = new Font("Comic Sans", Font.PLAIN, 15);
+        FontMetrics fontMetrics = new Canvas().getFontMetrics(font);
+        int yLabel = position.getY() + height/2 + fontMetrics.getDescent();
+        label = new Label(new Vector2DInt(position.getX(), yLabel), text, font, Color.BLACK);
+        box = new Box(new Vector2DInt(position.getX(), position.getY()), width, height, 4, Color.decode("#c65046"));
     }
 
     public void reset(){
@@ -29,8 +39,7 @@ public class Health {
     }
 
     public void draw(Graphics2D g2){
-        g2.setColor(Color.RED);
-        g2.fillRect(position.getX(), position.getY(), width, height);
+        box.draw(g2);
+        label.draw(g2);
     }
-
 }
