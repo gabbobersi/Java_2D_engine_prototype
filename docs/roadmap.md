@@ -1,18 +1,5 @@
 _Roadmap from the top, to the bottom._
-### Bug fix bounties
-- [X] InputHandler (low urgency)
-  - issue: while pressing at the same time two keys, one the horiz. and one vert. axies, the player is much faster.
-  - solution: Vector2D
-- [X] FPS:
-  - Issues:
-    - [x] Unstable FPS.
-      - [x] Player moving faster and slower, since it is rendered with unstable FPS
-    - [x] Player being rendered not fluid, in 30 FPS (it should be fluid, over 24 FPS!)
-    - All fixed with refactoring. 
-- Possible fixes:
-  - [x] Independent movement FPS.
-  - [x] Fixed Update
-- [ ] Button clicked one time, is seen as it was clicked 3 or more times...
+
 ### Core
 - [x] Main class
 - [x] Game class
@@ -29,10 +16,10 @@ _Roadmap from the top, to the bottom._
     - [x] Tile maps generator
 - [x] World map
 - [x] Camera
-- [ ] Collision detection
+- [x] Collision detection
 - [ ] Object placement
 - [ ] Object interaction
-- [ ] Sound
+- [x] Sound
 - [x] State machine
 - [x] Scenes
   - [x] Main menu
@@ -48,12 +35,12 @@ _Roadmap from the top, to the bottom._
 - [ ] Improving rendering
 - [x] Draw sprites (software Piskel)
 - [ ] Game systems
-  - [ ] Inventory system
-  - [ ] Health, stamina, magick bars
+  - [x] Inventory system
+  - [x] Health, stamina, magick bars
   - [ ] Skill tree
   - [ ] XP points
 ### Optional
-- [ ] Game tools (of any kind, to help development)
+- [x] Game tools (of any kind, to help development)
 - [ ] Automated test (Unit test)
 - [ ] Splash screen
 - [ ] Beautify UI (buttons, labels, ...)

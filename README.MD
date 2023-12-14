@@ -1,5 +1,4 @@
-# Intro
-Gioco 2D di esempio.
+2D game to learn Java and Game Dev foundamentals.
 
-L'obiettivo di adesso, è quello di raggiungere lo stato di MVP (Minimum Viable Product) 
-che consiste nell'avere il prodotto funzionante minimo, per testare l'idea generale.
+### Contributors list
+https://github.com/gabbobersi/2D_Unknown_Game/graphs/contributors
