@@ -4,10 +4,13 @@ import com.testgioco.core.GameState;
 import com.testgioco.core.CollisionManager;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.interfaces.Scene;
+import com.testgioco.core.ui_elements.bars.BarManager;
 import com.testgioco.core.ui_elements.inventory.InventoryManager;
 import com.testgioco.entities.Player;
+import com.testgioco.utilities.GameSettings;
 import com.testgioco.utilities.ScreenLogger;
 import com.testgioco.utilities.Handlers;
+import com.testgioco.utilities.Vector2DInt;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +21,7 @@ public class Play extends JPanel implements Scene {
     private Player player;
     private CollisionManager collisionManager;
     private InventoryManager inventoryManager;
+    private BarManager barManager;
 
     public Play(){
         super();
@@ -33,6 +37,8 @@ public class Play extends JPanel implements Scene {
         collisionManager = new CollisionManager();
         inventoryManager = new InventoryManager(this, 2, 4, 50, 50, 7);
         Handlers.keyH.reset();
+
+        barManager = new BarManager(new Vector2DInt(10, GameSettings.screenHeight - 50));
     }
 
     @Override
@@ -71,7 +77,7 @@ public class Play extends JPanel implements Scene {
         player.draw(g2);
         inventoryManager.draw(g2);
         collisionManager.drawCollision(g2, player);
-
+        barManager.draw(g2);
     }
 
     @Override

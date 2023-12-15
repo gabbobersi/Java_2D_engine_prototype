@@ -1,8 +1,9 @@
 package com.testgioco.core.ui_elements.bars;
 
-import com.testgioco.core.Vector2DInt;
-import com.testgioco.core.ui_elements.Box;
 import com.testgioco.core.ui_elements.Label;
+import com.testgioco.core.ui_elements.box.BoxColor;
+import com.testgioco.utilities.Vector2DInt;
+
 import java.awt.*;
 
 public class Stamina {
@@ -12,7 +13,7 @@ public class Stamina {
     private int height;
     private String text;
     private Label label;
-    private Box box;
+    private BoxColor box;
 
     public Stamina(Vector2DInt position, int width, int height, String text){
         this.position = position;
@@ -24,7 +25,7 @@ public class Stamina {
         FontMetrics fontMetrics = new Canvas().getFontMetrics(font);
         int yLabel = position.getY() + height/2 + fontMetrics.getDescent();
         label = new Label(new Vector2DInt(position.getX(), yLabel), text, font, Color.BLACK);
-        box = new Box(new Vector2DInt(position.getX(), position.getY()), width, height, 4, Color.decode("#a1bf41"));
+        box = new BoxColor(new Vector2DInt(position.getX(), position.getY()), width, height, 4, Color.decode("#a1bf41"));
     }
 
     public void reset(){

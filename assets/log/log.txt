@@ -8,3 +8,23 @@ dic 02, 2023 2:19:15 PM com.testgioco.core.Main main
 SEVERE: Severe msg
 dic 02, 2023 6:02:00 PM com.testgioco.utilities.LogSystem logInfo
 INFO: errore
+dic 15, 2023 9:12:00 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:13:12 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:14:38 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:15:22 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:15:39 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:18:54 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:19:52 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:20:17 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:20:31 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:21:57 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message

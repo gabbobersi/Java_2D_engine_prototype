@@ -29,7 +29,7 @@ public class Test extends JPanel implements Scene {
     private final ButtonLabel btnMainMenu = new ButtonLabel(new Vector2DInt(btnHorizontalAlignment, 500), btnWidth,
             btnHeight, "Main menu", bordThickness, btnColor, btnFont);
 
-    private BarManager barManager = new BarManager();
+    private BarManager barManager = new BarManager(new Vector2DInt(100, 100));
     private final InventoryManager inventory;
 
     public Test(){

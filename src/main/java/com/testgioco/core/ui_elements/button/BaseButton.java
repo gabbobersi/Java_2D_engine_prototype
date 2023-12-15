@@ -9,7 +9,6 @@ public class BaseButton {
 
     protected Vector2DInt positionOnTheScreen;
     protected int width, height;
-    protected String text;
     protected int bordThickness;
     protected Color buttonColor;
     protected Font font;

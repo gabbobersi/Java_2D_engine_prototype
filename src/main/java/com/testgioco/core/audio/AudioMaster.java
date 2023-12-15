@@ -19,7 +19,7 @@ public class AudioMaster {
 
                 // Lowering the volume
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(-25.0f);
+                gainControl.setValue(-15.0f);
 
                 clip.start();
             } else {
