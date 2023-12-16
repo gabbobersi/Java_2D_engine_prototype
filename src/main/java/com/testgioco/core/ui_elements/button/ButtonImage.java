@@ -36,7 +36,7 @@ public class ButtonImage extends BaseButton implements VisibleUI, Interactive {
         if (hasMouseOver() && !isBright && !isClicked){
             isBright = true;
             brightImage(100);
-        } else if (hasMouseOver() && isBright && !isClicked){
+        } else if (!hasMouseOver() && isBright && !isClicked){
             isBright = false;
             resetImage();
         }
