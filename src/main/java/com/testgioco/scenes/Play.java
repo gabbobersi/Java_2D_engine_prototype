@@ -62,7 +62,7 @@ public class Play extends JPanel implements Scene {
 
     @Override
     public void fixedUpdate(){
-        System.out.println("Player x: " + player.getPositionOnTheMap().getX() + " y: " + player.getPositionOnTheMap().getY());
+//        System.out.println("Player x: " + player.getPositionOnTheMap().getX() + " y: " + player.getPositionOnTheMap().getY());
     }
 
     @Override

@@ -5,13 +5,9 @@ import java.awt.image.BufferedImage;
 public class Image {
     private BufferedImage originalImage;
     private BufferedImage currentImage;
-    private int width, height;
 
     public Image(BufferedImage image){
         originalImage = image;
-
-        width = originalImage.getWidth();
-        height = originalImage.getHeight();
         currentImage = copyImage(originalImage);
     }
 

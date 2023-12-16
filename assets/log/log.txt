@@ -64,3 +64,19 @@ dic 16, 2023 1:57:16 AM com.testgioco.utilities.LogSystem logInfo
 INFO: info message
 dic 16, 2023 1:58:16 AM com.testgioco.utilities.LogSystem logInfo
 INFO: info message
+dic 16, 2023 2:02:05 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:12:13 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:12:56 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:14:49 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:17:07 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:18:30 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:21:05 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 2:23:09 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
