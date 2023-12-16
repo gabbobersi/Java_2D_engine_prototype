@@ -11,6 +11,7 @@ public class KeyboardHandler implements KeyListener {
     public boolean esc_pressed;
     public boolean space_pressed;
     public boolean i_pressed;
+    public boolean h_pressed;
 
     private boolean anyKey_pressed;
 
@@ -31,6 +32,7 @@ public class KeyboardHandler implements KeyListener {
         anyKey_pressed = false;
         space_pressed = false;
         i_pressed = false;
+        h_pressed = false;
     }
 
     @Override
@@ -65,6 +67,10 @@ public class KeyboardHandler implements KeyListener {
             i_pressed = true;
         }
 
+        if (code == KeyEvent.VK_H) {
+            h_pressed = true;
+        }
+
         // A key is being pressed.
         if (code != KeyEvent.VK_UNDEFINED){
             anyKey_pressed = true;
@@ -92,6 +98,10 @@ public class KeyboardHandler implements KeyListener {
 
         if (code == KeyEvent.VK_I) {
             i_pressed = false;
+        }
+
+        if (code == KeyEvent.VK_H) {
+            h_pressed = false;
         }
 
         // A key is being pressed.

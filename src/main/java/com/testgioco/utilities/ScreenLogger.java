@@ -1,22 +1,77 @@
 package com.testgioco.utilities;
 
-import java.awt.*;
+import com.testgioco.core.interfaces.ui.VisibleUI;
 
-public class ScreenLogger {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+public class ScreenLogger implements VisibleUI {
+    private boolean isVisible = true;
+    private boolean canChangeVisibility = true;
+    private Vector2DInt positionOnTheScreen;
+
+    private ArrayList<String> commands = new ArrayList<>();
+    private ArrayList<String> debugInfo = new ArrayList<>();
+
+    Timer changeVisibilityTimer = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            canChangeVisibility = true;
+        }
+    });
+
+    public ScreenLogger(Vector2DInt positionOnTheScreen){
+        changeVisibilityTimer.setRepeats(false);
+        this.positionOnTheScreen = positionOnTheScreen;
+
+        debugInfo.add("Risoluzione: " + GameSettings.screenWidth + " x " + GameSettings.screenHeight);
+        debugInfo.add("Numero colonne: " + GameSettings.mapColumnsNumber);
+        debugInfo.add("Numero righe: " + GameSettings.mapRowsNumber);
+        debugInfo.add("Dimensione cella: " + Constants.cellWidth + " x " + Constants.cellHeight);
+
+        commands.add("========== COMANDI ==========");
+        commands.add("> ESC == Menu principale");
+        commands.add("> SPACE == Inventario");
+        commands.add("> I == Invisibile");
+
+    }
 
     public void draw(Graphics2D g2){
-        int x = 10;
+        if (!isVisible) return;
+        int x = positionOnTheScreen.getX();
+        int y = positionOnTheScreen.getY();
 
         g2.setColor(Color.black);
         g2.setFont(new Font("Comic Sans", 1, 15));
-        g2.drawString("Risoluzione: " + GameSettings.screenWidth + " x " + GameSettings.screenHeight, x, 20);
-        g2.drawString("Numero colonne: " + GameSettings.mapColumnsNumber, x, 40);
-        g2.drawString("Numero righe: " + GameSettings.mapRowsNumber, x, 60);
-        g2.drawString("Dimensione cella: " + Constants.cellWidth + " x " + Constants.cellHeight, x, 80);
-        g2.drawString("========== COMANDI ==========", x, 120);
-        g2.drawString("> ESC == Menu principale", x, 140);
-        g2.drawString("> SPACE == Inventario", x, 160);
-        g2.drawString("> I == Invisibile", x, 180);
+
+        for (int i = 0; i < debugInfo.size(); i++){
+            g2.drawString(debugInfo.get(i), x, y + (i * 20));
+        }
+
+        for (int i = 0; i < commands.size(); i++){
+            g2.drawString(commands.get(i), x, y + (i * 20) + 100);
+        }
     }
 
+    @Override
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    @Override
+    public void setVisible(boolean isVisible) {
+        if (canChangeVisibility){
+            this.isVisible = isVisible;
+        }
+        canChangeVisibility = false;
+        changeVisibilityTimer.start();
+    }
+
+    @Override
+    public Vector2DInt getPositionOnTheScreen() {
+        return null;
+    }
 }

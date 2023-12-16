@@ -1,3 +1,7 @@
+#### BugFix
+- [ ] Texture bleeding
+- [ ] Collisione non correttamente rilevata per il fuori mappa
+
 #### TODO nuove
 - [ ] Sistemi core
   - [ ] Audio

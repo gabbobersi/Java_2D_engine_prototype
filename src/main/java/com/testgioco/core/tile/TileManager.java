@@ -67,7 +67,9 @@ public class TileManager {
 
     public Tile getTileByCoordinates(int x, int y){
         // If entity gets out of map. Return a "not loaded" tile.
+        System.out.println("x: " + x + " y: " + y);
         if (x < 0 || y < 0 || x >= mapRows || y >= mapCols){
+            System.out.println("Sono fuori");
             return getTileByName(TilesName.not_loaded.name());
         }
 

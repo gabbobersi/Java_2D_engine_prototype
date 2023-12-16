@@ -17,7 +17,7 @@ import java.awt.*;
 
 public class Play extends JPanel implements Scene {
     private TileManager tileManager;
-    private ScreenLogger debug;
+    private ScreenLogger screenLogger;
     private Player player;
     private CollisionManager collisionManager;
     private InventoryManager inventoryManager;
@@ -30,7 +30,7 @@ public class Play extends JPanel implements Scene {
     @Override
     public void awake(){
         System.out.println("AWAKE");
-        debug = new ScreenLogger();
+        screenLogger = new ScreenLogger(new Vector2DInt(10, 20));
         player = new Player();
         tileManager = new TileManager(player);
         tileManager.loadMap("/maps/tmapgen_1.txt");
@@ -58,6 +58,10 @@ public class Play extends JPanel implements Scene {
         if (Handlers.keyH.space_pressed){
             inventoryManager.setVisible(!inventoryManager.isVisible());
         }
+
+        if (Handlers.keyH.h_pressed){
+            screenLogger.setVisible(!screenLogger.isVisible());
+        }
     }
 
     @Override
@@ -75,7 +79,7 @@ public class Play extends JPanel implements Scene {
         }
 
         tileManager.draw(g2);
-        debug.draw(g2);
+        screenLogger.draw(g2);
         player.draw(g2);
         inventoryManager.draw(g2);
         collisionManager.drawCollision(g2, player);
@@ -90,7 +94,7 @@ public class Play extends JPanel implements Scene {
             player = null;
             collisionManager = null;
             inventoryManager = null;
-            debug = null;
+            screenLogger = null;
         });
         unloadTimer.setRepeats(false);
         unloadTimer.start();
