@@ -100,3 +100,5 @@ dic 16, 2023 2:55:29 AM com.testgioco.utilities.LogSystem logInfo
 INFO: info message
 dic 16, 2023 2:55:53 AM com.testgioco.utilities.LogSystem logInfo
 INFO: info message
+dic 16, 2023 3:03:21 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
