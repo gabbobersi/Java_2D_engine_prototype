@@ -1,5 +1,7 @@
 package com.testgioco.core.tile;
 
+import com.testgioco.utilities.Image;
+
 import java.awt.image.BufferedImage;
 
 public class Tile {

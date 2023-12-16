@@ -78,7 +78,6 @@ public class Game implements Runnable {
             previous = current;
             lag += elapsed;
 
-
             // Changing scene.
             if (nextState != GameState.State.EMPTY){
                 System.out.println("Cambio scena: da " + activeState + " a " + nextState);
@@ -113,7 +112,7 @@ public class Game implements Runnable {
                 mainMenu.fixedUpdate();
                 break;
             case PLAY:
-                play.update();
+                play.fixedUpdate();
                 break;
             case TILE_MAP_GENERATOR:
                 tmapgen.fixedUpdate();

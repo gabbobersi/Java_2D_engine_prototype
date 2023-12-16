@@ -15,7 +15,7 @@ public class GameSettings {
     public static final int screenWidth = 600;
     public static final int screenHeight = 600;
     public static final String gameTitle = "Gioco di esempio";
-    public static final GameState.State defaultScene = GameState.State.MAIN_MENU;
+    public static final GameState.State defaultScene = GameState.State.PLAY;
 
     // Camera
     public static final int cameraHeight = 10;

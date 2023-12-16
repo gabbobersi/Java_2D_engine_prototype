@@ -1,5 +1,6 @@
 package com.testgioco.core.tile;
 
+import com.testgioco.utilities.Image;
 import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.entities.Player;
 import com.testgioco.utilities.Constants;
@@ -9,15 +10,13 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class TileManager {
     private final Player player;
     private final Map<String, Tile> tiles = new HashMap<>();
     private static int[][] mapTileNum;
+    private ArrayList<Vector2DInt> highlightTileNum = new ArrayList<>();
 
     private int mapRows;
     private int mapCols;
@@ -96,11 +95,28 @@ public class TileManager {
                     tilePositionOnTheMap.getY() + Constants.cellHeight > player.positionOnTheMap.getY() - player.positionOnTheScreen.getY() &&
                     tilePositionOnTheMap.getY() - Constants.cellHeight < player.positionOnTheMap.getY() + player.positionOnTheScreen.getY()){
 
-                    g2.drawImage(getTileByIndex(tileIndex).getImage(), screenX, screenY, Constants.cellWidth,
-                            Constants.cellHeight, null);
+                    // Highlights or draw
+                    boolean highlight = false;
+                    for (Vector2DInt tile : highlightTileNum) {
+                        if (r == tile.getX() && c == tile.getY()) {
+                            highlight = true;
+                            break;
+                        }
+                    }
+                    if (highlight) {
+                        Image image = new Image(getTileByIndex(tileIndex).getImage());
+                        image.brightImage(100);
+                        g2.drawImage(image.getImage(), screenX, screenY, Constants.cellWidth, Constants.cellHeight, null);
+                    } else {
+                        g2.drawImage(getTileByIndex(tileIndex).getImage(), screenX, screenY, Constants.cellWidth, Constants.cellHeight, null);
+                    }
                 }
             }
         }
+    }
+
+    public void highlightTiles(ArrayList<Vector2DInt> tiles){
+        highlightTileNum = tiles;
     }
 
     /**

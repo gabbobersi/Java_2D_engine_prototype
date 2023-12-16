@@ -28,3 +28,39 @@ dic 15, 2023 9:20:31 PM com.testgioco.utilities.LogSystem logInfo
 INFO: info message
 dic 15, 2023 9:21:57 PM com.testgioco.utilities.LogSystem logInfo
 INFO: info message
+dic 15, 2023 9:22:28 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 15, 2023 9:26:35 PM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:16:45 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:18:13 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:19:38 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:20:15 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:20:49 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:21:03 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:22:02 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:22:32 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:24:23 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:43:10 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:43:18 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:45:40 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:52:44 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:55:42 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:57:16 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message
+dic 16, 2023 1:58:16 AM com.testgioco.utilities.LogSystem logInfo
+INFO: info message

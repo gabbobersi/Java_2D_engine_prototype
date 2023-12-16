@@ -9,6 +9,7 @@ import com.testgioco.core.tile.TileManager;
 import com.testgioco.utilities.Constants;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CollisionManager {
@@ -51,10 +52,20 @@ public class CollisionManager {
                 entityUpCell = (entityUp - speed) / Constants.cellHeight;
                 tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityLeftCell).hasCollision();
                 tile2Collision = tileManager.getTileByCoordinates(entityUpCell, entityRightCell).hasCollision();
+
+                tileManager.highlightTiles(new ArrayList<>(java.util.Arrays.asList(
+                        new Vector2DInt(entityUpCell, entityLeftCell),
+                        new Vector2DInt(entityUpCell, entityRightCell)
+                )));
             } else if (Objects.equals(verticalDirection, Direction.DOWN)) {
                 entityDownCell = (entityDown + speed) / Constants.cellHeight;
                 tile1Collision = tileManager.getTileByCoordinates(entityDownCell, entityLeftCell).hasCollision();
                 tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityRightCell).hasCollision();
+
+                tileManager.highlightTiles(new ArrayList<>(java.util.Arrays.asList(
+                        new Vector2DInt(entityDownCell, entityLeftCell),
+                        new Vector2DInt(entityDownCell, entityRightCell)
+                )));
             }
             isCollidingVertically = tile1Collision || tile2Collision;
         }
@@ -64,10 +75,20 @@ public class CollisionManager {
                 entityLeftCell = (entityLeft - speed) / Constants.cellWidth;
                 tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityLeftCell).hasCollision();
                 tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityLeftCell).hasCollision();
+
+                tileManager.highlightTiles(new ArrayList<>(java.util.Arrays.asList(
+                        new Vector2DInt(entityUpCell, entityLeftCell),
+                        new Vector2DInt(entityDownCell, entityLeftCell)
+                )));
             } else if (Objects.equals(horizontalDirection, Direction.RIGHT)) {
                 entityRightCell = (entityRight + speed) / Constants.cellWidth;
                 tile1Collision = tileManager.getTileByCoordinates(entityUpCell, entityRightCell).hasCollision();
                 tile2Collision = tileManager.getTileByCoordinates(entityDownCell, entityRightCell).hasCollision();
+
+                tileManager.highlightTiles(new ArrayList<>(java.util.Arrays.asList(
+                        new Vector2DInt(entityUpCell, entityRightCell),
+                        new Vector2DInt(entityDownCell, entityRightCell)
+                )));
             }
             isCollidingHorizontally = tile1Collision || tile2Collision;
         }

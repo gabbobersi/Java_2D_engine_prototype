@@ -35,8 +35,6 @@ public enum Direction {
             // Moving diagonally
             direction = vector.getY() > 0 ? DOWN_LEFT : UP_LEFT;
         }
-        System.out.println("Direction: " + direction.name());
-
         return direction;
     }
 
