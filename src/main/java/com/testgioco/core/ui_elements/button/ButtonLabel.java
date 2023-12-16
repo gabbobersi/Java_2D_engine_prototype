@@ -50,7 +50,7 @@ public class ButtonLabel extends BaseButton implements VisibleUI, Interactive {
         if (hasBeenPressed()){
             boxColor.setColor(Color.BLUE);
             if (!audioClickedPlayer){
-                // AudioMaster.play("assets/audio/btn_clicked_1.wav");
+                // AudioMaster.play("assets/audio/buttons/btn_clicked_1.wav");
                 audioClickedPlayer = true;
             }
         } else {
@@ -61,7 +61,7 @@ public class ButtonLabel extends BaseButton implements VisibleUI, Interactive {
         if (hasMouseOver()){
             label.setColor(Color.ORANGE);
             if (!audioOverPlayed){
-                AudioMaster.play("assets/audio/btn_over_1.wav");
+                AudioMaster.play("assets/audio/buttons/btn_over_1.wav");
                 audioOverPlayed = true;
             }
         } else {

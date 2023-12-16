@@ -2,6 +2,7 @@ package com.testgioco.scenes;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.CollisionManager;
+import com.testgioco.core.audio.AudioMaster;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.bars.BarManager;
@@ -19,7 +20,7 @@ public class Play extends JPanel implements Scene {
     private TileManager tileManager;
     private ScreenLogger screenLogger;
     private Player player;
-    private CollisionManager collisionManager;
+    private CollisionManager playerCollisionManager;
     private InventoryManager inventoryManager;
     private BarManager barManager;
 
@@ -34,11 +35,12 @@ public class Play extends JPanel implements Scene {
         player = new Player();
         tileManager = new TileManager(player);
         tileManager.loadMap("/maps/tmapgen_1.txt");
-        collisionManager = new CollisionManager();
+        playerCollisionManager = new CollisionManager(tileManager, player);
         inventoryManager = new InventoryManager(this, 2, 4, 50, 50, 7);
         Handlers.keyH.reset();
 
         barManager = new BarManager(new Vector2DInt(10, GameSettings.screenHeight - 50));
+        AudioMaster.play("assets/audio/background/test_1_npc.wav");
     }
 
     @Override
@@ -48,7 +50,7 @@ public class Play extends JPanel implements Scene {
             Handlers.keyH.reset();
         }
 
-        collisionManager.checkCollision(tileManager, player);
+        playerCollisionManager.checkCollision();
         player.update();
 
         if (Handlers.keyH.i_pressed){
@@ -74,7 +76,7 @@ public class Play extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        if (tileManager == null || player == null || collisionManager == null || inventoryManager == null){
+        if (tileManager == null || player == null || playerCollisionManager == null || inventoryManager == null || screenLogger == null){
             return;
         }
 
@@ -82,7 +84,7 @@ public class Play extends JPanel implements Scene {
         screenLogger.draw(g2);
         player.draw(g2);
         inventoryManager.draw(g2);
-        collisionManager.drawCollision(g2, player);
+        playerCollisionManager.drawCollision(g2, player);
         barManager.draw(g2);
     }
 
@@ -92,7 +94,7 @@ public class Play extends JPanel implements Scene {
             System.out.println("UNLOAD");
             tileManager = null;
             player = null;
-            collisionManager = null;
+            playerCollisionManager = null;
             inventoryManager = null;
             screenLogger = null;
         });

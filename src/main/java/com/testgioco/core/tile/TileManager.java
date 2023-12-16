@@ -8,6 +8,7 @@ import com.testgioco.utilities.GameSettings;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -67,9 +68,7 @@ public class TileManager {
 
     public Tile getTileByCoordinates(int x, int y){
         // If entity gets out of map. Return a "not loaded" tile.
-        System.out.println("x: " + x + " y: " + y);
         if (x < 0 || y < 0 || x >= mapRows || y >= mapCols){
-            System.out.println("Sono fuori");
             return getTileByName(TilesName.not_loaded.name());
         }
 
@@ -78,18 +77,22 @@ public class TileManager {
     }
 
     public void draw (Graphics g2) {
+        Vector2DInt tilePositionOnTheMap = new Vector2DInt(0, 0);
+        Image image = new Image(getTileByName(TilesName.not_loaded.name()).getImage());
+
         for (int r = 0; r < mapRows; r++) {
             for (int c = 0; c < mapCols; c++) {
                 int tileIndex = mapTileNum[r][c];
 
                 // Tile position, to draw.
-                Vector2DInt tilePositionOnTheMap = new Vector2DInt(c * Constants.cellWidth, r * Constants.cellHeight);
+                tilePositionOnTheMap.setX(c * Constants.cellWidth);
+                tilePositionOnTheMap.setY(r * Constants.cellHeight);
 
                 // Tile position, to draw, taking into consideration player position.
                 int screenX =
-                        tilePositionOnTheMap.getX() - player.positionOnTheMap.getX() + (int)Math.round(player.positionOnTheScreen.getX());
+                        tilePositionOnTheMap.getX() - player.positionOnTheMap.getX() + player.positionOnTheScreen.getX();
                 int screenY =
-                        tilePositionOnTheMap.getY() - player.positionOnTheMap.getY() + (int)Math.round(player.positionOnTheScreen.getY());
+                        tilePositionOnTheMap.getY() - player.positionOnTheMap.getY() + player.positionOnTheScreen.getY();
 
                 // Draw only tiles that are visible on the screen.
                 if (tilePositionOnTheMap.getX() + Constants.cellWidth > player.positionOnTheMap.getX() - player.positionOnTheScreen.getX() &&
@@ -105,8 +108,9 @@ public class TileManager {
                             break;
                         }
                     }
+
                     if (highlight) {
-                        Image image = new Image(getTileByIndex(tileIndex).getImage());
+                        image.setImage(getTileByIndex(tileIndex).getImage());
                         image.brightImage(100);
                         g2.drawImage(image.getImage(), screenX, screenY, Constants.cellWidth, Constants.cellHeight, null);
                     } else {

@@ -25,10 +25,14 @@ public class Player extends Entity implements SolidVisibleEntity {
     private final AxisController axisController = new AxisController();
     private int speed = 4;
     private final EntityAnimator animator;
+
     private Direction direction = Direction.DOWN;
+    private Direction lastDirection = direction;
 
     private boolean isVisible = true;
     private boolean canChangeVisibility = true;
+
+    private Vector2DInt solidAreaPositionOnTheScreen;
 
     Timer changeVisibilityTimer = new Timer(1000, new ActionListener() {
         @Override
@@ -66,7 +70,7 @@ public class Player extends Entity implements SolidVisibleEntity {
         // Position on the screen
         int x = GameSettings.screenWidth / 2 - (Constants.cellWidth / 2);
         int y = GameSettings.screenHeight / 2 - (Constants.cellHeight / 2);
-        positionOnTheScreen = new Vector2D(x, y);
+        positionOnTheScreen = new Vector2DInt(x, y);
 
         // Collision
         int solidHeight = Constants.cellHeight - 20;
@@ -76,6 +80,10 @@ public class Player extends Entity implements SolidVisibleEntity {
                 Constants.cellHeight - solidHeight,
                 solidWidth,
                 solidHeight
+        );
+        solidAreaPositionOnTheScreen = new Vector2DInt(
+                (int)Math.round(positionOnTheScreen.getX()) + solidArea.x,
+                (int)Math.round(positionOnTheScreen.getY()) + solidArea.y
         );
     }
 
@@ -145,11 +153,12 @@ public class Player extends Entity implements SolidVisibleEntity {
     }
 
     private void checkDiagonalDirection(){
+        lastDirection = direction;
         direction = Direction.getDirection(vector);
 
         // In case no direction is set, we use a default one.
         if (direction == Direction.IDLE){
-            direction = Direction.DOWN;
+            direction = lastDirection;
         }
 
         if (direction == Direction.DOWN_LEFT){
@@ -222,11 +231,7 @@ public class Player extends Entity implements SolidVisibleEntity {
 
     @Override
     public Vector2DInt getSolidAreaPositionOnTheScreen() {
-        Vector2DInt pos = new Vector2DInt(
-                (int)Math.round(positionOnTheScreen.getX()) + solidArea.x,
-                (int)Math.round(positionOnTheScreen.getY()) + solidArea.y
-        );
-        return pos;
+        return solidAreaPositionOnTheScreen;
     }
 
     @Override
@@ -284,7 +289,7 @@ public class Player extends Entity implements SolidVisibleEntity {
     }
 
     @Override
-    public Vector2D getPositionOnTheScreen() {
+    public Vector2DInt getPositionOnTheScreen() {
         return positionOnTheScreen;
     }
 }

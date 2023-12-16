@@ -25,6 +25,7 @@ public class Game implements Runnable {
     private final TileMapGenerator tmapgen;
     private final Test test;
     private final LoadingScreen loadingScreen;
+    private Dimension panelDimension = new Dimension(GameSettings.screenWidth, GameSettings.screenHeight);
 
     public Game() {
         mainMenu = new MainMenu();
@@ -237,7 +238,7 @@ public class Game implements Runnable {
         panel.requestFocus();
 
         // Position
-        panel.setPreferredSize(new Dimension(GameSettings.screenWidth, GameSettings.screenHeight));
+        panel.setPreferredSize(panelDimension);
         panel.setBounds(0, 0, GameSettings.screenWidth, GameSettings.screenHeight);
 
         // Others

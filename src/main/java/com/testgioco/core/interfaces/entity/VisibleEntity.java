@@ -9,5 +9,5 @@ public interface VisibleEntity extends Drawable, Visible {
     /**
      * Returns the position of the entity on the screen.
      * */
-    Vector2D getPositionOnTheScreen();
+    Vector2DInt getPositionOnTheScreen();
 }

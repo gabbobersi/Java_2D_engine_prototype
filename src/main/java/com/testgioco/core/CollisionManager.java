@@ -2,8 +2,6 @@ package com.testgioco.core;
 
 import com.testgioco.core.interfaces.base.Collidable;
 import com.testgioco.core.interfaces.entity.SolidEntity;
-import com.testgioco.core.interfaces.entity.SolidVisibleEntity;
-import com.testgioco.core.interfaces.entity.VisibleEntity;
 import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.utilities.Constants;
@@ -13,12 +11,23 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CollisionManager {
+    private final TileManager tileManager;
+    private final SolidEntity entity;
 
-    public void checkCollision(TileManager tileManager, SolidEntity entity){
-        Rectangle solidArea = entity.getSolidArea();
-        Vector2DInt positionOnTheMap = entity.getPositionOnTheMap();
-        int speed = entity.getSpeed();
+    private final Rectangle solidArea;
+    private final Vector2DInt positionOnTheMap;
+    private final int speed;
 
+    public CollisionManager(TileManager tileManager, SolidEntity entity){
+        this.tileManager = tileManager;
+        this.entity = entity;
+
+        solidArea = entity.getSolidArea();
+        positionOnTheMap = entity.getPositionOnTheMap();
+        speed = entity.getSpeed();
+    }
+
+    public void checkCollision(){
         // Position of the entity's solid area, in the map.
         int entityLeft = positionOnTheMap.getX() + solidArea.x;
         int entityRight = positionOnTheMap.getX() + solidArea.x + solidArea.width;

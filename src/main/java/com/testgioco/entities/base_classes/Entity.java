@@ -15,7 +15,7 @@ public class Entity {
 
     // Positions
     public Vector2DInt positionOnTheMap;
-    public Vector2D positionOnTheScreen;
+    public Vector2DInt positionOnTheScreen;
 
     // Collisions
     public boolean isCollidingVertically = false;
