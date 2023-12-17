@@ -2,6 +2,7 @@ package com.testgioco.scenes;
 
 import com.testgioco.core.Game;
 import com.testgioco.core.GameState;
+import com.testgioco.core.particles.SnowFall;
 import com.testgioco.core.ui_elements.button.ButtonLabel;
 import com.testgioco.utilities.Vector2DInt;
 import com.testgioco.core.interfaces.Scene;
@@ -33,6 +34,8 @@ public class MainMenu extends JPanel implements Scene {
             btnWidth,
             btnHeight, "Test", bordThickness, btnColor, btnFont);
 
+    private SnowFall snowFall = new SnowFall();
+
     public MainMenu(){super();}
 
     public void awake(){
@@ -61,6 +64,8 @@ public class MainMenu extends JPanel implements Scene {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         //Objects to draw, in order.
+        snowFall.draw(g2);
+
         playBtn.draw(g2);
         tMapGenBtn.draw(g2);
         quitBtn.draw(g2);
