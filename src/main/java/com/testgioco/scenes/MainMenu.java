@@ -40,7 +40,6 @@ public class MainMenu extends JPanel implements Scene {
 
     public void awake(){
         setBackground(Color.BLACK);
-        Game.updateScenePaint();
     }
 
     @Override

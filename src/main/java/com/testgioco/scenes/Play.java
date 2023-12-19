@@ -2,7 +2,6 @@ package com.testgioco.scenes;
 
 import com.testgioco.core.GameState;
 import com.testgioco.core.CollisionManager;
-import com.testgioco.core.audio.AudioMaster;
 import com.testgioco.core.tile.TileManager;
 import com.testgioco.core.interfaces.Scene;
 import com.testgioco.core.ui_elements.bars.BarManager;
@@ -40,7 +39,7 @@ public class Play extends JPanel implements Scene {
         Handlers.keyH.reset();
 
         barManager = new BarManager(new Vector2DInt(10, GameSettings.screenHeight - 50));
-        AudioMaster.play("assets/audio/background/test_1_npc.wav");
+        // AudioMaster.play("assets/audio/background/test_1_npc.wav");
     }
 
     @Override

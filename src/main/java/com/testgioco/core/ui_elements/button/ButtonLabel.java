@@ -1,6 +1,5 @@
 package com.testgioco.core.ui_elements.button;
 
-import com.testgioco.core.audio.AudioMaster;
 import com.testgioco.core.interfaces.Interactive;
 import com.testgioco.core.interfaces.ui.VisibleUI;
 import com.testgioco.core.ui_elements.Label;
@@ -61,7 +60,7 @@ public class ButtonLabel extends BaseButton implements VisibleUI, Interactive {
         if (hasMouseOver()){
             label.setColor(Color.ORANGE);
             if (!audioOverPlayed){
-                AudioMaster.play("assets/audio/buttons/btn_over_1.wav");
+                // AudioMaster.play("assets/audio/buttons/btn_over_1.wav");
                 audioOverPlayed = true;
             }
         } else {

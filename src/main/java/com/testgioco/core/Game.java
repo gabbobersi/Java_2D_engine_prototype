@@ -1,5 +1,6 @@
 package com.testgioco.core;
 
+import com.testgioco.core.audio.AudioManager;
 import com.testgioco.scenes.LoadingScreen;
 import com.testgioco.scenes.MainMenu;
 import com.testgioco.scenes.Play;
@@ -13,8 +14,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Game implements Runnable {
+    private static Game instance;
     private Thread gameThread;
     private volatile boolean isRunning = true;
+
+    private final AudioManager audioManager;
 
     private final Window window;
     private static final JPanel mainPanel = new JPanel();
@@ -25,9 +29,17 @@ public class Game implements Runnable {
     private final TileMapGenerator tmapgen;
     private final Test test;
     private final LoadingScreen loadingScreen;
-    private Dimension panelDimension = new Dimension(GameSettings.screenWidth, GameSettings.screenHeight);
+    private final Dimension panelDimension = new Dimension(GameSettings.screenWidth, GameSettings.screenHeight);
 
-    public Game() {
+    public static Game getInstance(){
+        if (instance == null){
+            instance = new Game();
+        }
+        return instance;
+    }
+
+    private Game() {
+        audioManager = AudioManager.getInstance();
         mainMenu = new MainMenu();
         play = new Play();
         tmapgen = new TileMapGenerator();
@@ -249,7 +261,7 @@ public class Game implements Runnable {
         updateScenePaint();
     }
 
-    public static void updateScenePaint(){
+    private void updateScenePaint(){
         mainPanel.repaint();
         mainPanel.revalidate();
     }

@@ -18,8 +18,11 @@ public class Constants {
     public static final double NANOSECONDS_PER_FIXED_UPDATE = 0.2 * ONE_SECOND_IN_NANOSECONDS;
 
     // Cell dimension
-    public static int cellHeight = GameSettings.screenHeight / GameSettings.cameraHeight;
-    public static int cellWidth = GameSettings.screenWidth / GameSettings.cameraWidth;
+    // public static int cellHeight = GameSettings.screenHeight / GameSettings.cameraHeight;
+    // public static int cellWidth = GameSettings.screenWidth / GameSettings.cameraWidth;
+    public static int cellHeight = 50;
+    public static int cellWidth = 50;
+
 
     // World dimension
     public static int maxWorldColumn = 100;
